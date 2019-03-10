@@ -1,0 +1,275 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SARHU.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Administración de Recursos Humanos</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/js") %>
+        <%: Styles.Render("~/bundles/css") %>
+    </asp:PlaceHolder>
+
+
+</head>
+<body class="bodynav">
+    <form runat="server">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="~/Views/Home.aspx" class="navbar-brand" runat="server">
+                    <asp:image CssClass="panelimg" runat="server" id="Image1" ImageUrl="~/logo/logonav.png" />
+                </a>
+            
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="/Views/AdmSisIndex.aspx"><i class="fa fa-cogs fa-fw fa-lg" style="color:white"></i></a>
+                    <%--<asp:HyperLink ID="adminSis" runat="server" NavigateUrl="~/Views/Contabilidad/Cuentas/CuentasContables/ListarCuentas.aspx"><i class="fa fa-cogs fa-fw fa-lg" style="color:white"></i></asp:HyperLink>--%>
+                </li>
+                <!-- Dropdown superior, solo quedo el del usuario -->
+                <li class="dropdown">
+                    <a id="user" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> Daryin Pérez <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
+                        </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Editar perfil </a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                            <a href="/Views/Seguridad/Acceso/Login.aspx"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-home fa-fw"></i> Inicio</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-group fa-fw"></i> Personal<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                               
+                                <li>
+                                    <a href="/Views/Personal/areas.aspx">Áreas</a>
+                                </li>
+                                <li>
+                                    <a href="/Views/Personal/funciones.aspx">Funciones</a>
+                                </li>
+                                <li>
+                                    <a href="#">Puestos</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+              
+
+<%--                        <li>
+                            <a href="#"><i class="fa fa-fax fa-fw"></i>Nómina <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <!-- Forma para hacer link a una página -->
+                                    <asp:HyperLink runat="server" NavigateUrl="~/Views/ViewNomina/GenerarPlanilla.aspx" Text="Generar Planilla" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink class="Links" runat="server" NavigateUrl="~/Views/ViewNomina/HistorialPlanilla.aspx" Text="Historial Planilla" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink class="Links" runat="server" NavigateUrl="~/Views/ViewAguinaldo/CalcularAguinaldo.aspx" Text="Calcular Aguinaldo" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink class="Links" runat="server" NavigateUrl="~/Views/ViewNomina/ComprobanteNomina.aspx" Text="Comprobante de Nómina" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Views/ViewLiquidaciones/ListaLiquidaciones.aspx" Text="Lista de Liquidaciones" />
+                                </li>
+                            </ul>
+                        </li>--%>
+
+
+                        <%--<li>
+                            <a href="#"><i class="fa fa-money fa-fw"></i>Contabilidad <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                               
+                                <li>
+                                    <asp:HyperLink ID="Cuentas" runat="server" NavigateUrl="~/Views/Contabilidad/Cuentas/CuentasContables/ListarCuentas.aspx">Cuentas</asp:HyperLink>
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="TablaIngresoDeduccionLink" runat="server" NavigateUrl="~/Views/Contabilidad/DeduccioneseIngresos/MostrarDeducciones.aspx" Text="Tabla Deducciones" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="RegistrarDeduccionLink" runat="server" NavigateUrl="~/Views/Contabilidad/DeduccioneseIngresos/MostrarIngresos.aspx" Text="Tabla Ingresos" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="TablaImpuestoLink" runat="server" NavigateUrl="~/Views/Contabilidad/Impuestos/Impuestos.aspx" Text="Tabla de Impuestos" />
+                                </li>
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>--%>
+
+
+<%--                        <li>
+                            <a href="#"><i class="fa fa-group fa-fw"></i>Personal<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">--%>
+                                <%--<li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Contrataciones.aspx" Text="Contrataciones" />
+                                </li>
+
+
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Empleados.aspx" Text="Empleados" />
+                                </li>
+
+
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Ademduns.aspx" Text="Ademduns" />
+                                </li>
+
+
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Puestos.aspx" Text="Catálogo de Puestos" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Constancias.aspx" Text="Constancias Salariales" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/Personal/Fichas.aspx" Text="Ficha de Empleados" />
+                                </li>--%>
+                            <%--</ul>
+                        </li>--%>
+
+
+
+
+                        <%--<li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Reportes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <asp:HyperLink ID="GenerarReportesLink" runat="server" NavigateUrl="~/Views/ViewReportes/GenerarReporte.aspx" Text="Otros" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="GenerarReporteEstadisticoDeEgresoLink" runat="server" NavigateUrl="~/Views/ViewReportes/GenerarReporteEstadisticoDeEgresos.aspx" Text="Estadística de Egresos" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="GenerarReporteEstadisticoDeIngresoLink" runat="server" NavigateUrl="~/Views/ViewReportes/GenerarReporteEstadisticoDeIngresos.aspx" Text="Estadística de Ingresos" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="GenerarReporteEstadisticoDePersonalLink" runat="server" NavigateUrl="~/Views/ViewReportes/GenerarReporteEstadisticoDePersonal.aspx" Text="Estadística de Personal" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="GenerarReporteEstadisticoDeRenunciasLink" runat="server" NavigateUrl="~/Views/ViewReportes/GenerarReporteEstadisticoDeRenuncias.aspx" Text="Estadística de Renuncias" />
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>--%>
+
+                        <%--<li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>Seguridad<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <asp:HyperLink ID="HyperLink30" runat="server" NavigateUrl="/Views/ViewSeguridad/Roles/ListarRoles.aspx">Roles</asp:HyperLink>
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="HyperLink31" runat="server" NavigateUrl="/Views/ViewSeguridad/Usuarios/ListarUsuarios.aspx">Usuaros</asp:HyperLink>
+                                </li>                              
+
+                            </ul>
+
+                        </li>--%>
+
+                        <!--Yoxi-->
+
+
+
+                        <%--<li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i>RRHH<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/RRHH/Subsidios.aspx" Text="Subsidios" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink runat="server" NavigateUrl="/Views/RRHH/Sanciones.aspx" Text="Sanciones" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Views/ViewVacaciones/ListaSolicitudVacaciones.aspx" Text="Lista de Solicitud de Vacaciones" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="ListarMotivosLink" runat="server" NavigateUrl="~/Views/RRHH/Motivos/MotivosIndex.aspx" Text="Lista de Motivos" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="TipoMotivoLink" runat="server" NavigateUrl="~/Views/RRHH/TipoMotivos/TipoMotivoIndex.aspx" Text="Lista de Tipos de Motivos" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Views/ViewSubsidioEmpleado/RegistrarSubsidioEmpleado.aspx" Text="Registrar Subsidio del Empleado" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Views/RRHH/Adelantos/MostrarSolicitudAdelanto.aspx" Text="Mostrar Solicitud Adelanto" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Views/RRHH/SancionEmpleado/RegistrarSancionEmpleado.aspx" Text="Registrar Sancion Empleado" />
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="/Views/RRHH/Indemnizacion/ListarIndemnizaciones.aspx">Indemnizacion</asp:HyperLink>
+                                </li>
+
+                                <li>
+                                    <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Views/RRHH/Embargo/MostrarEmbargos.aspx" Text="Mostrar Embargos" />
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>--%>
+
+                        <%--<li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i>Administración<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <asp:HyperLink ID="HyperLink27" runat="server" NavigateUrl="~/Views/ViewProgramas/ListaProgramas.aspx" Text="Catalogo de programas" />
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="LocalLink" runat="server" NavigateUrl="~/Views/ViewLocalidades/ListaLocalidades.aspx" Text="Lista de Localidades" />
+                                </li>
+                            </ul>--%>
+                            <!-- /.nav-second-level -->
+
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+    </form>
+</body>
+</html>
