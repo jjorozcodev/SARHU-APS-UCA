@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SARHU.sarhu.ingresos {
+namespace SARHU.sarhu.parametros {
     
     
-    public partial class agregar_bono {
+    public partial class impuestos {
     }
 }

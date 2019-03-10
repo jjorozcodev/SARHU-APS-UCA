@@ -10,31 +10,24 @@ namespace SARHU
         {
             bundles.Add(new StyleBundle("~/bundles/css").
                 Include(
-                "~/Content/vendor/bootstrap/css/bootstrap.min.css",
-                "~/Content/vendor/metisMenu/metisMenu.min.css",
-                "~/Content/dist/css/sb-admin-2.css",
-                "~/Content/vendor/morrisjs/morris.css",
-                "~/Content/vendor/font-awesome/css/font-awesome.min.css",
-                "~/Content/vendor/datatables-plugins/dataTables.bootstrap.css",
-                "~/Content/vendor/datatables-responsive/dataTables.responsive.css",
-                "~/Content/DiseñoSARHU.css"));
+                "~/Content/bootstrap.min.css",
+                "~/Content/metisMenu.min.css",
+                "~/Content/sb-admin-2.css",
+                "~/Content/font-awesome.min.css",
+                "~/Content/dataTables.bootstrap.css",
+                "~/Content/dataTables.responsive.css",
+                "~/Content/SARHU.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/js").
-                Include(
-                "~/Content/vendor/jquery/jquery.min.js",
-                "~/Content/vendor/bootstrap/js/bootstrap.min.js",
-                "~/Content/vendor/metisMenu/metisMenu.min.js",
-                "~/Content/vendor/raphael/raphael.min.js",
-                "~/Content/vendor/morrisjs/morris.min.js",
-                "~/Content/data/morris-data.js",
-                "~/Content/dist/js/sb-admin-2.js",
-                "~/Content/vendor/datatables/js/jquery.dataTables.min.js",
-                "~/Content/vendor/datatables-plugins/dataTables.bootstrap.min.js",
-                "~/Content/vendor/datatables-responsive/dataTables.responsive.js",
-                "~/Content/maskedinput/jquery.maskedinput.min.js",
-                "~/Content/maskedinput/jquery-1.8.3.min.js",
-                "~/Content/js/parallax.min.js",
-                "~/Content/js/parallax.js"));
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                "~/Scripts/jquery.min.js",
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/metisMenu.min.js",
+                "~/Scripts/sb-admin-2.js",
+                "~/Scripts/jquery.dataTables.min.js",
+                "~/Scripts/dataTables.bootstrap.min.js",
+                "~/Scripts/dataTables.responsive.js",
+                "~/Scripts/jquery.maskedinput.min.js",
+                "~/Scripts/jquery-1.8.3.min.js"));
         }
     }
 }

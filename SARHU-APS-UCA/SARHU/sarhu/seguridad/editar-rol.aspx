@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editar-rol.aspx.cs" Inherits="SARHU.Views.Seguridad.Roles.editar_rol" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="editar-rol.aspx.cs" Inherits="SARHU.sarhu.seguridad.editar_rol" %>
+<asp:Content ID="ContentEditarRol" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
         <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

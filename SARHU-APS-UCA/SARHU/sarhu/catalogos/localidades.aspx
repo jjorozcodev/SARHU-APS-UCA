@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="localidades.aspx.cs" Inherits="SARHU.Views.Administracion.Localidades.localidades" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="localidades.aspx.cs" Inherits="SARHU.sarhu.catalogos.localidades" %>
+<asp:Content ID="ContentLocalidades" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
         <div id="page-wrapper">
       <div class="row">
            <div class="col-lg-12">

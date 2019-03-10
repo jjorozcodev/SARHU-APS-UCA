@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="inicio.aspx.cs" Inherits="SARHU.Views.Home" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="inicio.aspx.cs" Inherits="SARHU.sarhu.inicio" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+<asp:Content ID="ContentInicio" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
     <div id="page-wrapper"> 
          <div class="row">

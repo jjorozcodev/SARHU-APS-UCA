@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
-namespace SARHU.Views.Administracion.Localidades
+namespace SARHU.sarhu.catalogos
 {
     public partial class agregar_localidad : System.Web.UI.Page
     {

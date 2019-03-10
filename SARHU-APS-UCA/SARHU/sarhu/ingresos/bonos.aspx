@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="bonos.aspx.cs" Inherits="SARHU.Views.Nomina.bonos" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="bonos.aspx.cs" Inherits="SARHU.sarhu.ingresos.bonos" %>
+<asp:Content ID="ContentBonos" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
         <div id="page-wrapper">
       <div class="row">
            <div class="col-lg-12">

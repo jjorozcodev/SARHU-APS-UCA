@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editar-funcion.aspx.cs" Inherits="SARHU.Views.Personal.editar_funcion" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="editar-funcion.aspx.cs" Inherits="SARHU.sarhu.personal.editar_funcion" %>
+<asp:Content ID="ContentEditarFuncion" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

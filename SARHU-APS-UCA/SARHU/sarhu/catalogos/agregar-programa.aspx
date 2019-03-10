@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregar-programa.aspx.cs" Inherits="SARHU.Views.Administracion.Programas.agregar_programa" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="agregar-programa.aspx.cs" Inherits="SARHU.sarhu.catalogos.agregar_programa" %>
+<asp:Content ID="ContentAgregarPrograma" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

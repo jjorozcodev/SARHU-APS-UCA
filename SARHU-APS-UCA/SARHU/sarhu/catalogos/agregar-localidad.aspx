@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregar-localidad.aspx.cs" Inherits="SARHU.Views.Administracion.Localidades.agregar_localidad" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="agregar-localidad.aspx.cs" Inherits="SARHU.sarhu.catalogos.agregar_localidad" %>
+<asp:Content ID="ContentAgregarLocalidad" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group input-group" style="width: 100%;">
                                 <span class="input-group-addon">+505</span>
-                                <input class="form-control" type="number" >
+                                <input class="form-control" type="text" >
                             </div>
                             <div class="form-group" style="width: 100%;">
                                 <label>Dirección</label>

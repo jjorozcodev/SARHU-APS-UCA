@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregar-rol.aspx.cs" Inherits="SARHU.Views.Seguridad.Roles.agregar_rol" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="agregar-rol.aspx.cs" Inherits="SARHU.sarhu.seguridad.agregar_rol" %>
+<asp:Content ID="ContentAgregarRol" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
         <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -27,8 +27,8 @@
                                 <div id="textarea_feedback">50 caracteres disponibles</div>
                             </div>
 
-                            <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success  fondo-verde-aldeas">Guardar</button>
                                 <a href="roles.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                             </div>
 

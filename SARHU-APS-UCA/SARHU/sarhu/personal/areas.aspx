@@ -1,13 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="areas.aspx.cs" Inherits="SARHU.Views.Personal.areas" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="areas.aspx.cs" Inherits="SARHU.sarhu.personal.areas" %>
+<asp:Content ID="ContentAreas" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     
     <div id="page-wrapper">
-      <div class="row">
+        <div class="row">
            <div class="col-lg-12">
                 <h1 class="page-header">Listado de Áreas</h1>
                 <a href="agregar-area.aspx" id="Generar" type="button" class="btn btn-success fondo-verde-aldeas" style="margin-bottom: 10px"><i class="fa fa-plus fa-fw"></i>Agregar Área</a>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
@@ -55,7 +54,6 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-
     </div>
 
     <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -103,7 +101,7 @@
 
             </div>
         </div>
-        </div>
+    </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -138,7 +136,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
     <script>
         function ShowPopup() {
             $('#myModal').modal({ backdrop: 'static', keyboard: false }, 'show');

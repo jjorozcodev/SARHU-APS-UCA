@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SARHU.Views {
+namespace SARHU.sarhu {
     
     
-    public partial class AdmSisIndex {
+    public partial class principal {
     }
 }

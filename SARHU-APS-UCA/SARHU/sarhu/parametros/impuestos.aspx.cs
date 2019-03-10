@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SARHU.sarhu
+namespace SARHU.sarhu.parametros
 {
-    public partial class inicio : System.Web.UI.Page
+    public partial class impuestos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

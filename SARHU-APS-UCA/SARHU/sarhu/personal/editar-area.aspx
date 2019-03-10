@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editar-area.aspx.cs" Inherits="SARHU.Views.Personal.editar_area" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="editar-area.aspx.cs" Inherits="SARHU.sarhu.personal.editar_area" %>
+<asp:Content ID="ContentEditarArea" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
     <div id="page-wrapper">
         <div class="row">

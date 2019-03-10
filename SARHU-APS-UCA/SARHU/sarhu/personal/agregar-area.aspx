@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregar-area.aspx.cs" Inherits="SARHU.Views.Personal.agregar_area" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="agregar-area.aspx.cs" Inherits="SARHU.sarhu.personal.agregar_area" %>
+<asp:Content ID="ContentAgregarArea" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
     <div id="page-wrapper">
         <div class="row">
