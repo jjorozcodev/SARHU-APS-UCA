@@ -13,19 +13,19 @@
             <div class="col-lg-12">
                 <div class="panel panel-default2">
                     <div class="panel-body tooltip-demo">
-                        <table style="width:100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
-                                    <th style="width:200px">Operaciones</th>
+                                    <th width="200px">Operaciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="odd gradeX">
                                     <td>Responsable de Nómina</td>
                                     <td>Se encarga de ver lo que corresponde a la nómina.</td>
-                                    <td style="align-content:center">
+                                    <td align="center">
                                       <a data-toggle="modal" data-target="#mediumModal" href="#" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Rol"><i class="fa fa-eye fa-fw"></i></span></a>
                                         <a href="editar-rol.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Rol"><i class="fa fa-edit fa-fw"></i></span></a>
                                          <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Rol"><i class="fa fa-trash-o fa-fw"></i></span></button>
@@ -36,7 +36,7 @@
                                 <tr class="even gradeC" style='border: inset 0pt'>
                                     <td>Jefe de Sistema</td>
                                     <td> Encargado de el mantenimiento del sistema.</td>
-                                    <td style="align-content:center">
+                                    <td align="center">
                                       <a data-toggle="modal" data-target="#mediumModal" href="#" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Rol"><i class="fa fa-eye fa-fw"></i></span></a>
                                         <a href="editar-rol.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Rol"><i class="fa fa-edit fa-fw"></i></span></a>
                                          <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Rol"><i class="fa fa-trash-o fa-fw"></i></span></button>

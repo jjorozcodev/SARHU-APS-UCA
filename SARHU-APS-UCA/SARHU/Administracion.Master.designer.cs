@@ -10,7 +10,7 @@
 namespace SARHU {
     
     
-    public partial class AdminSis {
+    public partial class Administracion {
         
         /// <summary>
         /// ContentPlaceHolder control.

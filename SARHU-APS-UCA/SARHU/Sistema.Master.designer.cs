@@ -10,7 +10,7 @@
 namespace SARHU {
     
     
-    public partial class SiteMaster {
+    public partial class Sistema {
         
         /// <summary>
         /// ContentPlaceHolder control.

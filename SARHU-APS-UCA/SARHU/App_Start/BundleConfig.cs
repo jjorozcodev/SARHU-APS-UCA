@@ -13,7 +13,6 @@ namespace SARHU
                 "~/Content/bootstrap.min.css",
                 "~/Content/metisMenu.min.css",
                 "~/Content/sb-admin-2.css",
-                "~/Content/font-awesome.min.css",
                 "~/Content/dataTables.bootstrap.css",
                 "~/Content/dataTables.responsive.css",
                 "~/Content/SARHU.css"));

@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace SARHU
 {
-    public partial class SiteMaster : MasterPage
+    public partial class Sistema: MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
