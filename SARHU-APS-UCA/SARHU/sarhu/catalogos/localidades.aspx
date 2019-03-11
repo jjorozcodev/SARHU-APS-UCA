@@ -17,7 +17,7 @@
                             <thead>
                                 <tr>
                                     <th>Programa</th>
-                                    <th>Municipio</th>
+                                    <th>Departamento</th>
                                     <th>Director</th>
                                     <th>Teléfono</th>
                                     <th width="200px">Operaciones</th>
@@ -25,10 +25,10 @@
                             </thead>
                             <tbody>
                                 <tr class="odd gradeX">
-                                    <td>Programa de Fortalecimiento Familiar Somoto</td>
-                                    <td>Totogalpa</td>
-                                    <td>General</td>
-                                    <td>22245897</td>
+                                    <td>Fortalecimiento Familiar</td>
+                                    <td>Somoto</td>
+                                    <td>María Espinoza</td>
+                                    <td>2224-5897</td>
                                     <td align="center">
                                       <a data-toggle="modal" data-target="#mediumModal"  type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Localidad"><i class="fa fa-eye fa-fw"></i></span></a>
                                         <a href="editar-localidad.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Localidad"><i class="fa fa-edit fa-fw"></i></span></a>
@@ -38,10 +38,10 @@
 
                                 </tr>
                                 <tr class="even gradeC" style='border: inset 0pt'>
-                                    <td>Centro de Formación Hermann Gmeiner Estelí</td>
-                                    <td>Pueblo Nuevo</td>
-                                    <td>General</td>
-                                    <td>22256787</td>
+                                    <td>Centro de Formación Hermann Gmeiner</td>
+                                    <td>Estelí</td>
+                                    <td>Luis Morales</td>
+                                    <td>8880-7543</td>
                                     <td align="center">
                                       <a data-toggle="modal" data-target="#mediumModal"  type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Localidad"><i class="fa fa-eye fa-fw"></i></span></a>
                                         <a href="editar-localidad.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Localidad"><i class="fa fa-edit fa-fw"></i></span></a>
@@ -80,13 +80,36 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label>Nombre</label>
+                            <label>Programa</label>
                             <div class="form-group input-group" style="width: 100%;">
-                                <input type="text" class="form-control" value="Responsable de Nómina" disabled="" >
+                                <input type="text" class="form-control" value="Fortalecimiento Familiar" disabled="" >
+                            </div>
+                            <label>Departamento</label>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <input type="text" class="form-control" value="Somoto" disabled="" >
+                            </div>
+                            <label>Municipio</label>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <input type="text" class="form-control" value="Totogalpa" disabled="" >
+                            </div>
+                            <label>Director</label>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <input type="text" class="form-control" value="Maria Espinoza" disabled="" >
+                            </div>
+                            <label>Alias</label>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <input type="text" class="form-control" value="Programa de Fortalecimiento Familiar Somoto" disabled="" >
+                            </div>
+                            <div>
+                                <label>Teléfono</label>
+                            </div>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <span class="input-group-addon">+505</span>
+                                <input class="form-control" disabled="" value="2224-5897">
                             </div>
                             <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>
-                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="50" name="textarea" disabled="" ReadOnly>Se encarga de ver lo que corresponde a la nómina.</textarea>
+                                <label>Dirección</label>
+                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="50" name="textarea" disabled="" ReadOnly>Barrio Totogalpa calle 14.</textarea>
                             </div>
 
                         </div>
@@ -115,7 +138,7 @@
                                             <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Está seguro que desea borrar "Responsable de Nómina"?
+                                            ¿Está seguro que desea borrar "Fortalecimiento Familiar"?
                                         </div>
                                         <div class="modal-footer">
                                             <button  onclick="DeletePopup()" data-dismiss="modal" type="button" class="btn btn-danger fondo-rojo-aldeas">Borrar</button>

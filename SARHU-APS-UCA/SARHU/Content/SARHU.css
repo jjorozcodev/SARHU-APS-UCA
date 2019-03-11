@@ -21,6 +21,12 @@
     font-size:1.5vw;
 }
 
+.modalLittle {
+    text-align: center;
+     margin: 0;
+    line-height: 1.42857143;
+}
+
 #pagewrapper {
     padding:0 15px;
     min-height:568px;
