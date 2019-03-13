@@ -17,6 +17,7 @@
     </asp:PlaceHolder>
 
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    
 </head>
 <body class="bodynav">
     <form runat="server">
