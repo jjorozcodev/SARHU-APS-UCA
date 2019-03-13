@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="catalogos/programas.aspx">
+                        <a data-toggle="modal" data-target="#mediumModal" type="button" >
                             <div class="panel-footer">
                                 <span class="pull-left">Ver Detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="catalogos/localidades.aspx">
+                        <a data-toggle="modal" data-target="#localidadesModal" type="button">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver Detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -138,6 +138,130 @@ Bar Chart Example
 
 </div>
      </div>
-            
-    
+
+         <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <button style="font-size:35px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="modal-title" id="mediumModalLabel">Lista de Programas</h2>     
+                </div>
+                <div class="modal-body">
+                    <div id="page-wrapper1">
+                        <div class="row">
+                        <div class="col-md-12">
+        <div class="panel panel-formulario">
+                <div class="panel-body">
+                   <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default2">
+                    <div class="panel-body tooltip-demo">
+                       <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                    <td>Programa de Fortalecimiento Familiar Somoto</td>
+                                    <td>Trabajamos con las familias para garantizar protección y amor a niñas, niños y adolescentes y promovemos el derecho a la educación.</td>
+                                </tr>
+                                <tr class="even gradeC" style='border: inset 0pt'>
+                                    <td>Centro de Formación Hermann Gmeiner Estelí</td>
+                                    <td> Programa de educación para niños desde los 3 años de edad.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+     </div>
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+     <div class="modal fade" id="localidadesModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <button style="font-size:35px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="modal-title" id="localidadesModalLabel">Lista de Programas</h2>     
+                </div>
+                <div class="modal-body">
+                    <div id="page-wrapper2">
+                        <div class="row">
+                        <div class="col-md-12">
+        <div class="panel panel-formulario">
+                <div class="panel-body">
+                   <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default2">
+                    <div class="panel-body tooltip-demo">
+                       <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Departamento</th>
+                                    <th>Director</th>
+                                    <th>Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                    <td>Fortalecimiento Familiar</td>
+                                    <td>Somoto</td>
+                                    <td>María Espinoza</td>
+                                    <td>2224-5897</td>
+                                </tr>
+                                <tr class="even gradeC" style='border: inset 0pt'>
+                                    <td>Centro de Formación Hermann Gmeiner</td>
+                                    <td>Estelí</td>
+                                    <td>Luis Morales</td>
+                                    <td>8880-7543</td>
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+     </div>
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
 </asp:Content>
