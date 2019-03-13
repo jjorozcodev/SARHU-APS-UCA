@@ -7,8 +7,8 @@
     <ProjectGuid>{9A7089FE-967F-4901-9E0C-B9F743050F81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>datos</RootNamespace>
-    <AssemblyName>datos</AssemblyName>
+    <RootNamespace>Datos</RootNamespace>
+    <AssemblyName>Datos</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,10 +41,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
-    <Compile Include="DTDeduccionesDevengados.cs" />
-    <Compile Include="DTTiposDeduccionDevengado.cs" />
-    <Compile Include="IDatos.cs" />
+    <Compile Include="DT_Areas.cs" />
+    <Compile Include="DT_Bitacora.cs" />
+    <Compile Include="DT_Bonos.cs" />
+    <Compile Include="DT_Departamentos.cs" />
+    <Compile Include="DT_Funciones.cs" />
+    <Compile Include="DT_INSS.cs" />
+    <Compile Include="DT_IR.cs" />
+    <Compile Include="DT_Localidades.cs" />
+    <Compile Include="DT_Municipios.cs" />
+    <Compile Include="DT_Organizacion.cs" />
+    <Compile Include="DT_Programas.cs" />
+    <Compile Include="DT_Roles.cs" />
+    <Compile Include="I_CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Procedimientos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\entidades\Entidades.csproj">

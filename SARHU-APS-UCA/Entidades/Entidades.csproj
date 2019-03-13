@@ -7,8 +7,8 @@
     <ProjectGuid>{CB238419-5ED8-4AB6-BEF9-BB4DD2764723}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>entidades</RootNamespace>
-    <AssemblyName>entidades</AssemblyName>
+    <RootNamespace>Entidades</RootNamespace>
+    <AssemblyName>Entidades</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeduccionDevengado.cs" />
+    <Compile Include="Area.cs" />
+    <Compile Include="Bitacora.cs" />
+    <Compile Include="Bono.cs" />
+    <Compile Include="Departamento.cs" />
+    <Compile Include="Funcion.cs" />
+    <Compile Include="Localidad.cs" />
+    <Compile Include="Municipio.cs" />
+    <Compile Include="Organizacion.cs" />
+    <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoDeduccionDevengado.cs" />
+    <Compile Include="Rol.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

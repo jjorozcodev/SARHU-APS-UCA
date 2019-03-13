@@ -7,8 +7,8 @@
     <ProjectGuid>{DA9FBBDB-DBAF-4260-BA2F-4E418F24FCBA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>negocio</RootNamespace>
-    <AssemblyName>negocio</AssemblyName>
+    <RootNamespace>Negocio</RootNamespace>
+    <AssemblyName>Negocio</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="INegocio.cs" />
-    <Compile Include="NGDeduccionesDevengados.cs" />
-    <Compile Include="NGTiposDeduccionDevengado.cs" />
+    <Compile Include="NG_Areas.cs" />
+    <Compile Include="NG_Bonos.cs" />
+    <Compile Include="NG_Departamentos.cs" />
+    <Compile Include="NG_Funciones.cs" />
+    <Compile Include="NG_Localidades.cs" />
+    <Compile Include="NG_Programas.cs" />
+    <Compile Include="NG_Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
