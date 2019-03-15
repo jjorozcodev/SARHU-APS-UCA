@@ -195,3 +195,8 @@ color:#333;background-color:gainsboro; height: 34px;
 .col-md-offset-6 {
     margin-left: 25%;
 }
+
+.alertas {
+    padding-bottom: 9px;
+    margin: 80px 0 20px;
+}
