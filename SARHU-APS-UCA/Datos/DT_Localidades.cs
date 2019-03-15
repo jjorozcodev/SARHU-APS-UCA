@@ -42,6 +42,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesAgregar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
             comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;
@@ -71,6 +72,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -95,6 +97,9 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesConsultar;
+
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -132,6 +137,8 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesEditar;
 
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
             comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;

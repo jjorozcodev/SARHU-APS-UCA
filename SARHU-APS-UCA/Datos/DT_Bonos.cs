@@ -42,6 +42,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.BonosAgregar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@bono_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@bono_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@bono_monto", SqlDbType.VarChar).Value = obj.Descripcion;
@@ -69,6 +70,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.BonosBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@bono_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -93,6 +95,9 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.BonosConsultar;
+
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@bono_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -127,6 +132,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.BonosEditar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@bono_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@bono_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@bono_monto", SqlDbType.Decimal).Value = obj.Monto;

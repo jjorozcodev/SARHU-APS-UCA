@@ -24,7 +24,7 @@
         public static string ProgramasBorrar = "[dbo].[programas_delete]";
         
         // LOCALIDADES
-        public static string LocalidadesListar = "";
+        public static string LocalidadesListar = "[dbo].[localidades_list]";
         public static string LocalidadesConsultar = "[dbo].[localidades_consult]";
         public static string LocalidadesAgregar = "[dbo].[localidades_insert]";
         public static string LocalidadesEditar = "[dbo].[localidades_update]";

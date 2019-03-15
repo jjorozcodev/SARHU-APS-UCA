@@ -42,6 +42,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.ProgramasAgregar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@programa_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
@@ -68,6 +69,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.ProgramasBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -92,6 +94,9 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.ProgramasConsultar;
+
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -125,6 +130,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.ProgramasEditar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@programa_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.Id;
