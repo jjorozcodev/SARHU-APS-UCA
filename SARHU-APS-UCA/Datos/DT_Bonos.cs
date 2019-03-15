@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using Entidades;
+using System.Collections.Generic;
 
 namespace Datos
 {
@@ -30,6 +31,11 @@ namespace Datos
 
         // METODOS
 
+        /// <summary>
+        /// El método permite agregar un registro de la entidad [Bono].
+        /// Recibe como parámetro un objeto [Bono] con la información a agregar a la base de datos (Nombre, Descripción y Monto).
+        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// </summary>
         public bool Agregar(Bono obj)
         {
             comandoSql.Connection = conexionSql;
@@ -38,6 +44,7 @@ namespace Datos
 
             comandoSql.Parameters.Add("@bono_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@bono_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
+            comandoSql.Parameters.Add("@bono_monto", SqlDbType.VarChar).Value = obj.Descripcion;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -51,6 +58,11 @@ namespace Datos
             return (agregado > 0);
         }
 
+        /// <summary>
+        /// El método permite borrar un registro de la entidad [Bono].
+        /// Recibe como parámetro el id [int] del registro a borrar en la base de datos.
+        /// Devuelve un valor booleano para notificar si el registro fue borrado o no.
+        /// </summary>
         public bool Borrar(int id)
         {
             comandoSql.Connection = conexionSql;
@@ -71,6 +83,11 @@ namespace Datos
             return (borrado > 0);
         }
 
+        /// <summary>
+        /// El método permite consultar/buscar un registro de la entidad [Bono].
+        /// Recibe como parámetro el id [int] del registro a consultar/buscar en la base de datos.
+        /// Devuelve un objeto [Bono] nulo en caso de no encontrarse, o con la información del registro en caso que exista.
+        /// </summary>
         public Bono Consultar(int id)
         {
             comandoSql.Connection = conexionSql;
@@ -99,6 +116,11 @@ namespace Datos
             return bono;
         }
 
+        /// <summary>
+        /// El método permite editar un registro de la entidad [Bono].
+        /// Recibe como parámetro un objeto [Bono] con la información editada para actualizarse en la base de datos (Nombre, Descripción y Monto).
+        /// Devuelve un valor booleano para notificar si el registro fue editado o no.
+        /// </summary>
         public bool Editar(Bono obj)
         {
             comandoSql.Connection = conexionSql;
@@ -122,16 +144,41 @@ namespace Datos
             return (editado > 0);
         }
 
-        public DataTable Listar()
+        /// <summary>
+        /// El método permite obtener la lista de registros de la entidad [Bono] desde la base de datos.
+        /// Los campos que se devuelven son: Id, Nombre, Descripción y Monto.
+        /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
+        /// </summary>
+        public List<Bono> Listar()
         {
+            List<Bono> bonos = new List<Bono>();
+
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.BonosListar;
-            adaptadorSql = new SqlDataAdapter(comandoSql);
-            DataTable dt = new DataTable();
-            adaptadorSql.Fill(dt);
-            adaptadorSql.Dispose();
-            return dt;
+
+            if (conexionSql.State == ConnectionState.Closed)
+            {
+                conexionSql.Open();
+            }
+
+            SqlDataReader reader = comandoSql.ExecuteReader();
+            Bono b = new Bono();
+
+            while (reader.Read())
+            {
+                b.Id = reader.GetInt32(0);
+                b.Nombre = reader.GetString(1);
+                b.Descripcion = reader.GetString(2);
+                b.Monto = reader.GetDecimal(3);
+
+                bonos.Add(b);
+            }
+            reader.Close();
+
+            conexionSql.Close();
+
+            return bonos;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using Entidades;
+using System.Collections.Generic;
 
 namespace Datos
 {
@@ -29,16 +30,40 @@ namespace Datos
         }
 
         // METODOS
-        public DataTable Listar()
+        /// <summary>
+        /// El método permite obtener la lista de registros de la entidad [Municipio] desde la base de datos.
+        /// Los campos que se devuelven son: Id, Nombre y DepartamentoId.
+        /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
+        /// </summary>
+        public List<Municipio> Listar()
         {
+            List<Municipio> municipios = new List<Municipio>();
+
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.MunicipiosListar;
-            adaptadorSql = new SqlDataAdapter(comandoSql);
-            DataTable dt = new DataTable();
-            adaptadorSql.Fill(dt);
-            adaptadorSql.Dispose();
-            return dt;
+            comandoSql.CommandText = Procedimientos.AreasListar;
+
+            if (conexionSql.State == ConnectionState.Closed)
+            {
+                conexionSql.Open();
+            }
+
+            SqlDataReader reader = comandoSql.ExecuteReader();
+            Municipio m = new Municipio();
+
+            while (reader.Read())
+            {
+                m.Id = reader.GetInt32(0);
+                m.Nombre = reader.GetString(1);
+                m.DepartamentoId = reader.GetInt32(2);
+
+                municipios.Add(m);
+            }
+            reader.Close();
+
+            conexionSql.Close();
+
+            return municipios;
         }
     }
 }

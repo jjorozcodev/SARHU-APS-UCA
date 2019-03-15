@@ -1,6 +1,6 @@
 ﻿using Datos;
 using Entidades;
-using System.Data;
+using System.Collections.Generic;
 
 namespace Negocio
 {
@@ -12,7 +12,7 @@ namespace Negocio
 
         private NG_Departamentos()
         {
-
+            // Singleton
         }
         
         public static NG_Departamentos Instanciar()
@@ -24,9 +24,9 @@ namespace Negocio
             return ngDepartamentos;
         }
 
-        public DataTable Obtener()
+        public List<Departamento> Listar()
         {
-            return dtDepartamentos.Obtener();
+            return dtDepartamentos.Listar();
         }
     }
 }
