@@ -12,6 +12,7 @@ namespace Datos
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionDB();
         private SqlCommand comandoSql = new SqlCommand();
 
+
         private static DT_Areas dtAreas = null;
 
         private DT_Areas()
@@ -24,6 +25,7 @@ namespace Datos
             if(dtAreas == null)
             {
                 dtAreas = new DT_Areas();
+                
             }
             return dtAreas;
         }
@@ -129,6 +131,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AreasEditar;
 
+
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@area_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@area_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
@@ -159,16 +162,19 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AreasListar;
 
+            comandoSql.Parameters.Clear();
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Area a = new Area();
+         
 
             while (reader.Read())
             {
+                Area a = new Area();
                 a.Id = reader.GetInt32(0);
                 a.Nombre = reader.GetString(1);
                 a.Descripcion = reader.GetString(2);

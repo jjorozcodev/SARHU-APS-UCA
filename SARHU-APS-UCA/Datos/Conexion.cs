@@ -5,7 +5,8 @@ namespace Datos
     public class Conexion
     {
         private static Conexion conexion = null;
-        private readonly string ConnectionString = "Data Source = 165.98.12.158; Initial Catalog = SARHU; MultipleActiveResultSets=True; Max Pool Size = 50; Min Pool Size = 1; Pooling = True;User ID = aps; Password = $qlS3rv3rAPS*;";
+        //private readonly string ConnectionString = "Data Source = 165.98.12.158; Initial Catalog = SARHU; MultipleActiveResultSets=True; Max Pool Size = 50; Min Pool Size = 1; Pooling = True;User ID = aps; Password = $qlS3rv3rAPS*;";
+        private readonly string ConnectionString = "Data Source = localhost; Initial Catalog = SARHU; MultipleActiveResultSets=True; Max Pool Size = 50; Min Pool Size = 1; Pooling = True;User ID = sa; Password = 1234;";
 
         private Conexion()
         {
