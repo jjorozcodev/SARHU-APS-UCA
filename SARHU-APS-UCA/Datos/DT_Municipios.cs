@@ -35,13 +35,16 @@ namespace Datos
         /// Los campos que se devuelven son: Id, Nombre y DepartamentoId.
         /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
         /// </summary>
-        public List<Municipio> Listar()
+        public List<Municipio> Listar(int id)
         {
             List<Municipio> municipios = new List<Municipio>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.AreasListar;
+            comandoSql.CommandText = Procedimientos.MunicipiosListar;
+
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -49,13 +52,14 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Municipio m = new Municipio();
+      
 
             while (reader.Read())
             {
+                Municipio m = new Municipio();
                 m.Id = reader.GetInt32(0);
                 m.Nombre = reader.GetString(1);
-                m.DepartamentoId = reader.GetInt32(2);
+             
 
                 municipios.Add(m);
             }

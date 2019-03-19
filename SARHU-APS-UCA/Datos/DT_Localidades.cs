@@ -38,6 +38,8 @@ namespace Datos
         /// </summary>
         public bool Agregar(Localidad obj)
         {
+
+
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesAgregar;
@@ -45,8 +47,10 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
             comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;
+            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = obj.DepartamentoId;
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;
-            comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias; comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
+            comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias;
+            comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
             comandoSql.Parameters.Add("@localidad_direccion", SqlDbType.VarChar).Value = obj.Direccion;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -107,17 +111,22 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Localidad localidad = new Localidad();
 
+
+            Localidad localidad = new Localidad();
             while (reader.Read())
             {
+               
                 localidad.Id = reader.GetInt32(0);
                 localidad.ProgramaId = reader.GetInt32(1);
-                localidad.MunicipioId = reader.GetInt32(2);
-                localidad.DirectorId = reader.GetInt32(3);
-                localidad.Alias = reader.GetString(4);
-                localidad.Telefono = reader.GetString(5);
-                localidad.Direccion = reader.GetString(6);
+                localidad.DepartamentoId = reader.GetInt32(2);
+                localidad.MunicipioId = reader.GetInt32(3);               
+                if (reader.GetInt32(4) == 0111) {
+                    localidad.DirectorName = "Pedro Antonio";
+                }
+               localidad.Telefono = reader.GetString(5);
+                localidad.Alias = reader.GetString(6);                
+                localidad.Direccion = reader.GetString(7);
             }
             reader.Close();
 
@@ -137,13 +146,16 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesEditar;
 
+
             comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
-            comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;
+            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = obj.DepartamentoId;
+            comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;           
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;
-            comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias; comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
+            comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias;
+            comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
             comandoSql.Parameters.Add("@localidad_direccion", SqlDbType.VarChar).Value = obj.Direccion;
+            comandoSql.Parameters.Add("@localidad_id", SqlDbType.VarChar).Value = obj.Id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -168,7 +180,8 @@ namespace Datos
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.ProgramasListar;
+            comandoSql.CommandText = Procedimientos.LocalidadesListar;
+            comandoSql.Parameters.Clear();
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -176,17 +189,21 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Localidad l = new Localidad();
+
 
             while (reader.Read())
             {
+                Localidad l = new Localidad();
                 l.Id = reader.GetInt32(0);
-                l.ProgramaId = reader.GetInt32(1);
-                l.MunicipioId = reader.GetInt32(2);
+                l.ProgramaNombre = reader.GetString(1);
+                l.DepartamentoNombre = reader.GetString(2);
                 l.DirectorId = reader.GetInt32(3);
-                l.Alias = reader.GetString(4);
-                l.Telefono = reader.GetString(5);
-                l.Direccion = reader.GetString(6);
+                if (l.DirectorId == 0111)
+                {
+                    l.DirectorName = "Pedro Antonio";
+                }              
+                l.Telefono = reader.GetString(4);
+               
 
                 localidades.Add(l);
             }

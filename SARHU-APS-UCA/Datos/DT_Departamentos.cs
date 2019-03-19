@@ -42,18 +42,19 @@ namespace Datos
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.AreasListar;
-
+            comandoSql.CommandText = Procedimientos.DepartamentosListar;
+            comandoSql.Parameters.Clear();
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Departamento d = new Departamento();
+         
 
             while (reader.Read())
             {
+                Departamento d = new Departamento();
                 d.Id = reader.GetInt32(0);
                 d.Nombre = reader.GetString(1);
 
