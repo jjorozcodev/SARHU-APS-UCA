@@ -1,11 +1,15 @@
 ﻿using System.Data.SqlClient;
+using System.IO;
+using System.Reflection;
+using System.Web;
 
 namespace Datos
 {
     public class Conexion
     {
-        private static Conexion conexion = null;
-        private readonly string ConnectionString = "Data Source = 165.98.12.158; Initial Catalog = SARHU; MultipleActiveResultSets=True; Max Pool Size = 50; Min Pool Size = 1; Pooling = True;User ID = aps; Password = $qlS3rv3rAPS*;";
+        private static Conexion Con = null;
+        private readonly string CadenaConexion = ObtenerCadena();
+        private static readonly int CantParametrosConfig = 4;
 
         private Conexion()
         {
@@ -14,18 +18,48 @@ namespace Datos
 
         public static Conexion Instanciar()
         {
-            if (conexion == null)
+            if (Con == null)
             {
-                conexion = new Conexion();
+                Con = new Conexion();
             }
-            return conexion;
+            return Con;
+        }
+
+        private static string ObtenerCadena()
+        {
+            string[] configs = CargarConfiguraciones();
+            string conconfig = string.Format("Data Source={0};Initial Catalog={1};MultipleActiveResultSets=True;Max Pool Size=50;Min Pool Size=1;Pooling=True;User ID={2};Password={3};", configs[0], configs[1], configs[2], configs[3]);
+            System.Diagnostics.Debug.WriteLine(conconfig);
+            return conconfig;
+        }
+
+        private static string[] CargarConfiguraciones()
+        {
+            StreamReader sr = null;
+
+            if (HttpContext.Current != null)
+            {
+                sr = new StreamReader(HttpContext.Current.Server.MapPath("~/ConfiguracionBD.sarhu"));
+            }
+            else
+                sr = new StreamReader("ConfiguracionBD.sarhu");
+
+            string[] configs = new string[CantParametrosConfig];
+            
+            for(int i=0; i<CantParametrosConfig; i++)
+            {
+                string linea = sr.ReadLine();
+                configs[i] = linea.Substring(linea.IndexOf("=") + 1);
+            }
+
+            return configs;
         }
 
         //Método que devuelve una conexión SQL a la Base de Datos
-        public SqlConnection ConexionDB()
+        public SqlConnection ConexionBD()
         {
             SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = ConnectionString;
+            conexion.ConnectionString = CadenaConexion;
             return conexion;
         }
     }

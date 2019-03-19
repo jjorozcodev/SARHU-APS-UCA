@@ -6,7 +6,7 @@ namespace SARHU.sarhu
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Negocio.NG_Areas.Instanciar();
         }
     }
 }
