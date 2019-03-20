@@ -69,6 +69,14 @@
                             <a href="~/sarhu/inicio.aspx" runat="server"><i class="fa fa-home fa-fw"></i> Inicio</a>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-money fa-fw"></i> Ingresos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                               
+                                <li>
+                                    <a href="~/sarhu/ingresos/bonos.aspx" runat="server">Bonos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-group fa-fw"></i> Personal<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                               
                                 <li>
