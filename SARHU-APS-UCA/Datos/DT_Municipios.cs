@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private SqlDataAdapter adaptadorSql = null;
+        private List<Municipio> municipios = new List<Municipio>();
 
         private static DT_Municipios dtMunicipios = null;
 
@@ -35,16 +35,15 @@ namespace Datos
         /// Los campos que se devuelven son: Id, Nombre y DepartamentoId.
         /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
         /// </summary>
-        public List<Municipio> Listar(int id)
+        public List<Municipio> Listar()
         {
-            List<Municipio> municipios = new List<Municipio>();
+            List<Municipio> listaMunicipios = new List<Municipio>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.MunicipiosListar;
 
             comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -56,18 +55,37 @@ namespace Datos
 
             while (reader.Read())
             {
-                Municipio m = new Municipio();
-                m.Id = reader.GetInt32(0);
-                m.Nombre = reader.GetString(1);
-             
-
-                municipios.Add(m);
+                Municipio m = new Municipio
+                {
+                    Id = reader.GetInt32(0),
+                    Nombre = reader.GetString(1)
+                };
+                
+                listaMunicipios.Add(m);
             }
             reader.Close();
 
             conexionSql.Close();
 
-            return municipios;
+            this.municipios.Clear();
+            this.municipios = listaMunicipios;
+
+            return listaMunicipios;
+        }
+
+        public List<Municipio> ObtenerMunicipios(int DepartamentoId)
+        {
+            List<Municipio> muniDepartamento = new List<Municipio>();
+
+            foreach(Municipio m in this.municipios)
+            {
+                if(m.Id == DepartamentoId)
+                {
+                    muniDepartamento.Add(m);
+                }
+            }
+
+            return muniDepartamento;
         }
     }
 }

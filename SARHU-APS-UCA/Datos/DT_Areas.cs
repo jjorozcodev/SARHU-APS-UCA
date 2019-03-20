@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-
+        private List<Area> areas = new List<Area>();
 
         private static DT_Areas dtAreas = null;
 
@@ -52,7 +52,7 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int agregado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
@@ -156,7 +156,7 @@ namespace Datos
         /// </summary>
         public List<Area> Listar()
         {
-            List<Area> areas = new List<Area>();
+            List<Area> listaAreas = new List<Area>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -171,7 +171,6 @@ namespace Datos
 
             SqlDataReader reader = comandoSql.ExecuteReader();
          
-
             while (reader.Read())
             {
                 Area a = new Area();
@@ -179,13 +178,34 @@ namespace Datos
                 a.Nombre = reader.GetString(1);
                 a.Descripcion = reader.GetString(2);
 
-                areas.Add(a);
+                listaAreas.Add(a);
             }
             reader.Close();
 
             conexionSql.Close();
 
-            return areas;
+            this.areas.Clear();
+            this.areas = listaAreas;
+
+            return listaAreas;
+        }
+
+        public List<Area> ListarPorEstado(bool Estado)
+        {
+            // Actualizar
+            Listar();
+
+            List<Area> listAreas = new List<Area>();
+
+            foreach (Area a in areas)
+            {
+                if (a.Estado == Estado)
+                {
+                    listAreas.Add(a);
+                }
+            }
+
+            return listAreas;
         }
     }
 }

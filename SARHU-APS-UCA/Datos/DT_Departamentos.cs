@@ -11,7 +11,6 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private SqlDataAdapter adaptadorSql = null;
 
         private static DT_Departamentos dtDepartamentos = null;
 
@@ -43,7 +42,9 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.DepartamentosListar;
+
             comandoSql.Parameters.Clear();
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
@@ -54,12 +55,15 @@ namespace Datos
 
             while (reader.Read())
             {
-                Departamento d = new Departamento();
-                d.Id = reader.GetInt32(0);
-                d.Nombre = reader.GetString(1);
+                Departamento d = new Departamento
+                {
+                    Id = reader.GetInt32(0),
+                    Nombre = reader.GetString(1)
+                };
 
                 departamentos.Add(d);
             }
+
             reader.Close();
 
             conexionSql.Close();

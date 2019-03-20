@@ -3,12 +3,12 @@
     public class Procedimientos
     {
         // ORGANIZACIÓN
-        //public static string OrganizacionObtener = "";
-        //public static string OrganizacionEditar = "";
+        public static string OrganizacionObtener = "[dbo].[sp_organizacion_consult]";
+        public static string OrganizacionEditar = "[dbo].[sp_organizacion_update]";
 
         // BITÁCORA
-        //public static string BitacoraListar = "";
-        //public static string BitacoraInsertar = "";
+        public static string BitacoraListar = "[dbo].[sp_bitacora_list]";
+        public static string BitacoraInsertar = "[dbo].[sp_bitacora_insert]";
 
         // DEPARTAMENTOS
         public static string DepartamentosListar = "[dbo].[sp_departamentos_list]";
@@ -42,7 +42,7 @@
         public static string AreasConsultar = "[dbo].[sp_areas_consult]";
         public static string AreasAgregar = "[dbo].[sp_areas_insert]";
         public static string AreasEditar = "[dbo].[sp_areas_update]";
-        public static string AreasBorrar = "[dbo].[areas_delete]";
+        public static string AreasBorrar = "[dbo].[sp_areas_delete]";
 
         // FUNCIONES
         public static string FuncionesListar = "[dbo].[sp_funciones_list]";
@@ -59,21 +59,28 @@
         public static string BonosBorrar = "[dbo].[sp_bonos_delete]";
 
         // IR
-        //public static string IRObtener = "";
-        //public static string IREditar = "";
+        public static string IRListar = "[dbo].[sp_ir_list]";
+        public static string IRConsultar = "[dbo].[sp_ir_consult]";
+        public static string IREditar = "[dbo].[sp_ir_update]";
 
         // INSS
-        //public static string INSSObtener = "";
-        //public static string INSSEditar = "";
+        public static string INSSListar = "[dbo].[sp_inss_list]";
+        public static string INSSConsultar = "[dbo].[sp_inss_consult]";
+        public static string INSSEditar = "[dbo].[sp_inss_update]";
+
+        // VARIABLES
+        public static string VariablesListar = "[dbo].[sp_variables_list]";
+        public static string VariablesConsultar = "[dbo].[sp_variables_consult]";
+        public static string VariablesEditar = "[dbo].[sp_variables_update]";
 
         // MODULOS
-        //public static string ModulosListar = "";
+        public static string ModulosListar = "[dbo].[sp_modulos_list]";
 
         // FUNCIONALIDADES
-        //public static string FuncionalidadesListar = "";
+        public static string FuncionalidadesListar = "[dbo].[sp_funcionalidades_list]";
 
         // OPERACIONES
-        //public static string OperacionesListar = "";
+        public static string OperacionesListar = "[dbo].[sp_operaciones_list]";
 
     }
 }

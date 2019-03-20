@@ -285,16 +285,16 @@
                     "datasets":
                     [{
                         "label": 'Movimientos',
-                        "data": [65, 59, 80],
+                        "data": [75, 35, 53],
                         "fill": false,
                         "backgroundColor": [
-                            "rgba(255, 99, 132, 0.5)", //color etiqueta n° 1
-                            "rgba(75, 192, 192, 0.5)", //color etiqueta n° 2
-                            "rgba(153, 102, 255, 0.5)"], //color etiqueta n° 3
+                            "rgba(0, 158, 224, 0.5)",
+                            "rgba(231, 67, 97, 0.5)",
+                            "rgba(240, 173, 78, 0.5)"],
                         "borderColor": [
-                            "rgb(255, 99, 132)", //color borde etiqueta n° 1
-                            "rgb(75, 192, 192)", //color borde etiqueta n° 1
-                            "rgb(153, 102, 255)"], //color borde etiqueta n° 1
+                            "rgb(0, 158, 224)",
+                            "rgb(231, 67, 97)",
+                            "rgb(240, 173, 78)"],
                         "borderWidth": 1
                     }]
                 }, "options": {"scales": { "yAxes": [{ "ticks": { "beginAtZero": true } }] } }

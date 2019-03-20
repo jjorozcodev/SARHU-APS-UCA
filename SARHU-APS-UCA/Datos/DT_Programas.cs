@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private SqlDataAdapter adaptadorSql = null;
+        private List<Programa> programas = new List<Programa>();
 
         private static DT_Programas dtProgramas = null;
 
@@ -148,12 +148,14 @@ namespace Datos
         /// </summary>
         public List<Programa> Listar()
         {
-            List<Programa> programas = new List<Programa>();
+            List<Programa> progsLista = new List<Programa>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.ProgramasListar;
+
             comandoSql.Parameters.Clear();
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
@@ -169,13 +171,33 @@ namespace Datos
                 p.Nombre = reader.GetString(1);
                 p.Descripcion = reader.GetString(2);
 
-                programas.Add(p);
+                progsLista.Add(p);
             }
             reader.Close();
 
             conexionSql.Close();
 
-            return programas;
+            this.programas.Clear();
+            this.programas = progsLista;
+            return progsLista;
+        }
+
+        public List<Programa> ListarPorEstado(bool Estado)
+        {
+            // Actualizar
+            Listar();
+
+            List<Programa> progs = new List<Programa>();
+
+            foreach(Programa p in programas)
+            {
+                if(p.Estado == Estado)
+                {
+                    progs.Add(p);
+                }
+            }
+
+            return progs;
         }
     }
 }
