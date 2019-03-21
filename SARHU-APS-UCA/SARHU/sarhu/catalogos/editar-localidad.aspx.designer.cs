@@ -10,7 +10,7 @@
 namespace SARHU.sarhu.catalogos {
     
     
-    public partial class agregar_localidad {
+    public partial class editar_localidad {
         
         /// <summary>
         /// Control panel.
@@ -20,6 +20,15 @@ namespace SARHU.sarhu.catalogos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panel;
+        
+        /// <summary>
+        /// Control Idlocalidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Idlocalidad;
         
         /// <summary>
         /// Control Programa.

@@ -1,15 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="agregar-localidad.aspx.cs" Inherits="SARHU.sarhu.catalogos.agregar_localidad" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="editar-localidad.aspx.cs" Inherits="SARHU.sarhu.catalogos.editar_localidad" %>
 
-<asp:Content ID="ContentAgregarLocalidad" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+<asp:Content ID="ContentEditarLocalidad" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Agregar Localidad</h1>
+                <h1 class="page-header">Editar Localidad</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row">
+       <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
                     <div class="row">
@@ -18,17 +18,12 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
-
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <i class="fa-lg fa fa-exclamation-circle "></i>
                                             <%=Message %>
-                                        </asp:Panel>
-
-
-
-                                       
+                                        </asp:Panel>                                     
                                             <div class="col-md-12">
-
+                                                <asp:HiddenField ID="Idlocalidad" runat="server" />
                                                 <label>Programa</label>
                                                 <div class="form-group input-group" style="width: 100%;">
                                                     <asp:DropDownList CssClass="form-control" ID="Programa" runat="server" InitialValue="Please select" ErrorMessage="Please select something"></asp:DropDownList>
@@ -123,7 +118,7 @@
                                                 </div>
 
                                             </div>
-                                       
+                                     
 
                                         <!-- /.col-lg-6 (nested) -->
                                     </div>
@@ -216,8 +211,6 @@
         </div>
     </div>
 
-
-
     <script>
         $(document).ready(function () {
             var text_max = 200;
@@ -230,6 +223,8 @@
                 $('#textarea_feedback').html(text_remaining + ' caracteres disponibles');
             });
         });
+
+
 
     </script>
 
@@ -249,9 +244,5 @@
 
 
 
-
     </script>
-
-
-
 </asp:Content>
