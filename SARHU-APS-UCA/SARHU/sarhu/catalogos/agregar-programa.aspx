@@ -17,18 +17,33 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
+
+
                             <label>Nombre</label>
                             <div class="form-group input-group" style="width: 100%;">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>
-                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
-                                <div id="textarea_feedback">150 caracteres disponibles</div>
+                                <asp:TextBox ID="nombreprog" type="text" runat="server" CssClass="form-control"></asp:TextBox>
+                                
                             </div>
 
+                   <asp:RequiredFieldValidator runat="server" ControlToValidate="nombreprog"
+                   ErrorMessage="El campo Nombre es Requerido" Display="None">                     
+                   </asp:RequiredFieldValidator>
+
+
+                            <div class="form-group" style="width: 100%;">
+                                <label>Descripción</label>                                                               
+
+                                   <asp:TextBox ID="descripcionprog" runat="server" Wrap = "true" type="text" TextMode="multiline" style="resize:none" rows="5" cols="5"  CssClass="form-control" maxlength="150" name="descripcionprog"></asp:TextBox>
+                               
+                                <div id="descripcionprog_feedback">150 caracteres disponibles</div>
+                            </div>
+
+
+
                             <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
+
+                                  <asp:Button runat="server" type="button" class="btn btn-success  fondo-verde-aldeas" ID ="btnGuardar" Text="Guardar" OnClick="btnGuardar_programa"></asp:Button>
+                                            
                                 <a href="programas.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                             </div>
 

@@ -17,20 +17,47 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label>Nombre</label>
+
+                             <asp:HiddenField runat="server" ID="idPrograma" />
+
+
+                                    <label>Nombre</label>
                             <div class="form-group input-group" style="width: 100%;">
-                                <input type="text" class="form-control" value="Programa de Fortalecimiento Familiar Somoto">
-                            </div>
-                            <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>
-                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea" >Trabajamos con las familias para garantizar protección y amor a niñas, niños y adolescentes y promovemos el derecho a la educación.</textarea>
-                                <div id="textarea_feedback">150 caracteres disponibles</div>
+                                <asp:TextBox ID="Nombre" type="text" runat="server" CssClass="form-control"></asp:TextBox>
+                                
                             </div>
 
+                   <asp:RequiredFieldValidator runat="server" ControlToValidate="Nombre"
+                   ErrorMessage="El campo Nombre es Requerido" Display="None">                     
+                   </asp:RequiredFieldValidator>
+
+
+                            <div class="form-group" style="width: 100%;">
+                                <label>Descripción</label>                                                               
+
+                                       <label>Descripción</label>
+                                                <textarea style="resize: none" id="Descripcion" rows="5" cols="5" class="form-control" maxlength="150" name="Descripcion"><%=Value %></textarea>
+                                                <div id="textarea_feedback">150 caracteres disponibles</div>
+                                            </div>
+
+
+
+                                  
+                               
+                        
+                            </div>
+
+
+
                             <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Editar</button>
+
+                                <asp:Button runat="server" type="button" class="btn btn-success  fondo-verde-aldeas" ID ="btnGuardar" Text="Editar" OnClick="btnEditar_programa"></asp:Button>
+
+                              
                                 <a href="programas.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                             </div>
+
+
 
                         </div>
                         <!-- /.col-lg-6 (nested) -->
