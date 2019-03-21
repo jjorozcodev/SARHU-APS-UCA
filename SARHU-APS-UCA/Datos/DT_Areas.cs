@@ -109,10 +109,12 @@ namespace Datos
 
             while (reader.Read())
             {
-                area.Id = reader.GetInt32(0);
-                area.Nombre = reader.GetString(1);
-                area.Descripcion = reader.GetString(2);
+                area.Id = id;
+                area.Nombre = reader.GetString(0);
+                area.Descripcion = reader.GetString(1);
+                area.Estado = reader.GetBoolean(2);
             }
+
             reader.Close();
             
             conexionSql.Close();
@@ -177,6 +179,7 @@ namespace Datos
                 a.Id = reader.GetInt32(0);
                 a.Nombre = reader.GetString(1);
                 a.Descripcion = reader.GetString(2);
+                a.Estado = reader.GetBoolean(3);
 
                 listaAreas.Add(a);
             }

@@ -21,7 +21,7 @@ namespace SARHU.sarhu.personal
 
         private void LoadData()
         {
-            rptTable.DataSource = NG_Funciones.Instanciar().Listar(); ;
+            rptTable.DataSource = NG_Funciones.Instanciar().ListarPorEstado(true);
             rptTable.DataBind();
 
         }
@@ -44,18 +44,16 @@ namespace SARHU.sarhu.personal
             int index = int.Parse(Idelminar.Value);
             if (NG_Funciones.Instanciar().Borrar(index))
             {
-                Message = "BORRADO EXITOSAMENTE";
+                Message = "El registro ha sido borrado.";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
             else
             {
-                Message = "ERROR AL BORRAR EL REGISTRO";
+                Message = "Error al tratar de borrar éste registro de Programa.";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
 
-
-
-
+            LoadData();
         }
     }
 }

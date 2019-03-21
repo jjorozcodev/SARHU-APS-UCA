@@ -49,5 +49,10 @@ namespace Negocio
         {
             return dtFunciones.Listar();
         }
+
+        public List<Funcion> ListarPorEstado(bool estado)
+        {
+            return dtFunciones.ListarPorEstado(estado);
+        }
     }
 }

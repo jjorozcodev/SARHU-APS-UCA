@@ -11,6 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
+        private List<Funcion> funciones = new List<Funcion>();
 
         private static DT_Funciones dtFunciones = null;
 
@@ -41,6 +42,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.FuncionesAgregar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@funcion_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@funcion_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
@@ -67,6 +69,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.FuncionesBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@funcion_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -92,6 +95,9 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.FuncionesConsultar;
 
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@funcion_id", SqlDbType.Int).Value = id;
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
@@ -102,9 +108,10 @@ namespace Datos
 
             while (reader.Read())
             {
-                funcion.Id = reader.GetInt32(0);
-                funcion.Nombre = reader.GetString(1);
-                funcion.Descripcion = reader.GetString(2);
+                funcion.Id = id;
+                funcion.Nombre = reader.GetString(0);
+                funcion.Descripcion = reader.GetString(1);
+                funcion.Estado = reader.GetBoolean(2);
             }
             reader.Close();
 
@@ -124,6 +131,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.FuncionesEditar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@funcion_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@funcion_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@funcion_id", SqlDbType.Int).Value = obj.Id;
@@ -147,11 +155,13 @@ namespace Datos
         /// </summary>
         public List<Funcion> Listar()
         {
-            List<Funcion> funciones = new List<Funcion>();
+            List<Funcion> listaFuncs = new List<Funcion>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.FuncionesListar;
+
+            comandoSql.Parameters.Clear();
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -159,21 +169,43 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Funcion f = new Funcion();
-
+            
             while (reader.Read())
             {
+                Funcion f = new Funcion();
                 f.Id = reader.GetInt32(0);
                 f.Nombre = reader.GetString(1);
                 f.Descripcion = reader.GetString(2);
+                f.Estado = reader.GetBoolean(3);
 
-                funciones.Add(f);
+                listaFuncs.Add(f);
             }
             reader.Close();
 
             conexionSql.Close();
 
-            return funciones;
+            this.funciones.Clear();
+            this.funciones = listaFuncs;
+
+            return listaFuncs;
+        }
+
+        public List<Funcion> ListarPorEstado(bool Estado)
+        {
+            // Actualizar
+            Listar();
+
+            List<Funcion> funcs = new List<Funcion>();
+
+            foreach (Funcion f in funciones)
+            {
+                if (f.Estado == Estado)
+                {
+                    funcs.Add(f);
+                }
+            }
+
+            return funcs;
         }
     }
 }

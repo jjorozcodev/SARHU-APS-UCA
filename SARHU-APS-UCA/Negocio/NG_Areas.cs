@@ -50,5 +50,10 @@ namespace Negocio
         {
             return dtAreas.Listar();
         }
+
+        public List<Area> ListarPorEstado(bool estado)
+        {
+            return dtAreas.ListarPorEstado(estado);
+        }
     }
 }
