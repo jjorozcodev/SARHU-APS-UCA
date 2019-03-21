@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="agregar-area.aspx.cs" Inherits="SARHU.sarhu.personal.agregar_area" %>
+
 <asp:Content ID="ContentAgregarArea" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
     <div id="page-wrapper">
@@ -14,34 +15,40 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-6">
-        <div class="panel panel-formulario">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Nombre</label>
-                            <div class="form-group input-group" style="width: 100%;">
+                            <div class="panel panel-formulario">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                <%=Message %>
+                                            </asp:Panel>
 
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>
-                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
-                                <div id="textarea_feedback">150 caracteres disponibles</div>
-                            </div>
 
-                            <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
-                                <a href="areas.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
-                            </div>
+                                            <label>Nombre</label>
+                                            <div class="form-group input-group" style="width: 100%;">
+                                                <asp:TextBox ID="Nombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                                            </div>
+                                            <div class="form-group" style="width: 100%;">
+                                                <label>Descripción</label>
+                                                <textarea style="resize: none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
+                                                <div id="textarea_feedback">150 caracteres disponibles</div>
+                                            </div>
 
+                                            <div class="form-group" align="center">
+                                                <asp:Button runat="server" class="btn btn-success  fondo-verde-aldeas" ID="btnGuardar" Text="Guardar" OnClick="Guardar_Click" />
+                                                <a href="areas.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
                         </div>
-                        <!-- /.col-lg-6 (nested) -->
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.panel-body -->
-            </div>
-     </div>
                         <!-- /.col-lg-6 (nested) -->
                     </div>
                     <!-- /.row (nested) -->
@@ -53,6 +60,11 @@
         <!-- /.col-lg-12 -->
 
     </div>
+   
+
+
+
+
 
     <script>
         $(document).ready(function () {
@@ -67,8 +79,29 @@
             });
         });
 
+        function DeletePopup() {
+            $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
+        }
 
         
+
+        var hasFaded = false;
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#panel").fadeOut("slow", function () {
+                    window.location.replace("areas.aspx");
+                });
+                
+                
+                //#popupBox is the DIV to fade out
+            }, 2000); //5000 equals 5 seconds
+        });
+
+        if (hasFaded) {
+            window.location.replace("areas.aspx");
+        }
+
     </script>
 
 </asp:Content>
