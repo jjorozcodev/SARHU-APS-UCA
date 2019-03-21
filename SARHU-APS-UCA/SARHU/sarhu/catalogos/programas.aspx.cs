@@ -19,28 +19,17 @@ namespace SARHU.sarhu.catalogos
             if (!Page.IsPostBack)
             {
                 LoadData();
-              
-
-
             }
 
         }
-
-
-
+        
         private void LoadData()
         {
-
-            List<Programa> listaprog = NG_Programas.Instanciar().Listar();
-
-            
+            List<Programa> listaprog = NG_Programas.Instanciar().ListarPorEstado(true);
+   
             rptTable.DataSource = listaprog;
             rptTable.DataBind();
         }
-
-
-
-
 
         protected void Delete_Click(object sender, EventArgs e)
         {
@@ -53,37 +42,28 @@ namespace SARHU.sarhu.catalogos
             nombreFuncion = args[1];
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
-
-       
-
-
         }
 
-
-
-
-        protected void Button_EliminarPrograma(object sender, EventArgs e)
+        protected void Confirm_Click(object sender, EventArgs e)
         {
+            int index = int.Parse(eliminar.Value);
 
-            int index = int.Parse(eliminar.Value);            
+            System.Diagnostics.Debug.WriteLine("Entró en evento eliminar programa. Valor: " + index);
 
             if (NG_Programas.Instanciar().Borrar(index))
             {
-                Message = "REGISTRO BORRADO EXITOSAMENTE!!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+                Message = "El registro ha sido borrado.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
             else
             {
-                Message = "ERROR AL TRATAR DE ELIMINAR";
+                Message = "Error al tratar de borrar éste registro de Programa.";
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
+
+            LoadData();
         }
-
-
-
-
-
 
     }
 }

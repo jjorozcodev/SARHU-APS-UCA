@@ -81,7 +81,7 @@ namespace SARHU.sarhu.catalogos
             if (id > 0)
             {
                 Municipio.Enabled = true;
-                Municipio.DataSource = NG_Municipios.Instanciar().Listar(id);
+                Municipio.DataSource = NG_Municipios.Instanciar().ObtenerMunicipios(id);
                 Municipio.DataTextField = "Nombre";
                 Municipio.DataValueField = "Id";
                 Municipio.DataBind();

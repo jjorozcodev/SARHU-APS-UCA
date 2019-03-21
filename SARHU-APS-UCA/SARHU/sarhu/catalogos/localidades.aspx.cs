@@ -45,7 +45,7 @@ namespace SARHU.sarhu.catalogos
             Departamento.DataTextField = "Nombre";
             Departamento.DataValueField = "Id";
             Departamento.DataBind();
-            Departamento.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+            Departamento.Items.Insert(0, new ListItem("Seleccione...", "0"));
 
         }
 
@@ -53,16 +53,14 @@ namespace SARHU.sarhu.catalogos
         {
             Municipio.Items.Clear();
             
-            Municipio.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+            Municipio.Items.Insert(0, new ListItem("Seleccione...", "0"));
             if (id > 0)
             {              
-                Municipio.DataSource = NG_Municipios.Instanciar().Listar(id);
+                Municipio.DataSource = NG_Municipios.Instanciar().ObtenerMunicipios(id);
                 Municipio.DataTextField = "Nombre";
                 Municipio.DataValueField = "Id";
                 Municipio.DataBind();
-
             }
-
         }
 
         private void ConsultData(int ID)
@@ -107,12 +105,12 @@ namespace SARHU.sarhu.catalogos
             int index = int.Parse(Idelminar.Value);
             if (NG_Localidades.Instanciar().Borrar(index))
             {
-                Message = "BORRADO EXITOSAMENTE";
+                Message = "El registro ha sido borrado.";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
             else
             {
-                Message = "ERROR AL BORRAR EL REGISTRO";
+                Message = "Error al tratar de borrar éste registro de Programa.";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
             }
 

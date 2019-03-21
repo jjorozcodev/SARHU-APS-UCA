@@ -28,5 +28,10 @@ namespace Negocio
         {
             return dtMunicipios.Listar();
         }
+
+        public List<Municipio> ObtenerMunicipios(int DepartamentoId)
+        {
+            return dtMunicipios.ObtenerMunicipios(DepartamentoId);
+        }
     }
 }

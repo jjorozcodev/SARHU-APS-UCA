@@ -16,6 +16,11 @@
         <div class="panel panel-formulario">
                 <div class="panel-body">
                     <div class="row">
+                        <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa-lg fa fa-exclamation-circle "></i>
+                            <%=Message %>
+                        </asp:Panel>
                         <div class="col-md-12">
 
                              <asp:HiddenField runat="server" ID="idPrograma" />
@@ -33,21 +38,10 @@
 
 
                             <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>                                                               
-
-                                       <label>Descripción</label>
-                                                <textarea style="resize: none" id="Descripcion" rows="5" cols="5" class="form-control" maxlength="150" name="Descripcion"><%=Value %></textarea>
-                                                <div id="textarea_feedback">150 caracteres disponibles</div>
-                                            </div>
-
-
-
-                                  
-                               
-                        
+                                <label>Descripción</label>
+                                <textarea style="resize: none" id="textarea" rows="5" cols="5" runat="server" clientidmode="Static" class="form-control" maxlength="150" name="textarea"></textarea>
+                                <div id="textarea_feedback">150 caracteres disponibles</div>
                             </div>
-
-
 
                             <div class="form-group" align="center">
 

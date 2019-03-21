@@ -11,7 +11,6 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private SqlDataAdapter adaptadorSql = null;
 
         private static DT_Roles dtRoles = null;
 

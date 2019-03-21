@@ -49,5 +49,10 @@ namespace Negocio
         {
             return dtProgramas.Listar();
         }
+
+        public List<Programa> ListarPorEstado(bool estado)
+        {
+            return dtProgramas.ListarPorEstado(estado);
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace SARHU.sarhu.catalogos
             Departamento.DataTextField = "Nombre";
             Departamento.DataValueField = "Id";
             Departamento.DataBind();
-            Departamento.Items.Insert(0, new ListItem("SELECCIONE...", "0"));       
+            Departamento.Items.Insert(0, new ListItem("Seleccione...", "0"));       
            
         }
 
@@ -43,17 +43,16 @@ namespace SARHU.sarhu.catalogos
         {            
             Municipio.Items.Clear();
             Municipio.Enabled = false;
-            Municipio.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+            Municipio.Items.Insert(0, new ListItem("Seleccione...", "0"));
+
             if (id > 0)
             {
                 Municipio.Enabled = true;
-                Municipio.DataSource = NG_Municipios.Instanciar().Listar(id);
+                Municipio.DataSource = NG_Municipios.Instanciar().ObtenerMunicipios(id);
                 Municipio.DataTextField = "Nombre";
                 Municipio.DataValueField = "Id";
                 Municipio.DataBind();
-               
             }
-
         }
 
         private void ConsultData(int ID)

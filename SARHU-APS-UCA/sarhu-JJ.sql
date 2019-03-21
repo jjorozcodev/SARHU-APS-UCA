@@ -12,7 +12,7 @@ GO
 create table SARHU_MODULOS
 (
 	modulo_id int identity
-		constraint [ SARHU_MODULOS_pk]
+		constraint SARHU_MODULOS_pk
 			primary key clustered,
 	modulo_nombre varchar(20) not null,
 	modulo_descripcion varchar(150)

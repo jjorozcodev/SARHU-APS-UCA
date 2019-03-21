@@ -32,7 +32,7 @@ namespace SARHU.sarhu.catalogos
             programa = NG_Programas.Instanciar().Consultar(ID);
 
             Nombre.Text = programa.Nombre;
-            Value = programa.Descripcion;
+            textarea.Value = programa.Descripcion;
         }
 
 
@@ -40,8 +40,10 @@ namespace SARHU.sarhu.catalogos
         {
             programa.Id = int.Parse(idPrograma.Value);
             programa.Nombre = Nombre.Text;
-            programa.Descripcion = Request.Form["textarea"];
+            programa.Descripcion = textarea.Value;
             Nombre.Text = "";
+            textarea.Value = "";
+            System.Diagnostics.Debug.WriteLine(programa.Nombre + " " + programa.Descripcion);
             return programa;
         }
 
@@ -49,13 +51,12 @@ namespace SARHU.sarhu.catalogos
         {
             if (NG_Programas.Instanciar().Editar(ObtenerDatosInterfaz()))
             {
-
-                Message = "GUARDADO EXITOSAMENTE";
+                Message = "Guardado Exitosamente";
                 panel.Visible = true;
             }
             else
             {
-                Message = "ERROR AL EDITAR EL REGISTRO";
+                Message = "Error al editar registro";
                 panel.CssClass = "alert alert-danger alert-dismissable";
                 panel.Visible = true;
             }

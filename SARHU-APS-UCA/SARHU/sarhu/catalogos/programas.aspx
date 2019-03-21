@@ -133,11 +133,10 @@
                                             <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Está seguro que desea borrar <%=nombreFuncion %>??
+                                            ¿Está seguro que desea borrar <%=nombreFuncion %>?
                                         </div>
                                         <div class="modal-footer">
-                                            <asp:LinkButton runat="server" OnClick="Button_EliminarPrograma" Text="Borrar" data-dismiss="modal" type="button" class="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
-                                            
+                                            <asp:LinkButton ID="Confirm" runat="server" OnClick="Confirm_Click" CssClass="btn btn-danger fondo-rojo-aldeas" Text="Borrar"></asp:LinkButton>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> 
                                         </div>
                                     </div>
