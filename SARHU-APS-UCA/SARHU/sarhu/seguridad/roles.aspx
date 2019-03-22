@@ -1,10 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="roles.aspx.cs" Inherits="SARHU.sarhu.seguridad.roles" %>
 <asp:Content ID="ContentRoles" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+
+
+
     <div id="page-wrapper">
       <div class="row">
            <div class="col-lg-12">
                 <h1 class="page-header">Listado de Roles</h1>
-                <a href="agregar-rol.aspx" id="Generar" type="button" class="btn btn-success fondo-verde-aldeas" style="margin-bottom: 10px"><i class="fa fa-plus fa-fw"></i>Agregar Rol</a>
+                <a href="agregar-rol.aspx" id="Generar" type="button" class="btn btn-success fondo-verde-aldeas" style="margin-bottom: 10px"><i class="fa fa-plus fa-fw"></i>Agregar Roles</a>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -13,37 +16,55 @@
             <div class="col-lg-12">
                 <div class="panel panel-default2">
                     <div class="panel-body tooltip-demo">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th width="200px">Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Responsable de Nómina</td>
-                                    <td>Se encarga de ver lo que corresponde a la nómina.</td>
-                                    <td align="center">
-                                      <a data-toggle="modal" data-target="#mediumModal" href="#" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Rol"><i class="fa fa-eye fa-fw"></i></span></a>
-                                        <a href="editar-rol.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Rol"><i class="fa fa-edit fa-fw"></i></span></a>
-                                         <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Rol"><i class="fa fa-trash-o fa-fw"></i></span></button>
-                                    </td>
 
 
-                                </tr>
-                                <tr class="even gradeC" style='border: inset 0pt'>
-                                    <td>Jefe de Sistema</td>
-                                    <td> Encargado de el mantenimiento del sistema.</td>
-                                    <td align="center">
-                                      <a data-toggle="modal" data-target="#mediumModal" href="#" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Rol"><i class="fa fa-eye fa-fw"></i></span></a>
-                                        <a href="editar-rol.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Rol"><i class="fa fa-edit fa-fw"></i></span></a>
-                                         <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Rol"><i class="fa fa-trash-o fa-fw"></i></span></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                         <asp:HiddenField ID="eliminar" runat="server"/>
+                        
+                            <asp:Repeater ID="rptTable" runat="server">
+
+                                <HeaderTemplate>
+                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                               <th>Nombre</th>
+                                               <th>Descripcion</th>
+                                               
+                                               <th width="200px">Operaciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                </HeaderTemplate>
+                                <ItemTemplate>                                  
+                                    <tr class="even gradeC" style='border: inset 0pt'>
+
+                                        <%--El EVAl funciona para recuperar el dato según la columna--%>
+                                        <td><%#Eval("Nombre")%></td>
+                                        <td><%#Eval("Descripcion")%></td>
+                                       
+                                        <td>
+                                                                                  
+                                            <%--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#mediumModal" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Detalle"><i class="fa fa-eye fa-fw"></i></span></button>--%>
+
+                                            <%--en este lado es el pegon del modificar ya que al mandar a llamar a otro aspx, tengo que mandar el ID del registro para que sea precargado
+                                           pero con el href se puede mandar un ID de la manera que sale acontinuación--%>
+                                    
+                                       <a href="editar-rol.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Rol"><i class="fa fa-edit fa-fw"></i></span></a>
+                                    
+                                                                             
+                                       <asp:LinkButton ID="Delete" runat="server" OnClick="Delete_Click" CommandArgument='<%#Eval("Id")+ ";" + Eval("Nombre")%>' class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Rol"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
+
+
+                                             </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </tbody>
+                             </table>
+                                </FooterTemplate>
+                            </asp:Repeater>
+
+                        
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
@@ -52,8 +73,15 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-
     </div>
+
+
+
+
+
+
+
+
 
     <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -109,10 +137,12 @@
                                             <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Está seguro que desea borrar "Responsable de Nómina"?
+                                            ¿Está seguro que desea borrar <%=nombreFuncion%>?
                                         </div>
                                         <div class="modal-footer">
-                                            <button  onclick="DeletePopup()" data-dismiss="modal" type="button" class="btn btn-danger fondo-rojo-aldeas">Borrar</button>
+                                        
+                                                  <asp:LinkButton ID="Confirm" runat="server" OnClick="Confirm_Click" CssClass="btn btn-danger fondo-rojo-aldeas" Text="Borrar"></asp:LinkButton>
+
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> 
                                         </div>
                                     </div>
@@ -124,7 +154,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    Borrado correctamente
+                    <%=Message %>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -149,6 +179,22 @@
             $('#closemodal').click(function () {
                 $('#mymodal').modal('hide');
            
-        });
+            });
+
+
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+            $('.tooltip-demo').tooltip({
+                selector: "[data-toggle=tooltip]",
+                container: "body"
+            })
+
+
+
+
+
     </script>
 </asp:Content>

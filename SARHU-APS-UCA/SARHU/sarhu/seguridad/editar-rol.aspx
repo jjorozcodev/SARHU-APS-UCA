@@ -17,20 +17,34 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label>Nombre</label>
-                            <div class="form-group input-group" style="width: 100%;">
-                                <input type="text" class="form-control" value="Responsable de Nómina">
-                            </div>
-                            <div class="form-group" style="width: 100%;">
-                                <label>Descripción</label>
-                                <textarea style="resize:none" id="textarea" rows="5" cols="5" class="form-control" maxlength="50" name="textarea" >Se encarga de ver lo que corresponde a la nómina.</textarea>
-                                <div id="textarea_feedback">150 caracteres disponibles</div>
-                            </div>
 
-                            <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Editar</button>
-                                <a href="roles.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
-                            </div>
+
+                                                        <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                <%=Message %>
+                                            </asp:Panel>
+
+
+                                            <asp:HiddenField runat="server" ID="idRol" />
+                                            <label>Nombre</label>
+                                            <div class="form-group input-group" style="width: 100%;">
+
+                                                <asp:TextBox ID="Nombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                                            </div>
+                                            <div class="form-group" style="width: 100%;">
+                                                <label>Descripción</label>
+                                                <textarea style="resize: none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"><%=Value %></textarea>
+                                                <div id="textarea_feedback">150 caracteres disponibles</div>
+                                            </div>
+
+                                            <div class="form-group" align="center">
+                                                <asp:Button ID="Editar" Text="Editar" runat="server" CssClass="btn btn-success  fondo-verde-aldeas" align="center" OnClick="Editar_click"></asp:Button>
+                                                <a href="roles.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
+                                            </div>
+
+
+
 
                         </div>
                         <!-- /.col-lg-6 (nested) -->
@@ -50,7 +64,18 @@
         </div>
         <!-- /.col-lg-12 -->
 
+
     </div>
+
+
+            <script>
+        function DeletePopup() {
+            $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
+        }
+
+    </script>
+
+
 
     <script>
         $(document).ready(function () {
@@ -63,6 +88,12 @@
 
                 $('#textarea_feedback').html(text_remaining + ' caracteres disponibles');
             });
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#panel").fadeOut("slow") //#popupBox is the DIV to fade out
+            }, 2000); //5000 equals 5 seconds
         });
 
 

@@ -13,6 +13,8 @@ namespace Datos
         private SqlCommand comandoSql = new SqlCommand();
         private SqlDataAdapter adaptadorSql = null;
 
+        private List<Rol> rol = new List<Rol>();
+
         private static DT_Roles dtRoles = null;
 
         private DT_Roles()
@@ -68,6 +70,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -93,6 +96,9 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesConsultar;
 
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
@@ -103,9 +109,11 @@ namespace Datos
 
             while (reader.Read())
             {
-                rol.Id = reader.GetInt32(0);
-                rol.Nombre = reader.GetString(1);
-                rol.Descripcion = reader.GetString(2);
+
+                rol.Id = id;
+                rol.Nombre = reader.GetString(0);
+                rol.Descripcion = reader.GetString(1);
+                rol.Estado = reader.GetBoolean(2);
             }
             reader.Close();
 
@@ -154,19 +162,23 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesListar;
 
+            comandoSql.Parameters.Clear();
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Rol r = new Rol();
+            
 
             while (reader.Read())
             {
+                Rol r = new Rol();
                 r.Id = reader.GetInt32(0);
                 r.Nombre = reader.GetString(1);
                 r.Descripcion = reader.GetString(2);
+                r.Estado = reader.GetBoolean(3);
 
                 roles.Add(r);
             }
@@ -174,7 +186,36 @@ namespace Datos
 
             conexionSql.Close();
 
+            this.rol.Clear();
+            this.rol = roles;
+
+
             return roles;
         }
+
+
+        public List<Rol> ListarPorEstado(bool Estado)
+        {
+            // Actualizar
+            Listar();
+
+            List<Rol> rols = new List<Rol>();
+
+            foreach (Rol p in rol)
+            {
+                if (p.Estado == Estado)
+                {
+                    rols.Add(p);
+                }
+            }
+
+            return rols;
+        }
+
+
+
+
+
+
     }
 }
