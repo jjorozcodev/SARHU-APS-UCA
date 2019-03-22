@@ -181,6 +181,7 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesListar;
+
             comandoSql.Parameters.Clear();
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -189,8 +190,7 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-
-
+            
             while (reader.Read())
             {
                 Localidad l = new Localidad();

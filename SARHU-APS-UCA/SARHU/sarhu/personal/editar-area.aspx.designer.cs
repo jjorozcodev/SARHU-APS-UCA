@@ -13,31 +13,31 @@ namespace SARHU.sarhu.personal {
     public partial class editar_area {
         
         /// <summary>
-        /// Control panel.
+        /// Control panelNotificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel;
+        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
         
         /// <summary>
-        /// Control idArea.
+        /// Control areaNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField idArea;
+        protected global::System.Web.UI.WebControls.TextBox areaNombre;
         
         /// <summary>
-        /// Control Nombre.
+        /// Control areaDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Nombre;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea areaDescripcion;
         
         /// <summary>
         /// Control Editar.
