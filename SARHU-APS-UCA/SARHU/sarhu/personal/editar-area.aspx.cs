@@ -7,54 +7,59 @@ namespace SARHU.sarhu.personal
 {
     public partial class editar_area : System.Web.UI.Page
     {
-        protected Area area = new Area();
-        protected string Value { get; set; }
-        protected string Message { get; set; }
+        private NG_Areas ngAreas = NG_Areas.Instanciar();
+        protected Area area = null;
+        private int idAreaEditable = 0;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack) {
-                idArea.Value = Request.QueryString["id"];
-                
-                ConsultData(int.Parse(idArea.Value));
+                idAreaEditable = int.Parse(Request.QueryString["id"]);
+                CargarInformacion(idAreaEditable);
             }
-             
         }
-
-
-        private void ConsultData(int ID)
+        
+        private void CargarInformacion(int idArea)
         {
-            area = NG_Areas.Instanciar().Consultar(ID);
+            area = ngAreas.Consultar(idArea);
            
-            Nombre.Text = area.Nombre;
-            Value = area.Descripcion;
-        }
-
-
-        private Area ObtenerDatosInterfaz()
-        {
-            area.Id = int.Parse(idArea.Value);
-            area.Nombre = Nombre.Text;
-            area.Descripcion = Request.Form["textarea"];
-            Nombre.Text = "";
-            return area;
+            if(area != null)
+            {
+                areaNombre.Text = area.Nombre;
+                areaDescripcion.Value = area.Descripcion;
+            }
         }
 
         protected void Editar_click(object sender, EventArgs e)
         {
-            if (NG_Areas.Instanciar().Editar(ObtenerDatosInterfaz()))
+            Area a = ObtenerDatosInterfaz();
+            EjecutarNotificarUsuario(ngAreas.Editar(a));
+        }
+
+        private Area ObtenerDatosInterfaz()
+        {
+            Area a = new Area();
+            a.Id = this.idAreaEditable;
+            a.Nombre = areaNombre.Text;
+            a.Descripcion = areaDescripcion.Value;
+            return a;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                
-                Message = "GUARDADO EXITOSAMENTE";
-                panel.Visible = true;
+                Mensaje = "¡Se actualizó correctamente la información organizacional!";
             }
             else
             {
-                Message = "ERROR AL EDITAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar actualizar la información!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
+            panelNotificacion.Visible = true;
         }
     }
 }

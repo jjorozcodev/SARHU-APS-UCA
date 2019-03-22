@@ -25,7 +25,6 @@ namespace Datos
             if(dtAreas == null)
             {
                 dtAreas = new DT_Areas();
-                
             }
             return dtAreas;
         }

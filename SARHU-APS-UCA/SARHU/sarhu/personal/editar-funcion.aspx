@@ -69,7 +69,6 @@
 
     </script>
 
-
     <script>
         $(document).ready(function () {
             var text_max = 150;
@@ -87,8 +86,6 @@
                 $("#panel").fadeOut("slow") //#popupBox is the DIV to fade out
             }, 2000); //5000 equals 5 seconds
         });
-
-
-
+        
     </script>
 </asp:Content>

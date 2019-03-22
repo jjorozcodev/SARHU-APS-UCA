@@ -26,38 +26,46 @@
                         <div class="col-md-6 col-md-offset-6">
                             <div class="panel panel-formulario">
                                 <div class="panel-body">
+                                    <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                <% =Mensaje %>
+                                            </asp:Panel>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Nombre</label>
                                             <div class="form-group input-group" style="width: 100%;">
-                                                <input type="text" class="form-control" value="Aldeas SOS Nicaragua">
+                                                <asp:TextBox ID="orgNombre" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
+
+                                            <%--                                        TODO: PENDIENTE
                                             <label>Localidad</label>
                                             <div class="form-group input-group" style="width: 100%;">
-                                                <input type="text" class="form-control" value="Managua, Managua">
+                                                <asp:TextBox ID="orgLocalidadAlias" CssClass="form-control" runat="server"></asp:TextBox>
                                                 <span class="input-group-btn">
                                                     <a data-toggle="modal" data-target="#mediumModal" type="button" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Lista de Localidades"><i class="fa fa-search"></i></span></a>
                                                 </span>
-                                            </div>
+                                            </div>--%>
                                             <div class="form-group" style="width: 100%;">
                                                 <label>Misión</label>
-                                                <textarea style="resize: none" id="textarea" rows="5" cols="5" class="form-control" maxlength="200" name="textarea">Trabajamos por el derecho de los niños a vivir en familia.</textarea>
-                                                <div id="textarea_feedback">200 caracteres disponibles</div>
+
+                                                <textarea style="resize: none" id="textareaM" rows="5" cols="5" class="form-control" maxlength="200" name="textarea" runat="server"></textarea>
+                                                <div id="textareaM_feedback">200 caracteres disponibles</div>
                                             </div>
                                             <div class="form-group" style="width: 100%;">
                                                 <label>Visión</label>
-                                                <textarea style="resize: none" id="textareaV" rows="5" cols="5" class="form-control" maxlength="200" name="textarea">Cada niño y cada niña pertenecen a una familia y crece con amor.</textarea>
+                                                <textarea style="resize: none" id="textareaV" rows="5" cols="5" class="form-control" maxlength="200" name="textarea" runat="server"></textarea>
                                                 <div id="textareaV_feedback">200 caracteres disponibles</div>
                                             </div>
 
                                             <div class="form-group" style="width: 100%;">
                                                 <label>Descripción</label>
-                                                <textarea style="resize: none" id="textareaD" rows="5" cols="5" class="form-control" maxlength="200" name="textarea">Somos una organización no gubernamental sin fines de lucro presentes en 133 países del mundo, siendo la organización más grande en atención directa a niños, niñas, adolescentes y familias.</textarea>
+                                                <textarea style="resize: none" id="textareaD" rows="5" cols="5" class="form-control" maxlength="200" name="textarea" runat="server"></textarea>
                                                 <div id="textareaD_feedback">200 caracteres disponibles</div>
                                             </div>
 
                                             <div class="form-group" align="center">
-                                                <span id="btnActualizar" class="btn btn-success  fondo-verde-aldeas" align="center">Actualizar</span>
+                                                <asp:Button ID="btnActualizar" CssClass="btn btn-success fondo-verde-aldeas" runat="server" Text="Actualizar" OnClick="btnActualizar_Click" />
                                                 <%--<button id="btnActualizafr" class="btn btn-success  fondo-verde-aldeas" align="center">Actualizar</button>--%>
                                             </div>
 
@@ -152,45 +160,55 @@
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function () {
+            var text_l = $('#ContentPlaceHolder_textareaM').val().length;
             var text_max = 200;
-            $('#textarea_feedback').html(text_max + ' caracteres disponibles');
+            $('#textareaM_feedback').html(text_max - text_l + ' caracteres disponibles');
 
-            $('#textarea').keyup(function () {
-                var text_length = $('#textarea').val().length;
+            $('#ContentPlaceHolder_textareaM').keyup(function () {
+                var text_length = $('#ContentPlaceHolder_textareaM').val().length;
                 var text_remaining = text_max - text_length;
 
-                $('#textarea_feedback').html(text_remaining + ' caracteres disponibles');
+                $('#textareaM_feedback').html(text_remaining + ' caracteres disponibles');
             });
         });
-    </script>
 
-    <script>
         $(document).ready(function () {
+            var text_l = $('#ContentPlaceHolder_textareaV').val().length;
             var text_max = 200;
-            $('#textareaV_feedback').html(text_max + ' caracteres disponibles');
+            $('#textareaV_feedback').html(text_max - text_l + ' caracteres disponibles');
 
-            $('#textareaV').keyup(function () {
-                var text_length = $('#textareaV').val().length;
+            $('#ContentPlaceHolder_textareaV').keyup(function () {
+                var text_length = $('#ContentPlaceHolder_textareaV').val().length;
                 var text_remaining = text_max - text_length;
 
                 $('#textareaV_feedback').html(text_remaining + ' caracteres disponibles');
             });
         });
-    </script>
 
-    <script>
         $(document).ready(function () {
+            var text_l = $('#ContentPlaceHolder_textareaD').val().length;
             var text_max = 200;
-            $('#textareaD_feedback').html(text_max + ' caracteres disponibles');
+            $('#textareaD_feedback').html(text_max - text_l + ' caracteres disponibles');
 
-            $('#textareaD').keyup(function () {
-                var text_length = $('#textareaD').val().length;
+            $('#ContentPlaceHolder_textareaD').keyup(function () {
+                var text_length = $('#ContentPlaceHolder_textareaD').val().length;
                 var text_remaining = text_max - text_length;
 
                 $('#textareaD_feedback').html(text_remaining + ' caracteres disponibles');
             });
+        });
+
+        var hasFaded = false;
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#panelNotificacion").fadeOut("slow", function () {
+                    //$('#alertitaAmarilla').show('fade');
+                });
+            }, 3500);
         });
     </script>
     <script>

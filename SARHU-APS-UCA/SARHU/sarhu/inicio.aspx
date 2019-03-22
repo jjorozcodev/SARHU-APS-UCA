@@ -17,7 +17,7 @@
                         Nuestra Misión
                     </div>
                     <div class="panel-body">
-                        <p>Trabajamos por el derecho de los niños a vivir en familia.</p>
+                        <p> <% = org.Mision %> </p>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         Nuestra Visión
                     </div>
                     <div class="panel-body">
-                        <p>Cada niño y cada niña pertenecen a una familia y crece con amor.</p>
+                        <p> <% = org.Vision %> </p>
                     </div>
                 </div>
             </div>
