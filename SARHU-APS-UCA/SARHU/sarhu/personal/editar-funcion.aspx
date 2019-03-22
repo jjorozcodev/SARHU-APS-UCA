@@ -82,9 +82,13 @@
                 $('#textarea_feedback').html(text_remaining + ' caracteres disponibles');
             });
         });
+            
         $(document).ready(function () {
             setTimeout(function () {
-                $("#panel").fadeOut("slow") //#popupBox is the DIV to fade out
+                $("#panel").fadeOut("slow", function () {
+                    window.location.replace("funciones.aspx");
+                });
+                //#popupBox is the DIV to fade out
             }, 2000); //5000 equals 5 seconds
         });
 

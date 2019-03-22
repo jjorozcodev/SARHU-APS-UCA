@@ -49,5 +49,10 @@ namespace Negocio
         {
             return dtBonos.Listar();
         }
+
+        public List<Bono> ListarPorEstado(bool estado)
+        {
+            return dtBonos.ListarPorEstado(estado);
+        }
     }
 }
