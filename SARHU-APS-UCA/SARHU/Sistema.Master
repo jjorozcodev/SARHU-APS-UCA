@@ -85,6 +85,9 @@
                                 <li>
                                     <a href="~/sarhu/personal/funciones.aspx" runat="server">Funciones</a>
                                 </li>
+                                <li>
+                                    <a href="~/sarhu/personal/empleados.aspx" runat="server">Empleados</a>
+                                </li>
                                 <%--<li>
                                     <a href="#">Puestos</a>
                                 </li>--%>
