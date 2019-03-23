@@ -75,6 +75,12 @@
                                 <li>
                                     <a href="~/sarhu/seguridad/roles.aspx" runat="server">Roles</a>
                                 </li>
+
+                                 <li>
+                                    <a href="~/sarhu/seguridad/usuarios.aspx" runat="server">Usuarios</a>
+                                </li>
+
+
                             </ul>
                         </li>
                         <li>
