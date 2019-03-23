@@ -5,7 +5,7 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class editar_area : System.Web.UI.Page
+    public partial class editar_area : Page
     {
         private NG_Areas ngAreas = NG_Areas.Instanciar();
         protected Area area = null;
@@ -15,17 +15,17 @@ namespace SARHU.sarhu.personal
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idAreaEditable = int.Parse(Request.QueryString["id"]);
+            area = ngAreas.Consultar(idAreaEditable);
+
             if (!Page.IsPostBack) {
-                idAreaEditable = int.Parse(Request.QueryString["id"]);
-                CargarInformacion(idAreaEditable);
+                CargarInformacion();
             }
         }
         
-        private void CargarInformacion(int idArea)
+        private void CargarInformacion()
         {
-            area = ngAreas.Consultar(idArea);
-           
-            if(area != null)
+            if (area != null)
             {
                 areaNombre.Text = area.Nombre;
                 areaDescripcion.Value = area.Descripcion;
@@ -34,8 +34,9 @@ namespace SARHU.sarhu.personal
 
         protected void Editar_click(object sender, EventArgs e)
         {
-            Area a = ObtenerDatosInterfaz();
-            EjecutarNotificarUsuario(ngAreas.Editar(a));
+            this.area = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngAreas.Editar(area));
         }
 
         private Area ObtenerDatosInterfaz()
@@ -44,18 +45,25 @@ namespace SARHU.sarhu.personal
             a.Id = this.idAreaEditable;
             a.Nombre = areaNombre.Text;
             a.Descripcion = areaDescripcion.Value;
+            a.Estado = true;
             return a;
+        }
+
+        private void LimpiarFormulario()
+        {
+            areaNombre.Text = string.Empty;
+            areaDescripcion.Value = string.Empty;
         }
 
         private void EjecutarNotificarUsuario(bool correcto)
         {
             if (correcto)
             {
-                Mensaje = "¡Se actualizó correctamente la información organizacional!";
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Mensaje = "¡Ocurrió un error al intentar actualizar la información!";
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
                 panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 

@@ -36,10 +36,8 @@ namespace Datos
         /// Recibe como parámetro un objeto [Localidad] con la información a agregar a la base de datos (ProgramaId, MunicipioId, DirectorId, Alias, Telefono y Direccion).
         /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
         /// </summary>
-        public bool Agregar(Localidad obj)
+        public int Agregar(Localidad obj)
         {
-
-
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesAgregar;
@@ -62,7 +60,7 @@ namespace Datos
 
             conexionSql.Close();
 
-            return (agregado > 0);
+            return (agregado);
         }
 
         /// <summary>

@@ -34,14 +34,14 @@ namespace Datos
         /// <summary>
         /// El método permite agregar un registro de la entidad [Area].
         /// Recibe como parámetro un objeto [Area] con la información a agregar a la base de datos (Nombre y Descripción).
-        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// Devuelve un valor entero con el id generado.
         /// </summary>
-        public bool Agregar(Area obj)
+        public int Agregar(Area obj)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AreasAgregar;
-
+            
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@area_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@area_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
@@ -51,11 +51,10 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = int.Parse(comandoSql.ExecuteScalar().ToString());
-
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
             conexionSql.Close();
 
-            return (agregado > 0);
+            return idGenerado;
         }
 
         /// <summary>
@@ -104,6 +103,7 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
+
             Area area = new Area();
 
             while (reader.Read())
@@ -132,7 +132,6 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AreasEditar;
 
-
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@area_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@area_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
@@ -152,7 +151,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite obtener la lista de registros de la entidad [Area] desde la base de datos.
-        /// Los campos que se devuelven son: Id, Nombre y Descripción.
+        /// Los campos que se devuelven son: Id, Nombre, Descripción y Estado.
         /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
         /// </summary>
         public List<Area> Listar()

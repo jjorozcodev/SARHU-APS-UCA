@@ -27,7 +27,7 @@ namespace Negocio
 
         public bool Agregar(Programa obj)
         {
-            return dtProgramas.Agregar(obj);
+            return dtProgramas.Agregar(obj) > 0;
         }
 
         public bool Borrar(int id)

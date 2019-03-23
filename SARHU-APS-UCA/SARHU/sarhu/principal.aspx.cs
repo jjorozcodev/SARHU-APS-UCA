@@ -53,11 +53,11 @@ namespace SARHU.sarhu
         {
             if (correcto)
             {
-                Mensaje = "¡Se actualizó correctamente la información organizacional!";
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Mensaje = "¡Ocurrió un error al intentar actualizar la información!";
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
                 panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 

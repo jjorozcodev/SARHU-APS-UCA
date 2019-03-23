@@ -36,7 +36,7 @@ namespace Datos
         /// Recibe como parámetro un objeto [Bono] con la información a agregar a la base de datos (Nombre, Descripción y Monto).
         /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
         /// </summary>
-        public bool Agregar(Bono obj)
+        public int Agregar(Bono obj)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -56,7 +56,7 @@ namespace Datos
 
             conexionSql.Close();
 
-            return (agregado > 0);
+            return (agregado);
         }
 
         /// <summary>

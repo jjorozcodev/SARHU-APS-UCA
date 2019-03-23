@@ -5,7 +5,7 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class agregar_area : System.Web.UI.Page
+    public partial class agregar_area : Page
     {
         private NG_Areas ngArea = NG_Areas.Instanciar();
         protected Area area = null;
@@ -19,8 +19,9 @@ namespace SARHU.sarhu.personal
 
         protected void Guardar_Click(object sender, EventArgs e)
         {
-            Area a = ObtenerDatosInterfaz();
-            EjecutarNotificarUsuario(ngArea.Agregar(a));
+            this.area = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngArea.Agregar(this.area));
         }
 
         private Area ObtenerDatosInterfaz()
@@ -31,15 +32,21 @@ namespace SARHU.sarhu.personal
             return a;
         }
 
+        private void LimpiarFormulario()
+        {
+            areaNombre.Text = string.Empty;
+            areaDescripcion.Value = string.Empty;
+        }
+
         private void EjecutarNotificarUsuario(bool correcto)
         {
             if (correcto)
             {
-                Mensaje = "¡Se actualizó correctamente la información organizacional!";
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Mensaje = "¡Ocurrió un error al intentar actualizar la información!";
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
                 panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 

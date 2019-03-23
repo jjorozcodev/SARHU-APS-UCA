@@ -8,7 +8,7 @@ namespace Datos
        
         Entidad Consultar(int id);
        
-        bool Agregar(Entidad obj);
+        int Agregar(Entidad obj);
         
         bool Editar(Entidad obj);
         

@@ -27,7 +27,7 @@ namespace Negocio
 
         public bool Agregar(Localidad obj)
         {
-            return dtLocalidades.Agregar(obj);
+            return dtLocalidades.Agregar(obj) > 0;
         }
 
         public bool Borrar(int id)
