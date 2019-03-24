@@ -130,7 +130,7 @@
                                                                      <input class="form-control" type="text"  id="cedula" placeholder="" tabindex="14" disabled="" value="001-171180-0005B">
                                                                 </td>
                                                                 <td>
-                                                                     <input class="form-control" type="text"  id="fechaN" placeholder="" tabindex="8" value="24/02/1971" disabled="">
+                                                                     <input class="form-control" type="date" name="nacimiento" step="1" min="1959-01-01" max="2001-01-01" value="24/02/1971" disabled="">
                                                                 </td>
                                                             </tr>                                              
                                                         </tbody>
@@ -154,13 +154,13 @@
                                                         </div>
                                                     </div>
                                                 <div class="tab-pane fade " id="datosA">                                   
-                                                     <label>Inss</label>
+                                                     <label>Número de Asegurado</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input class="form-control" type="text"  id="inss" placeholder="0000000-0" tabindex="8" disabled="" value="5132706-0">
                                                             </div>
                                                      <label>Fecha de Ingreso</label>
                                                             <div class="form-group input-group" style="width: 100%;">
-                                                                <input class="form-control" type="text"  id="fechaI" placeholder="00/00/0000" tabindex="8" disabled="" value="07/04/2018">
+                                                                <input class="form-control" type="date" name="ingreso" step="1" min="1949-01-01" max="2019-01-01"  disabled="" value="07/04/2018">
                                                             </div>
                                                     <label>Programa</label>
                                                         <div class="form-group input-group" style="width: 100%;">
@@ -193,6 +193,10 @@
                                                             </tr>                                              
                                                         </tbody>
                                                     </table>
+                                                    <label>Número de Cuenta</label>
+                                                            <div class="form-group input-group" style="width: 100%;">
+                                                                <input type="text" class="form-control" value="" disabled="">
+                                                            </div>
                                                     <div class="form-group" style="width: 100%;">
                                                         <label>Observaciones</label>
                                                         <textarea style="resize:none" id="textarea1" rows="5" cols="5" class="form-control" maxlength="200" name="textarea" disabled="">Su nuevo salario a partir del primero de Octubre del 2019 es de C$8,900</textarea>
@@ -202,15 +206,6 @@
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input type="text" class="form-control" disabled="" value="0 Años con 11 Meses y 16 Días">
                                                             </div>
-                                                    <label>Fecha de Egreso/Cambio</label>
-                                                                <div class="form-group input-group" style="width: 100%;">
-                                                                    <input class="form-control" type="text"  id="fechaE" placeholder="00/00/0000" tabindex="8" disabled="" value="13/08/2019">
-                                                                </div>
-                                                        <div class="form-group" style="width: 100%;">
-                                                            <label>Observaciones de Egreso</label>
-                                                            <textarea style="resize:none" id="textarea2" rows="5" cols="5" class="form-control" maxlength="200" disabled="" name="textarea">Asuntos personales</textarea>
-                                                            <div id="textarea_feedback2">200 caracteres disponibles</div>
-                                                        </div> 
                                             </div> 
                                            </div> 
                                       
