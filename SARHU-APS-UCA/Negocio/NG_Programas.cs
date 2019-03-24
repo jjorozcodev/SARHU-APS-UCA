@@ -54,5 +54,12 @@ namespace Negocio
         {
             return dtProgramas.ListarPorEstado(estado);
         }
+
+        public int CantidadProgramasActivos()
+        {
+            List<Programa> miLista = this.ListarPorEstado(true);
+            int cantidadProgActivos = miLista.Count;
+            return cantidadProgActivos;
+        }
     }
 }

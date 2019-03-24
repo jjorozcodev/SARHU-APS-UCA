@@ -41,7 +41,7 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">7</div>
+                                <div class="huge"> <% = cantProgAct %> </div>
                                 <div>Programas Activos</div>
                             </div>
                         </div>

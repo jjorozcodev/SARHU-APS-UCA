@@ -201,6 +201,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Administracion.Master" />
+    <Content Include="ConfiguracionBD.sarhu" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <Content Include="Logo\logonav.png" />
@@ -294,7 +295,7 @@
     </Compile>
     <Compile Include="sarhu\personal\empleados.aspx.designer.cs">
       <DependentUpon>empleados.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="sarhu\seguridad\agregar-usuario.aspx.cs">
       <DependentUpon>agregar-usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
