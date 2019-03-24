@@ -27,7 +27,7 @@ namespace Negocio
 
         public bool Agregar(Bono obj)
         {
-            return dtBonos.Agregar(obj);
+            return dtBonos.Agregar(obj) > 0;
         }
 
         public bool Borrar(int id)
@@ -48,6 +48,11 @@ namespace Negocio
         public List<Bono> Listar()
         {
             return dtBonos.Listar();
+        }
+
+        public List<Bono> ListarPorEstado(bool estado)
+        {
+            return dtBonos.ListarPorEstado(estado);
         }
     }
 }

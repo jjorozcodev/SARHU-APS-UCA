@@ -26,9 +26,14 @@ namespace Negocio
             return ngAreas;
         }
 
-        public bool Agregar(Area obj)
+        public int AgregarObtenerID(Area obj)
         {
             return dtAreas.Agregar(obj);
+        }
+
+        public bool Agregar(Area obj)
+        {
+            return (dtAreas.Agregar(obj) > 0);
         }
 
         public bool Borrar(int id)

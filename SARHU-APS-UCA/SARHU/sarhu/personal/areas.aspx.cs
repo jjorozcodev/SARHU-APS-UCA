@@ -1,60 +1,58 @@
 ﻿using System;
 using Negocio;
-
+using Entidades;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class areas : System.Web.UI.Page
+    public partial class areas : Page
     {
-        protected string nombreArea { get; set; }
-        protected string Message { get; set; }
+        private NG_Areas ngAreas = NG_Areas.Instanciar();
+        protected Area area = null;
+
+        protected string Mensaje = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                LoadData();
-
+                CargarInformacion();
             }
         }
-
-
-        private void LoadData()
+        
+        private void CargarInformacion()
         {
-            rptTable.DataSource = NG_Areas.Instanciar().ListarPorEstado(true);
+            rptTable.DataSource = ngAreas.ListarPorEstado(true);
             rptTable.DataBind();
-
+        }
+        
+        protected void Borrar_Click(object sender, CommandEventArgs e)
+        {
+            idSeleccionado.Value = e.CommandArgument.ToString();
+            this.area = ngAreas.Consultar(int.Parse(idSeleccionado.Value));
+            Mensaje = "¿Está seguro que desea borrar el registro " + this.area.Nombre + " ?";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupConfirmacion();", true);
         }
 
-        protected void Delete_Click(object sender, EventArgs e)
+        protected void Confirmar_Click(object sender, EventArgs e)
         {
-            LinkButton b = (LinkButton)sender;
-
-            string arguments = b.CommandArgument;
-            string[] args = arguments.Split(';');
-
-            Idelminar.Value = args[0];
-            nombreArea = args[1];
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+            EjecutarNotificarUsuario(ngAreas.Borrar(int.Parse(idSeleccionado.Value)));
+            CargarInformacion();
         }
 
-        protected void Confirm_Click(object sender, EventArgs e)
+        private void EjecutarNotificarUsuario(bool correcto)
         {
-            int index = int.Parse(Idelminar.Value);
-            if (NG_Areas.Instanciar().Borrar(index))
+            if (correcto)
             {
-                Message = "El registro ha sido borrado.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "Error al tratar de borrar éste registro de Programa.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
             }
 
-            LoadData();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupNotificacion();", true);
         }
     }
 }

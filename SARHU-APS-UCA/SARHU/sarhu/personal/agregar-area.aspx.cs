@@ -5,38 +5,52 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class agregar_area : System.Web.UI.Page
+    public partial class agregar_area : Page
     {
-        protected string Message { get; set; }
+        private NG_Areas ngArea = NG_Areas.Instanciar();
+        protected Area area = null;
+
+        protected string Mensaje = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        private Area ObtenerDatosInterfaz()
-        {
-            Area area = new Area();
-            area.Nombre = Nombre.Text;
-            area.Descripcion = Request.Form["textarea"];
-            Nombre.Text = "";
-            return area;
-        }
-
         protected void Guardar_Click(object sender, EventArgs e)
         {
-            if (NG_Areas.Instanciar().Agregar(ObtenerDatosInterfaz()))
+            this.area = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngArea.Agregar(this.area));
+        }
+
+        private Area ObtenerDatosInterfaz()
+        {
+            Area a = new Area();
+            a.Nombre = areaNombre.Text;
+            a.Descripcion = areaDescripcion.Value;
+            return a;
+        }
+
+        private void LimpiarFormulario()
+        {
+            areaNombre.Text = string.Empty;
+            areaDescripcion.Value = string.Empty;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                Message = "GUARDADO EXITOSAMENTE";
-                panel.Visible = true;
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "ERROR AL GUARDAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
-
+            panelNotificacion.Visible = true;
         }
     }
 }
