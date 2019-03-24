@@ -88,6 +88,15 @@
                                 <li>
                                     <a href="~/sarhu/personal/empleados.aspx" runat="server">Empleados</a>
                                 </li>
+
+                                <li>
+                                    <a href="~/sarhu/personal/puestos.aspx" runat="server">Puestos</a>
+                                </li>
+
+                                <li>
+                                    <a href="~/sarhu/personal/adendums.aspx" runat="server">Adendums</a>
+                                </li>
+
                                 <%--<li>
                                     <a href="#">Puestos</a>
                                 </li>--%>

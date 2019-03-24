@@ -171,9 +171,15 @@
   <ItemGroup>
     <Content Include="Content\SARHU.css" />
     <Content Include="Content\sb-admin-2.css" />
+    <Content Include="sarhu\personal\adendums.aspx" />
+    <Content Include="sarhu\personal\agregar-adendum.aspx" />
     <Content Include="sarhu\personal\agregar-empleado.aspx" />
+    <Content Include="sarhu\personal\agregar-puesto.aspx" />
+    <Content Include="sarhu\personal\editar-adendum.aspx" />
     <Content Include="sarhu\personal\editar-empleado.aspx" />
+    <Content Include="sarhu\personal\editar-puesto.aspx" />
     <Content Include="sarhu\personal\empleados.aspx" />
+    <Content Include="sarhu\personal\puestos.aspx" />
     <Content Include="sarhu\seguridad\agregar-usuario.aspx" />
     <Content Include="sarhu\seguridad\editar-usuario.aspx" />
     <Content Include="sarhu\seguridad\usuarios.aspx" />
@@ -275,12 +281,40 @@
     <Compile Include="sarhu\parametros\impuestos.aspx.designer.cs">
       <DependentUpon>impuestos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="sarhu\personal\adendums.aspx.cs">
+      <DependentUpon>adendums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\adendums.aspx.designer.cs">
+      <DependentUpon>adendums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\personal\agregar-adendum.aspx.cs">
+      <DependentUpon>agregar-adendum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\agregar-adendum.aspx.designer.cs">
+      <DependentUpon>agregar-adendum.aspx</DependentUpon>
+    </Compile>
     <Compile Include="sarhu\personal\agregar-empleado.aspx.cs">
       <DependentUpon>agregar-empleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="sarhu\personal\agregar-empleado.aspx.designer.cs">
       <DependentUpon>agregar-empleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\personal\agregar-puesto.aspx.cs">
+      <DependentUpon>agregar-puesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\agregar-puesto.aspx.designer.cs">
+      <DependentUpon>agregar-puesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\personal\editar-adendum.aspx.cs">
+      <DependentUpon>editar-adendum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\editar-adendum.aspx.designer.cs">
+      <DependentUpon>editar-adendum.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\personal\editar-empleado.aspx.cs">
       <DependentUpon>editar-empleado.aspx</DependentUpon>
@@ -289,12 +323,26 @@
     <Compile Include="sarhu\personal\editar-empleado.aspx.designer.cs">
       <DependentUpon>editar-empleado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="sarhu\personal\editar-puesto.aspx.cs">
+      <DependentUpon>editar-puesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\editar-puesto.aspx.designer.cs">
+      <DependentUpon>editar-puesto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="sarhu\personal\empleados.aspx.cs">
       <DependentUpon>empleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="sarhu\personal\empleados.aspx.designer.cs">
       <DependentUpon>empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\personal\puestos.aspx.cs">
+      <DependentUpon>puestos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\personal\puestos.aspx.designer.cs">
+      <DependentUpon>puestos.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\seguridad\agregar-usuario.aspx.cs">
       <DependentUpon>agregar-usuario.aspx</DependentUpon>
