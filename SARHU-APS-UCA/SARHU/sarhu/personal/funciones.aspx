@@ -12,11 +12,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default2">
-                    <div class="panel-body tooltip-demo">
-                        <asp:HiddenField runat="server" ID="Idelminar" />
+                                        <div class="panel-body tooltip-demo">
+                        <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa-lg fa fa-exclamation-circle "></i>
+                            <% =Mensaje %>
+                        </asp:Panel>
                         <asp:Repeater runat="server" ID="rptTable">
                             <HeaderTemplate>
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-datos">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -26,30 +30,21 @@
                                     </thead>
                                     <tbody>
                             </HeaderTemplate>
-
                             <ItemTemplate>
                                 <tr class="even gradeC" style='border: inset 0pt'>
                                     <td><%#Eval("Nombre")%></td>
                                     <td><%#Eval("Descripcion")%></td>
                                     <td align="center">
-                                         <!-- <a data-toggle="modal" data-target="#mediumModal" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Área"><i class="fa fa-eye fa-fw"></i></span></a>-->
-                                        <a href="editar-funcion.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Función"><i class="fa fa-edit fa-fw"></i></span></a>
-                                        <asp:LinkButton ID="Delete" runat="server" OnClick="Delete_Click" CommandArgument='<%#Eval("Id")+ ";" + Eval("Nombre")%>' class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Función"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
+                                        <a href="editar-funcion.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Área"><i class="fa fa-edit fa-fw"></i></span></a>
+                                        <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Área"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
                                     </td>
                                 </tr>
                             </ItemTemplate>
-
                             <FooterTemplate>
                                 </tbody>
                         </table>
                             </FooterTemplate>
                         </asp:Repeater>
-
-                        
-
-
-
-
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
@@ -100,11 +95,8 @@
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -116,10 +108,10 @@
                     <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                 </div>
                 <div class="modal-body">
-                    ¿Está seguro que desea borrar <%=nombreFuncion %>?
+                    <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton runat="server" OnClick="Confirm_Click" Text="Borrar" class="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
+                    <asp:LinkButton runat="server" OnClick="Confirmar_Click" Text="Borrar" class="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -132,34 +124,33 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <%=Message %>
+                    <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <a href="/sarhu/personal/funciones" type="button" class="btn btn-default">Cerrar</a>
-
+                    <a href="funciones.aspx" type="button" class="btn btn-default">OK</a>
                 </div>
             </div>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <asp:HiddenField runat="server" ID="idSeleccionado" />
     <script>
-        function ShowPopup() {
+        function PopupConfirmacion() {
             $('#myModal').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
 
-        function DeletePopup() {
+        function PopupNotificacion() {
             $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
-
-
+        
         $('#closemodal').click(function () {
             $('#mymodal').modal('hide');
 
         });
 
         $(document).ready(function () {
-            $('#dataTables-example').DataTable({
+            $('#dataTables-datos').DataTable({
                 responsive: true
             });
         });

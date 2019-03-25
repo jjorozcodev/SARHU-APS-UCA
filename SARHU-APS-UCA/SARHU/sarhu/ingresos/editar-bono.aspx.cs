@@ -5,57 +5,73 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.ingresos
 {
-    public partial class editar_bono : System.Web.UI.Page
+    public partial class editar_bono : Page
     {
-        protected Bono bono = new Bono();
-        protected string Value { get; set; }
-        protected string Message { get; set; }
+        private NG_Bonos ngBonos = NG_Bonos.Instanciar();
+        protected Bono bono = null;
+        private int idEditable = 0;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idEditable = int.Parse(Request.QueryString["id"]);
+            bono = ngBonos.Consultar(idEditable);
+
             if (!Page.IsPostBack)
             {
-                idBono.Value = Request.QueryString["id"];
-
-                ConsultData(int.Parse(idBono.Value));
+                CargarInformacion();
             }
         }
 
-        private void ConsultData(int ID)
+        private void CargarInformacion()
         {
-            bono = NG_Bonos.Instanciar().Consultar(ID);
-
-            Nombre.Text = bono.Nombre;
-            Value = bono.Descripcion;
-            Monto.Text = Convert.ToString(bono.Monto);
-        }
-
-
-        private Bono ObtenerDatosInterfaz()
-        {
-            bono.Id = int.Parse(idBono.Value);
-            bono.Nombre = Nombre.Text;
-            bono.Descripcion = Request.Form["textarea"];
-            Nombre.Text = "";
-            bono.Monto = Convert.ToDecimal(Monto.Text);
-            return bono;
+            if (bono != null)
+            {
+                bonoNombre.Text = bono.Nombre;
+                bonoDescripcion.Value = bono.Descripcion;
+                bonoMonto.Text = bono.Monto.ToString();
+            }
         }
 
         protected void Editar_click(object sender, EventArgs e)
         {
-            if (NG_Bonos.Instanciar().Editar(ObtenerDatosInterfaz()))
-            {
+            this.bono = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngBonos.Editar(bono));
+        }
 
-                Message = "GUARDADO EXITOSAMENTE";
-                panel.Visible = true;
+        private Bono ObtenerDatosInterfaz()
+        {
+            Bono b = new Bono();
+            b.Id = this.idEditable;
+            b.Nombre = bonoNombre.Text;
+            b.Descripcion = bonoDescripcion.Value;
+            b.Monto = decimal.Parse(bonoMonto.Text);
+            b.Estado = true;
+            return b;
+        }
+
+        private void LimpiarFormulario()
+        {
+            bonoNombre.Text = string.Empty;
+            bonoDescripcion.Value = string.Empty;
+            bonoMonto.Text = string.Empty;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
+            {
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "ERROR AL EDITAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
+            panelNotificacion.Visible = true;
         }
     }
 }

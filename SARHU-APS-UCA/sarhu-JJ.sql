@@ -245,9 +245,10 @@ create table SOS_ORGANIZACION
 		constraint SOS_ORGANIZACION_pk
 			primary key clustered,
 	organizacion_nombre varchar(100) not null,
+	organizacion_descripcion text,
+	organizacion_fundacion date,
 	organizacion_mision varchar(200),
 	organizacion_vision varchar(200),
-	organizacion_descripcion text,
 	localidad_id int
 )
 GO
@@ -270,7 +271,6 @@ GO
 create unique index SOS_AREAS_area_id_uindex
 	on SOS_AREAS (area_id)
 GO
-
 
 create table SOS_PUESTOS
 (
@@ -332,6 +332,53 @@ GO
 
 create unique index SOS_BONOS_bono_id_uindex
 	on SOS_BONOS (bono_id)
+GO
+
+create table SOS_ADELANTOS
+(
+	adelanto_id int identity
+		constraint SOS_ADELANTOS_pk
+			primary key clustered,
+	empleado_id int not null,
+	adelanto_monto decimal(8,2),
+	adelanto_fecha_entrega date not null,
+	adelanto_fecha_deduccion date not null,
+	adelanto_descripcion varchar(150),
+	adelanto_cancelado bit default 0 not null,
+	adelanto_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_ADELANTOS_adelanto_id_uindex
+	on SOS_ADELANTOS (adelanto_id)
+GO
+
+create table SOS_ADENDUMS
+(
+	adendum_id int identity
+		constraint SOS_ADENDUMS_pk
+			primary key clustered,
+	empleado_id int not null,
+	adendum_incremento_salarial decimal(8,2) not null,
+	adendum_fecha_aplicacion date not null,
+	adendum_observaciones varchar(150) not null,
+	adendum_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_ADENDUMS_adendum_id_uindex
+	on SOS_ADENDUMS (adendum_id)
+GO
+
+create table SOS_ADENDUMS_FUNCIONES
+(
+	adendum_id int not null
+		constraint SOS_ADENDUMS_FUNCIONES_SOS_ADENDUMS_adendum_id_fk
+			references SOS_ADENDUMS,
+	funcion_id int not null
+		constraint SOS_ADENDUMS_FUNCIONES_SOS_FUNCIONES_funcion_id_fk
+			references SOS_FUNCIONES
+)
 GO
 
 /* ------------ fin tablas ------------ */
@@ -568,18 +615,17 @@ GO
 CREATE PROCEDURE sp_organizacion_consult
 (@organizacion_pais int)
 AS
-	SELECT organizacion_nombre, organizacion_mision, organizacion_vision, organizacion_descripcion, localidad_id
+	SELECT organizacion_nombre, organizacion_descripcion, organizacion_fundacion, organizacion_mision, organizacion_vision, localidad_id
 	FROM SARHU.dbo.SOS_ORGANIZACION
 	WHERE organizacion_pais = @organizacion_pais
 GO
 
 CREATE PROCEDURE sp_organizacion_update
 (@organizacion_pais int, @organizacion_nombre varchar(100), @organizacion_mision varchar(200),
-@organizacion_vision varchar(200), @organizacion_descripcion varchar(250), @localidad_id int)
+@organizacion_vision varchar(200), @organizacion_descripcion varchar(250), @organizacion_fundacion date, @localidad_id int)
 AS
 	UPDATE SARHU.dbo.SOS_ORGANIZACION
-	SET organizacion_nombre = @organizacion_nombre, organizacion_mision = @organizacion_mision, organizacion_vision = @organizacion_vision, organizacion_descripcion = @organizacion_descripcion,
-		localidad_id = @localidad_id
+	SET organizacion_nombre = @organizacion_nombre, organizacion_mision = @organizacion_mision, organizacion_vision = @organizacion_vision, organizacion_descripcion = @organizacion_descripcion, organizacion_fundacion = @organizacion_fundacion, localidad_id = @localidad_id
 	WHERE organizacion_pais = @organizacion_pais;
 GO
 
@@ -851,7 +897,7 @@ INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VA
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (2, N'Masaya')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (3, N'León')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (3, N'Leï¿½n')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (4, N'Granada')
 GO
@@ -869,13 +915,13 @@ INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VA
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (11, N'Boaco')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (12, N'Estelí')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (12, N'Estelï¿½')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (13, N'Nueva Segovia')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (14, N'Madriz')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (15, N'Río San Juan')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (15, N'Rï¿½o San Juan')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (16, N'Caribe Norte')
 GO
@@ -905,7 +951,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (11, 2, N'Catarina')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (12, 2, N'La Concepción')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (12, 2, N'La Concepciï¿½n')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (13, 2, N'Masatepe')
 GO
@@ -913,7 +959,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (15, 2, N'Nandasmo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (16, 2, N'Nindirí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (16, 2, N'Nindirï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (17, 2, N'Niquinohomo')
 GO
@@ -929,7 +975,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (23, 3, N'La Paz Centro')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (24, 3, N'León')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (24, 3, N'Leï¿½n')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (25, 3, N'Larreynaga')
 GO
@@ -939,7 +985,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (28, 3, N'Telica')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (29, 4, N'Diriá')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (29, 4, N'Diriï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (30, 4, N'Diriomo')
 GO
@@ -979,23 +1025,23 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (48, 6, N'San Pedro del Norte')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (49, 6, N'Santo Tomás del Norte')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (49, 6, N'Santo Tomï¿½s del Norte')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (50, 6, N'Somotillo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (51, 6, N'Puerto Morazán')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (51, 6, N'Puerto Morazï¿½n')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (52, 6, N'Villanueva')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (53, 7, N'Altagracia')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (54, 7, N'Belén')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (54, 7, N'Belï¿½n')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (55, 7, N'Buenos Aires')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (56, 7, N'Cárdenas')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (56, 7, N'Cï¿½rdenas')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (57, 7, N'Potosí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (57, 7, N'Potosï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (58, 7, N'San Jorge')
 GO
@@ -1003,7 +1049,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (60, 7, N'Tola')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (61, 8, N'Ciudad Darío')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (61, 8, N'Ciudad Darï¿½o')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (62, 8, N'Esquipulas')
 GO
@@ -1011,19 +1057,19 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (64, 8, N'Matagalpa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (65, 8, N'Matiguás')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (65, 8, N'Matiguï¿½s')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (66, 8, N'Muy Muy')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (67, 8, N'Rancho Grande')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (68, 8, N'Río Blanco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (68, 8, N'Rï¿½o Blanco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (69, 8, N'San Dionisio')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (70, 8, N'San Ramón')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (70, 8, N'San Ramï¿½n')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (71, 8, N'Sébaco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (71, 8, N'Sï¿½baco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (72, 8, N'Terrabona')
 GO
@@ -1035,45 +1081,45 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (77, 9, N'El Coral')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (78, 9, N'San Pedro de Lóvago')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (78, 9, N'San Pedro de Lï¿½vago')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (79, 9, N'Santo Domingo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (80, 9, N'Santo Tomás')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (80, 9, N'Santo Tomï¿½s')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (81, 9, N'Villa Sandino')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (82, 10, N'San José de Bocay')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (82, 10, N'San Josï¿½ de Bocay')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (83, 10, N'El Cuá')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (83, 10, N'El Cuï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (84, 10, N'Jinotega')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (85, 10, N'La Concordia')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (86, 10, N'Santa María de Pantasma')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (86, 10, N'Santa Marï¿½a de Pantasma')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (87, 10, N'San Rafael del Norte')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (88, 10, N'Wiwilí de Jinotega')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (88, 10, N'Wiwilï¿½ de Jinotega')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (89, 10, N'San Sebastián de Yalí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (89, 10, N'San Sebastiï¿½n de Yalï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (90, 11, N'Boaco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (91, 11, N'Camoapa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (92, 11, N'San José de los Remates')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (92, 11, N'San Josï¿½ de los Remates')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (93, 11, N'San Lorenzo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (94, 11, N'Santa Lucía')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (94, 11, N'Santa Lucï¿½a')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (95, 11, N'Teustepe')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (96, 12, N'Condega')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (97, 12, N'Estelí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (97, 12, N'Estelï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (98, 12, N'La Trinidad')
 GO
@@ -1081,13 +1127,13 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (100, 12, N'San Juan de Limay')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (101, 12, N'San Nicolás')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (101, 12, N'San Nicolï¿½s')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (102, 13, N'Ciudad Antigua')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (103, 13, N'Dipilto')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (104, 13, N'El Jícaro')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (104, 13, N'El Jï¿½caro')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (105, 13, N'Jalapa')
 GO
@@ -1099,21 +1145,21 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (110, 13, N'Ocotal')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (111, 13, N'Quilalí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (111, 13, N'Quilalï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (112, 13, N'San Fernando')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (113, 13, N'Santa María')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (113, 13, N'Santa Marï¿½a')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (114, 13, N'Güigüilí')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (114, 13, N'Gï¿½igï¿½ilï¿½')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (115, 14, N'San José de Cusmapa')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (115, 14, N'San Josï¿½ de Cusmapa')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (116, 14, N'Las Sabanas')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (117, 14, N'Palacagüina')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (117, 14, N'Palacagï¿½ina')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (118, 14, N'San Juan de Río Coco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (118, 14, N'San Juan de Rï¿½o Coco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (119, 14, N'San Lucas')
 GO
@@ -1123,7 +1169,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (122, 14, N'Totogalpa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (123, 14, N'Yalagüina')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (123, 14, N'Yalagï¿½ina')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (124, 15, N'El Castillo')
 GO
@@ -1141,7 +1187,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (131, 16, N'Bonanza')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (132, 16, N'Mulukukú')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (132, 16, N'Mulukukï¿½')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (133, 16, N'Prinzapolka')
 GO
@@ -1151,7 +1197,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (136, 16, N'Waslala')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (137, 16, N'Waspán')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (137, 16, N'Waspï¿½n')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (138, 17, N'Bluefields')
 GO
@@ -1163,11 +1209,11 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (142, 17, N'El Tortuguero')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (143, 17, N'Desembocadura de Río Grande')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (143, 17, N'Desembocadura de Rï¿½o Grande')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (144, 17, N'Kukra Hill')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (145, 17, N'La Cruz de Río Grande')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (145, 17, N'La Cruz de Rï¿½o Grande')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (146, 17, N'Laguna de Perlas')
 GO
@@ -1188,7 +1234,7 @@ INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descri
 GO
 INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (3, N'Colegio SOS', N'Colegio SOS', 1)
 GO
-INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (4, N'Centro de Formación', N'Centro de Formación', 1)
+INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (4, N'Centro de Formaciï¿½n', N'Centro de Formaciï¿½n', 1)
 GO
 INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (5, N'Programa de Fortalecimiento Familiar', N'Programa de Fortalecimiento Familiar', 1)
 GO
@@ -1206,7 +1252,8 @@ GO
 SET IDENTITY_INSERT [dbo].[SARHU_OPERACIONES] OFF
 GO
 
-INSERT [dbo].[SOS_ORGANIZACION] ([organizacion_pais], [organizacion_nombre], [organizacion_mision], [organizacion_vision], [organizacion_descripcion], [localidad_id]) VALUES (505, N'ALDEAS INFANTILES SOS NICARAGUA', N'Trabajamos por el derecho de los Niños a vivir en familia.', N'Cada niño y cada niña pertenecen a una familia y crece con amor.', N'Somos una organización no gubernamental sin fines de lucro presentes en 133 países del mundo, siendo la organización más grande en atención directa a niños, niñas, adolescentes y familias.', 1)
+INSERT [dbo].[SOS_ORGANIZACION] ([organizacion_pais], [organizacion_nombre], [organizacion_mision], [organizacion_vision], [organizacion_descripcion], [organizacion_fundacion], [localidad_id]) 
+VALUES (505, N'ALDEAS INFANTILES SOS NICARAGUA', N'Trabajamos por el derecho de los niï¿½os a vivir en familia.', N'Cada niï¿½o y cada niï¿½a pertenecen a una familia y crece con amor.', N'Somos una organizaciï¿½n no gubernamental sin fines de lucro presentes en 133 paï¿½ses del mundo, siendo la organizaciï¿½n mï¿½s grande en atenciï¿½n directa a niï¿½os, niï¿½as, adolescentes y familias.', CAST(N'1949-01-01' AS Date), 0)
 GO
 
 /* ------------ fin registros tablas ------------ */

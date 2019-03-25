@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private SqlDataAdapter adaptadorSql = null;
+        private List<Localidad> localidades = new List<Localidad>();
 
         private static DT_Localidades dtLocalidades = null;
 
@@ -34,18 +34,17 @@ namespace Datos
         /// <summary>
         /// El método permite agregar un registro de la entidad [Localidad].
         /// Recibe como parámetro un objeto [Localidad] con la información a agregar a la base de datos (ProgramaId, MunicipioId, DirectorId, Alias, Telefono y Direccion).
-        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(Localidad obj)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.LocalidadesAgregar;
-
+            
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
             comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;
-            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = obj.DepartamentoId;
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;
             comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias;
             comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
@@ -56,11 +55,11 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
-            return (agregado);
+            return idGenerado;
         }
 
         /// <summary>
@@ -109,23 +108,21 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-
-
+            
             Localidad localidad = new Localidad();
+
             while (reader.Read())
             {
-               
-                localidad.Id = reader.GetInt32(0);
-                localidad.ProgramaId = reader.GetInt32(1);
-                localidad.DepartamentoId = reader.GetInt32(2);
-                localidad.MunicipioId = reader.GetInt32(3);               
-                if (reader.GetInt32(4) == 0111) {
-                    localidad.DirectorName = "Pedro Antonio";
-                }
-               localidad.Telefono = reader.GetString(5);
-                localidad.Alias = reader.GetString(6);                
-                localidad.Direccion = reader.GetString(7);
+                localidad.Id = id;
+                localidad.ProgramaId = int.Parse(reader["programa_id"].ToString());
+                localidad.DirectorId = int.Parse(reader["director_id"].ToString());
+                localidad.MunicipioId = int.Parse(reader["municipio_id"].ToString());
+                localidad.Alias = reader["localidad_alias"].ToString();
+                localidad.Telefono = reader["localidad_telefono"].ToString();
+                localidad.Direccion = reader["localidad_direccion"].ToString();
+                localidad.Estado = bool.Parse(reader["localidad_estado"].ToString());
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -147,7 +144,6 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = obj.ProgramaId;
-            comandoSql.Parameters.Add("@departamento_id", SqlDbType.Int).Value = obj.DepartamentoId;
             comandoSql.Parameters.Add("@municipio_id", SqlDbType.Int).Value = obj.MunicipioId;           
             comandoSql.Parameters.Add("@director_id", SqlDbType.Int).Value = obj.DirectorId;
             comandoSql.Parameters.Add("@localidad_alias", SqlDbType.VarChar).Value = obj.Alias;
@@ -174,7 +170,7 @@ namespace Datos
         /// </summary>
         public List<Localidad> Listar()
         {
-            List<Localidad> localidades = new List<Localidad>();
+            List<Localidad> listaLocalidades = new List<Localidad>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -192,40 +188,45 @@ namespace Datos
             while (reader.Read())
             {
                 Localidad l = new Localidad();
-                l.Id = reader.GetInt32(0);
-                l.ProgramaNombre = reader.GetString(1);
-                l.DepartamentoNombre = reader.GetString(2);
-                l.DirectorId = reader.GetInt32(3);
-                if (l.DirectorId == 0111)
-                {
-                    l.DirectorName = "Pedro Antonio";
-                }              
-                l.Telefono = reader.GetString(4);
-               
 
-                localidades.Add(l);
+                l.Id = int.Parse(reader["localidad_id"].ToString());
+                l.ProgramaId = int.Parse(reader["programa_id"].ToString());
+                l.DirectorId = int.Parse(reader["director_id"].ToString());
+                l.MunicipioId = int.Parse(reader["municipio_id"].ToString());
+                l.Alias = reader["localidad_alias"].ToString();
+                l.Telefono = reader["localidad_telefono"].ToString();
+                l.Direccion = reader["localidad_direccion"].ToString();
+                l.Estado = bool.Parse(reader["localidad_estado"].ToString());
+
+                listaLocalidades.Add(l);
             }
+
             reader.Close();
 
             conexionSql.Close();
 
-            return localidades;
+            this.localidades.Clear();
+            this.localidades = listaLocalidades;
+
+            return listaLocalidades;
         }
 
-        /// <summary>
-        /// Método aún en desarrollo...
-        /// </summary>
-        public DataTable ObtenerVista()
+        public List<Localidad> ListarPorEstado(bool Estado)
         {
-            // TODO: Para mostrar en la tabla.
-            comandoSql.Connection = conexionSql;
-            comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.LocalidadesListar;
-            adaptadorSql = new SqlDataAdapter(comandoSql);
-            DataTable dt = new DataTable();
-            adaptadorSql.Fill(dt);
-            adaptadorSql.Dispose();
-            return dt;
+            // Actualizar
+            Listar();
+
+            List<Localidad> listLocalidades = new List<Localidad>();
+
+            foreach (Localidad l in localidades)
+            {
+                if (l.Estado == Estado)
+                {
+                    listLocalidades.Add(l);
+                }
+            }
+
+            return listLocalidades;
         }
     }
 }

@@ -5,78 +5,52 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.catalogos
 {
-    public partial class agregar_programa : System.Web.UI.Page
+    public partial class agregar_programa : Page
     {
-        public string Value { get; set; }
+        private NG_Programas ngProgramas = NG_Programas.Instanciar();
+        protected Programa programa = null;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
         }
 
-
-        private Programa GetEntity()
+        protected void Guardar_Click(object sender, EventArgs e)
         {
-
-            Programa prog = new Programa();
-
-            
-            prog.Nombre = nombreprog.Text;
-            prog.Descripcion = descripcionprog.Text;
-
-            return prog;
-
+            this.programa = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngProgramas.Agregar(this.programa));
         }
 
-
-
-        protected void btnGuardar_programa(object sender, EventArgs e)
+        private Programa ObtenerDatosInterfaz()
         {
+            Programa p = new Programa();
+            p.Nombre = programaNombre.Text;
+            p.Descripcion = programaDescripcion.Value;
+            return p;
+        }
 
-            Programa prog = GetEntity();//Recupero el valor regresado por GetEntity
+        private void LimpiarFormulario()
+        {
+            programaNombre.Text = string.Empty;
+            programaDescripcion.Value = string.Empty;
+        }
 
-            if (prog != null)// Valido si el objeto no es nulo
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                //Si el objeto no es nulo se llama a la capa de negocio y se le pasa el objeto
-
-                bool resp = NG_Programas.Instanciar().Agregar(prog);
-                if (resp == true)//Se valida la respuesta de la capa de negocio
-                {
-                    //Si la respuesta es TRUE se procede a ejecutar un JavaScript que muestra un MODAL que 
-                    //muestra al usuario un mensaje de confirmacion
-                    Value = "REGISTRO GUARDADO EXITOSAMENTE!!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
-
-
-                    nombreprog.Text = "";
-                    nombreprog.BorderColor = System.Drawing.Color.LightGray;
-                    descripcionprog.Text = "";
-                    descripcionprog.BorderColor = System.Drawing.Color.LightGray;
-                    Response.Redirect("programas.aspx");
-
-                }
-                else
-                {
-                    //Si la respuesta es FALSE se procede a ejecutar un JavaScript que muestra un MODAL que 
-                    //muestra al usuario un mensaje de error
-                    Value = "NO SE PUEDO GUARDAR EL REGISTRO";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
-                }
-
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                //Si el objeto es nulo se muestra un SNACKBAR o TOAST que indica al usuario que no se pueden dejar campos nulos
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "snackbar();", true);
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
-
+            panelNotificacion.Visible = true;
         }
-
-
-
-
-
     }
 }

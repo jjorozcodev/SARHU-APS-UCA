@@ -5,38 +5,52 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class agregar_funcion : System.Web.UI.Page
+    public partial class agregar_funcion : Page
     {
-        protected string Message { get; set; }
+        private NG_Funciones ngFunciones = NG_Funciones.Instanciar();
+        protected Funcion funcion = null;
+
+        protected string Mensaje = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        private Funcion ObtenerDatosInterfaz()
-        {
-            Funcion funcion = new Funcion();
-            funcion.Nombre = Nombre.Text;
-            funcion.Descripcion = Request.Form["textarea"];
-            Nombre.Text = "";
-            return funcion;
-        }
-
         protected void Guardar_Click(object sender, EventArgs e)
         {
-            if (NG_Funciones.Instanciar().Agregar(ObtenerDatosInterfaz()))
+            this.funcion = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngFunciones.Agregar(this.funcion));
+        }
+
+        private Funcion ObtenerDatosInterfaz()
+        {
+            Funcion f = new Funcion();
+            f.Nombre = funcionNombre.Text;
+            f.Descripcion = funcionDescripcion.Value;
+            return f;
+        }
+
+        private void LimpiarFormulario()
+        {
+            funcionNombre.Text = string.Empty;
+            funcionDescripcion.Value = string.Empty;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                Message = "GUARDADO EXITOSAMENTE";
-                panel.Visible = true;
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "ERROR AL GUARDAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
-
+            panelNotificacion.Visible = true;
         }
     }
 }

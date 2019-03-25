@@ -34,7 +34,7 @@ namespace Datos
         /// <summary>
         /// El método permite agregar un registro de la entidad [Programa].
         /// Recibe como parámetro un objeto [Programa] con la información a agregar a la base de datos (Nombre y Descripción).
-        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(Programa obj)
         {
@@ -51,11 +51,11 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
-            return (agregado);
+            return idGenerado;
         }
 
         /// <summary>
@@ -104,15 +104,17 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
+
             Programa programa = new Programa();
 
             while (reader.Read())
             {
                 programa.Id = id;
-                programa.Nombre = reader.GetString(0);
-                programa.Descripcion = reader.GetString(1);
-                programa.Estado = reader.GetBoolean(2);
+                programa.Nombre = reader["programa_nombre"].ToString();
+                programa.Descripcion = reader["programa_descripcion"].ToString();
+                programa.Estado = bool.Parse(reader["programa_estado"].ToString());
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -156,7 +158,7 @@ namespace Datos
         /// </summary>
         public List<Programa> Listar()
         {
-            List<Programa> progsLista = new List<Programa>();
+            List<Programa> listaProgramas = new List<Programa>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -171,24 +173,26 @@ namespace Datos
 
             SqlDataReader reader = comandoSql.ExecuteReader();
            
-
             while (reader.Read())
             {
                 Programa p = new Programa();
-                p.Id = reader.GetInt32(0);
-                p.Nombre = reader.GetString(1);
-                p.Descripcion = reader.GetString(2);
-                p.Estado = reader.GetBoolean(3);
+                
+                p.Id = int.Parse(reader["programa_id"].ToString());
+                p.Nombre = reader["programa_nombre"].ToString();
+                p.Descripcion = reader["programa_descripcion"].ToString();
+                p.Estado = bool.Parse(reader["programa_estado"].ToString());
 
-                progsLista.Add(p);
+                listaProgramas.Add(p);
             }
+
             reader.Close();
 
             conexionSql.Close();
 
             this.programas.Clear();
-            this.programas = progsLista;
-            return progsLista;
+            this.programas = listaProgramas;
+
+            return listaProgramas;
         }
 
         public List<Programa> ListarPorEstado(bool Estado)
@@ -196,17 +200,17 @@ namespace Datos
             // Actualizar
             Listar();
 
-            List<Programa> progs = new List<Programa>();
+            List<Programa> listProgramas = new List<Programa>();
 
             foreach(Programa p in programas)
             {
                 if(p.Estado == Estado)
                 {
-                    progs.Add(p);
+                    listProgramas.Add(p);
                 }
             }
 
-            return progs;
+            return listProgramas;
         }
     }
 }

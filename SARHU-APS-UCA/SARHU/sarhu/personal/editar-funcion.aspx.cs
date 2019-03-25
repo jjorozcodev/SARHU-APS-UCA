@@ -5,57 +5,69 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class editar_funcion : System.Web.UI.Page
+    public partial class editar_funcion : Page
     {
-        protected Funcion funcion = new Funcion();
-        protected string Value { get; set; }
-        protected string Message { get; set; }
+        private NG_Funciones ngFunciones = NG_Funciones.Instanciar();
+        protected Funcion funcion = null;
+        private int idEditable = 0;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idEditable = int.Parse(Request.QueryString["id"]);
+            funcion = ngFunciones.Consultar(idEditable);
+
             if (!Page.IsPostBack)
             {
-                idFuncion.Value = Request.QueryString["id"];
-
-                ConsultData(int.Parse(idFuncion.Value));
+                CargarInformacion();
             }
-
         }
 
-
-        private void ConsultData(int ID)
+        private void CargarInformacion()
         {
-            funcion = NG_Funciones.Instanciar().Consultar(ID);
-
-            Nombre.Text = funcion.Nombre;
-            Value = funcion.Descripcion;
-        }
-
-
-        private Funcion ObtenerDatosInterfaz()
-        {
-            funcion.Id = int.Parse(idFuncion.Value);
-            funcion.Nombre = Nombre.Text;
-            funcion.Descripcion = Request.Form["textarea"];
-            Nombre.Text = "";
-            return funcion;
+            if (funcion != null)
+            {
+                funcionNombre.Text = funcion.Nombre;
+                funcionDescripcion.Value = funcion.Descripcion;
+            }
         }
 
         protected void Editar_click(object sender, EventArgs e)
         {
-            if (NG_Funciones.Instanciar().Editar(ObtenerDatosInterfaz()))
-            {
+            this.funcion = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngFunciones.Editar(funcion));
+        }
 
-                Message = "GUARDADO EXITOSAMENTE";
-                panel.Visible = true;
+        private Funcion ObtenerDatosInterfaz()
+        {
+            Funcion f = new Funcion();
+            f.Id = this.idEditable;
+            f.Nombre = funcionNombre.Text;
+            f.Descripcion = funcionDescripcion.Value;
+            return f;
+        }
+
+        private void LimpiarFormulario()
+        {
+            funcionNombre.Text = string.Empty;
+            funcionDescripcion.Value = string.Empty;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
+            {
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "ERROR AL EDITAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
+            panelNotificacion.Visible = true;
         }
     }
 }

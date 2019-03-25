@@ -1,69 +1,60 @@
 ﻿using System;
 using Negocio;
 using Entidades;
-using System.Collections.Generic;
-using System.Data;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
 namespace SARHU.sarhu.catalogos
 {
-    public partial class programas : System.Web.UI.Page
+    public partial class programas : Page
     {
-        protected string Message { get; set; }
-        protected string nombreFuncion { get; set; }
+        private NG_Programas ngProgramas = NG_Programas.Instanciar();
+        protected Programa programa = null;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!Page.IsPostBack)
             {
-                LoadData();
+                CargarInformacion();
             }
 
         }
         
-        private void LoadData()
-        {
-            List<Programa> listaprog = NG_Programas.Instanciar().ListarPorEstado(true);
-   
-            rptTable.DataSource = listaprog;
+        private void CargarInformacion()
+        {   
+            rptTable.DataSource = ngProgramas.ListarPorEstado(true);
             rptTable.DataBind();
         }
 
-        protected void Delete_Click(object sender, EventArgs e)
+        protected void Borrar_Click(object sender, CommandEventArgs e)
         {
-            LinkButton b = (LinkButton)sender;
-
-            string arguments = b.CommandArgument;
-            string[] args = arguments.Split(';');
-
-            eliminar.Value = args[0];
-            nombreFuncion = args[1];
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+            idSeleccionado.Value = e.CommandArgument.ToString();
+            this.programa = ngProgramas.Consultar(int.Parse(idSeleccionado.Value));
+            Mensaje = "¿Está seguro que desea borrar el registro " + this.programa.Nombre + "?";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupConfirmacion();", true);
         }
 
-        protected void Confirm_Click(object sender, EventArgs e)
+        protected void Confirmar_Click(object sender, EventArgs e)
         {
-            int index = int.Parse(eliminar.Value);
+            EjecutarNotificarUsuario(ngProgramas.Borrar(int.Parse(idSeleccionado.Value)));
+            CargarInformacion();
+        }
 
-            System.Diagnostics.Debug.WriteLine("Entró en evento eliminar programa. Valor: " + index);
-
-            if (NG_Programas.Instanciar().Borrar(index))
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                Message = "El registro ha sido borrado.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "Error al tratar de borrar éste registro de Programa.";
-
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
             }
 
-            LoadData();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupNotificacion();", true);
         }
-
     }
 }

@@ -31,7 +31,7 @@ namespace SARHU.sarhu.personal
         {
             idSeleccionado.Value = e.CommandArgument.ToString();
             this.area = ngAreas.Consultar(int.Parse(idSeleccionado.Value));
-            Mensaje = "¿Está seguro que desea borrar el registro " + this.area.Nombre + " ?";
+            Mensaje = "¿Está seguro que desea borrar el registro " + this.area.Nombre + "?";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupConfirmacion();", true);
         }
 

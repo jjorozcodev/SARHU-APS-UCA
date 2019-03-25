@@ -11,6 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
+        private List<Departamento> departamentos = new List<Departamento>();
 
         private static DT_Departamentos dtDepartamentos = null;
 
@@ -37,6 +38,11 @@ namespace Datos
         /// </summary>
         public List<Departamento> Listar()
         {
+            if (this.departamentos != null)
+            {
+                return this.departamentos;
+            }
+
             List<Departamento> departamentos = new List<Departamento>();
 
             comandoSql.Connection = conexionSql;
@@ -55,11 +61,10 @@ namespace Datos
 
             while (reader.Read())
             {
-                Departamento d = new Departamento
-                {
-                    Id = reader.GetInt32(0),
-                    Nombre = reader.GetString(1)
-                };
+                Departamento d = new Departamento();
+
+                d.Id = int.Parse(reader["departamento_id"].ToString());
+                d.Nombre = reader["departamento_nombre"].ToString();
 
                 departamentos.Add(d);
             }
@@ -69,6 +74,22 @@ namespace Datos
             conexionSql.Close();
 
             return departamentos;
+        }
+
+        public Departamento Consultar(int id)
+        {
+            Departamento departamento = null;
+           
+            foreach (Departamento d in this.departamentos)
+            {
+                if (d.Id == id)
+                {
+                    departamento = d;
+                    break;
+                }
+            }
+
+            return departamento;
         }
 
     }

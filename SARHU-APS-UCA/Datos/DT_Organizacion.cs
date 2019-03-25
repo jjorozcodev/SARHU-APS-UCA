@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -63,14 +64,18 @@ namespace Datos
 
             SqlDataReader reader = comandoSql.ExecuteReader();
             Organizacion org = new Organizacion();
-
+            
             while (reader.Read())
             {
+                DateTime ff;
+
                 org.Pais = codPais;
                 org.Nombre = reader["organizacion_nombre"].ToString();
+                org.Descripcion = reader["organizacion_descripcion"].ToString();
                 org.Mision = reader["organizacion_mision"].ToString();
                 org.Vision = reader["organizacion_vision"].ToString();
-                org.Descripcion = reader["organizacion_descripcion"].ToString();
+                DateTime.TryParse(reader["organizacion_fundacion"].ToString(), out ff);
+                org.Fundacion = ff;
                 org.LocalidadId = int.Parse(reader["localidad_id"].ToString());
             }
 
@@ -85,7 +90,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite editar un registro de la entidad [Organizacion].
-        /// Recibe como parámetro un objeto [Organizacion] con la información editada para actualizarse en la base de datos (Nombre, Descripción, Misión y Visión).
+        /// Recibe como parámetro un objeto [Organizacion] con la información editada para actualizarse en la base de datos (Nombre, Descripción, Fecha de Fundación, Misión y Visión).
         /// Devuelve un valor booleano para notificar si el registro fue editado o no.
         /// </summary>
         public bool Editar(Organizacion obj)
@@ -97,6 +102,7 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@organizacion_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@organizacion_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
+            comandoSql.Parameters.Add("@organizacion_fundacion", SqlDbType.Date).Value = obj.Fundacion.Date;
             comandoSql.Parameters.Add("@organizacion_mision", SqlDbType.VarChar).Value = obj.Mision;
             comandoSql.Parameters.Add("@organizacion_vision", SqlDbType.VarChar).Value = obj.Vision;
             comandoSql.Parameters.Add("@organizacion_pais", SqlDbType.Int).Value = this.codPais;

@@ -47,12 +47,12 @@ namespace SARHU.sarhu.catalogos
             Municipio.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
         }
 
-        private Localidad ObtenerDatosInterfaz()
+        private Localidad ObtenerDatosInterfaz(bool f = false)
         {
             Localidad localidad = new Localidad();
             localidad.ProgramaId = int.Parse(Programa.SelectedItem.Value);
             localidad.MunicipioId = int.Parse(Municipio.SelectedItem.Value);
-            localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
+            //localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
             localidad.Telefono = Telefono.Text;
             localidad.Alias = Alias.Text;
             localidad.DirectorId = 0111;

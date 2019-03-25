@@ -25,9 +25,14 @@ namespace Negocio
             return ngFunciones;
         }
 
+        public int AgregarObtenerID(Funcion obj)
+        {
+            return dtFunciones.Agregar(obj);
+        }
+
         public bool Agregar(Funcion obj)
         {
-            return dtFunciones.Agregar(obj) > 0;
+            return (dtFunciones.Agregar(obj) > 0);
         }
 
         public bool Borrar(int id)

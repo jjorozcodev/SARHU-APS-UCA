@@ -37,6 +37,11 @@ namespace Datos
         /// </summary>
         public List<Municipio> Listar()
         {
+            if(this.municipios != null)
+            {
+                return this.municipios;
+            }
+
             List<Municipio> listaMunicipios = new List<Municipio>();
 
             comandoSql.Connection = conexionSql;
@@ -52,17 +57,17 @@ namespace Datos
 
             SqlDataReader reader = comandoSql.ExecuteReader();
       
-
             while (reader.Read())
             {
-                Municipio m = new Municipio
-                {
-                    Id = reader.GetInt32(0),
-                    Nombre = reader.GetString(1)
-                };
-                
+               Municipio m = new Municipio();
+
+                m.Id = int.Parse(reader["municipio_id"].ToString());
+                m.Nombre = reader["municipio_nombre"].ToString();
+                m.DepartamentoId = int.Parse(reader["departamento_id"].ToString());
+
                 listaMunicipios.Add(m);
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -73,19 +78,35 @@ namespace Datos
             return listaMunicipios;
         }
 
+        public Municipio Consultar(int id)
+        {
+            Municipio municipio = null;
+
+            foreach (Municipio m in this.municipios)
+            {
+                if (m.Id == id)
+                {
+                    municipio = m;
+                    break;
+                }
+            }
+
+            return municipio;
+        }
+
         public List<Municipio> ObtenerMunicipios(int DepartamentoId)
         {
-            List<Municipio> muniDepartamento = new List<Municipio>();
+            List<Municipio> municipiosDepartamento = new List<Municipio>();
 
             foreach(Municipio m in this.municipios)
             {
                 if(m.Id == DepartamentoId)
                 {
-                    muniDepartamento.Add(m);
+                    municipiosDepartamento.Add(m);
                 }
             }
 
-            return muniDepartamento;
+            return municipiosDepartamento;
         }
     }
 }

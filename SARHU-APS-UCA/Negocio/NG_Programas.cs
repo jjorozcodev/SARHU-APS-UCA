@@ -25,9 +25,14 @@ namespace Negocio
             return ngProgramas;
         }
 
+        public int AgregarObtenerID(Programa obj)
+        {
+            return dtProgramas.Agregar(obj);
+        }
+
         public bool Agregar(Programa obj)
         {
-            return dtProgramas.Agregar(obj) > 0;
+            return (dtProgramas.Agregar(obj) > 0);
         }
 
         public bool Borrar(int id)
@@ -57,8 +62,8 @@ namespace Negocio
 
         public int CantidadProgramasActivos()
         {
-            List<Programa> miLista = this.ListarPorEstado(true);
-            int cantidadProgActivos = miLista.Count;
+            List<Programa> prgms = this.ListarPorEstado(true);
+            int cantidadProgActivos = prgms.Count;
             return cantidadProgActivos;
         }
     }

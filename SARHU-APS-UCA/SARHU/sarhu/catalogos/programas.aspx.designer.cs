@@ -13,13 +13,13 @@ namespace SARHU.sarhu.catalogos {
     public partial class programas {
         
         /// <summary>
-        /// eliminar control.
+        /// panelNotificacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField eliminar;
+        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
         
         /// <summary>
         /// rptTable control.
@@ -38,5 +38,14 @@ namespace SARHU.sarhu.catalogos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton Confirm;
+        
+        /// <summary>
+        /// idSeleccionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField idSeleccionado;
     }
 }
