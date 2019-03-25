@@ -23,7 +23,7 @@
                                            </ul>
                                            <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="datosP">
-                                                    <label>Código</label>
+                                                     <label>Código</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input type="number" class="form-control">
                                                             </div>
@@ -65,7 +65,7 @@
                                                                      <input class="form-control" type="text"  id="cedula" placeholder="000-000000-0000T" tabindex="14">
                                                                 </td>
                                                                 <td>
-                                                                     <input class="form-control" type="text"  id="fechaN" placeholder="00/00/0000" tabindex="8">
+                                                                     <input class="form-control" type="date" name="nacimiento" step="1" min="1959-01-01" max="2001-01-01">
                                                                 </td>
                                                             </tr>                                              
                                                         </tbody>
@@ -108,13 +108,13 @@
                                                     </div>
                                             </div> 
                                                 <div class="tab-pane fade " id="datosA">                                   
-                                                     <label>Inss</label>
+                                                     <label>Número de Asegurado</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input class="form-control" type="text"  id="inss" placeholder="0000000-0" tabindex="8">
                                                             </div>
                                                      <label>Fecha de Ingreso</label>
                                                             <div class="form-group input-group" style="width: 100%;">
-                                                                <input class="form-control" type="text"  id="fechaI" placeholder="00/00/0000" tabindex="8">
+                                                                <input class="form-control" type="date" name="ingreso" step="1" min="1949-01-01" max="2019-01-01">
                                                             </div>
                                                     <label>Programa</label>
                                                         <div class="form-group input-group" style="width: 100%;">
@@ -163,6 +163,10 @@
                                                             </tr>                                              
                                                         </tbody>
                                                     </table>
+                                                    <label>Número de Cuenta</label>
+                                                            <div class="form-group input-group" style="width: 100%;">
+                                                                <input type="text" class="form-control" id="numeroC" placeholder="00000000000000" tabindex="14">
+                                                            </div>
                                                     <div class="form-group" style="width: 100%;">
                                                         <label>Observaciones</label>
                                                         <textarea style="resize:none" id="textarea1" rows="5" cols="5" class="form-control" maxlength="200" name="textarea"></textarea>
@@ -172,15 +176,6 @@
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input type="text" class="form-control" disabled="">
                                                             </div>
-                                                    <label>Fecha de Egreso/Cambio</label>
-                                                                <div class="form-group input-group" style="width: 100%;">
-                                                                    <input class="form-control" type="text"  id="fechaE" placeholder="00/00/0000" tabindex="8">
-                                                                </div>
-                                                    <div class="form-group" style="width: 100%;">
-                                                            <label>Observaciones de Egreso</label>
-                                                            <textarea style="resize:none" id="textarea2" rows="5" cols="5" class="form-control" maxlength="200" name="textarea"></textarea>
-                                                            <div id="textarea_feedback2">200 caracteres disponibles</div>
-                                                        </div> 
                                                      <div class="form-group" align="center">
                                                         <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
                                                         <a href="empleados.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
@@ -205,7 +200,6 @@
                  </div>
             </div>
          </div>
-    </div>
 
         <script>
         $(function () {
@@ -219,23 +213,15 @@
             });
 
             $(function () {
-                $("#fechaN").mask("99/99/9999", { placeholder: " " });
-            });
-
-            $(function () {
-                $("#fechaI").mask("99/99/9999", { placeholder: " " });
-            });
-
-            $(function () {
-                $("#fechaE").mask("99/99/9999", { placeholder: " " });
-            });
-
-            $(function () {
                 $("#inss").mask("9999999-9", { placeholder: " " });
             });
 
             $(function () {
                 $("#Telefono").mask("9999-9999", { placeholder: " " });
+            });
+
+            $(function () {
+                $("#numeroC").mask("99999999999999", { placeholder: " " });
             });
         </script>
 
@@ -263,20 +249,6 @@
                     var text_remaining = text_max - text_length;
 
                     $('#textarea_feedback1').html(text_remaining + ' caracteres disponibles');
-                });
-            });
-        </script>
-
-    <script>
-            $(document).ready(function () {
-                var text_max = 200;
-                $('#textarea_feedback2').html(text_max + ' caracteres disponibles');
-
-                $('#textarea2').keyup(function () {
-                    var text_length = $('#textarea2').val().length;
-                    var text_remaining = text_max - text_length;
-
-                    $('#textarea_feedback2').html(text_remaining + ' caracteres disponibles');
                 });
             });
         </script>
