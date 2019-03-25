@@ -85,7 +85,7 @@
                                 <i class="fa fa-map-marker fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">56</div>
+                                <div class="huge"><% = cantLocAct %></div>
                                 <div>Localidades</div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private List<Municipio> municipios = new List<Municipio>();
+        private List<Municipio> municipios = null;
 
         private static DT_Municipios dtMunicipios = null;
 
@@ -71,8 +71,7 @@ namespace Datos
             reader.Close();
 
             conexionSql.Close();
-
-            this.municipios.Clear();
+            
             this.municipios = listaMunicipios;
 
             return listaMunicipios;
@@ -80,6 +79,8 @@ namespace Datos
 
         public Municipio Consultar(int id)
         {
+            Listar();
+
             Municipio municipio = null;
 
             foreach (Municipio m in this.municipios)
@@ -96,11 +97,13 @@ namespace Datos
 
         public List<Municipio> ObtenerMunicipios(int DepartamentoId)
         {
+            Listar();
+
             List<Municipio> municipiosDepartamento = new List<Municipio>();
 
             foreach(Municipio m in this.municipios)
             {
-                if(m.Id == DepartamentoId)
+                if(m.DepartamentoId == DepartamentoId)
                 {
                     municipiosDepartamento.Add(m);
                 }

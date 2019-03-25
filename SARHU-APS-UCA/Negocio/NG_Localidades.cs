@@ -74,7 +74,7 @@ namespace Negocio
         public DataTable VisualizarLocalidades()
         {
             DataTable vistaLocalidades = new DataTable();
-            vistaLocalidades.Columns.Add("IdLocalidad", typeof(int));
+            vistaLocalidades.Columns.Add("Id", typeof(int));
             vistaLocalidades.Columns.Add("Programa", typeof(string));
             vistaLocalidades.Columns.Add("Departamento", typeof(string));
             vistaLocalidades.Columns.Add("Director", typeof(string));

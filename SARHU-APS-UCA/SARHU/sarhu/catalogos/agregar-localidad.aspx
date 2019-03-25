@@ -17,23 +17,17 @@
                             <div class="panel panel-formulario">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
-
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <i class="fa-lg fa fa-exclamation-circle "></i>
-                                            <%=Message %>
-                                        </asp:Panel>
-
-
-
-                                       
                                             <div class="col-md-12">
-
+                                                <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                <% =Mensaje %>
+                                            </asp:Panel>
                                                 <label>Programa</label>
                                                 <div class="form-group input-group" style="width: 100%;">
-                                                    <asp:DropDownList CssClass="form-control" ID="Programa" runat="server" InitialValue="Please select" ErrorMessage="Please select something"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server" InitialValue="Please select" ErrorMessage="Please select something"></asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                                                        ControlToValidate="Programa"
+                                                        ControlToValidate="ddlProgramas"
                                                         ErrorMessage="Selecciona un Programa"
                                                         InitialValue="0" SetFocusOnError="True" ForeColor="#FF3300">
                                                     </asp:RequiredFieldValidator>
@@ -45,25 +39,24 @@
                                                     <ContentTemplate>
                                                         <label>Departamento</label>
                                                         <div class="form-group input-group" style="width: 100%;">
-                                                            <asp:DropDownList CssClass="form-control" ID="Departamento" runat="server" AutoPostBack="true" OnSelectedIndexChanged="Departamento_SelectedIndexChanged"></asp:DropDownList>
+                                                            <asp:DropDownList CssClass="form-control" ID="ddlDepartamentos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="Departamento_SelectedIndexChanged"></asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                                                ControlToValidate="Departamento"
+                                                                ControlToValidate="ddlDepartamentos"
                                                                 ErrorMessage="Selecciona un Departamento"
                                                                 InitialValue="0" SetFocusOnError="True" ForeColor="#FF3300">
                                                             </asp:RequiredFieldValidator>
                                                         </div>
                                                         <label>Municipio</label>
                                                         <div class="form-group input-group" style="width: 100%;">
-                                                            <asp:DropDownList CssClass="form-control" ID="Municipio" runat="server"></asp:DropDownList>
+                                                            <asp:DropDownList CssClass="form-control" ID="ddlMunicipios" runat="server"></asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                                                                ControlToValidate="Municipio"
+                                                                ControlToValidate="ddlMunicipios"
                                                                 ErrorMessage="Selecciona un Municipio"
                                                                 InitialValue="0" SetFocusOnError="True" ForeColor="#FF3300">
                                                             </asp:RequiredFieldValidator>
                                                         </div>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
-
 
                                                 <label>Director</label>
                                                 <div class="form-group input-group" style="width: 100%;">
@@ -240,18 +233,12 @@
 
         $(document).ready(function () {
             setTimeout(function () {
-                $("#panel").fadeOut("slow", function () {
-                    window.location.replace("localidades.aspx");
+                $("#panelNotificacion").fadeOut("slow", function () {
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/catalogos/localidades'
                 });
                 //#popupBox is the DIV to fade out
             }, 2000); //5000 equals 5 seconds
         });
-
-
-
-
     </script>
-
-
 
 </asp:Content>

@@ -102,7 +102,7 @@ namespace SARHU.sarhu.catalogos
             Programa.ClearSelection();
             Departamento.ClearSelection();
 
-            Idlocalidad.Value = localidad.Id.ToString();
+            //Idlocalidad.Value = localidad.Id.ToString();
             Alias.Text = localidad.Alias;
             //En busca el valor del Id en el dropdownlist para dejarlo ubicado al momento de cargar la pagina
             Programa.Items.FindByValue(localidad.ProgramaId.ToString()).Selected = true;
@@ -113,7 +113,7 @@ namespace SARHU.sarhu.catalogos
 
             Municipio.Items.FindByValue(localidad.MunicipioId.ToString()).Selected = true;//Una vez cargados los departamentos se ubica el municipio del departamento
 
-            Director.Text = "Juan Pérez";
+            Director.Text = "Hermann Gmeiner";
             textarea.Value = localidad.Direccion;
             Telefono.Text = localidad.Telefono;
         }

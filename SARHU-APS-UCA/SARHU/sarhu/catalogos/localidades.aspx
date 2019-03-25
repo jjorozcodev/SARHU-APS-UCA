@@ -182,7 +182,7 @@
                     <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <a href="localidades.aspx" type="button" class="btn btn-default">Cerrar</a>
+                    <a href="localidades.aspx" type="button" class="btn btn-default">OK</a>
 
                 </div>
             </div>

@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private List<Departamento> departamentos = new List<Departamento>();
+        private List<Departamento> departamentos = null;
 
         private static DT_Departamentos dtDepartamentos = null;
 
@@ -73,11 +73,15 @@ namespace Datos
 
             conexionSql.Close();
 
+            this.departamentos = departamentos;
+
             return departamentos;
         }
 
         public Departamento Consultar(int id)
         {
+            Listar();
+
             Departamento departamento = null;
            
             foreach (Departamento d in this.departamentos)
