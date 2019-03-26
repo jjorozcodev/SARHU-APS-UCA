@@ -390,7 +390,7 @@ GO
 CREATE PROCEDURE sp_modulos_list
 AS
 	SELECT modulo_id, modulo_nombre, modulo_descripcion
-	FROM SARHU.dbo.SARHU_MODULOS;
+	FROM SARHU_MODULOS;
 GO
 
 --SARHU_FUNCIONALIDADES
@@ -398,7 +398,7 @@ GO
 CREATE PROCEDURE sp_funcionalidades_list
 AS
 	SELECT funcionalidad_id, modulo_id, funcionalidad_descripcion, funcionalidad_url
-	FROM SARHU.dbo.SARHU_FUNCIONALIDADES
+	FROM SARHU_FUNCIONALIDADES
 GO
 
 --SARHU_ROLES
@@ -406,21 +406,21 @@ GO
 CREATE PROCEDURE sp_roles_list
 AS
 	SELECT rol_id, rol_nombre, rol_descripcion, rol_estado
-	FROM SARHU.dbo.SARHU_ROLES;
+	FROM SARHU_ROLES;
 GO
 
 CREATE PROCEDURE sp_roles_consult
 (@rol_id int)
 AS
 	SELECT rol_nombre, rol_descripcion, rol_estado
-	FROM SARHU.dbo.SARHU_ROLES
+	FROM SARHU_ROLES
 	WHERE rol_id = @rol_id;
 GO
 
 CREATE PROCEDURE sp_roles_insert
 (@rol_nombre varchar(20), @rol_descripcion varchar(50))
 AS
-	INSERT INTO SARHU.dbo.SARHU_ROLES(rol_nombre, rol_descripcion)
+	INSERT INTO SARHU_ROLES(rol_nombre, rol_descripcion)
 	VALUES (@rol_nombre, @rol_descripcion);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -428,7 +428,7 @@ GO
 CREATE PROCEDURE sp_roles_update
 (@rol_id int, @rol_nombre varchar(20), @rol_descripcion varchar(50))
 AS
-	UPDATE SARHU.dbo.SARHU_ROLES
+	UPDATE SARHU_ROLES
 	SET	rol_nombre = @rol_nombre, rol_descripcion = @rol_descripcion
     WHERE rol_id = @rol_id;
 GO
@@ -436,53 +436,51 @@ GO
 CREATE PROCEDURE sp_roles_delete
 (@rol_id int)
 AS
-	UPDATE SARHU.dbo.SARHU_ROLES
+	UPDATE SARHU_ROLES
 	SET	rol_estado = 0
 	WHERE rol_id = @rol_id;
 GO
 
 --SARHU_PERMISOS
-
 CREATE PROCEDURE sp_permisos_list
 AS
 	SELECT rol_id, funcionalidad_id
-	FROM SARHU.dbo.SARHU_PERMISOS;
+	FROM SARHU_PERMISOS;
 GO
 
 CREATE PROCEDURE sp_permisos_insert
 (@rol_id int, @funcionalidad_id int)
 AS
-	INSERT INTO SARHU.dbo.SARHU_PERMISOS(rol_id, funcionalidad_id)
+	INSERT INTO SARHU_PERMISOS(rol_id, funcionalidad_id)
 	VALUES (@rol_id, @funcionalidad_id);
 GO
 
 CREATE PROCEDURE sp_permisos_delete
 (@rol_id int, @funcionalidad_id int)
 AS
-	DELETE FROM SARHU.dbo.SARHU_PERMISOS
+	DELETE FROM SARHU_PERMISOS
 	WHERE rol_id = @rol_id AND funcionalidad_id = @funcionalidad_id;
 GO
 
 --SARHU_USUARIOS
-
 CREATE PROCEDURE sp_usuarios_list
 AS
 	SELECT usuario_id, rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
-	FROM SARHU.dbo.SARHU_USUARIOS;
+	FROM SARHU_USUARIOS;
 GO
 
 CREATE PROCEDURE sp_usuarios_consult
 (@usuario_id int)
 AS
 	SELECT rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
-	FROM SARHU.dbo.SARHU_USUARIOS
+	FROM SARHU_USUARIOS
 	WHERE usuario_id = @usuario_id;
 GO
 
 CREATE PROCEDURE sp_usuarios_insert
 (@rol_id int, @colaborador_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
 AS
-	INSERT INTO SARHU.dbo.SARHU_USUARIOS(rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo)
+	INSERT INTO SARHU_USUARIOS(rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo)
 	VALUES (@rol_id, @colaborador_id, @usuario_nombre, @usuario_clave, @usuario_correo);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -490,7 +488,7 @@ GO
 CREATE PROCEDURE sp_usuarios_update
 (@usuario_id int, @rol_id int, @colaborador_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
 AS
-	UPDATE SARHU.dbo.SARHU_USUARIOS
+	UPDATE SARHU_USUARIOS
 	SET	rol_id = @rol_id, colaborador_id = @colaborador_id, usuario_nombre = @usuario_nombre, usuario_clave = @usuario_clave, usuario_correo = @usuario_correo
     WHERE usuario_id = @usuario_id;
 GO
@@ -498,7 +496,7 @@ GO
 CREATE PROCEDURE sp_usuarios_delete
 (@usuario_id int)
 AS
-	UPDATE SARHU.dbo.SARHU_USUARIOS
+	UPDATE SARHU_USUARIOS
 	SET	usuario_estado = 0
 	WHERE usuario_id = @usuario_id;
 GO
@@ -507,20 +505,20 @@ GO
 CREATE PROCEDURE sp_operaciones_list
 AS
 	SELECT operacion_id, operacion_nombre
-	FROM SARHU.dbo.SARHU_OPERACIONES;
+	FROM SARHU_OPERACIONES;
 GO
 
 --SARHU_BITACORA
 CREATE PROCEDURE sp_bitacora_list
 AS
 	SELECT bitacora_id, usuario_id, operacion_id, bitacora_tabla, bitacora_comentario, bitacora_usuario_bd, bitacora_fecha_registro
-	FROM SARHU.dbo.SARHU_BITACORA;
+	FROM SARHU_BITACORA;
 GO
 
 CREATE PROCEDURE sp_bitacora_insert
 (@usuario_id int, @operacion_id int, @bitacora_tabla varchar(20), @bitacora_comentario varchar(150))
 AS
-	INSERT INTO SARHU.dbo.SARHU_BITACORA(usuario_id, operacion_id, bitacora_tabla, bitacora_comentario)
+	INSERT INTO SARHU_BITACORA(usuario_id, operacion_id, bitacora_tabla, bitacora_comentario)
 	VALUES (@usuario_id, @operacion_id, @bitacora_tabla, @bitacora_comentario);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -529,27 +527,27 @@ GO
 CREATE PROCEDURE sp_departamentos_list
 AS
 	SELECT departamento_id, departamento_nombre
-	FROM SARHU.dbo.SARHU_DEPARTAMENTOS;
+	FROM SARHU_DEPARTAMENTOS;
 GO
 
 --SARHU_MUNICIPIOS
 CREATE PROCEDURE sp_municipios_list
 AS
 	SELECT municipio_id, departamento_id, municipio_nombre
-	FROM SARHU.dbo.SARHU_MUNICIPIOS;
+	FROM SARHU_MUNICIPIOS;
 GO
 
 --SARHU_INSS
 CREATE PROCEDURE sp_inss_list
 AS
 SELECT inss_id, inss_porcentaje, inss_patronal, inss_ultima_actualizacion
-FROM SARHU.dbo.SARHU_INSS;
+FROM SARHU_INSS;
 GO
 
 CREATE PROCEDURE sp_inss_update
 (@inss_id int, @inss_porcentaje decimal(5,2), @ultima_actualizacion datetime)
 AS
-	UPDATE SARHU.dbo.SARHU_INSS
+	UPDATE SARHU_INSS
 	SET	inss_porcentaje = @inss_porcentaje, inss_ultima_actualizacion = @ultima_actualizacion
     WHERE inss_id = @inss_id;
 GO
@@ -558,7 +556,7 @@ CREATE PROCEDURE sp_inss_consult
 (@inss_id int)
 AS
 	SELECT inss_porcentaje, inss_patronal, inss_ultima_actualizacion
-	FROM SARHU.dbo.SARHU_INSS
+	FROM SARHU_INSS
 	WHERE inss_id = @inss_id;
 GO
 
@@ -567,13 +565,13 @@ GO
 CREATE PROCEDURE sp_ir_list
 AS
 SELECT ir_id, ir_desde, ir_hasta, ir_base, ir_exceso, ir_porcentaje_aplicable, ir_ultima_actualizacion
-FROM SARHU.dbo.SARHU_IR;
+FROM SARHU_IR;
 GO
 
 CREATE PROCEDURE sp_ir_update
 (@ir_id int, @ir_desde decimal(9,2), @ir_hasta decimal(9,2), @ir_base decimal(9,2), @ir_exceso decimal(9,2), @ir_porcentaje_aplicable decimal(5,2), @ir_ultima_actualizacion datetime)
 AS
-	UPDATE SARHU.dbo.SARHU_IR
+	UPDATE SARHU_IR
 	SET	ir_desde = @ir_desde, ir_hasta = @ir_hasta, ir_base = @ir_base, ir_exceso = @ir_exceso, ir_porcentaje_aplicable = @ir_porcentaje_aplicable, ir_ultima_actualizacion = @ir_ultima_actualizacion
     WHERE ir_id = @ir_id;
 GO
@@ -582,7 +580,7 @@ CREATE PROCEDURE sp_ir_consult
 (@ir_id int)
 AS
 	SELECT ir_desde, ir_hasta, ir_base, ir_exceso, ir_porcentaje_aplicable, ir_ultima_actualizacion
-	FROM SARHU.dbo.SARHU_IR
+	FROM SARHU_IR
 	WHERE ir_id = @ir_id;
 GO
 
@@ -590,13 +588,13 @@ GO
 CREATE PROCEDURE sp_variables_list
 AS
 SELECT variable_id, variable_nombre, variable_valor, variable_ultima_actualizacion
-FROM SARHU.dbo.SARHU_VARIABLES;
+FROM SARHU_VARIABLES;
 GO
 
 CREATE PROCEDURE sp_variables_update
 (@variable_id int, @variable_nombre varchar(50), @variable_valor decimal(9,2), @variable_ultima_actualizacion datetime)
 AS
-	UPDATE SARHU.dbo.SARHU_VARIABLES
+	UPDATE SARHU_VARIABLES
 	SET	variable_nombre = @variable_nombre, variable_valor = @variable_valor, variable_ultima_actualizacion = @variable_ultima_actualizacion
     WHERE variable_id = @variable_id;
 GO
@@ -605,7 +603,7 @@ CREATE PROCEDURE sp_variables_consult
 (@variable_id int)
 AS
 	SELECT variable_nombre, variable_valor, variable_ultima_actualizacion
-	FROM SARHU.dbo.SARHU_VARIABLES
+	FROM SARHU_VARIABLES
 	WHERE variable_id = @variable_id;
 GO
 
@@ -616,7 +614,7 @@ CREATE PROCEDURE sp_organizacion_consult
 (@organizacion_pais int)
 AS
 	SELECT organizacion_nombre, organizacion_descripcion, organizacion_fundacion, organizacion_mision, organizacion_vision, localidad_id
-	FROM SARHU.dbo.SOS_ORGANIZACION
+	FROM SOS_ORGANIZACION
 	WHERE organizacion_pais = @organizacion_pais
 GO
 
@@ -624,7 +622,7 @@ CREATE PROCEDURE sp_organizacion_update
 (@organizacion_pais int, @organizacion_nombre varchar(100), @organizacion_mision varchar(200),
 @organizacion_vision varchar(200), @organizacion_descripcion varchar(250), @organizacion_fundacion date, @localidad_id int)
 AS
-	UPDATE SARHU.dbo.SOS_ORGANIZACION
+	UPDATE SOS_ORGANIZACION
 	SET organizacion_nombre = @organizacion_nombre, organizacion_mision = @organizacion_mision, organizacion_vision = @organizacion_vision, organizacion_descripcion = @organizacion_descripcion, organizacion_fundacion = @organizacion_fundacion, localidad_id = @localidad_id
 	WHERE organizacion_pais = @organizacion_pais;
 GO
@@ -633,13 +631,13 @@ GO
 CREATE PROCEDURE sp_programas_list
 AS
 	SELECT programa_id, programa_nombre, programa_descripcion, programa_estado
-	FROM SARHU.dbo.SOS_PROGRAMAS;
+	FROM SOS_PROGRAMAS;
 GO
 
 CREATE PROCEDURE sp_programas_insert
 (@programa_nombre varchar(50), @programa_descripcion varchar(150))
 AS
-	INSERT INTO SARHU.dbo.SOS_PROGRAMAS(programa_nombre, programa_descripcion)
+	INSERT INTO SOS_PROGRAMAS(programa_nombre, programa_descripcion)
 	VALUES (@programa_nombre, @programa_descripcion);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -648,14 +646,14 @@ CREATE PROCEDURE sp_programas_consult
 (@programa_id int)
 AS
 	SELECT programa_nombre, programa_descripcion, programa_estado
-	FROM SARHU.dbo.SOS_PROGRAMAS
+	FROM SOS_PROGRAMAS
 	WHERE programa_id = @programa_id;
 GO
 
 CREATE PROCEDURE sp_programas_update
 (@programa_id int, @programa_nombre varchar(50), @programa_descripcion varchar(150))
 AS
-	UPDATE SARHU.dbo.SOS_PROGRAMAS
+	UPDATE SOS_PROGRAMAS
 	SET	programa_nombre = @programa_nombre, programa_descripcion = @programa_descripcion
     WHERE programa_id = @programa_id;
 GO
@@ -663,7 +661,7 @@ GO
 CREATE PROCEDURE sp_programas_delete
 (@programa_id int)
 AS
-	UPDATE SARHU.dbo.SOS_PROGRAMAS
+	UPDATE SOS_PROGRAMAS
 	SET programa_estado = 0 
 	WHERE programa_id = @programa_id
 GO
@@ -672,14 +670,14 @@ GO
 CREATE PROCEDURE sp_localidades_list
 AS
 	SELECT localidad_id, programa_id, municipio_id, director_id, localidad_alias, localidad_telefono, localidad_direccion, localidad_estado
-	FROM SARHU.dbo.SOS_LOCALIDADES
+	FROM SOS_LOCALIDADES
 GO
 
 CREATE PROCEDURE sp_localidades_insert
 (@programa_id int, @municipio_id int, @director_id int, @localidad_alias varchar(100),
  @localidad_telefono varchar(9), @localidad_direccion varchar(200))
 AS
-	INSERT INTO SARHU.dbo.SOS_LOCALIDADES(programa_id, municipio_id, director_id, localidad_alias, localidad_telefono, localidad_direccion)
+	INSERT INTO SOS_LOCALIDADES(programa_id, municipio_id, director_id, localidad_alias, localidad_telefono, localidad_direccion)
 	VALUES (@programa_id, @municipio_id, @director_id, @localidad_alias,
 	        @localidad_telefono, @localidad_direccion);
 	SELECT SCOPE_IDENTITY();
@@ -689,7 +687,7 @@ CREATE PROCEDURE sp_localidades_consult
 (@localidad_id int)
 AS
 	SELECT programa_id, municipio_id, director_id, localidad_alias, localidad_telefono, localidad_direccion, localidad_estado
-	FROM SARHU.dbo.SOS_LOCALIDADES
+	FROM SOS_LOCALIDADES
 	WHERE localidad_id = @localidad_id
 GO
 
@@ -697,7 +695,7 @@ CREATE PROCEDURE sp_localidades_update
 (@localidad_id int, @programa_id int, @municipio_id int, @director_id int,
 @localidad_alias varchar(100), @localidad_telefono varchar(9), @localidad_direccion varchar(200))
   AS
-	UPDATE SARHU.dbo.SOS_LOCALIDADES
+	UPDATE SOS_LOCALIDADES
 	SET programa_id = @programa_id, municipio_id  = @municipio_id, director_id = @director_id, localidad_alias = @localidad_alias, localidad_telefono = @localidad_telefono, localidad_direccion = @localidad_direccion
     WHERE localidad_id = @localidad_id;
 GO
@@ -705,7 +703,7 @@ GO
 CREATE PROCEDURE sp_localidades_delete
 (@localidad_id int)
 AS
-	UPDATE SARHU.dbo.SOS_LOCALIDADES
+	UPDATE SOS_LOCALIDADES
 	SET localidad_estado = 0
 	WHERE localidad_id = @localidad_id;
 GO
@@ -714,13 +712,13 @@ GO
 CREATE PROCEDURE sp_areas_list
 AS
 	SELECT area_id, area_nombre, area_descripcion, area_estado
-	FROM SARHU.dbo.SOS_AREAS
+	FROM SOS_AREAS
 GO
 
 CREATE PROCEDURE sp_areas_insert
 (@area_nombre varchar(50), @area_descripcion varchar(150))
 AS
-	INSERT INTO SARHU.dbo.SOS_AREAS(area_nombre, area_descripcion)
+	INSERT INTO SOS_AREAS(area_nombre, area_descripcion)
 	VALUES (@area_nombre, @area_descripcion);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -729,14 +727,14 @@ CREATE PROCEDURE sp_areas_consult
 (@area_id int)
 AS
 	SELECT area_nombre, area_descripcion, area_estado
-	FROM SARHU.dbo.SOS_AREAS
+	FROM SOS_AREAS
 	WHERE area_id = @area_id;
 GO
 
 CREATE PROCEDURE sp_areas_update
 (@area_id int, @area_nombre varchar(50), @area_descripcion varchar(150))
 AS
-	UPDATE SARHU.dbo.SOS_AREAS
+	UPDATE SOS_AREAS
 	SET	area_nombre = @area_nombre, area_descripcion = @area_descripcion
     WHERE area_id = @area_id;
 GO
@@ -744,7 +742,7 @@ GO
 CREATE PROCEDURE sp_areas_delete
 (@area_id int)
 AS
-	UPDATE SARHU.dbo.SOS_AREAS
+	UPDATE SOS_AREAS
 	SET area_estado = 0
 	WHERE area_id = @area_id
 GO
@@ -753,13 +751,13 @@ GO
 CREATE PROCEDURE sp_puestos_list
 AS
 	SELECT puesto_id, puesto_nombre, puesto_descripcion, cuenta_id, area_id, puesto_salario_base, puesto_estado
-	FROM SARHU.dbo.SOS_PUESTOS
+	FROM SOS_PUESTOS
 GO
 
 CREATE PROCEDURE sp_puestos_insert
 (@puesto_nombre varchar(50), @puesto_descripcion varchar(150), @cuenta_id int, @area_id int, @puesto_salario_base decimal(9,2))
 AS
-	INSERT INTO SARHU.dbo.SOS_PUESTOS(puesto_nombre, puesto_descripcion, cuenta_id, area_id, puesto_salario_base)
+	INSERT INTO SOS_PUESTOS(puesto_nombre, puesto_descripcion, cuenta_id, area_id, puesto_salario_base)
 	VALUES (@puesto_nombre, @puesto_descripcion, @cuenta_id, @area_id, @puesto_salario_base);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -768,14 +766,14 @@ CREATE PROCEDURE sp_puestos_consult
 (@puesto_id int)
 AS
 	SELECT puesto_nombre, puesto_descripcion, cuenta_id, area_id, puesto_salario_base, puesto_estado
-	FROM SARHU.dbo.SOS_PUESTOS
+	FROM SOS_PUESTOS
 	WHERE puesto_id = @puesto_id;
 GO
 
 CREATE PROCEDURE sp_puestos_update
 (@puesto_id int, @puesto_nombre varchar(50), @puesto_descripcion varchar(150), @cuenta_id int, @area_id int, @puesto_salario_base decimal(9,2))
 AS
-	UPDATE SARHU.dbo.SOS_PUESTOS
+	UPDATE SOS_PUESTOS
 	SET	puesto_nombre = @puesto_nombre, puesto_descripcion = @puesto_descripcion, cuenta_id = @cuenta_id, area_id = @area_id, puesto_salario_base = @puesto_salario_base
     WHERE puesto_id = @puesto_id;
 GO
@@ -783,7 +781,7 @@ GO
 CREATE PROCEDURE sp_puestos_delete
 (@puesto_id int)
 AS
-	UPDATE SARHU.dbo.SOS_PUESTOS
+	UPDATE SOS_PUESTOS
 	SET puesto_estado = 0
 	WHERE puesto_id = @puesto_id
 GO
@@ -792,13 +790,13 @@ GO
 CREATE PROCEDURE sp_funciones_list
 AS
 	SELECT funcion_id, funcion_nombre, funcion_descripcion, funcion_estado
-	FROM SARHU.dbo.SOS_FUNCIONES
+	FROM SOS_FUNCIONES
 GO
 
 CREATE PROCEDURE sp_funciones_insert
 (@funcion_nombre varchar(50), @funcion_descripcion varchar(150))
 AS
-	INSERT INTO SARHU.dbo.SOS_FUNCIONES(funcion_nombre, funcion_descripcion)
+	INSERT INTO SOS_FUNCIONES(funcion_nombre, funcion_descripcion)
 	VALUES (@funcion_nombre, @funcion_descripcion);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -807,14 +805,14 @@ CREATE PROCEDURE sp_funciones_consult
 (@funcion_id int)
 AS
 	SELECT funcion_nombre, funcion_descripcion, funcion_estado
-	FROM SARHU.dbo.SOS_FUNCIONES
+	FROM SOS_FUNCIONES
 	WHERE funcion_id = @funcion_id;
 GO
 
 CREATE PROCEDURE sp_funciones_update
 (@funcion_id int, @funcion_nombre varchar(50), @funcion_descripcion varchar(150))
 AS
-	UPDATE SARHU.dbo.SOS_FUNCIONES
+	UPDATE SOS_FUNCIONES
 	SET funcion_nombre = @funcion_nombre, funcion_descripcion = @funcion_descripcion
     WHERE funcion_id = @funcion_id;
 GO
@@ -822,7 +820,7 @@ GO
 CREATE PROCEDURE sp_funciones_delete
 (@funcion_id int)
 AS
-	UPDATE SARHU.dbo.SOS_FUNCIONES
+	UPDATE SOS_FUNCIONES
 	SET  funcion_estado = 0
 	WHERE funcion_id = @funcion_id;
 GO
@@ -831,20 +829,20 @@ GO
 CREATE PROCEDURE sp_puesto_funcion_list
 AS
 	SELECT puesto_id, funcion_id
-	FROM SARHU.dbo.SOS_PUESTOS_FUNCIONES
+	FROM SOS_PUESTOS_FUNCIONES
 GO
 
 CREATE PROCEDURE sp_puesto_funcion_insert
 (@puesto_id int, @funcion_id int)
 AS
-	INSERT INTO SARHU.dbo.SOS_PUESTOS_FUNCIONES(puesto_id, funcion_id)
+	INSERT INTO SOS_PUESTOS_FUNCIONES(puesto_id, funcion_id)
 	VALUES (@puesto_id, @funcion_id);
 GO
 
 CREATE PROCEDURE sp_puesto_funcion_delete
 (@puesto_id int, @funcion_id int)
 AS
-	DELETE FROM SARHU.dbo.SOS_PUESTOS_FUNCIONES
+	DELETE FROM SOS_PUESTOS_FUNCIONES
 	WHERE puesto_id = @puesto_id AND funcion_id = @funcion_id;
 GO
 
@@ -858,7 +856,7 @@ GO
 CREATE PROCEDURE sp_bonos_insert
 (@bono_nombre varchar(30), @bono_descripcion varchar(150), @bono_monto decimal(8,2))
 AS
-	INSERT INTO SARHU.dbo.SOS_BONOS(bono_nombre, bono_descripcion, bono_monto)
+	INSERT INTO SOS_BONOS(bono_nombre, bono_descripcion, bono_monto)
 	VALUES (@bono_nombre, @bono_descripcion, @bono_monto);
 	SELECT SCOPE_IDENTITY();
 GO
@@ -867,14 +865,14 @@ CREATE PROCEDURE sp_bonos_consult
 (@bono_id int)
 AS
 	SELECT bono_nombre, bono_descripcion, bono_monto, bono_estado
-	FROM SARHU.dbo.SOS_BONOS
+	FROM SOS_BONOS
 	WHERE bono_id = @bono_id;
 GO
 
 CREATE PROCEDURE sp_bonos_update
 (@bono_id int, @bono_nombre varchar(30), @bono_descripcion varchar(150), @bono_monto decimal(8,2))
 AS
-	UPDATE SARHU.dbo.SOS_BONOS
+	UPDATE SOS_BONOS
 	SET bono_nombre = @bono_nombre, bono_descripcion = @bono_descripcion, bono_monto = @bono_monto
     WHERE bono_id = @bono_id;
 GO
@@ -882,9 +880,110 @@ GO
 CREATE PROCEDURE sp_bonos_delete
 (@bono_id int)
 AS
-	UPDATE SARHU.dbo.SOS_BONOS
+	UPDATE SOS_BONOS
 	SET bono_estado = 0
 	WHERE bono_id = @bono_id;
+GO
+
+-- SOS_ADELANTOS --
+
+CREATE PROCEDURE sp_adelantos_list
+AS
+	SELECT adelanto_id, empleado_id, adelanto_monto, adelanto_fecha_entrega, adelanto_fecha_deduccion, adelanto_descripcion, adelanto_cancelado, adelanto_estado
+	FROM SOS_ADELANTOS;
+GO
+
+CREATE PROCEDURE sp_adelantos_insert
+(@empleado_id int, @adelanto_monto decimal(8,2), @adelanto_fecha_entrega date, @adelanto_fecha_deduccion date, @adelanto_descripcion varchar(150))
+AS
+	INSERT INTO SOS_ADELANTOS(empleado_id, adelanto_monto, adelanto_fecha_entrega, adelanto_fecha_deduccion, adelanto_descripcion)
+	VALUES (@empleado_id, @adelanto_monto, @adelanto_fecha_entrega, @adelanto_fecha_deduccion, @adelanto_descripcion);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_adelantos_consult
+(@adelanto_id int)
+AS
+	SELECT empleado_id, adelanto_monto, adelanto_fecha_entrega, adelanto_fecha_deduccion, adelanto_descripcion, adelanto_cancelado, adelanto_estado
+	FROM SOS_ADELANTOS
+	WHERE adelanto_id = @adelanto_id;
+GO
+
+CREATE PROCEDURE sp_adelantos_update
+(@adelanto_id int, @empleado_id int, @adelanto_monto decimal(8,2), @adelanto_fecha_entrega date, @adelanto_fecha_deduccion date, @adelanto_descripcion varchar(150), @adelanto_cancelado bit)
+AS
+	UPDATE SOS_ADELANTOS
+	SET empleado_id = @empleado_id, adelanto_monto = @adelanto_monto, adelanto_fecha_entrega = @adelanto_fecha_entrega, adelanto_fecha_deduccion = @adelanto_fecha_deduccion, adelanto_descripcion = @adelanto_descripcion, adelanto_cancelado = @adelanto_cancelado
+    WHERE adelanto_id = @adelanto_id;
+GO
+
+CREATE PROCEDURE sp_adelantos_delete
+(@adelanto_id int)
+AS
+	UPDATE SOS_ADELANTOS
+	SET adelanto_estado = 0
+	WHERE adelanto_id = @adelanto_id;
+GO
+
+-- SOS_ADENDUMS --
+
+CREATE PROCEDURE sp_adendums_list
+AS
+	SELECT adendum_id, empleado_id, adendum_incremento_salarial, adendum_fecha_aplicacion, adendum_observaciones, adendum_estado
+	FROM SOS_ADENDUMS
+GO
+
+CREATE PROCEDURE sp_adendums_insert
+(@empleado_id int, @adendum_incremento_salarial decimal(8,2), @adendum_fecha_aplicacion date, @adendum_observaciones varchar(150))
+AS
+	INSERT INTO SOS_ADENDUMS(empleado_id, adendum_incremento_salarial, adendum_fecha_aplicacion, adendum_observaciones)
+	VALUES (@empleado_id, @adendum_incremento_salarial, @adendum_fecha_aplicacion, @adendum_observaciones);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_adendums_consult
+(@adendum_id INT)
+AS
+	SELECT empleado_id, adendum_incremento_salarial, adendum_fecha_aplicacion, adendum_observaciones, adendum_estado
+	FROM SOS_ADENDUMS
+	WHERE adendum_id = @adendum_id;
+GO
+
+CREATE PROCEDURE sp_adendums_update
+(@adendum_id int, @empleado_id int, @adendum_incremento_salarial decimal (8,2), @adendum_fecha_aplicacion date, @adendum_observaciones varchar(150))
+AS
+	UPDATE SOS_ADENDUMS
+	SET	empleado_id = @empleado_id, adendum_incremento_salarial = @adendum_incremento_salarial, adendum_fecha_aplicacion = @adendum_fecha_aplicacion, adendum_observaciones = @adendum_observaciones
+		WHERE adendum_id = @adendum_id;
+GO
+
+CREATE PROCEDURE sp_adendums_delete
+(@adendum_id INT)
+AS
+	UPDATE SOS_ADENDUMS
+	SET adendum_estado = 0
+	WHERE adendum_id = @adendum_id;
+GO
+
+--SOS_ADENDUMS_FUNCIONES
+CREATE PROCEDURE sp_adendum_funcion_list
+AS
+	SELECT adendum_id, funcion_id
+	FROM SOS_ADENDUMS_FUNCIONES
+GO
+
+CREATE PROCEDURE sp_adendum_funcion_insert
+(@adendum_id int, @funcion_id int)
+AS
+	INSERT INTO SOS_ADENDUMS_FUNCIONES(adendum_id, funcion_id)
+	VALUES (@adendum_id, @funcion_id);
+GO
+
+CREATE PROCEDURE sp_adendum_funcion_delete
+(@adendum_id int, @funcion_id int)
+AS
+	DELETE FROM SOS_ADENDUMS_FUNCIONES
+	WHERE adendum_id = @adendum_id AND funcion_id = @funcion_id;
 GO
 
 /* ------------ fin procedimientos almacenados ------------ */
@@ -897,7 +996,7 @@ INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VA
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (2, N'Masaya')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (3, N'Le�n')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (3, N'León')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (4, N'Granada')
 GO
@@ -915,13 +1014,13 @@ INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VA
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (11, N'Boaco')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (12, N'Estel�')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (12, N'Estelí')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (13, N'Nueva Segovia')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (14, N'Madriz')
 GO
-INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (15, N'R�o San Juan')
+INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (15, N'Río San Juan')
 GO
 INSERT [dbo].[SARHU_DEPARTAMENTOS] ([departamento_id], [departamento_nombre]) VALUES (16, N'Caribe Norte')
 GO
@@ -951,7 +1050,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (11, 2, N'Catarina')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (12, 2, N'La Concepci�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (12, 2, N'La Concepción')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (13, 2, N'Masatepe')
 GO
@@ -959,7 +1058,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (15, 2, N'Nandasmo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (16, 2, N'Nindir�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (16, 2, N'Nindirí')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (17, 2, N'Niquinohomo')
 GO
@@ -975,7 +1074,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (23, 3, N'La Paz Centro')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (24, 3, N'Le�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (24, 3, N'León')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (25, 3, N'Larreynaga')
 GO
@@ -985,7 +1084,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (28, 3, N'Telica')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (29, 4, N'Diri�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (29, 4, N'Diriá')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (30, 4, N'Diriomo')
 GO
@@ -1025,23 +1124,23 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (48, 6, N'San Pedro del Norte')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (49, 6, N'Santo Tom�s del Norte')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (49, 6, N'Santo Tomás del Norte')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (50, 6, N'Somotillo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (51, 6, N'Puerto Moraz�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (51, 6, N'Puerto Morazán')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (52, 6, N'Villanueva')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (53, 7, N'Altagracia')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (54, 7, N'Bel�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (54, 7, N'Belén')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (55, 7, N'Buenos Aires')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (56, 7, N'C�rdenas')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (56, 7, N'Cárdenas')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (57, 7, N'Potos�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (57, 7, N'Potosí')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (58, 7, N'San Jorge')
 GO
@@ -1049,7 +1148,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (60, 7, N'Tola')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (61, 8, N'Ciudad Dar�o')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (61, 8, N'Ciudad Darío')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (62, 8, N'Esquipulas')
 GO
@@ -1057,19 +1156,19 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (64, 8, N'Matagalpa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (65, 8, N'Matigu�s')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (65, 8, N'Matiguás')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (66, 8, N'Muy Muy')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (67, 8, N'Rancho Grande')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (68, 8, N'R�o Blanco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (68, 8, N'Río Blanco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (69, 8, N'San Dionisio')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (70, 8, N'San Ram�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (70, 8, N'San Ramón')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (71, 8, N'S�baco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (71, 8, N'Sébaco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (72, 8, N'Terrabona')
 GO
@@ -1081,45 +1180,45 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (77, 9, N'El Coral')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (78, 9, N'San Pedro de L�vago')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (78, 9, N'San Pedro de Lóvago')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (79, 9, N'Santo Domingo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (80, 9, N'Santo Tom�s')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (80, 9, N'Santo Tomás')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (81, 9, N'Villa Sandino')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (82, 10, N'San Jos� de Bocay')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (82, 10, N'San José de Bocay')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (83, 10, N'El Cu�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (83, 10, N'El Cuá')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (84, 10, N'Jinotega')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (85, 10, N'La Concordia')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (86, 10, N'Santa Mar�a de Pantasma')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (86, 10, N'Santa María de Pantasma')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (87, 10, N'San Rafael del Norte')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (88, 10, N'Wiwil� de Jinotega')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (88, 10, N'Wiwilí de Jinotega')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (89, 10, N'San Sebasti�n de Yal�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (89, 10, N'San Sebastián de Yalí')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (90, 11, N'Boaco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (91, 11, N'Camoapa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (92, 11, N'San Jos� de los Remates')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (92, 11, N'San José de los Remates')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (93, 11, N'San Lorenzo')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (94, 11, N'Santa Luc�a')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (94, 11, N'Santa Lucía')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (95, 11, N'Teustepe')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (96, 12, N'Condega')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (97, 12, N'Estel�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (97, 12, N'Estelí')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (98, 12, N'La Trinidad')
 GO
@@ -1127,13 +1226,13 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (100, 12, N'San Juan de Limay')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (101, 12, N'San Nicol�s')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (101, 12, N'San Nicolás')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (102, 13, N'Ciudad Antigua')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (103, 13, N'Dipilto')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (104, 13, N'El J�caro')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (104, 13, N'El Jícaro')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (105, 13, N'Jalapa')
 GO
@@ -1145,21 +1244,21 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (110, 13, N'Ocotal')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (111, 13, N'Quilal�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (111, 13, N'Quilalí')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (112, 13, N'San Fernando')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (113, 13, N'Santa Mar�a')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (113, 13, N'Santa María')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (114, 13, N'G�ig�il�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (114, 13, N'Güigüilí')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (115, 14, N'San Jos� de Cusmapa')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (115, 14, N'San José de Cusmapa')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (116, 14, N'Las Sabanas')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (117, 14, N'Palacag�ina')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (117, 14, N'Palacagüina')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (118, 14, N'San Juan de R�o Coco')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (118, 14, N'San Juan de Río Coco')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (119, 14, N'San Lucas')
 GO
@@ -1169,7 +1268,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (122, 14, N'Totogalpa')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (123, 14, N'Yalag�ina')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (123, 14, N'Yalagüina')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (124, 15, N'El Castillo')
 GO
@@ -1187,7 +1286,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (131, 16, N'Bonanza')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (132, 16, N'Mulukuk�')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (132, 16, N'Mulukukú')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (133, 16, N'Prinzapolka')
 GO
@@ -1197,7 +1296,7 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (136, 16, N'Waslala')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (137, 16, N'Wasp�n')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (137, 16, N'Waspán')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (138, 17, N'Bluefields')
 GO
@@ -1209,11 +1308,11 @@ INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_n
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (142, 17, N'El Tortuguero')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (143, 17, N'Desembocadura de R�o Grande')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (143, 17, N'Desembocadura de Río Grande')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (144, 17, N'Kukra Hill')
 GO
-INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (145, 17, N'La Cruz de R�o Grande')
+INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (145, 17, N'La Cruz de Río Grande')
 GO
 INSERT [dbo].[SARHU_MUNICIPIOS] ([municipio_id], [departamento_id], [municipio_nombre]) VALUES (146, 17, N'Laguna de Perlas')
 GO
@@ -1234,7 +1333,7 @@ INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descri
 GO
 INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (3, N'Colegio SOS', N'Colegio SOS', 1)
 GO
-INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (4, N'Centro de Formaci�n', N'Centro de Formaci�n', 1)
+INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (4, N'Centro de Formación', N'Centro de Formación', 1)
 GO
 INSERT [dbo].[SOS_PROGRAMAS] ([programa_id], [programa_nombre], [programa_descripcion], [programa_estado]) VALUES (5, N'Programa de Fortalecimiento Familiar', N'Programa de Fortalecimiento Familiar', 1)
 GO
@@ -1253,7 +1352,7 @@ SET IDENTITY_INSERT [dbo].[SARHU_OPERACIONES] OFF
 GO
 
 INSERT [dbo].[SOS_ORGANIZACION] ([organizacion_pais], [organizacion_nombre], [organizacion_mision], [organizacion_vision], [organizacion_descripcion], [organizacion_fundacion], [localidad_id]) 
-VALUES (505, N'ALDEAS INFANTILES SOS NICARAGUA', N'Trabajamos por el derecho de los ni�os a vivir en familia.', N'Cada ni�o y cada ni�a pertenecen a una familia y crece con amor.', N'Somos una organizaci�n no gubernamental sin fines de lucro presentes en 133 pa�ses del mundo, siendo la organizaci�n m�s grande en atenci�n directa a ni�os, ni�as, adolescentes y familias.', CAST(N'1949-01-01' AS Date), 0)
+VALUES (505, N'ALDEAS INFANTILES SOS NICARAGUA', N'Trabajamos por el derecho de los niños a vivir en familia.', N'Cada niño y cada niña pertenecen a una familia y crece con amor.', N'Somos una organización no gubernamental sin fines de lucro presente en 133 países del mundo, siendo la organización más grande en atención directa a niños, niñas, adolescentes y familias.', CAST(N'1949-01-01' AS Date), 0)
 GO
 
 /* ------------ fin registros tablas ------------ */

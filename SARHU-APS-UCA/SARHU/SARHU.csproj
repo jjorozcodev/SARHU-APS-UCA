@@ -218,6 +218,8 @@
     <Content Include="sarhu\parametros\impuestos.aspx" />
     <Content Include="Logo\aldeas-sos.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
     <Content Include="Sistema.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="sarhu\catalogos\agregar-localidad.aspx" />
