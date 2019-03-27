@@ -75,7 +75,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/seguridad/roles' 
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/seguridad/roles' 
                 });
             }, 2500);
         });

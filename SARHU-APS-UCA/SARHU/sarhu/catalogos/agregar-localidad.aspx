@@ -234,7 +234,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/catalogos/localidades'
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/catalogos/localidades'
                 });
                 //#popupBox is the DIV to fade out
             }, 2000); //5000 equals 5 seconds

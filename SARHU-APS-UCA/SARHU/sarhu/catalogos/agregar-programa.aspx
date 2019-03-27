@@ -74,7 +74,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/catalogos/programas' 
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/catalogos/programas' 
                 });
             }, 2500);
         });
