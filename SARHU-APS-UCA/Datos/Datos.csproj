@@ -54,6 +54,7 @@
     <Compile Include="DT_Organizacion.cs" />
     <Compile Include="DT_Programas.cs" />
     <Compile Include="DT_Roles.cs" />
+    <Compile Include="DT_Variables.cs" />
     <Compile Include="I_CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Procedimientos.cs" />

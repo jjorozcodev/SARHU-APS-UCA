@@ -189,7 +189,7 @@ create table SARHU_VARIABLES
 		constraint SARHU_VARIABLES_pk
 			primary key clustered,
 	variable_nombre varchar(50) not null,
-	variable_valor decimal(18,2) not null,
+	variable_valor decimal(9,2) not null,
 	variable_ultima_actualizacion datetime not null
 )
 GO
