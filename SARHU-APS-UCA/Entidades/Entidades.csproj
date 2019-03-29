@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adelanto.cs" />
     <Compile Include="Area.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="Bono.cs" />
     <Compile Include="Departamento.cs" />
+    <Compile Include="Empleado.cs" />
     <Compile Include="Funcion.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Municipio.cs" />
