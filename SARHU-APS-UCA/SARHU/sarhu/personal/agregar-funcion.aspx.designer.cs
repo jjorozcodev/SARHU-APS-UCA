@@ -13,22 +13,31 @@ namespace SARHU.sarhu.personal {
     public partial class agregar_funcion {
         
         /// <summary>
-        /// panel control.
+        /// panelNotificacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel;
+        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
         
         /// <summary>
-        /// Nombre control.
+        /// funcionNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Nombre;
+        protected global::System.Web.UI.WebControls.TextBox funcionNombre;
+        
+        /// <summary>
+        /// funcionDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea funcionDescripcion;
         
         /// <summary>
         /// btnGuardar control.

@@ -63,13 +63,14 @@ namespace SARHU.sarhu.catalogos
             Alias.Text = localidad.Alias;
             //En busca el valor del Id en el dropdownlist para dejarlo ubicado al momento de cargar la pagina
             Programa.Items.FindByValue(localidad.ProgramaId.ToString()).Selected = true;
-            Departamento.Items.FindByValue(localidad.DepartamentoId.ToString()).Selected = true;
-
-            LoadMunicipio(localidad.DepartamentoId);//El setdefault recupera los municipios segun el Departamento para rellenar el dropdownlist
+            
+            Departamento d = NG_Municipios.Instanciar().ObtenerDepartamento(localidad.MunicipioId);
+            Departamento.Items.FindByValue(d.Id.ToString()).Selected = true;
+            LoadMunicipio(d.Id);//El setdefault recupera los municipios segun el Departamento para rellenar el dropdownlist
 
             Municipio.Items.FindByValue(localidad.MunicipioId.ToString()).Selected = true;//Una vez cargados los departamentos se ubica el municipio del departamento
 
-            Director.Text = localidad.DirectorName;
+            Director.Text = "Hermann Gmeiner";
             textarea.Value = localidad.Direccion;
             Telefono.Text = localidad.Telefono; 
         }
@@ -78,7 +79,7 @@ namespace SARHU.sarhu.catalogos
         {           
             localidad.ProgramaId = int.Parse(Programa.SelectedItem.Value);
             localidad.MunicipioId = int.Parse(Municipio.SelectedItem.Value);
-            localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
+            //localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
             localidad.Telefono = Telefono.Text;
             localidad.Alias = Alias.Text;
             localidad.DirectorId = 0111;
@@ -99,12 +100,12 @@ namespace SARHU.sarhu.catalogos
 
             if (NG_Localidades.Instanciar().Editar(localidades))
             {
-                Message = "GUARDADO EXITOSAMENTE";
+                Message = "¡La operación fue completada con éxito!";
                 panel.Visible = true;
             }
             else
             {
-                Message = "ERROR AL EDITAR EL REGISTRO";
+                Message = "¡Ocurrió un error al intentar realizar la operación!";
                 panel.CssClass = "alert alert-danger alert-dismissable";
                 panel.Visible = true;
             }

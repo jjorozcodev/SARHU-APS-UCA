@@ -8,6 +8,8 @@ namespace Negocio
     {
         private DT_Municipios dtMunicipios = DT_Municipios.Instanciar();
 
+        private static NG_Departamentos ngDepartamentos = NG_Departamentos.Instanciar();
+
         private static NG_Municipios ngMunicipios = null;
 
         private NG_Municipios()
@@ -32,6 +34,17 @@ namespace Negocio
         public List<Municipio> ObtenerMunicipios(int DepartamentoId)
         {
             return dtMunicipios.ObtenerMunicipios(DepartamentoId);
+        }
+
+        public Municipio Consultar(int id)
+        {
+            return dtMunicipios.Consultar(id);
+        }
+
+        public Departamento ObtenerDepartamento(int MunicipioId)
+        {
+            Municipio m = Consultar(MunicipioId);
+            return ngDepartamentos.Consultar(m.DepartamentoId);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="editar-area.aspx.cs" Inherits="SARHU.sarhu.personal.editar_area" %>
 
 <asp:Content ID="ContentEditarArea" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -24,8 +23,8 @@
                                                 <i class="fa-lg fa fa-exclamation-circle "></i>
                                                 <% =Mensaje %>
                                             </asp:Panel>
-                                            <label>Nombre</label>
                                             <div class="form-group input-group" style="width: 100%;">
+                                                <label>Nombre</label>
                                                 <asp:TextBox ID="areaNombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
                                             <div class="form-group" style="width: 100%;">
@@ -55,8 +54,8 @@
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
-     </div>
-    
+    </div>
+
     <script>
         $(document).ready(function () {
             var text_l = $('#ContentPlaceHolder_areaDescripcion').val().length;
@@ -74,7 +73,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/personal/areas'
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/personal/areas'
                 });
             }, 2500);
         });

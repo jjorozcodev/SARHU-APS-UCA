@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="agregar-area.aspx.cs" Inherits="SARHU.sarhu.personal.agregar_area" %>
-
 <asp:Content ID="ContentAgregarArea" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -25,8 +23,8 @@
                                                 <% =Mensaje %>
                                             </asp:Panel>
 
-                                            <label>Nombre</label>
                                             <div class="form-group input-group" style="width: 100%;">
+                                                <label>Nombre</label>
                                                 <asp:TextBox ID="areaNombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
                                             <div class="form-group" style="width: 100%;">
@@ -76,7 +74,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %>/sarhu/personal/areas' 
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/personal/areas' 
                 });
             }, 2500);
         });

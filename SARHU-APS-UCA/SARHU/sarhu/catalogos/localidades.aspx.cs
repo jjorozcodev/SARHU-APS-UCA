@@ -6,50 +6,82 @@ using System.Web.UI;
 
 namespace SARHU.sarhu.catalogos
 {
-    public partial class localidades : System.Web.UI.Page
+    public partial class localidades : Page
     {
-        protected string nombreLocalidad { get; set; }
-        protected string Message { get; private set; }
-        protected Localidad localidad = new Localidad();
+        private NG_Localidades ngLocalidades = NG_Localidades.Instanciar();
+        protected Localidad localidad = null;
+
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                LoadData();
-                LoadContent();
-               
-
+                CargarInformacion();
             }
            
         }
-        private void LoadData()
+        private void CargarInformacion()
         {
-            rptTable.DataSource = NG_Localidades.Instanciar().Listar(); ;
+            rptTable.DataSource = NG_Localidades.Instanciar().VisualizarLocalidades(); ;
             rptTable.DataBind();
-
         }
 
-        private void LoadContent()
+        protected void Borrar_Click(object sender, CommandEventArgs e)
         {
-        
-            ///Rellenar Dropdown De Programas
+            idSeleccionado.Value = e.CommandArgument.ToString();
+            this.localidad = ngLocalidades.Consultar(int.Parse(idSeleccionado.Value));
+            Mensaje = "¿Está seguro que desea borrar el registro " + this.localidad.Alias + "?";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupConfirmacion();", true);
+        }
+
+        protected void Confirmar_Click(object sender, EventArgs e)
+        {
+            EjecutarNotificarUsuario(ngLocalidades.Borrar(int.Parse(idSeleccionado.Value)));
+            CargarInformacion();
+        }
+
+        protected void VerDetalle_Click(object sender, CommandEventArgs e)
+        {
+            LinkButton button = (sender as LinkButton);
+            int index = int.Parse(button.CommandArgument);
+            ConsultData(index);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowDetail();", true);
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
+            {
+                Mensaje = "¡La operación fue completada con éxito!";
+            }
+            else
+            {
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+            }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupNotificacion();", true);
+        }
+
+        private void CargarProgramas()
+        {
             Programa.DataSource = NG_Programas.Instanciar().Listar();
             Programa.DataTextField = "Nombre";
             Programa.DataValueField = "Id";
             Programa.DataBind();
-            Programa.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+            Programa.Items.Insert(0, new ListItem("Seleccione...", "0"));
+        }
 
-            ///Rellenar Dropdown de Departamentos
+        private void CargarDepartamentos()
+        {
             Departamento.DataSource = NG_Departamentos.Instanciar().Listar();
             Departamento.DataTextField = "Nombre";
             Departamento.DataValueField = "Id";
             Departamento.DataBind();
             Departamento.Items.Insert(0, new ListItem("Seleccione...", "0"));
-
         }
 
-        private void LoadMunicipio(int id)
+        private void CargarMunicipios(int id)
         {
             Municipio.Items.Clear();
             
@@ -70,60 +102,52 @@ namespace SARHU.sarhu.catalogos
             Programa.ClearSelection();
             Departamento.ClearSelection();
 
-            Idlocalidad.Value = localidad.Id.ToString();
+            //Idlocalidad.Value = localidad.Id.ToString();
             Alias.Text = localidad.Alias;
             //En busca el valor del Id en el dropdownlist para dejarlo ubicado al momento de cargar la pagina
             Programa.Items.FindByValue(localidad.ProgramaId.ToString()).Selected = true;
-            Departamento.Items.FindByValue(localidad.DepartamentoId.ToString()).Selected = true;
+            Departamento d = NG_Municipios.Instanciar().ObtenerDepartamento(localidad.MunicipioId);
+            Departamento.Items.FindByValue(d.Id.ToString()).Selected = true;
 
-            LoadMunicipio(localidad.DepartamentoId);//El setdefault recupera los municipios segun el Departamento para rellenar el dropdownlist
+            CargarMunicipios(d.Id);//El setdefault recupera los municipios segun el Departamento para rellenar el dropdownlist
 
             Municipio.Items.FindByValue(localidad.MunicipioId.ToString()).Selected = true;//Una vez cargados los departamentos se ubica el municipio del departamento
 
-            Director.Text = localidad.DirectorName;
+            Director.Text = "Hermann Gmeiner";
             textarea.Value = localidad.Direccion;
             Telefono.Text = localidad.Telefono;
         }
 
-        protected void Delete_Click(object sender, EventArgs e)
-        {
-            LinkButton b = (LinkButton)sender;
+        //protected void Delete_Click(object sender, EventArgs e)
+        //{
+        //    LinkButton b = (LinkButton)sender;
 
-            string arguments = b.CommandArgument;
-            string[] args = arguments.Split(';');
+        //    string arguments = b.CommandArgument;
+        //    string[] args = arguments.Split(';');
 
-            Idelminar.Value = args[0];
-            nombreLocalidad = args[1];
+        //    Idelminar.Value = args[0];
+        //    nombreLocalidad = args[1];
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
-        }
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+        //}
 
       
 
-        protected void Confirm_Click(object sender, EventArgs e)
-        {
-            int index = int.Parse(Idelminar.Value);
-            if (NG_Localidades.Instanciar().Borrar(index))
-            {
-                Message = "El registro ha sido borrado.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
-            }
-            else
-            {
-                Message = "Error al tratar de borrar éste registro de Programa.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
-            }
+        //protected void Confirm_Click(object sender, EventArgs e)
+        //{
+        //    int index = int.Parse(Idelminar.Value);
+        //    if (NG_Localidades.Instanciar().Borrar(index))
+        //    {
+        //        Message = "El registro ha sido borrado.";
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+        //    }
+        //    else
+        //    {
+        //        Message = "Error al tratar de borrar éste registro de Programa.";
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+        //    }
 
-        }
-
-        protected void Detail_Click(object sender, EventArgs e)
-        {
-            LinkButton button = (sender as LinkButton);
-            int index = int.Parse(button.CommandArgument);
-            ConsultData(index);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowDetail();", true);
-            
-        }
+        //}
 
     }
 }

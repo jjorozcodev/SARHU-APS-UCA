@@ -15,7 +15,7 @@ namespace SARHU.sarhu
         {
             if (!Page.IsPostBack)
             {
-                CargarInformacion();
+                CargarInformacion(); 
             }
             
         }
@@ -28,6 +28,7 @@ namespace SARHU.sarhu
             textareaV.Value = org.Vision;
             textareaM.Value = org.Mision;
             textareaD.Value = org.Descripcion;
+            orgFundacion.Value = String.Format("{0:yyyy-MM-dd}", org.Fundacion);
         }
 
         protected void btnActualizar_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace SARHU.sarhu
             o.Mision = textareaM.Value;
             o.Vision = textareaV.Value;
             o.Descripcion = textareaD.Value;
+            o.Fundacion = DateTime.Parse(orgFundacion.Value);
             return o;
         }
 

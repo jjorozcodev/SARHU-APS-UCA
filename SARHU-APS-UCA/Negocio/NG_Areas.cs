@@ -15,8 +15,7 @@ namespace Negocio
         {
             //Singleton
         }
-
-
+        
         public static NG_Areas Instanciar()
         {
             if (ngAreas == null)

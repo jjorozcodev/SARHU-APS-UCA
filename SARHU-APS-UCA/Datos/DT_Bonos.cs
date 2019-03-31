@@ -34,7 +34,7 @@ namespace Datos
         /// <summary>
         /// El método permite agregar un registro de la entidad [Bono].
         /// Recibe como parámetro un objeto [Bono] con la información a agregar a la base de datos (Nombre, Descripción y Monto).
-        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(Bono obj)
         {
@@ -52,11 +52,11 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
-            return (agregado);
+            return idGenerado;
         }
 
         /// <summary>
@@ -105,16 +105,18 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
+
             Bono bono = new Bono();
 
             while (reader.Read())
             {
                 bono.Id = id;
-                bono.Nombre = reader.GetString(0);
-                bono.Descripcion = reader.GetString(1);
-                bono.Monto = reader.GetDecimal(2);
-                bono.Estado = reader.GetBoolean(3);
+                bono.Nombre = reader["bono_nombre"].ToString();
+                bono.Descripcion = reader["bono_descripcion"].ToString();
+                bono.Monto = decimal.Parse(reader["bono_monto"].ToString());
+                bono.Estado = bool.Parse(reader["bono_estado"].ToString());
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -134,11 +136,12 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.BonosEditar;
 
             comandoSql.Parameters.Clear();
+
+            comandoSql.Parameters.Add("@bono_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@bono_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@bono_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@bono_monto", SqlDbType.Decimal).Value = obj.Monto;
-            comandoSql.Parameters.Add("@bono_id", SqlDbType.Int).Value = obj.Id;
-
+            
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
@@ -158,7 +161,7 @@ namespace Datos
         /// </summary>
         public List<Bono> Listar()
         {
-            List<Bono> listaBons = new List<Bono>();
+            List<Bono> listaBonos = new List<Bono>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -176,22 +179,24 @@ namespace Datos
             while (reader.Read())
             {
                 Bono b = new Bono();
-                b.Id = reader.GetInt32(0);
-                b.Nombre = reader.GetString(1);
-                b.Descripcion = reader.GetString(2);
-                b.Monto = reader.GetDecimal(3);
-                b.Estado = reader.GetBoolean(4);
 
-                listaBons.Add(b);
+                b.Id = int.Parse(reader["bono_id"].ToString());
+                b.Nombre = reader["bono_nombre"].ToString();
+                b.Descripcion = reader["bono_descripcion"].ToString();
+                b.Monto = decimal.Parse(reader["bono_monto"].ToString());
+                b.Estado = bool.Parse(reader["bono_estado"].ToString());
+
+                listaBonos.Add(b);
             }
+
             reader.Close();
 
             conexionSql.Close();
 
             this.bonos.Clear();
-            this.bonos = listaBons;
+            this.bonos = listaBonos;
 
-            return listaBons;
+            return listaBonos;
         }
 
         public List<Bono> ListarPorEstado(bool Estado)
@@ -199,17 +204,17 @@ namespace Datos
             // Actualizar
             Listar();
 
-            List<Bono> bons = new List<Bono>();
+            List<Bono> listBonos = new List<Bono>();
 
             foreach (Bono b in bonos)
             {
                 if (b.Estado == Estado)
                 {
-                    bons.Add(b);
+                    listBonos.Add(b);
                 }
             }
 
-            return bons;
+            return listBonos;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
-        private List<Municipio> municipios = new List<Municipio>();
+        private List<Municipio> municipios = null;
 
         private static DT_Municipios dtMunicipios = null;
 
@@ -37,6 +37,11 @@ namespace Datos
         /// </summary>
         public List<Municipio> Listar()
         {
+            if(this.municipios != null)
+            {
+                return this.municipios;
+            }
+
             List<Municipio> listaMunicipios = new List<Municipio>();
 
             comandoSql.Connection = conexionSql;
@@ -52,40 +57,59 @@ namespace Datos
 
             SqlDataReader reader = comandoSql.ExecuteReader();
       
-
             while (reader.Read())
             {
-                Municipio m = new Municipio
-                {
-                    Id = reader.GetInt32(0),
-                    Nombre = reader.GetString(1)
-                };
-                
+               Municipio m = new Municipio();
+
+                m.Id = int.Parse(reader["municipio_id"].ToString());
+                m.Nombre = reader["municipio_nombre"].ToString();
+                m.DepartamentoId = int.Parse(reader["departamento_id"].ToString());
+
                 listaMunicipios.Add(m);
             }
+
             reader.Close();
 
             conexionSql.Close();
-
-            this.municipios.Clear();
+            
             this.municipios = listaMunicipios;
 
             return listaMunicipios;
         }
 
-        public List<Municipio> ObtenerMunicipios(int DepartamentoId)
+        public Municipio Consultar(int id)
         {
-            List<Municipio> muniDepartamento = new List<Municipio>();
+            Listar();
 
-            foreach(Municipio m in this.municipios)
+            Municipio municipio = null;
+
+            foreach (Municipio m in this.municipios)
             {
-                if(m.Id == DepartamentoId)
+                if (m.Id == id)
                 {
-                    muniDepartamento.Add(m);
+                    municipio = m;
+                    break;
                 }
             }
 
-            return muniDepartamento;
+            return municipio;
+        }
+
+        public List<Municipio> ObtenerMunicipios(int DepartamentoId)
+        {
+            Listar();
+
+            List<Municipio> municipiosDepartamento = new List<Municipio>();
+
+            foreach(Municipio m in this.municipios)
+            {
+                if(m.DepartamentoId == DepartamentoId)
+                {
+                    municipiosDepartamento.Add(m);
+                }
+            }
+
+            return municipiosDepartamento;
         }
     }
 }

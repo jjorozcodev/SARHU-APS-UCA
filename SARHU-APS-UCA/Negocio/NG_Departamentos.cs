@@ -28,5 +28,10 @@ namespace Negocio
         {
             return dtDepartamentos.Listar();
         }
+
+        public Departamento Consultar(int id)
+        {
+            return dtDepartamentos.Consultar(id);
+        }
     }
 }

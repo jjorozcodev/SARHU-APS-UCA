@@ -9,14 +9,14 @@ namespace SARHU.sarhu.personal
     {
         private NG_Areas ngAreas = NG_Areas.Instanciar();
         protected Area area = null;
-        private int idAreaEditable = 0;
+        private int idEditable = 0;
 
         protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idAreaEditable = int.Parse(Request.QueryString["id"]);
-            area = ngAreas.Consultar(idAreaEditable);
+            idEditable = int.Parse(Request.QueryString["id"]);
+            area = ngAreas.Consultar(idEditable);
 
             if (!Page.IsPostBack) {
                 CargarInformacion();
@@ -42,10 +42,9 @@ namespace SARHU.sarhu.personal
         private Area ObtenerDatosInterfaz()
         {
             Area a = new Area();
-            a.Id = this.idAreaEditable;
+            a.Id = this.idEditable;
             a.Nombre = areaNombre.Text;
             a.Descripcion = areaDescripcion.Value;
-            a.Estado = true;
             return a;
         }
 

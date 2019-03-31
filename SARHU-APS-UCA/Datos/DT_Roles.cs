@@ -11,6 +11,7 @@ namespace Datos
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
+        private List<Rol> roles = new List<Rol>();
 
         private static DT_Roles dtRoles = null;
 
@@ -33,7 +34,7 @@ namespace Datos
         /// <summary>
         /// El método permite agregar un registro de la entidad [Rol].
         /// Recibe como parámetro un objeto [Rol] con la información a agregar a la base de datos (Nombre y Descripción).
-        /// Devuelve un valor booleano para notificar si el registro fue agregado o no.
+        /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(Rol obj)
         {
@@ -41,6 +42,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesAgregar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@rol_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@rol_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
@@ -49,11 +51,11 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
-            return (agregado);
+            return idGenerado;
         }
 
         /// <summary>
@@ -67,6 +69,7 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesBorrar;
 
+            comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
 
             if (conexionSql.State == ConnectionState.Closed)
@@ -92,20 +95,26 @@ namespace Datos
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesConsultar;
 
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
+
             if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
+
             Rol rol = new Rol();
 
             while (reader.Read())
             {
-                rol.Id = reader.GetInt32(0);
-                rol.Nombre = reader.GetString(1);
-                rol.Descripcion = reader.GetString(2);
+                rol.Id = id;
+                rol.Nombre = reader["rol_nombre"].ToString();
+                rol.Descripcion = reader["rol_descripcion"].ToString();
+                rol.Estado = bool.Parse(reader["rol_estado"].ToString());
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -123,6 +132,8 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesEditar;
+
+            comandoSql.Parameters.Clear();
 
             comandoSql.Parameters.Add("@rol_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@rol_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
@@ -147,11 +158,13 @@ namespace Datos
         /// </summary>
         public List<Rol> Listar()
         {
-            List<Rol> roles = new List<Rol>();
+            List<Rol> listaRoles = new List<Rol>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.RolesListar;
+
+            comandoSql.Parameters.Clear();
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -159,21 +172,45 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Rol r = new Rol();
-
+            
             while (reader.Read())
             {
-                r.Id = reader.GetInt32(0);
-                r.Nombre = reader.GetString(1);
-                r.Descripcion = reader.GetString(2);
+                Rol r = new Rol();
 
-                roles.Add(r);
+                r.Id = int.Parse(reader["rol_id"].ToString());
+                r.Nombre = reader["rol_nombre"].ToString();
+                r.Descripcion = reader["rol_descripcion"].ToString();
+                r.Estado = bool.Parse(reader["rol_estado"].ToString());
+
+                listaRoles.Add(r);
             }
+
             reader.Close();
 
             conexionSql.Close();
 
-            return roles;
+            this.roles.Clear();
+            this.roles = listaRoles;
+
+            return listaRoles;
+        }
+
+        public List<Rol> ListarPorEstado(bool Estado)
+        {
+            // Actualizar
+            Listar();
+
+            List<Rol> listRoles = new List<Rol>();
+
+            foreach (Rol r in roles)
+            {
+                if (r.Estado == Estado)
+                {
+                    listRoles.Add(r);
+                }
+            }
+
+            return listRoles;
         }
     }
 }

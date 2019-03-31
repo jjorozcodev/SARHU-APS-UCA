@@ -7,7 +7,7 @@ namespace SARHU.sarhu.personal
 {
     public partial class agregar_area : Page
     {
-        private NG_Areas ngArea = NG_Areas.Instanciar();
+        private NG_Areas ngAreas = NG_Areas.Instanciar();
         protected Area area = null;
 
         protected string Mensaje = null;
@@ -21,7 +21,7 @@ namespace SARHU.sarhu.personal
         {
             this.area = ObtenerDatosInterfaz();
             LimpiarFormulario();
-            EjecutarNotificarUsuario(ngArea.Agregar(this.area));
+            EjecutarNotificarUsuario(ngAreas.Agregar(this.area));
         }
 
         private Area ObtenerDatosInterfaz()

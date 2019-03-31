@@ -13,48 +13,39 @@ namespace SARHU.sarhu.catalogos {
     public partial class editar_programa {
         
         /// <summary>
-        /// panel control.
+        /// panelNotificacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel;
+        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
         
         /// <summary>
-        /// idPrograma control.
+        /// programaNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField idPrograma;
+        protected global::System.Web.UI.WebControls.TextBox programaNombre;
         
         /// <summary>
-        /// Nombre control.
+        /// programaDescripcion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Nombre;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea programaDescripcion;
         
         /// <summary>
-        /// textarea control.
+        /// Editar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea textarea;
-        
-        /// <summary>
-        /// btnGuardar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button Editar;
     }
 }

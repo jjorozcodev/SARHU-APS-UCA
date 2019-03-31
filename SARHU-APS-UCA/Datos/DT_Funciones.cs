@@ -51,11 +51,11 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int agregado = comandoSql.ExecuteNonQuery();
+            int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
 
             conexionSql.Close();
 
-            return (agregado);
+            return idGenerado;
         }
 
         /// <summary>
@@ -104,15 +104,17 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
+
             Funcion funcion = new Funcion();
 
             while (reader.Read())
             {
                 funcion.Id = id;
-                funcion.Nombre = reader.GetString(0);
-                funcion.Descripcion = reader.GetString(1);
-                funcion.Estado = reader.GetBoolean(2);
+                funcion.Nombre = reader["funcion_nombre"].ToString();
+                funcion.Descripcion = reader["funcion_descripcion"].ToString();
+                funcion.Estado = bool.Parse(reader["funcion_estado"].ToString());
             }
+
             reader.Close();
 
             conexionSql.Close();
@@ -132,9 +134,10 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.FuncionesEditar;
 
             comandoSql.Parameters.Clear();
+
+            comandoSql.Parameters.Add("@funcion_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@funcion_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@funcion_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
-            comandoSql.Parameters.Add("@funcion_id", SqlDbType.Int).Value = obj.Id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -155,7 +158,7 @@ namespace Datos
         /// </summary>
         public List<Funcion> Listar()
         {
-            List<Funcion> listaFuncs = new List<Funcion>();
+            List<Funcion> listaFunciones = new List<Funcion>();
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -173,21 +176,23 @@ namespace Datos
             while (reader.Read())
             {
                 Funcion f = new Funcion();
-                f.Id = reader.GetInt32(0);
-                f.Nombre = reader.GetString(1);
-                f.Descripcion = reader.GetString(2);
-                f.Estado = reader.GetBoolean(3);
 
-                listaFuncs.Add(f);
+                f.Id = int.Parse(reader["funcion_id"].ToString());
+                f.Nombre = reader["funcion_nombre"].ToString();
+                f.Descripcion = reader["funcion_descripcion"].ToString();
+                f.Estado = bool.Parse(reader["funcion_estado"].ToString());
+
+                listaFunciones.Add(f);
             }
+
             reader.Close();
 
             conexionSql.Close();
 
             this.funciones.Clear();
-            this.funciones = listaFuncs;
+            this.funciones = listaFunciones;
 
-            return listaFuncs;
+            return listaFunciones;
         }
 
         public List<Funcion> ListarPorEstado(bool Estado)
@@ -195,17 +200,17 @@ namespace Datos
             // Actualizar
             Listar();
 
-            List<Funcion> funcs = new List<Funcion>();
+            List<Funcion> listFunciones = new List<Funcion>();
 
             foreach (Funcion f in funciones)
             {
                 if (f.Estado == Estado)
                 {
-                    funcs.Add(f);
+                    listFunciones.Add(f);
                 }
             }
 
-            return funcs;
+            return listFunciones;
         }
     }
 }

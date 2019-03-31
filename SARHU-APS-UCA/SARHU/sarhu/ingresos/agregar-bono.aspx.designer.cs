@@ -13,31 +13,40 @@ namespace SARHU.sarhu.ingresos {
     public partial class agregar_bono {
         
         /// <summary>
-        /// panel control.
+        /// panelNotificacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel;
+        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
         
         /// <summary>
-        /// Nombre control.
+        /// bonoNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Nombre;
+        protected global::System.Web.UI.WebControls.TextBox bonoNombre;
         
         /// <summary>
-        /// Monto control.
+        /// bonoDescripcion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Monto;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea bonoDescripcion;
+        
+        /// <summary>
+        /// bonoMonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bonoMonto;
         
         /// <summary>
         /// btnGuardar control.

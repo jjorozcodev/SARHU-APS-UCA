@@ -21,7 +21,7 @@
                         </asp:Panel>
                         <asp:Repeater runat="server" ID="rptTable">
                             <HeaderTemplate>
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-datos">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -31,7 +31,6 @@
                                     </thead>
                                     <tbody>
                             </HeaderTemplate>
-
                             <ItemTemplate>
                                 <tr class="even gradeC" style='border: inset 0pt'>
                                     <td><%#Eval("Nombre")%></td>
@@ -42,18 +41,11 @@
                                     </td>
                                 </tr>
                             </ItemTemplate>
-
                             <FooterTemplate>
                                 </tbody>
                         </table>
                             </FooterTemplate>
                         </asp:Repeater>
-
-                        
-
-
-
-
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
@@ -63,8 +55,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-
-
 
     <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -77,7 +67,6 @@
 
                 </div>
                 <div class="modal-body">
-
                     <div id="page-wrapper1">
                         <div class="row">
                             <div class="col-md-6 col-md-offset-6">
@@ -93,7 +82,6 @@
                                                     <label>Descripción</label>
                                                     <textarea style="resize: none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea" disabled="" readonly>Es un área considerada la cabeza de la empresa. Establece los objetivos y la dirige hacia ellos.</textarea>
                                                 </div>
-
                                             </div>
                                             <!-- /.col-lg-6 (nested) -->
                                         </div>
@@ -104,14 +92,12 @@
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -139,7 +125,7 @@
                     <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <a href="areas.aspx" type="button" class="btn btn-default">Cerrar</a>
+                    <a href="areas.aspx" type="button" class="btn btn-default">OK</a>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -155,15 +141,14 @@
         function PopupNotificacion() {
             $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
-
-
+        
         $('#closemodal').click(function () {
             $('#mymodal').modal('hide');
 
         });
 
         $(document).ready(function () {
-            $('#dataTables-example').DataTable({
+            $('#dataTables-datos').DataTable({
                 responsive: true
             });
         });

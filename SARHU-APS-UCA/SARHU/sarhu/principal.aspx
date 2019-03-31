@@ -33,11 +33,13 @@
                                             </asp:Panel>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label>Nombre</label>
-                                            <div class="form-group input-group" style="width: 100%;">
-                                                <asp:TextBox ID="orgNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <div class="form-group" style="width: 100%">
+                                                <label>Nombre</label>
+                                                <div class="form-group input-group" style="width: 100%;">
+                                                    <asp:TextBox ID="orgNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                                                </div>
                                             </div>
-
+                                            
                                             <%--                                        TODO: PENDIENTE
                                             <label>Localidad</label>
                                             <div class="form-group input-group" style="width: 100%;">
@@ -63,7 +65,12 @@
                                                 <textarea style="resize: none" id="textareaD" rows="5" cols="5" class="form-control" maxlength="200" name="textarea" runat="server"></textarea>
                                                 <div id="textareaD_feedback">200 caracteres disponibles</div>
                                             </div>
-
+                                            <div class="form-group" style="width: 100%">
+                                                <label>Fecha de Fundación</label>
+                                                <div class="form-group input-group" style="width: 100%;">
+                                                    <input type="date" id="orgFundacion" class="form-control" runat="server" name="FechaFundacion" step="1" min="1900-01-01" max="2000-12-31" value="2000-01-01">
+                                                </div>
+                                            </div>
                                             <div class="form-group" align="center">
                                                 <asp:Button ID="btnActualizar" CssClass="btn btn-success fondo-verde-aldeas" runat="server" Text="Actualizar" OnClick="btnActualizar_Click" />
                                                 <%--<button id="btnActualizafr" class="btn btn-success  fondo-verde-aldeas" align="center">Actualizar</button>--%>

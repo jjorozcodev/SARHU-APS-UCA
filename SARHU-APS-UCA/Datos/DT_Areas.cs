@@ -52,6 +52,7 @@ namespace Datos
             }
 
             int idGenerado = int.Parse(comandoSql.ExecuteScalar().ToString());
+
             conexionSql.Close();
 
             return idGenerado;
@@ -109,9 +110,9 @@ namespace Datos
             while (reader.Read())
             {
                 area.Id = id;
-                area.Nombre = reader.GetString(0);
-                area.Descripcion = reader.GetString(1);
-                area.Estado = reader.GetBoolean(2);
+                area.Nombre = reader["area_nombre"].ToString();
+                area.Descripcion = reader["area_descripcion"].ToString();
+                area.Estado = bool.Parse(reader["area_estado"].ToString());
             }
 
             reader.Close();
@@ -133,9 +134,10 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.AreasEditar;
 
             comandoSql.Parameters.Clear();
+
+            comandoSql.Parameters.Add("@area_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@area_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@area_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
-            comandoSql.Parameters.Add("@area_id", SqlDbType.Int).Value = obj.Id;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -174,13 +176,15 @@ namespace Datos
             while (reader.Read())
             {
                 Area a = new Area();
-                a.Id = reader.GetInt32(0);
-                a.Nombre = reader.GetString(1);
-                a.Descripcion = reader.GetString(2);
-                a.Estado = reader.GetBoolean(3);
+
+                a.Id = int.Parse(reader["area_id"].ToString());
+                a.Nombre = reader["area_nombre"].ToString();
+                a.Descripcion = reader["area_descripcion"].ToString();
+                a.Estado = bool.Parse(reader["area_estado"].ToString());
 
                 listaAreas.Add(a);
             }
+
             reader.Close();
 
             conexionSql.Close();

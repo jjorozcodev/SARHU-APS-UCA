@@ -1,80 +1,74 @@
 ﻿using System;
 using Entidades;
-
 using Negocio;
 using System.Web.UI;
-using System.Web.Services.Description;
 
 namespace SARHU.sarhu.catalogos
 {
-    public partial class editar_programa : System.Web.UI.Page
+    public partial class editar_programa : Page
     {
+        private NG_Programas ngProgramas = NG_Programas.Instanciar();
+        protected Programa programa = null;
+        private int idEditable = 0;
 
-
-
-        protected Programa programa = new Programa();
-        protected string Value { get; set; }
-        protected string Message { get; set; }
-     
+        protected string Mensaje = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            idEditable = int.Parse(Request.QueryString["id"]);
+            programa = ngProgramas.Consultar(idEditable);
+
             if (!Page.IsPostBack)
             {
-                idPrograma.Value = Request.QueryString["id"];
-
-                ConsultData(int.Parse(idPrograma.Value));
+                CargarInformacion();
             }
-
         }
-        private void ConsultData(int ID)
+
+        private void CargarInformacion()
         {
-            programa = NG_Programas.Instanciar().Consultar(ID);
-
-            Nombre.Text = programa.Nombre;
-            textarea.Value = programa.Descripcion;
+            if (programa != null)
+            {
+                programaNombre.Text = programa.Nombre;
+                programaDescripcion.Value = programa.Descripcion;
+            }
         }
 
+        protected void Editar_click(object sender, EventArgs e)
+        {
+            this.programa = ObtenerDatosInterfaz();
+            LimpiarFormulario();
+            EjecutarNotificarUsuario(ngProgramas.Editar(programa));
+        }
 
         private Programa ObtenerDatosInterfaz()
         {
-            programa.Id = int.Parse(idPrograma.Value);
-            programa.Nombre = Nombre.Text;
-            programa.Descripcion = textarea.Value;
-            Nombre.Text = "";
-            textarea.Value = "";
-            System.Diagnostics.Debug.WriteLine(programa.Nombre + " " + programa.Descripcion);
-            return programa;
+            Programa p = new Programa();
+            p.Id = this.idEditable;
+            p.Nombre = programaNombre.Text;
+            p.Descripcion = programaDescripcion.Value;
+            p.Estado = true;
+            return p;
         }
 
-        protected void btnEditar_programa(object sender, EventArgs e)
+        private void LimpiarFormulario()
         {
-            if (NG_Programas.Instanciar().Editar(ObtenerDatosInterfaz()))
+            programaNombre.Text = string.Empty;
+            programaDescripcion.Value = string.Empty;
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                Message = "Guardado Exitosamente";
-                panel.Visible = true;
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "Error al editar registro";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-                panel.Visible = true;
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
+                panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
             }
 
+            panelNotificacion.Visible = true;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,61 +1,60 @@
 ﻿using System;
 using Negocio;
+using Entidades;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
 namespace SARHU.sarhu.ingresos
 {
-    public partial class bonos : System.Web.UI.Page
+    public partial class bonos : Page
     {
-        protected string nombreBono { get; set; }
-        protected string Message { get; set; }
+        private NG_Bonos ngBonos = NG_Bonos.Instanciar();
+        protected Bono bono = null;
+
+        protected string Mensaje = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
-                LoadData();
-
+                CargarInformacion();
             }
+
         }
 
-
-        private void LoadData()
+        private void CargarInformacion()
         {
-            rptTable.DataSource = NG_Bonos.Instanciar().ListarPorEstado(true);
+            rptTable.DataSource = ngBonos.ListarPorEstado(true);
             rptTable.DataBind();
-
         }
 
-        protected void Delete_Click(object sender, EventArgs e)
+        protected void Borrar_Click(object sender, CommandEventArgs e)
         {
-            LinkButton b = (LinkButton)sender;
-
-            string arguments = b.CommandArgument;
-            string[] args = arguments.Split(';');
-
-            Idelminar.Value = args[0];
-            nombreBono = args[1];
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
+            idSeleccionado.Value = e.CommandArgument.ToString();
+            this.bono = ngBonos.Consultar(int.Parse(idSeleccionado.Value));
+            Mensaje = "¿Está seguro que desea borrar el registro " + this.bono.Nombre + "?";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupConfirmacion();", true);
         }
 
-        protected void Confirm_Click(object sender, EventArgs e)
+        protected void Confirmar_Click(object sender, EventArgs e)
         {
-            int index = int.Parse(Idelminar.Value);
-            if (NG_Bonos.Instanciar().Borrar(index))
+            EjecutarNotificarUsuario(ngBonos.Borrar(int.Parse(idSeleccionado.Value)));
+            CargarInformacion();
+        }
+
+        private void EjecutarNotificarUsuario(bool correcto)
+        {
+            if (correcto)
             {
-                Message = "BORRADO EXITOSAMENTE";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡La operación fue completada con éxito!";
             }
             else
             {
-                Message = "ERROR AL BORRAR EL REGISTRO";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "DeletePopup();", true);
+                Mensaje = "¡Ocurrió un error al intentar realizar la operación!";
             }
 
-
-
-
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "PopupNotificacion();", true);
         }
     }
 }

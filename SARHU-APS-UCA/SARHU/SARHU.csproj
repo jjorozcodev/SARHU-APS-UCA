@@ -174,6 +174,9 @@
     <Content Include="Content\SARHU.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="sarhu\perfil.aspx" />
+    <Content Include="sarhu\ingresos\adelantos.aspx" />
+    <Content Include="sarhu\ingresos\agregar-adelanto.aspx" />
+    <Content Include="sarhu\ingresos\editar-adelanto.aspx" />
     <Content Include="sarhu\personal\adendums.aspx" />
     <Content Include="sarhu\personal\agregar-adendum.aspx" />
     <Content Include="sarhu\personal\agregar-empleado.aspx" />
@@ -218,6 +221,8 @@
     <Content Include="sarhu\parametros\impuestos.aspx" />
     <Content Include="Logo\aldeas-sos.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
     <Content Include="Sistema.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="sarhu\catalogos\agregar-localidad.aspx" />
@@ -276,6 +281,27 @@
     </Compile>
     <Compile Include="sarhu\acceso.aspx.designer.cs">
       <DependentUpon>acceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\ingresos\adelantos.aspx.cs">
+      <DependentUpon>adelantos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\ingresos\adelantos.aspx.designer.cs">
+      <DependentUpon>adelantos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\ingresos\agregar-adelanto.aspx.cs">
+      <DependentUpon>agregar-adelanto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\ingresos\agregar-adelanto.aspx.designer.cs">
+      <DependentUpon>agregar-adelanto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\ingresos\editar-adelanto.aspx.cs">
+      <DependentUpon>editar-adelanto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\ingresos\editar-adelanto.aspx.designer.cs">
+      <DependentUpon>editar-adelanto.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\parametros\impuestos.aspx.cs">
       <DependentUpon>impuestos.aspx</DependentUpon>
