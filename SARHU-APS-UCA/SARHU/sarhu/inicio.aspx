@@ -33,6 +33,8 @@
             </div>
         </div>
         <div class="row">
+            <hr />
+            <!-- /.col-lg-12 -->
             <div class="col-lg-4 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading2">
@@ -101,9 +103,11 @@
             </div>
         </div>
         <div class="row">
+            <hr />
+
             <div class="col-lg-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
+                <div class="panel panel-primary">
+                    <div class="panel-heading pad-10">
                         Género de Colaboradores
                     </div>
 
@@ -113,8 +117,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
+                <div class="panel panel-primary">
+                    <div class="panel-heading pad-10">
                         Ingresos/Egresos del Mes
                     </div>
 

@@ -38,7 +38,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a href="~/sarhu/principal" runat="server"><i class="fa fa-cogs fa-fw fa-lg" style="color:white"></i></a>
+                    <a href="~/sarhu/principal" runat="server"> <span data-toggle="tooltip" data-placement="bottom" title="Ir Administración del Sistema"> <i class="fa fa-cogs fa-fw fa-lg" style="color:white"></i></span></a>
+                    
                 </li>
                 <!-- Dropdown superior, solo quedo el del usuario -->
                 <li class="dropdown">
@@ -46,10 +47,7 @@
                         <i class="fa fa-user fa-fw"></i> Administrador <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
-                        </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Editar perfil </a>
-                        </li>
+                        <li><a href="perfil.aspx"><i class="fa fa-user fa-fw"></i> Ver Perfil de Usuario</a>
                         <li class="divider">
                         </li>
                         <li>
@@ -115,4 +113,13 @@
         </div>
     </form>
 </body>
+
+    <script>
+        $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    })
+
+    </script>
+
 </html>

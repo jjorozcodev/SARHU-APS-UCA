@@ -37,20 +37,13 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a href="~/sarhu/inicio.aspx" runat="server"><i class="fa fa-retweet fa-fw fa-lg" style="color:white"></i></a>
+                    <a href="~/sarhu/inicio.aspx" runat="server"><span data-toggle="tooltip" data-placement="bottom" title="Regresar Inicio"><i class="fa fa-retweet fa-fw fa-lg" style="color:white"></i></span></a>
                 </li>
                 <li class="dropdown">
                     <a id="user" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> Administrador <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
-                        </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Editar perfil </a>
-                        </li>
-                        <li class="divider">
-                        
-                        </li>
                         <li>
                             
                             <a href="~/sarhu/acceso.aspx" runat="server"><i class="fa fa-sign-out fa-fw"></i>Salir</a>

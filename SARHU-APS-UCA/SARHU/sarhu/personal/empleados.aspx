@@ -77,18 +77,31 @@
             <div class="col-lg-12">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-6">
+                        <div class="col-md-7 col-md-offset-6">
                             <div class="panel panel-formulario">
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12" id="tabs">
+                                            <div class="col-md-4" style="padding:5px;">
+                                                   <img src="/Content/Imagenes/profile.png" width="130" height="140">
+                                             </div>
+                                            <div class="col-md-8" style="padding:5px;">
+                                                 <label>Nombres</label>
+                                                       <div class="form-group input-group" style="width: 100%;">
+                                                            <input type="text" class="form-control" value="Maria Juana" disabled="">
+                                                       </div>
+                                                 <label>Apellidos</label>
+                                                       <div class="form-group input-group" style="width: 100%;">
+                                                            <input type="text" class="form-control" value="Maldonado Palacios" disabled="">
+                                                       </div>
+                                            </div>
                                            <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#datosP" data-toggle="tab">Datos Personales</a></li>
                                                 <li ><a href="#datosA" data-toggle="tab">Datos Administrativos</a></li>
                                            </ul>
                                            <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="datosP">
-                                                    <label>Código</label>
+                                                    <label style="padding:7px;">Código</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input type="number" class="form-control" value="230319" disabled="">
                                                             </div>
@@ -109,14 +122,6 @@
                                                             </tr>                                              
                                                         </tbody>
                                                     </table>
-                                                        <label>Nombres</label>
-                                                            <div class="form-group input-group" style="width: 100%;">
-                                                                <input type="text" class="form-control" disabled="" value="Maria Juana" >
-                                                            </div>
-                                                        <label>Apellidos</label>
-                                                            <div class="form-group input-group" style="width: 100%;">
-                                                                <input type="text" class="form-control" disabled="" value="Maldonado Palacios">
-                                                            </div>
                                                         <table class="table">
                                                         <thead>
                                                             <tr>
@@ -154,7 +159,7 @@
                                                         </div>
                                                     </div>
                                                 <div class="tab-pane fade " id="datosA">                                   
-                                                     <label>Número de Asegurado</label>
+                                                     <label style="padding:7px;">Número de Asegurado</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input class="form-control" type="text"  id="inss" placeholder="0000000-0" tabindex="8" disabled="" value="5132706-0">
                                                             </div>
@@ -186,9 +191,8 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <div class="form-group input-group" style="width: 100%;">
-                                                                        <input type="text" class="form-control" value="No" disabled="" >
-                                                                    </div>  
+                                                                    <input type="radio" name="state" value="yes" style="margin-left: 50px;" disabled="">Si
+                                                                    <input type="radio" name="state" value="no" style="margin-left: 5px;" checked="" disabled="">No  
                                                                 </td>
                                                             </tr>                                              
                                                         </tbody>

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="col-md-6">
-                    <h1 class="page-header">Administración del Sistema</h1>
+                    <h1 class="page-header">Información Organizacional</h1>
                 </div>
                 <div id="alertitaVerde" class="alert alert-success col-md-6 alertas collapse">
                     <button id="mibotoncerrar" class="close">&times;</button>

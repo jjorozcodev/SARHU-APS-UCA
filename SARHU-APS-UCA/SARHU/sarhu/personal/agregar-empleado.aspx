@@ -17,15 +17,28 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12" id="tabs">
+                                             <div class="col-md-4" style="padding:5px;">
+                                                   <img src="/Content/Imagenes/profile.png" width="130" height="140" title="De Clic Para Cambiar">
+                                             </div>
+                                            <div class="col-md-8" style="padding:5px;">
+                                                <label>Nombres</label>
+                                                            <div class="form-group input-group" style="width: 100%;">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                <label>Apellidos</label>
+                                                            <div class="form-group input-group" style="width: 100%;">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                </div>
                                            <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#datosP" data-toggle="tab">Datos Personales</a></li>
                                                 <li ><a href="#datosA" data-toggle="tab">Datos Administrativos</a></li>
                                            </ul>
                                            <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="datosP">
-                                                     <label>Código</label>
+                                                     <label style="padding:7px;">Código</label>
                                                             <div class="form-group input-group" style="width: 100%;">
-                                                                <input type="number" class="form-control">
+                                                                <input type="number" class="form-control" value="230319" disabled="">
                                                             </div>
                                                    <table class="table">
                                                         <thead>
@@ -44,14 +57,7 @@
                                                             </tr>                                              
                                                         </tbody>
                                                     </table>
-                                                        <label>Nombres</label>
-                                                            <div class="form-group input-group" style="width: 100%;">
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        <label>Apellidos</label>
-                                                            <div class="form-group input-group" style="width: 100%;">
-                                                                <input type="text" class="form-control">
-                                                            </div>
+                                                        
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
@@ -108,7 +114,7 @@
                                                     </div>
                                             </div> 
                                                 <div class="tab-pane fade " id="datosA">                                   
-                                                     <label>Número de Asegurado</label>
+                                                     <label style="padding:7px;">Número de Asegurado</label>
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <input class="form-control" type="text"  id="inss" placeholder="0000000-0" tabindex="8">
                                                             </div>
@@ -152,13 +158,8 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <div class="form-group input-group" style="width: 100%;">
-                                                                        <select class="form-control" >
-                                                                            <option >Seleccione..</option>
-                                                                            <option>Si</option>
-                                                                            <option>No</option>
-                                                                        </select>
-                                                                    </div>  
+                                                                    <input type="radio" name="state" value="yes" style="margin-left: 50px;">Si
+                                                                    <input type="radio" name="state" value="no" style="margin-left: 5px;">No
                                                                 </td>
                                                             </tr>                                              
                                                         </tbody>
@@ -200,6 +201,7 @@
                  </div>
             </div>
          </div>
+    
 
         <script>
         $(function () {
