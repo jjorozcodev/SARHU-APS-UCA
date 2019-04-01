@@ -19,9 +19,10 @@
                             <thead>
                                 <tr>
 
-                                  <th>Nombre</th>
+                                  <th>Nombre</th>                                  
+                                  <th>Empleado</th> 
                                   <th>Rol</th>
-                                  <th>Colaborador</th>          
+                                             
                                   <th width="200px">Operaciones</th>
 
                                 </tr>
@@ -29,9 +30,9 @@
                             <tbody>
                                 <tr class="odd gradeX">
 
-                                        <td>DarwinP</td>
-                                        <td>Responsable de Nomina</td>
-                                        <td>Alberto Mairena</td>                                            
+                                        <td>DarwinP</td>                                       
+                                        <td>Alberto Mairena</td>  
+                                        <td>Responsable de Nomina</td>                                          
 
                                         <td align="center">
 
@@ -92,17 +93,19 @@
                                 <input type="text" class="form-control" value="DarwinP" disabled="" >
                             </div>
 
+
+                             <label>Empleado</label>
+                            <div class="form-group input-group" style="width: 100%;">
+                                <input type="text" class="form-control" value="Alberto Mairena" disabled="" >
+                            </div>
+
+                            
                              <label>Rol</label>
                             <div class="form-group input-group" style="width: 100%;">
                                 <input type="text" class="form-control" value="Responsable de Nomina" disabled="" >
                             </div>
 
-                             <label>Colaborador</label>
-                            <div class="form-group input-group" style="width: 100%;">
-                                <input type="text" class="form-control" value="Alberto Mairena" disabled="" >
-                            </div>
-
-                             <label>Usuario Clave</label>
+                             <label>Contraseña</label>
                             <div class="form-group input-group" style="width: 100%;">
                                 <input type="text" class="form-control" value="-" disabled="" >
                             </div>
