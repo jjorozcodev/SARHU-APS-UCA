@@ -41,9 +41,26 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.EmpleadosAgregar;
-
+            
             comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@empleado_nombre", SqlDbType.VarChar).Value = obj.Nombre;
+            comandoSql.Parameters.Add("@empleado_codigo", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_foto", SqlDbType.VarChar).Value = obj.Foto;
+            comandoSql.Parameters.Add("@empleado_nombres", SqlDbType.VarChar).Value = obj.Nombres;
+            comandoSql.Parameters.Add("@empleado_apellidos", SqlDbType.VarChar).Value = obj.Apellidos;
+            comandoSql.Parameters.Add("@empleado_cedula", SqlDbType.VarChar).Value = obj.Cedula;
+            comandoSql.Parameters.Add("@empleado_sexo", SqlDbType.VarChar).Value = obj.Sexo;
+            comandoSql.Parameters.Add("@empleado_fecha_nacimiento", SqlDbType.VarChar).Value = obj.FechaNacimiento;
+            comandoSql.Parameters.Add("@empleado_estado_civil", SqlDbType.VarChar).Value = obj.EstadoCivilId;
+            comandoSql.Parameters.Add("@empleado_nivel_academico", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_telefono ", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_direccion", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_fecha_ingreso", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_seguro_social", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_banco", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_cuenta_banco", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@localidad_id", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@puesto_id", SqlDbType.VarChar).Value = obj.Codigo;
+            comandoSql.Parameters.Add("@empleado_observaciones", SqlDbType.VarChar).Value = obj.Codigo;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
