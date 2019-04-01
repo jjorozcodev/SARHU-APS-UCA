@@ -74,7 +74,7 @@ create table SARHU_USUARIOS
 	rol_id int not null
 		constraint SARHU_USUARIOS_SARHU_ROLES_rol_id_fk
 			references SARHU_ROLES,
-	colaborador_id int,
+	empleado_id int,
 	usuario_nombre varchar(20) not null,
 	usuario_clave varchar(75) not null,
 	usuario_correo varchar(50),
@@ -189,7 +189,7 @@ create table SARHU_VARIABLES
 		constraint SARHU_VARIABLES_pk
 			primary key clustered,
 	variable_nombre varchar(50) not null,
-	variable_valor decimal(18,2) not null,
+	variable_valor decimal(9,2) not null,
 	variable_ultima_actualizacion datetime not null
 )
 GO
@@ -381,6 +381,64 @@ create table SOS_ADENDUMS_FUNCIONES
 )
 GO
 
+create table SOS_CUENTAS
+(
+	cuenta_id int identity
+		constraint SOS_CUENTAS_pk
+			primary key clustered,
+	cuenta_codigo_contable varchar(20),
+	cuenta_descripcion varchar(25),
+	cuenta_codigo_salarios varchar(20),
+	cuenta_codigo_impuestos varchar(20),
+	cuenta_codigo_seguros varchar(20),
+	cuenta_planilla bit not null,
+	cuenta_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_CUENTAS_cuenta_id_uindex
+	on SOS_CUENTAS (cuenta_id)
+GO
+
+create unique index SOS_CUENTAS_cuenta_codigo_contable_uindex
+	on SOS_CUENTAS (cuenta_codigo_contable)
+GO
+
+create table SOS_EMPLEADOS
+(
+	empleado_id int identity
+		constraint SOS_EMPLEADOS_pk
+			primary key clustered,
+	empleado_codigo varchar(12),
+	empleado_foto varchar(30),
+	empleado_nombres varchar(50),
+	empleado_apellidos varchar(50),
+	empleado_cedula varchar(18),
+	empleado_sexo bit not null,
+	empleado_fecha_nacimiento date,
+	empleado_estado_civil char,
+	empleado_nivel_academico char,
+	empleado_telefono varchar(9),
+	empleado_direccion varchar (150),
+	empleado_fecha_ingreso datetime,
+	empleado_seguro_social varchar(8),
+	empleado_banco bit not null,
+	empleado_cuenta_banco varchar(15),
+	localidad_id int,
+	puesto_id int,
+	empleado_observaciones varchar(150),
+	empleado_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_EMPLEADOS_empleado_id_uindex
+	on SOS_EMPLEADOS (empleado_id)
+GO
+
+create unique index SOS_EMPLEADOS_empleado_codigo_uindex
+	on SOS_EMPLEADOS (empleado_codigo)
+GO
+
 /* ------------ fin tablas ------------ */
 
 /* PROCEDIMIENTOS ALMACENADOS ---SARHU */
@@ -465,31 +523,31 @@ GO
 --SARHU_USUARIOS
 CREATE PROCEDURE sp_usuarios_list
 AS
-	SELECT usuario_id, rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
+	SELECT usuario_id, rol_id, empleado_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
 	FROM SARHU_USUARIOS;
 GO
 
 CREATE PROCEDURE sp_usuarios_consult
 (@usuario_id int)
 AS
-	SELECT rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
+	SELECT rol_id, empleado_id, usuario_nombre, usuario_clave, usuario_correo, usuario_estado
 	FROM SARHU_USUARIOS
 	WHERE usuario_id = @usuario_id;
 GO
 
 CREATE PROCEDURE sp_usuarios_insert
-(@rol_id int, @colaborador_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
+(@rol_id int, @empleado_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
 AS
-	INSERT INTO SARHU_USUARIOS(rol_id, colaborador_id, usuario_nombre, usuario_clave, usuario_correo)
-	VALUES (@rol_id, @colaborador_id, @usuario_nombre, @usuario_clave, @usuario_correo);
+	INSERT INTO SARHU_USUARIOS(rol_id, empleado_id, usuario_nombre, usuario_clave, usuario_correo)
+	VALUES (@rol_id, @empleado_id, @usuario_nombre, @usuario_clave, @usuario_correo);
 	SELECT SCOPE_IDENTITY();
 GO
 
 CREATE PROCEDURE sp_usuarios_update
-(@usuario_id int, @rol_id int, @colaborador_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
+(@usuario_id int, @rol_id int, @empleado_id int, @usuario_nombre varchar(20), @usuario_clave varchar(75), @usuario_correo varchar(50))
 AS
 	UPDATE SARHU_USUARIOS
-	SET	rol_id = @rol_id, colaborador_id = @colaborador_id, usuario_nombre = @usuario_nombre, usuario_clave = @usuario_clave, usuario_correo = @usuario_correo
+	SET	rol_id = @rol_id, empleado_id = @empleado_id, usuario_nombre = @usuario_nombre, usuario_clave = @usuario_clave, usuario_correo = @usuario_correo
     WHERE usuario_id = @usuario_id;
 GO
 
@@ -545,10 +603,10 @@ FROM SARHU_INSS;
 GO
 
 CREATE PROCEDURE sp_inss_update
-(@inss_id int, @inss_porcentaje decimal(5,2), @ultima_actualizacion datetime)
+(@inss_id int, @inss_porcentaje decimal(5,2), @inss_ultima_actualizacion datetime)
 AS
 	UPDATE SARHU_INSS
-	SET	inss_porcentaje = @inss_porcentaje, inss_ultima_actualizacion = @ultima_actualizacion
+	SET	inss_porcentaje = @inss_porcentaje, inss_ultima_actualizacion = @inss_ultima_actualizacion
     WHERE inss_id = @inss_id;
 GO
 
