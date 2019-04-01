@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NG_Adelantos.cs" />
+    <Compile Include="NG_Adendums.cs" />
     <Compile Include="NG_Areas.cs" />
     <Compile Include="NG_Bonos.cs" />
     <Compile Include="NG_Departamentos.cs" />
@@ -49,6 +51,7 @@
     <Compile Include="NG_Organizacion.cs" />
     <Compile Include="NG_Programas.cs" />
     <Compile Include="NG_Roles.cs" />
+    <Compile Include="NG_Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

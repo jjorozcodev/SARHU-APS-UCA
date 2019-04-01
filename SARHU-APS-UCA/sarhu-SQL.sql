@@ -1000,7 +1000,7 @@ AS
 GO
 
 CREATE PROCEDURE sp_adendums_consult
-(@adendum_id INT)
+(@adendum_id int)
 AS
 	SELECT empleado_id, adendum_incremento_salarial, adendum_fecha_aplicacion, adendum_observaciones, adendum_estado
 	FROM SOS_ADENDUMS
@@ -1016,7 +1016,7 @@ AS
 GO
 
 CREATE PROCEDURE sp_adendums_delete
-(@adendum_id INT)
+(@adendum_id int)
 AS
 	UPDATE SOS_ADENDUMS
 	SET adendum_estado = 0
@@ -1042,6 +1042,87 @@ CREATE PROCEDURE sp_adendum_funcion_delete
 AS
 	DELETE FROM SOS_ADENDUMS_FUNCIONES
 	WHERE adendum_id = @adendum_id AND funcion_id = @funcion_id;
+GO
+
+-- SOS_CUENTAS --
+
+CREATE PROCEDURE sp_cuentas_list
+AS
+	SELECT cuenta_id, cuenta_codigo_contable, cuenta_descripcion, cuenta_codigo_salarios, cuenta_codigo_impuestos, cuenta_codigo_seguros, cuenta_planilla, cuenta_estado
+	FROM SOS_CUENTAS
+GO
+
+CREATE PROCEDURE sp_cuentas_insert
+(@cuenta_codigo_contable VARCHAR(20), @cuenta_descripcion VARCHAR(25), @cuenta_codigo_salarios VARCHAR(20), @cuenta_codigo_impuestos VARCHAR(20), @cuenta_codigo_seguros VARCHAR(20), @cuenta_planilla BIT)
+AS
+	INSERT INTO SOS_CUENTAS(cuenta_codigo_contable, cuenta_descripcion, cuenta_codigo_salarios, cuenta_codigo_impuestos, cuenta_codigo_seguros, cuenta_planilla)
+	VALUES (@cuenta_codigo_contable, @cuenta_descripcion, @cuenta_codigo_salarios, @cuenta_codigo_impuestos, @cuenta_codigo_seguros, @cuenta_planilla);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_cuentas_consult
+(@cuenta_id INT)
+AS
+	SELECT cuenta_id, cuenta_codigo_contable, cuenta_descripcion, cuenta_codigo_salarios, cuenta_codigo_impuestos, cuenta_codigo_seguros, cuenta_planilla, cuenta_estado
+	FROM SOS_CUENTAS
+	WHERE cuenta_id = @cuenta_id;
+GO
+
+CREATE PROCEDURE sp_cuentas_update
+(@cuenta_id INT, @cuenta_codigo_contable VARCHAR(20), @cuenta_descripcion VARCHAR(25), @cuenta_codigo_salarios VARCHAR(20), @cuenta_codigo_impuestos VARCHAR(20), @cuenta_codigo_seguros VARCHAR(20), @cuenta_planilla BIT)
+AS
+	UPDATE SOS_CUENTAS
+	SET	cuenta_codigo_contable = @cuenta_codigo_contable,  cuenta_descripcion = @cuenta_descripcion, cuenta_codigo_salarios = @cuenta_codigo_salarios, cuenta_codigo_impuestos = @cuenta_codigo_impuestos, cuenta_codigo_seguros = @cuenta_codigo_seguros, cuenta_planilla = @cuenta_planilla
+		WHERE cuenta_id = @cuenta_id;
+GO
+
+CREATE PROCEDURE sp_cuentas_delete
+(@cuenta_id INT)
+AS
+	UPDATE SOS_CUENTAS
+	SET cuenta_estado = 0
+	WHERE cuenta_id = @cuenta_id;
+GO
+
+
+-- SOS_EMPLEADOS --
+
+CREATE PROCEDURE sp_empleados_list
+AS
+	SELECT empleado_id, empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones, empleado_estado
+	FROM SOS_EMPLEADOS
+GO
+
+CREATE PROCEDURE sp_empleados_insert
+(@empleado_codigo VARCHAR(12), @empleado_foto VARCHAR(30), @empleado_nombres VARCHAR(50), @empleado_apellidos VARCHAR(50), @empleado_cedula VARCHAR(50), @empleado_sexo BIT, @empleado_fecha_nacimiento DATE, @empleado_estado_civil CHAR(1), @empleado_nivel_academico CHAR(1), @empleado_telefono VARCHAR(9), @empleado_direccion VARCHAR(150), @empleado_fecha_ingreso DATETIME, @empleado_seguro_social VARCHAR(8), @empleado_banco BIT, @empleado_cuenta_banco VARCHAR(15), @localidad_id INT, @puesto_id INT, @empleado_observaciones VARCHAR(150), @empleado_estado BIT)
+AS
+	INSERT INTO SOS_EMPLEADOS(empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones)
+	VALUES (@empleado_codigo, @empleado_foto, @empleado_nombres, @empleado_apellidos, @empleado_cedula, @empleado_sexo, @empleado_fecha_nacimiento, @empleado_estado_civil, @empleado_nivel_academico, @empleado_telefono, @empleado_direccion, @empleado_fecha_ingreso, @empleado_seguro_social, @empleado_banco, @empleado_cuenta_banco, @localidad_id, @puesto_id, @empleado_observaciones);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_empleados_consult
+(@empleado_id INT)
+AS
+	SELECT empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones
+	FROM SOS_EMPLEADOS
+	WHERE empleado_id = @empleado_id;
+GO
+
+CREATE PROCEDURE sp_empleados_update
+(@empleado_id INT,@empleado_codigo VARCHAR(12), @empleado_foto VARCHAR(30), @empleado_nombres VARCHAR(50), @empleado_apellidos VARCHAR(50), @empleado_cedula VARCHAR(50), @empleado_sexo BIT, @empleado_fecha_nacimiento DATE, @empleado_estado_civil CHAR(1), @empleado_nivel_academico CHAR(1), @empleado_telefono VARCHAR(9), @empleado_direccion VARCHAR(150), @empleado_fecha_ingreso DATETIME, @empleado_seguro_social VARCHAR(8), @empleado_banco BIT, @empleado_cuenta_banco VARCHAR(15), @localidad_id INT, @puesto_id INT, @empleado_observaciones VARCHAR(150), @empleado_estado BIT)
+AS
+	UPDATE SOS_EMPLEADOS
+	SET	empleado_codigo = @empleado_codigo, empleado_foto = @empleado_foto, empleado_nombres = @empleado_nombres, empleado_apellidos = @empleado_apellidos, empleado_cedula = @empleado_cedula, empleado_sexo = @empleado_sexo, empleado_fecha_nacimiento = @empleado_fecha_nacimiento, empleado_estado_civil = @empleado_estado_civil, empleado_nivel_academico = @empleado_nivel_academico, empleado_telefono = @empleado_telefono, empleado_direccion = @empleado_direccion, empleado_fecha_ingreso = @empleado_fecha_ingreso, empleado_seguro_social = @empleado_seguro_social, empleado_banco = @empleado_banco, empleado_cuenta_banco = @empleado_cuenta_banco, puesto_id = @puesto_id, empleado_observaciones = @empleado_observaciones, empleado_estado = @empleado_estado
+		WHERE empleado_id = @empleado_id;
+GO
+
+CREATE PROCEDURE sp_empleados_delete
+(@empleado_id INT)
+AS
+	UPDATE SOS_EMPLEADOS
+	SET empleado_estado = 0
+	WHERE empleado_id = @empleado_id;
 GO
 
 /* ------------ fin procedimientos almacenados ------------ */

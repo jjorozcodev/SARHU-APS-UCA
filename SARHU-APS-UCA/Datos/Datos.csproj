@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DT_Adelantos.cs" />
+    <Compile Include="DT_Adendums.cs" />
     <Compile Include="DT_Areas.cs" />
     <Compile Include="DT_Bitacora.cs" />
     <Compile Include="DT_Bonos.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="DT_Organizacion.cs" />
     <Compile Include="DT_Programas.cs" />
     <Compile Include="DT_Roles.cs" />
+    <Compile Include="DT_Usuarios.cs" />
     <Compile Include="I_CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Procedimientos.cs" />
