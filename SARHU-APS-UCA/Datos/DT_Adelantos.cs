@@ -125,7 +125,7 @@ namespace Datos
                 DateTime.TryParse(reader["adelanto_fecha_deduccion"].ToString(), out fd);
                 adelanto.FechaDeduccion = fd;
                 adelanto.Descripcion = reader["adelanto_descripcion"].ToString();
-                adelanto.Estado = bool.Parse(reader["adelanto_cancelado"].ToString());
+                adelanto.Cancelado = bool.Parse(reader["adelanto_cancelado"].ToString());
                 adelanto.Estado = bool.Parse(reader["adelanto_estado"].ToString());
                 
             }

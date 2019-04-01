@@ -8,7 +8,8 @@ namespace Negocio
     {
         //GLOBALES
         private static DT_Adelantos dtAdelantos = DT_Adelantos.Instanciar();
-        
+        private static NG_Empleados ngEmpleados = NG_Empleados.Instanciar();
+
         private static NG_Adelantos ngAdelantos = null;
 
         private NG_Adelantos()
@@ -59,6 +60,35 @@ namespace Negocio
         {
             return dtAdelantos.ListarPorEstado(estado);
         }
+
+        public int CantidadAdelantosActivas()
+        {
+            List<Adelanto> adelnts = this.ListarPorEstado(true);
+            int cantidadAdelntsActivos = adelnts.Count;
+            return cantidadAdelntsActivos;
+        }
+
+        public DataTable VisualizarAdelantos()
+        {
+            DataTable vistaAdelantos = new DataTable();
+            vistaAdelantos.Columns.Add("Id", typeof(int));
+            vistaAdelantos.Columns.Add("Empleado", typeof(string));
+            vistaAdelantos.Columns.Add("FechaEntrega", typeof(DateTime));
+            vistaAdelantos.Columns.Add("FechaDeduccion", typeof(DateTime));
+            vistaAdelantos.Columns.Add("Descripcion", typeof(string));
+            vistaAdelantos.Columns.Add("Monto", typeof(Decimal));
+
+            List<Adelanto> adelantosActivas = this.ListarPorEstado(true);
+
+            foreach (Adelanto a in adelantosActivas)
+            {
+                Empleado e = ngEmpleados.Consultar(a.EmpleadoId);
+                // TODO: recuperar ID
+
+                vistaAdelantos.Rows.Add(a.Id, e.Nombre, a.FechaDeduccion, a.FechaDeduccion, a.Descripcion, a.Monto);
+            }
+
+            return vistaAdelantos;
+        }
     }
 }
-
