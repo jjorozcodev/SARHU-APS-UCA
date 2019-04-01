@@ -121,6 +121,7 @@ button {
 
 button, select {
     text-transform: none;
+   /* cursor:url(../Content/Cursor/mouse-pointer.cur),auto;*/
 }
 
 button, html input[type=button], input[type=reset], input[type=submit] {
