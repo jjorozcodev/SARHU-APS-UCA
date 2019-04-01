@@ -1,4 +1,4 @@
-Servidor=165.98.12.158
+Servidor=LAPTOP-BG\SQLEXPRESS
 Base de Datos=SARHU
-Usuario=aps
-Contraseña=$qlS3rv3rAPS*
+Usuario=sa
+Contraseña=1234

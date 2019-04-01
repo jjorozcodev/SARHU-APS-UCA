@@ -22,13 +22,27 @@
         public static string ProgramasAgregar = "[sp_programas_insert]";
         public static string ProgramasEditar = "[sp_programas_update]";
         public static string ProgramasBorrar = "[sp_programas_delete]";
-        
+
+        //EMPLEADOS
+        public static string EmpleadosListar = "[sp_empleados_list]";
+        public static string EmpleadosConsultar = "[sp_empleados_consult]";
+        public static string EmpleadosAgregar = "[sp_empleados_insert]";
+        public static string EmpleadosEditar = "[sp_empleados_update]";
+        public static string EmpleadosBorrar = "[sp_empleados_delete]";
+
         // LOCALIDADES
         public static string LocalidadesListar = "[sp_localidades_list]";
         public static string LocalidadesConsultar = "[sp_localidades_consult]";
         public static string LocalidadesAgregar = "[sp_localidades_insert]";
         public static string LocalidadesEditar = "[sp_localidades_update]";
         public static string LocalidadesBorrar = "[sp_localidades_delete]";
+
+        // ADELANTOS
+        public static string AdelantosListar = "[sp_adelantos_list]";
+        public static string AdelantosConsultar = "[sp_adelantos_consult]";
+        public static string AdelantosAgregar = "[sp_adelantos_insert]";
+        public static string AdelantosEditar = "[sp_adelantos_update]";
+        public static string AdelantosBorrar = "[sp_adelantos_delete]";
 
         // ROLES
         public static string RolesListar = "[sp_roles_list]";
