@@ -47,7 +47,10 @@
                         <i class="fa fa-user fa-fw"></i> Administrador <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="perfil.aspx"><i class="fa fa-user fa-fw"></i> Ver Perfil de Usuario</a>
+                        <li><a href="perfil.aspx"><i class="fa fa-user fa-fw"></i>Ver Perfil de Usuario</a>
+                        <li class="divider">
+                        </li>
+                        <li><a href="cambiar-clave.aspx"><i class="fa fa-user fa-fw"></i>Cambiar Contraseña</a>
                         <li class="divider">
                         </li>
                         <li>
