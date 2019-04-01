@@ -169,15 +169,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Cursor\mouse-pointer.cur" />
     <Content Include="Content\Imagenes\profile.png" />
     <Content Include="Content\Imagenes\user.png" />
     <Content Include="Content\SARHU.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="sarhu\cambiar-clave.aspx" />
     <Content Include="sarhu\perfil.aspx" />
-    <Content Include="sarhu\ingresos\adelantos.aspx" />
-    <Content Include="sarhu\ingresos\agregar-adelanto.aspx" />
-    <Content Include="sarhu\ingresos\editar-adelanto.aspx" />
+    <Content Include="sarhu\ingresos-deducciones\adelantos.aspx" />
+    <Content Include="sarhu\ingresos-deducciones\agregar-adelanto.aspx" />
+    <Content Include="sarhu\ingresos-deducciones\editar-adelanto.aspx" />
     <Content Include="sarhu\personal\adendums.aspx" />
     <Content Include="sarhu\personal\agregar-adendum.aspx" />
     <Content Include="sarhu\personal\agregar-empleado.aspx" />
@@ -234,11 +235,11 @@
     <Content Include="sarhu\catalogos\programas.aspx" />
     <Content Include="sarhu\principal.aspx" />
     <Content Include="sarhu\inicio.aspx" />
-    <Content Include="sarhu\ingresos\agregar-bono.aspx" />
-    <Content Include="sarhu\ingresos\bonos.aspx">
+    <Content Include="sarhu\ingresos-deducciones\agregar-bono.aspx" />
+    <Content Include="sarhu\ingresos-deducciones\bonos.aspx">
       <BrowseToURL>~/Views/Nomina/bonos</BrowseToURL>
     </Content>
-    <Content Include="sarhu\ingresos\editar-bono.aspx" />
+    <Content Include="sarhu\ingresos-deducciones\editar-bono.aspx" />
     <Content Include="sarhu\personal\agregar-area.aspx" />
     <Content Include="sarhu\personal\agregar-funcion.aspx" />
     <Content Include="sarhu\personal\areas.aspx">
@@ -290,25 +291,25 @@
     <Compile Include="sarhu\cambiar-clave.aspx.designer.cs">
       <DependentUpon>cambiar-clave.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\adelantos.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\adelantos.aspx.cs">
       <DependentUpon>adelantos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\adelantos.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\adelantos.aspx.designer.cs">
       <DependentUpon>adelantos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\agregar-adelanto.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\agregar-adelanto.aspx.cs">
       <DependentUpon>agregar-adelanto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\agregar-adelanto.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\agregar-adelanto.aspx.designer.cs">
       <DependentUpon>agregar-adelanto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\editar-adelanto.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\editar-adelanto.aspx.cs">
       <DependentUpon>editar-adelanto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\editar-adelanto.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\editar-adelanto.aspx.designer.cs">
       <DependentUpon>editar-adelanto.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\parametros\impuestos.aspx.cs">
@@ -479,25 +480,25 @@
     <Compile Include="sarhu\inicio.aspx.designer.cs">
       <DependentUpon>inicio.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\agregar-bono.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\agregar-bono.aspx.cs">
       <DependentUpon>agregar-bono.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\agregar-bono.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\agregar-bono.aspx.designer.cs">
       <DependentUpon>agregar-bono.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\bonos.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\bonos.aspx.cs">
       <DependentUpon>bonos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\bonos.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\bonos.aspx.designer.cs">
       <DependentUpon>bonos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sarhu\ingresos\editar-bono.aspx.cs">
+    <Compile Include="sarhu\ingresos-deducciones\editar-bono.aspx.cs">
       <DependentUpon>editar-bono.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sarhu\ingresos\editar-bono.aspx.designer.cs">
+    <Compile Include="sarhu\ingresos-deducciones\editar-bono.aspx.designer.cs">
       <DependentUpon>editar-bono.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\personal\agregar-area.aspx.cs">

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="adelantos.aspx.cs" Inherits="SARHU.sarhu.ingresos.adelantos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="adelantos.aspx.cs" Inherits="SARHU.sarhu.ingresos.adelantos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
 

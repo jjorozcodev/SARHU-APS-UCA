@@ -210,3 +210,7 @@ tableHeader {
 .tableData {
     text-align: center;
 }
+
+.cursor{
+    cursor:url(../Content/Cursor/mouse-pointer.cur),auto;
+}

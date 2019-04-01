@@ -57,6 +57,7 @@
 
                                             <div class="form-group" align="center">
                                                 <button id="btnActualizafr" class="btn btn-success  fondo-verde-aldeas" align="center">Actualizar</button>
+                                                <a href="inicio.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                                             </div>
 
                                         </div>

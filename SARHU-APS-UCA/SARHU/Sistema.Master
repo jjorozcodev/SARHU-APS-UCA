@@ -20,7 +20,7 @@
     
 </head>
 <body class="bodynav">
-    <form runat="server">
+    <form runat="server" class="cursor">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -70,10 +70,13 @@
                             <a href="~/sarhu/inicio.aspx" runat="server"><i class="fa fa-home fa-fw"></i> Inicio</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Ingresos<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-money fa-fw"></i> Ingresos / Deducciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">                               
                                 <li>
-                                    <a href="~/sarhu/ingresos/bonos.aspx" runat="server">Bonos</a>
+                                    <a href="~/sarhu/ingresos-deducciones/bonos.aspx" runat="server">Bonos</a>
+                                </li>
+                                <li>
+                                    <a href="~/sarhu/ingresos-deducciones/adelantos.aspx" runat="server">Adelantos</a>
                                 </li>
                             </ul>
                         </li>
