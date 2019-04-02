@@ -55,7 +55,7 @@
                                                             <div class="form-group input-group" style="width: 100%;">
                                                                 <span class="input-group-addon">C$</span>
 
-                                                          <asp:TextBox ID="techoSalaralInss" type="number" runat="server" Text='<%#Eval("")%>' CssClass="form-control"></asp:TextBox>
+                                                          <asp:TextBox ID="techoSalaralInss" type="number" runat="server" Text='<%#Eval("Valor")%>' CssClass="form-control"></asp:TextBox>
                                                                 
                                                             </div>
 

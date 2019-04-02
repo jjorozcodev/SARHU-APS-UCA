@@ -16,8 +16,8 @@ namespace SARHU.sarhu.parametros
         protected INSS ins1, ins2 = null;
         private int idinnss = 1, idinss2 = 2;
 
-        protected Variable va = null;
-        private int idVariable = 6;
+        protected Variable va1, va2 = null;
+        private int idVariable1 = 6, idVariable2 = 8;
 
         protected IR ir1, ir2, ir3, ir4, ir5 = null;
         private int idActualizar1 = 1, idActualizar2 = 2, idActualizar3 = 3, idActualizar4 = 4, idActualizar5 = 5;
@@ -31,8 +31,9 @@ namespace SARHU.sarhu.parametros
             ins1 = ngINSS.Consultar(idinnss);
             ins2 = ngINSS.Consultar(idinss2);
 
-            va = ngVariable.Consultar(idVariable);
-            
+            va1 = ngVariable.Consultar(idVariable1);
+            va2 = ngVariable.Consultar(idVariable2);
+
             ir1 = ngIR.Consultar(idActualizar1);
             ir2 = ngIR.Consultar(idActualizar2);
             ir3 = ngIR.Consultar(idActualizar3);
@@ -64,15 +65,25 @@ namespace SARHU.sarhu.parametros
                 porcentajeP.Text = ins2.Porcentaje.ToString();
    
             }
+
+            if (va1 != null)
+            {
+                techoSalaralInss.Text = va1.Valor.ToString();
+
+            }
+
+
+
         }
-        
+
         //------------------------------------------------------------------------------------------------
-         
-                private void CargarInformacionInatec()
+
+        private void CargarInformacionInatec()
                 {
-                    if (va != null)
+                    if (va2 != null)
                     {
-                        porcentajeIna.Text = va.Valor.ToString();
+                        porcentajeIna.Text = va2.Valor.ToString();
+
 
                     }
                 }
@@ -257,14 +268,28 @@ namespace SARHU.sarhu.parametros
             return i;
         }
 
-
-
-        private Variable ObtenerDatosInterfazInatec()
+        private Variable ObtenerDatosInterfazINSS3()
         {
             Variable v = new Variable();
             int id = 6;
             v.Id = id;
             string n = "Techo salarial inss";
+            v.Nombre = n;
+            v.Valor = decimal.Parse(techoSalaralInss.Text);
+            v.UltimaActualizacion = DateTime.Now;
+
+            return v;
+        }
+
+
+
+
+        private Variable ObtenerDatosInterfazInatec()
+        {
+            Variable v = new Variable();
+            int id = 8;
+            v.Id = id;
+            string n = "INATEC";
             v.Nombre = n;
             v.Valor = decimal.Parse(porcentajeIna.Text);
             v.UltimaActualizacion = DateTime.Now;
@@ -275,9 +300,9 @@ namespace SARHU.sarhu.parametros
 
         protected void ActualizarInatec_click(object sender, EventArgs e)
         {
-            this.va = ObtenerDatosInterfazInatec();
+            this.va2 = ObtenerDatosInterfazInatec();
 
-            EjecutarNotificarUsuario(ngVariable.Editar(va));
+            EjecutarNotificarUsuario(ngVariable.Editar(va2));
 
         }
 
@@ -287,10 +312,12 @@ namespace SARHU.sarhu.parametros
         {
             this.ins1 = ObtenerDatosInterfazINSS();
             this.ins2 = ObtenerDatosInterfazINSS2();
+            this.va1 = ObtenerDatosInterfazINSS3();
 
             EjecutarNotificarUsuario(ngINSS.Editar(ins1));
             EjecutarNotificarUsuario(ngINSS.Editar(ins2));
-            
+            EjecutarNotificarUsuario(ngVariable.Editar(va1));
+
 
         }
 
