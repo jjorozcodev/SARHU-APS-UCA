@@ -126,6 +126,7 @@ namespace Datos
 
             while (reader.Read())
             {
+                DateTime fi, fn;
                 empleado.Id = id;
                 empleado.Codigo = reader["empleado_codigo"].ToString();
                 empleado.Nombres = reader["empleado_nombres"].ToString();
@@ -133,13 +134,13 @@ namespace Datos
                 empleado.Foto = reader["empleado_foto"].ToString();
                 empleado.Sexo = bool.Parse(reader["empleado_sexo"].ToString());
                 empleado.Cedula = reader["empleado_cedula"].ToString();
-                DateTime.TryParse(reader["empleado_fecha_nacimiento"].ToString(), out DateTime fn);
+                DateTime.TryParse(reader["empleado_fecha_nacimiento"].ToString(), out fn);
                 empleado.FechaNacimiento = fn;
                 empleado.EstadoCivilId = int.Parse(reader["estado_civil_id"].ToString());
                 empleado.NivelAcademicoId = int.Parse(reader["nivel_academico_id"].ToString());
                 empleado.Telefono = reader["empleado_telefono"].ToString();
                 empleado.Direccion = reader["empleado_direccion"].ToString();
-                DateTime.TryParse(reader["empleado_fecha_ingreso"].ToString(), out DateTime fi);
+                DateTime.TryParse(reader["empleado_fecha_ingreso"].ToString(), out fi);
                 empleado.FechaIngreso = fi;
                 empleado.SeguroSocial = reader["empleado_seguro_social"].ToString();
                 empleado.Banco = bool.Parse(reader["empleado_banco"].ToString());
@@ -227,6 +228,8 @@ namespace Datos
             {
                 Empleado e = new Empleado();
 
+                DateTime fn, fi;
+
                 e.Id = int.Parse(reader["empleado_id"].ToString());
                 e.Codigo = reader["empleado_codigo"].ToString();
                 e.Nombres = reader["empleado_nombres"].ToString();
@@ -234,13 +237,13 @@ namespace Datos
                 e.Foto = reader["empleado_foto"].ToString();
                 e.Sexo = bool.Parse(reader["empleado_sexo"].ToString());
                 e.Cedula = reader["empleado_cedula"].ToString();
-                DateTime.TryParse(reader["empleado_fecha_nacimiento"].ToString(), out DateTime fn);
+                DateTime.TryParse(reader["empleado_fecha_nacimiento"].ToString(), out fn);
                 e.FechaNacimiento = fn;
                 e.EstadoCivilId = int.Parse(reader["estado_civil_id"].ToString());
                 e.NivelAcademicoId = int.Parse(reader["nivel_academico_id"].ToString());
                 e.Telefono = reader["empleado_telefono"].ToString();
                 e.Direccion = reader["empleado_direccion"].ToString();
-                DateTime.TryParse(reader["empleado_fecha_ingreso"].ToString(), out DateTime fi);
+                DateTime.TryParse(reader["empleado_fecha_ingreso"].ToString(), out fi);
                 e.FechaIngreso = fi;
                 e.SeguroSocial = reader["empleado_seguro_social"].ToString();
                 e.Banco = bool.Parse(reader["empleado_banco"].ToString());

@@ -37,7 +37,7 @@
                                     <td><%#Eval("Descripcion")%></td>
                                     <td align="center">
                                         <a href="editar-area.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Área"><i class="fa fa-edit fa-fw"></i></span></a>
-                                        <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Área"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
+                                        <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" CssClass="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Área"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -109,7 +109,7 @@
                     <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton runat="server" OnClick="Confirmar_Click" Text="Borrar" class="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
+                    <asp:LinkButton runat="server" OnClick="Confirmar_Click" Text="Borrar" CssClass="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
