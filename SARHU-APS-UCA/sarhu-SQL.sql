@@ -416,11 +416,11 @@ create table SOS_EMPLEADOS
 	empleado_cedula varchar(18),
 	empleado_sexo bit not null,
 	empleado_fecha_nacimiento date,
-	empleado_estado_civil char,
-	empleado_nivel_academico char,
+	estado_civil_id int,
+	nivel_academico_id int,
 	empleado_telefono varchar(9),
 	empleado_direccion varchar (150),
-	empleado_fecha_ingreso datetime,
+	empleado_fecha_ingreso date,
 	empleado_seguro_social varchar(8),
 	empleado_banco bit not null,
 	empleado_cuenta_banco varchar(15),
@@ -1089,36 +1089,36 @@ GO
 
 CREATE PROCEDURE sp_empleados_list
 AS
-	SELECT empleado_id, empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones, empleado_estado
+	SELECT empleado_id, empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, estado_civil_id, nivel_academico_id, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones, empleado_estado
 	FROM SOS_EMPLEADOS
 GO
 
 CREATE PROCEDURE sp_empleados_insert
-(@empleado_codigo VARCHAR(12), @empleado_foto VARCHAR(30), @empleado_nombres VARCHAR(50), @empleado_apellidos VARCHAR(50), @empleado_cedula VARCHAR(50), @empleado_sexo BIT, @empleado_fecha_nacimiento DATE, @empleado_estado_civil CHAR(1), @empleado_nivel_academico CHAR(1), @empleado_telefono VARCHAR(9), @empleado_direccion VARCHAR(150), @empleado_fecha_ingreso DATETIME, @empleado_seguro_social VARCHAR(8), @empleado_banco BIT, @empleado_cuenta_banco VARCHAR(15), @localidad_id INT, @puesto_id INT, @empleado_observaciones VARCHAR(150), @empleado_estado BIT)
+(@empleado_codigo varchar(12), @empleado_foto varchar(30), @empleado_nombres varchar(50), @empleado_apellidos varchar(50), @empleado_cedula varchar(18), @empleado_sexo bit, @empleado_fecha_nacimiento date, @estado_civil_id int, @nivel_academico_id int, @empleado_telefono varchar(9), @empleado_direccion varchar(150), @empleado_fecha_ingreso date, @empleado_seguro_social varchar(8), @empleado_banco bit, @empleado_cuenta_banco varchar(15), @localidad_id int, @puesto_id int, @empleado_observaciones varchar(150))
 AS
-	INSERT INTO SOS_EMPLEADOS(empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones)
-	VALUES (@empleado_codigo, @empleado_foto, @empleado_nombres, @empleado_apellidos, @empleado_cedula, @empleado_sexo, @empleado_fecha_nacimiento, @empleado_estado_civil, @empleado_nivel_academico, @empleado_telefono, @empleado_direccion, @empleado_fecha_ingreso, @empleado_seguro_social, @empleado_banco, @empleado_cuenta_banco, @localidad_id, @puesto_id, @empleado_observaciones);
+	INSERT INTO SOS_EMPLEADOS(empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, estado_civil_id, nivel_academico_id, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones)
+	VALUES (@empleado_codigo, @empleado_foto, @empleado_nombres, @empleado_apellidos, @empleado_cedula, @empleado_sexo, @empleado_fecha_nacimiento, @estado_civil_id, @nivel_academico_id, @empleado_telefono, @empleado_direccion, @empleado_fecha_ingreso, @empleado_seguro_social, @empleado_banco, @empleado_cuenta_banco, @localidad_id, @puesto_id, @empleado_observaciones);
 	SELECT SCOPE_IDENTITY();
 GO
 
 CREATE PROCEDURE sp_empleados_consult
-(@empleado_id INT)
+(@empleado_id int)
 AS
-	SELECT empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, empleado_estado_civil, empleado_nivel_academico, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones
+	SELECT empleado_codigo, empleado_foto, empleado_nombres, empleado_apellidos, empleado_cedula, empleado_sexo, empleado_fecha_nacimiento, estado_civil_id, nivel_academico_id, empleado_telefono, empleado_direccion, empleado_fecha_ingreso, empleado_seguro_social, empleado_banco, empleado_cuenta_banco, localidad_id, puesto_id, empleado_observaciones, empleado_estado
 	FROM SOS_EMPLEADOS
 	WHERE empleado_id = @empleado_id;
 GO
 
 CREATE PROCEDURE sp_empleados_update
-(@empleado_id INT,@empleado_codigo VARCHAR(12), @empleado_foto VARCHAR(30), @empleado_nombres VARCHAR(50), @empleado_apellidos VARCHAR(50), @empleado_cedula VARCHAR(50), @empleado_sexo BIT, @empleado_fecha_nacimiento DATE, @empleado_estado_civil CHAR(1), @empleado_nivel_academico CHAR(1), @empleado_telefono VARCHAR(9), @empleado_direccion VARCHAR(150), @empleado_fecha_ingreso DATETIME, @empleado_seguro_social VARCHAR(8), @empleado_banco BIT, @empleado_cuenta_banco VARCHAR(15), @localidad_id INT, @puesto_id INT, @empleado_observaciones VARCHAR(150), @empleado_estado BIT)
+(@empleado_id int, @empleado_codigo varchar(12), @empleado_foto varchar(30), @empleado_nombres varchar(50), @empleado_apellidos varchar(50), @empleado_cedula varchar(18), @empleado_sexo bit, @empleado_fecha_nacimiento date, @estado_civil_id int, @nivel_academico_id int, @empleado_telefono varchar(9), @empleado_direccion varchar(150), @empleado_fecha_ingreso date, @empleado_seguro_social varchar(8), @empleado_banco bit, @empleado_cuenta_banco varchar(15), @localidad_id int, @puesto_id int, @empleado_observaciones varchar(150))
 AS
 	UPDATE SOS_EMPLEADOS
-	SET	empleado_codigo = @empleado_codigo, empleado_foto = @empleado_foto, empleado_nombres = @empleado_nombres, empleado_apellidos = @empleado_apellidos, empleado_cedula = @empleado_cedula, empleado_sexo = @empleado_sexo, empleado_fecha_nacimiento = @empleado_fecha_nacimiento, empleado_estado_civil = @empleado_estado_civil, empleado_nivel_academico = @empleado_nivel_academico, empleado_telefono = @empleado_telefono, empleado_direccion = @empleado_direccion, empleado_fecha_ingreso = @empleado_fecha_ingreso, empleado_seguro_social = @empleado_seguro_social, empleado_banco = @empleado_banco, empleado_cuenta_banco = @empleado_cuenta_banco, puesto_id = @puesto_id, empleado_observaciones = @empleado_observaciones, empleado_estado = @empleado_estado
-		WHERE empleado_id = @empleado_id;
+	SET	empleado_codigo = @empleado_codigo, empleado_foto = @empleado_foto, empleado_nombres = @empleado_nombres, empleado_apellidos = @empleado_apellidos, empleado_cedula = @empleado_cedula, empleado_sexo = @empleado_sexo, empleado_fecha_nacimiento = @empleado_fecha_nacimiento, estado_civil_id = @estado_civil_id, nivel_academico_id = @nivel_academico_id, empleado_telefono = @empleado_telefono, empleado_direccion = @empleado_direccion, empleado_fecha_ingreso = @empleado_fecha_ingreso, empleado_seguro_social = @empleado_seguro_social, empleado_banco = @empleado_banco, empleado_cuenta_banco = @empleado_cuenta_banco, localidad_id = @localidad_id, puesto_id = @puesto_id, empleado_observaciones = @empleado_observaciones
+	WHERE empleado_id = @empleado_id;
 GO
 
 CREATE PROCEDURE sp_empleados_delete
-(@empleado_id INT)
+(@empleado_id int)
 AS
 	UPDATE SOS_EMPLEADOS
 	SET empleado_estado = 0

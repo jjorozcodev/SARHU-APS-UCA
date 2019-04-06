@@ -36,14 +36,7 @@
         public static string LocalidadesAgregar = "[sp_localidades_insert]";
         public static string LocalidadesEditar = "[sp_localidades_update]";
         public static string LocalidadesBorrar = "[sp_localidades_delete]";
-
-        // ADELANTOS
-        public static string AdelantosListar = "[sp_adelantos_list]";
-        public static string AdelantosConsultar = "[sp_adelantos_consult]";
-        public static string AdelantosAgregar = "[sp_adelantos_insert]";
-        public static string AdelantosEditar = "[sp_adelantos_update]";
-        public static string AdelantosBorrar = "[sp_adelantos_delete]";
-
+        
         // ROLES
         public static string RolesListar = "[sp_roles_list]";
         public static string RolesConsultar = "[sp_roles_consult]";

@@ -1,6 +1,8 @@
 ﻿using Datos;
 using Entidades;
+using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Negocio
 {
@@ -85,7 +87,7 @@ namespace Negocio
                 Empleado e = ngEmpleados.Consultar(a.EmpleadoId);
                 // TODO: recuperar ID
 
-                vistaAdelantos.Rows.Add(a.Id, e.Nombre, a.FechaDeduccion, a.FechaDeduccion, a.Descripcion, a.Monto);
+                vistaAdelantos.Rows.Add(a.Id, e.Nombres, a.FechaDeduccion, a.FechaDeduccion, a.Descripcion, a.Monto);
             }
 
             return vistaAdelantos;
