@@ -85,6 +85,9 @@
                                 <li>
                                     <a href="~/sarhu/catalogos/localidades.aspx" runat="server">Localidades</a>
                                 </li>
+                                <li>
+                                    <a href="~/sarhu/catalogos/cuentas.aspx" runat="server">Cuentas</a>
+                                </li>
                             </ul>
                         </li>
                         <li>

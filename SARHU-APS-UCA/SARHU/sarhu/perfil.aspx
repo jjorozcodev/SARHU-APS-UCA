@@ -49,7 +49,7 @@
                                                  <span class="input-group-addon">+505</span>
                                                  <input class="form-control" type="text"  id="Telefono" placeholder="8888-8888" tabindex="8" value="8256-7651">
                                             </div>
-                                            <label>Correo Electronico</label>
+                                            <label>Correo Electrónico</label>
                                                     <div class="form-group input-group" style="width: 100%;">
                                                         <input type="text" class="form-control" value="mariajuanap@gmail.com">
                                                     </div>

@@ -175,6 +175,9 @@
     <Content Include="Content\SARHU.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="sarhu\cambiar-clave.aspx" />
+    <Content Include="sarhu\catalogos\agregar-cuenta.aspx" />
+    <Content Include="sarhu\catalogos\cuentas.aspx" />
+    <Content Include="sarhu\catalogos\editar-cuenta.aspx" />
     <Content Include="sarhu\perfil.aspx" />
     <Content Include="sarhu\ingresos-deducciones\adelantos.aspx" />
     <Content Include="sarhu\ingresos-deducciones\agregar-adelanto.aspx" />
@@ -290,6 +293,27 @@
     </Compile>
     <Compile Include="sarhu\cambiar-clave.aspx.designer.cs">
       <DependentUpon>cambiar-clave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\agregar-cuenta.aspx.cs">
+      <DependentUpon>agregar-cuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\agregar-cuenta.aspx.designer.cs">
+      <DependentUpon>agregar-cuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\cuentas.aspx.cs">
+      <DependentUpon>cuentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\cuentas.aspx.designer.cs">
+      <DependentUpon>cuentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-cuenta.aspx.cs">
+      <DependentUpon>editar-cuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-cuenta.aspx.designer.cs">
+      <DependentUpon>editar-cuenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\ingresos-deducciones\adelantos.aspx.cs">
       <DependentUpon>adelantos.aspx</DependentUpon>
