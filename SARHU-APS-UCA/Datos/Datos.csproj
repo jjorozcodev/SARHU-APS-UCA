@@ -47,13 +47,16 @@
     <Compile Include="DT_Areas.cs" />
     <Compile Include="DT_Bitacora.cs" />
     <Compile Include="DT_Bonos.cs" />
+    <Compile Include="DT_Cuentas.cs" />
     <Compile Include="DT_Departamentos.cs" />
     <Compile Include="DT_Empleados.cs" />
+    <Compile Include="DT_EstadosCiviles.cs" />
     <Compile Include="DT_Funciones.cs" />
     <Compile Include="DT_INSS.cs" />
     <Compile Include="DT_IR.cs" />
     <Compile Include="DT_Localidades.cs" />
     <Compile Include="DT_Municipios.cs" />
+    <Compile Include="DT_NivelesAcademicos.cs" />
     <Compile Include="DT_Organizacion.cs" />
     <Compile Include="DT_Programas.cs" />
     <Compile Include="DT_Roles.cs" />

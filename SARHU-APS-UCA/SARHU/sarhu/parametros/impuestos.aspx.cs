@@ -38,9 +38,7 @@ namespace SARHU.sarhu.parametros
             ir3 = ngIR.Consultar(idActualizar3);
             ir4 = ngIR.Consultar(idActualizar4);
             ir5 = ngIR.Consultar(idActualizar5);
-
-
-
+            
             if (!Page.IsPostBack)
             {
                 CargarInformacionINSS();
@@ -309,10 +307,7 @@ namespace SARHU.sarhu.parametros
             EjecutarNotificarUsuario(ngIR.Editar(ir3));
             EjecutarNotificarUsuario(ngIR.Editar(ir4));
             EjecutarNotificarUsuario(ngIR.Editar(ir5));
-
-
-
-
+            
         }
 
 

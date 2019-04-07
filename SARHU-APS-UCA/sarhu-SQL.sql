@@ -381,6 +381,34 @@ create table SOS_ADENDUMS_FUNCIONES
 )
 GO
 
+create table SOS_ESTADOSCIVILES
+(
+	estadocivil_id int identity
+		constraint SOS_ESTADOSCIVILES_pk
+			primary key clustered,
+	estadocivil_nombre varchar(30) not null,
+	estadocivil_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_ESTADOSCIVILES_estadocivil_id_uindex
+	on SOS_ESTADOSCIVILES (estadocivil_id)
+GO
+
+create table SOS_NIVELESACADEMICOS
+(
+	nivelacademico_id int identity
+		constraint SOS_NIVELESACADEMICOS_pk
+			primary key clustered,
+	nivelacademico_nombre varchar(30) not null,
+	nivelacademico_estado bit default 1 not null
+)
+GO
+
+create unique index SOS_NIVELESACADEMICOS_nivelacademico_id_uindex
+	on SOS_NIVELESACADEMICOS (nivelacademico_id)
+GO
+
 create table SOS_CUENTAS
 (
 	cuenta_id int identity

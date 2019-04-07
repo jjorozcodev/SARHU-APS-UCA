@@ -45,13 +45,16 @@
     <Compile Include="Area.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="Bono.cs" />
+    <Compile Include="Cuenta.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="EstadoCivil.cs" />
     <Compile Include="Funcion.cs" />
     <Compile Include="INSS.cs" />
     <Compile Include="IR.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Municipio.cs" />
+    <Compile Include="NivelAcademico.cs" />
     <Compile Include="Organizacion.cs" />
     <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -43,6 +43,7 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.BonosAgregar;
 
             comandoSql.Parameters.Clear();
+
             comandoSql.Parameters.Add("@bono_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@bono_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@bono_monto", SqlDbType.Decimal).Value = obj.Monto;
