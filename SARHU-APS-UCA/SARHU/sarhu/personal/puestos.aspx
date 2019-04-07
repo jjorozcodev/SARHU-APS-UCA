@@ -104,10 +104,7 @@
                                                             </div>
                                                             <label>Cuenta</label>
                                                             <div class="form-group input-group" style="width: 100%;">
-                                                                <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlCuentas">
-                                                                    <asp:ListItem Value="0">Seleccione..</asp:ListItem>
-                                                                    <asp:ListItem Value="1">proveedores SOS </asp:ListItem>
-                                                                    <asp:ListItem Value="2">Ingresos Diversos </asp:ListItem>
+                                                                <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlCuentas">                                                                   
                                                                 </asp:DropDownList>
                                                             </div>
 

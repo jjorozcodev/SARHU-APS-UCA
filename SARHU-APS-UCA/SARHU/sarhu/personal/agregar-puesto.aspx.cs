@@ -26,6 +26,7 @@ namespace SARHU.sarhu.personal
             {
                 clearList();
                 populatedDropdownArea();
+                populatedDropdownCuentas();
                 listFunciones = NG_Funciones.Instanciar().Listar();
                 BindGriview(listFunciones);
                 fillRepeater(funcionesRepeater);
@@ -53,6 +54,16 @@ namespace SARHU.sarhu.personal
             ddlarea.DataValueField = "Id";
             ddlarea.DataBind();
             ddlarea.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+
+        }
+        private void populatedDropdownCuentas()
+        {
+
+            ddlCuentas.DataSource = NG_Cuentas.Instanciar().ListarPorEstado(true);
+            ddlCuentas.DataTextField = "Descripcion";
+            ddlCuentas.DataValueField = "Id";
+            ddlCuentas.DataBind();
+            ddlCuentas.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
 
         }
 
@@ -84,11 +95,12 @@ namespace SARHU.sarhu.personal
 
         private bool GuardarPuesto(Puestos puesto)
         {
-
-            bool resp = ngPuesto.AgregarPuesto(puesto);
-            if (resp == true)
+            bool resp = false;
+            int idObtenido = ngPuesto.AgregarPuesto(puesto);
+            if (idObtenido > 0)
             {
-                ngPuesto.AgregarPuestoFuncion(funcionesId);
+                ngPuesto.AgregarPuestoFuncion(funcionesId, idObtenido);
+                resp = true;
             }
             else
             {

@@ -16,7 +16,7 @@ namespace Negocio
         private DT_Puestos dtPuesto = DT_Puestos.Instanciar();
         private DT_Funciones dtFunciones = DT_Funciones.Instanciar();
         private static DataTable dTablePuestoFunciones = new DataTable();
-
+      
 
 
         private NG_Puestos()
@@ -35,18 +35,18 @@ namespace Negocio
         }
 
 
-        public bool AgregarPuesto(Puestos puesto)
+        public int AgregarPuesto(Puestos puesto)
         {
 
             return DT_Puestos.Instanciar().Agregar(puesto);
         }
 
-        public void AgregarPuestoFuncion(List<int> funcionesId)
+        public void AgregarPuestoFuncion(List<int> funcionesId, int idPuesto)
         {
 
             foreach (int id in funcionesId)
             {
-                dtPuesto.AgregarPuestoFunciones(id);
+                dtPuesto.AgregarPuestoFunciones(id,idPuesto);
             }
 
 

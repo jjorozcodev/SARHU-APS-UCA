@@ -22,6 +22,7 @@ namespace SARHU.sarhu.personal
             {
                 LoadRepeater();
                 populatedDropdownArea();
+                populatedDropdownCuentas();
             }
         }
 
@@ -42,7 +43,16 @@ namespace SARHU.sarhu.personal
             ddlarea.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
 
         }
+        private void populatedDropdownCuentas()
+        {
 
+            ddlCuentas.DataSource = NG_Cuentas.Instanciar().ListarPorEstado(true);
+            ddlCuentas.DataTextField = "Descripcion";
+            ddlCuentas.DataValueField = "Id";
+            ddlCuentas.DataBind();
+            ddlCuentas.Items.Insert(0, new ListItem("SELECCIONE...", "0"));
+
+        }
 
         public void ConsultData(int id)
         {

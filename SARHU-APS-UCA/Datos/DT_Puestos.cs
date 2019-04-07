@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 using Entidades;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Datos
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionDB();
         private SqlCommand comandoSql = new SqlCommand();
         private SqlDataAdapter adaptadorSql = null;
-        int idPuesto = 0;
+     
 
         private static DT_Puestos dtPuestos = null;
 
@@ -74,6 +74,7 @@ namespace Datos
 
         public Puestos Consultar(int id)
         {
+        
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.PuestoConsultar;
@@ -90,13 +91,12 @@ namespace Datos
             Puestos puesto = new Puestos();
 
             while (reader.Read())
-            {
-                idPuesto = reader.GetInt32(0);
-                puesto.Nombre = reader.GetString(1);
-                puesto.Descripcion = reader.GetString(2);
-                puesto.CuentaId = reader.GetInt32(3);
-                puesto.AreaId = reader.GetInt32(4);
-                puesto.SalarioBase = reader.GetDecimal(5);
+            {                
+                puesto.Nombre = reader.GetString(0);
+                puesto.Descripcion = reader.GetString(1);
+                puesto.CuentaId = reader.GetInt32(2);
+                puesto.AreaId = reader.GetInt32(3);
+                puesto.SalarioBase = reader.GetDecimal(4);
             }
             reader.Close();
 
@@ -105,9 +105,9 @@ namespace Datos
             return puesto;
         }
 
-        public bool Agregar(Puestos obj)
+        public int Agregar(Puestos obj)
         {
-            bool resp = false;
+          
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.PuestoAgregar;
@@ -126,14 +126,11 @@ namespace Datos
 
 
             //int agregado = comandoSql.ExecuteNonQuery();
-            idPuesto = Convert.ToInt32(comandoSql.ExecuteScalar());
+            int idPuesto = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexionSql.Close();
-            if (idPuesto > 0)
-            {
-                resp = true;
-            }
+           
 
-            return resp;
+            return idPuesto;
         }
 
         public bool Editar(Puestos obj)
@@ -185,7 +182,7 @@ namespace Datos
             return (borrado > 0);
         }
 
-        public void AgregarPuestoFunciones(int FuncionId)
+        public void AgregarPuestoFunciones(int FuncionId, int idpuesto)
         {
 
 
@@ -194,7 +191,7 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.PuestoFuncionAgregar;
 
             comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@puesto_id", SqlDbType.VarChar).Value = idPuesto;
+            comandoSql.Parameters.Add("@puesto_id", SqlDbType.VarChar).Value = idpuesto;
             comandoSql.Parameters.Add("@funcion_id", SqlDbType.VarChar).Value = FuncionId;
 
 
