@@ -178,6 +178,7 @@
     <Content Include="sarhu\catalogos\agregar-cuenta.aspx" />
     <Content Include="sarhu\catalogos\cuentas.aspx" />
     <Content Include="sarhu\catalogos\editar-cuenta.aspx" />
+    <Content Include="sarhu\parametros\factores-calculo.aspx" />
     <Content Include="sarhu\perfil.aspx" />
     <Content Include="sarhu\ingresos-deducciones\adelantos.aspx" />
     <Content Include="sarhu\ingresos-deducciones\agregar-adelanto.aspx" />
@@ -335,6 +336,13 @@
     </Compile>
     <Compile Include="sarhu\ingresos-deducciones\editar-adelanto.aspx.designer.cs">
       <DependentUpon>editar-adelanto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\parametros\factores-calculo.aspx.cs">
+      <DependentUpon>factores-calculo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\parametros\factores-calculo.aspx.designer.cs">
+      <DependentUpon>factores-calculo.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\parametros\impuestos.aspx.cs">
       <DependentUpon>impuestos.aspx</DependentUpon>

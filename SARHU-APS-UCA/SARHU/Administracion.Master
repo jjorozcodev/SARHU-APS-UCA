@@ -96,6 +96,9 @@
                                 <li>
                                     <a href="~/sarhu/parametros/impuestos.aspx" runat="server">Impuestos</a>
                                 </li>
+                                <li>
+                                    <a href="~/sarhu/parametros/factores-calculo.aspx" runat="server">Factores de Cálculo</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
