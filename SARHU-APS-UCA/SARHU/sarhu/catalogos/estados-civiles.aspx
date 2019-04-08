@@ -13,30 +13,37 @@
             <div class="col-lg-12">
                 <div class="panel panel-default2">
                     <div class="panel-body tooltip-demo">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th width="200px">Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Soltero</td>
-                                    <td align="center">
-                                        <a href="editar-estadoc.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Estado Civil"><i class="fa fa-edit fa-fw"></i></span></a>
-                                        <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Estado Civil"><i class="fa fa-trash-o fa-fw"></i></span></button>
-                                    </td>
-                                </tr>
+                        <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa-lg fa fa-exclamation-circle "></i>
+                            <% =Mensaje %>
+                        </asp:Panel>
+
+                        <asp:Repeater runat="server" ID="rptTable">
+                            <HeaderTemplate>
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-datos">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th width="200px">Operaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            </HeaderTemplate>
+                            <ItemTemplate>
                                 <tr class="even gradeC" style='border: inset 0pt'>
-                                    <td>Casado</td>
+                                    <td><%#Eval("Nombre")%></td>
                                     <td align="center">
-                                        <a href="editar-estadoc.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Estado Civil"><i class="fa fa-edit fa-fw"></i></span></a>
-                                        <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Estado Civil"><i class="fa fa-trash-o fa-fw"></i></span></button>
+                                        <a href="editar-estadoc.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Estado Civil"><i class="fa fa-edit fa-fw"></i></span></a>
+                                        <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Estado Civil"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
                                     </td>
                                 </tr>
-                            </tbody>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </tbody>
                         </table>
+                            </FooterTemplate>
+                        </asp:Repeater>
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
@@ -55,10 +62,10 @@
                     <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                 </div>
                 <div class="modal-body">
-                   <h3 >¿Está seguro que desea borrar el registro "Soltero"?</h3>
+                    <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton runat="server" Text="Borrar" CssClass="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
+                     <asp:LinkButton runat="server" OnClick="Confirmar_Click" Text="Borrar" class="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -66,4 +73,39 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <%=Mensaje %>
+                </div>
+                <div class="modal-footer">
+                    <a href="estados-civiles.aspx" type="button" class="btn btn-default">OK</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <asp:HiddenField runat="server" ID="idSeleccionado" />
+    <script>
+        function PopupConfirmacion() {
+            $('#myModal').modal({ backdrop: 'static', keyboard: false }, 'show');
+        }
+
+        function PopupNotificacion() {
+            $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
+        }
+        
+        $('#closemodal').click(function () {
+            $('#mymodal').modal('hide');
+
+        });
+
+        $(document).ready(function () {
+            $('#dataTables-datos').DataTable({
+                responsive: true
+            });
+        });
+    </script>
 </asp:Content>

@@ -90,32 +90,43 @@ namespace Datos
         /// </summary>
         public EstadoCivil Consultar(int id)
         {
-            comandoSql.Connection = conexionSql;
-            comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.EstadosCivilesConsultar;
+            //comandoSql.Connection = conexionSql;
+            //comandoSql.CommandType = CommandType.StoredProcedure;
+            //comandoSql.CommandText = Procedimientos.EstadosCivilesConsultar;
 
-            comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@estado_civil_id", SqlDbType.Int).Value = id;
+            //comandoSql.Parameters.Clear();
+            //comandoSql.Parameters.Add("@estado_civil_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            //if (conexionSql.State == ConnectionState.Closed)
+            //{
+            //    conexionSql.Open();
+            //}
+
+            //SqlDataReader reader = comandoSql.ExecuteReader();
+
+            //EstadoCivil estadoCivil = new EstadoCivil();
+
+            //while (reader.Read())
+            //{
+            //    estadoCivil.Id = id;
+            //    estadoCivil.Nombre = reader["estado_civil_nombre"].ToString();
+            //    estadoCivil.Estado = bool.Parse(reader["estado_civil_estado"].ToString());
+            //}
+
+            //reader.Close();
+
+            //conexionSql.Close();
+
+            EstadoCivil estadoCivil = null;
+
+            foreach (EstadoCivil e in estadosCiviles)
             {
-                conexionSql.Open();
+                if (e.Id == id)
+                {
+                    estadoCivil = e;
+                    break;
+                }
             }
-
-            SqlDataReader reader = comandoSql.ExecuteReader();
-
-            EstadoCivil estadoCivil = new EstadoCivil();
-
-            while (reader.Read())
-            {
-                estadoCivil.Id = id;
-                estadoCivil.Nombre = reader["estado_civil_nombre"].ToString();
-                estadoCivil.Estado = bool.Parse(reader["estado_civil_estado"].ToString());
-            }
-
-            reader.Close();
-
-            conexionSql.Close();
 
             return estadoCivil;
         }
@@ -173,7 +184,7 @@ namespace Datos
             {
                 EstadoCivil ec = new EstadoCivil();
 
-                ec.Id = int.Parse(reader["rol_id"].ToString());
+                ec.Id = int.Parse(reader["estado_civil_id"].ToString());
                 ec.Nombre = reader["estado_civil_nombre"].ToString();
                 ec.Estado = bool.Parse(reader["estado_civil_estado"].ToString());
 

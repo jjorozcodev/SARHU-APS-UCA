@@ -15,7 +15,6 @@ namespace SARHU.sarhu.seguridad
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!Page.IsPostBack)
             {
                 CargarInformacion();
