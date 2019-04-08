@@ -33,7 +33,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite agregar un registro de la entidad [EstadoCivil].
-        /// Recibe como parámetro un objeto [EstadoCivil] con la información a agregar a la base de datos (Nombre y Descripción).
+        /// Recibe como parámetro un objeto [EstadoCivil] con la información a agregar a la base de datos.
         /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(EstadoCivil obj)
@@ -122,7 +122,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite editar un registro de la entidad [EstadoCivil].
-        /// Recibe como parámetro un objeto [EstadoCivil] con la información editada para actualizarse en la base de datos (Nombre y Descripción).
+        /// Recibe como parámetro un objeto [EstadoCivil] con la información editada para actualizarse en la base de datos.
         /// Devuelve un valor booleano para notificar si el registro fue editado o no.
         /// </summary>
         public bool Editar(EstadoCivil obj)
@@ -173,7 +173,7 @@ namespace Datos
             {
                 EstadoCivil ec = new EstadoCivil();
 
-                ec.Id = int.Parse(reader["rol_id"].ToString());
+                ec.Id = int.Parse(reader["estado_civil_id"].ToString());
                 ec.Nombre = reader["estado_civil_nombre"].ToString();
                 ec.Estado = bool.Parse(reader["estado_civil_estado"].ToString());
 

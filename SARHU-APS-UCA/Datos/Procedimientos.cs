@@ -56,6 +56,13 @@
         public static string PermisosAgregar = "[sp_permisos_insert]";
         public static string PermisosBorrar = "[sp_permisos_delete]";
 
+        // NIVELES ACADÉMICOS
+        public static string NivelesAcademicosListar = "[sp_niveles_academicos_list]";
+        public static string NivelesAcademicosConsultar = "[sp_niveles_academicos_consult]";
+        public static string NivelesAcademicosAgregar = "[sp_niveles_academicos_insert]";
+        public static string NivelesAcademicosEditar = "[sp_niveles_academicos_update]";
+        public static string NivelesAcademicosBorrar = "[sp_niveles_academicos_delete]";
+
         // ESTADOS CIVILES
         public static string EstadosCivilesListar = "[sp_estados_civiles_list]";
         public static string EstadosCivilesConsultar = "[sp_estados_civiles_consult]";

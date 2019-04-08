@@ -7,9 +7,9 @@ namespace Negocio
     public class NG_NivelesAcademicos
     {
         //GLOBALES
-        private static DT_NivelesAcademicos dtBonos = DT_NivelesAcademicos.Instanciar();
+        private static DT_NivelesAcademicos dtNivelesAcademicos = DT_NivelesAcademicos.Instanciar();
 
-        private static NG_NivelesAcademicos ngBonos = null;
+        private static NG_NivelesAcademicos ngNivelesAcademicos = null;
 
         private NG_NivelesAcademicos()
         {
@@ -18,46 +18,46 @@ namespace Negocio
 
         public static NG_NivelesAcademicos Instanciar()
         {
-            if (ngBonos == null)
+            if (ngNivelesAcademicos == null)
             {
-                ngBonos = new NG_NivelesAcademicos();
+                ngNivelesAcademicos = new NG_NivelesAcademicos();
             }
-            return ngBonos;
+            return ngNivelesAcademicos;
         }
 
         public int AgregarObtenerID(NivelAcademico obj)
         {
-            return dtBonos.Agregar(obj);
+            return dtNivelesAcademicos.Agregar(obj);
         }
 
         public bool Agregar(NivelAcademico obj)
         {
-            return (dtBonos.Agregar(obj) > 0);
+            return (dtNivelesAcademicos.Agregar(obj) > 0);
         }
 
         public bool Borrar(int id)
         {
-            return dtBonos.Borrar(id);
+            return dtNivelesAcademicos.Borrar(id);
         }
 
         public NivelAcademico Consultar(int id)
         {
-            return dtBonos.Consultar(id);
+            return dtNivelesAcademicos.Consultar(id);
         }
 
         public bool Editar(NivelAcademico obj)
         {
-            return dtBonos.Editar(obj);
+            return dtNivelesAcademicos.Editar(obj);
         }
 
         public List<NivelAcademico> Listar()
         {
-            return dtBonos.Listar();
+            return dtNivelesAcademicos.Listar();
         }
 
         public List<NivelAcademico> ListarPorEstado(bool estado)
         {
-            return null; //dtNivelesAcademicos.ListarPorEstado(estado);
+            return dtNivelesAcademicos.ListarPorEstado(estado);
         }
     }
 }
