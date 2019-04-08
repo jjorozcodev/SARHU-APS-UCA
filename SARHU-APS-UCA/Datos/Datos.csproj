@@ -45,6 +45,7 @@
     <Compile Include="DT_Areas.cs" />
     <Compile Include="DT_Bitacora.cs" />
     <Compile Include="DT_Bonos.cs" />
+    <Compile Include="DT_Cuentas.cs" />
     <Compile Include="DT_Departamentos.cs" />
     <Compile Include="DT_Funciones.cs" />
     <Compile Include="DT_INSS.cs" />

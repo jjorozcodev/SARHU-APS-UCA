@@ -2,6 +2,13 @@
 {
     public class Procedimientos
     {
+        // CUENTAS
+        public static string CuentasListar = "[sp_cuentas_list]";
+        public static string CuentasConsultar = "[sp_cuentas_consult]";
+        public static string CuentasAgregar = "[sp_cuentas_insert]";
+        public static string CuentasEditar = "[sp_cuentas_update]";
+        public static string CuentasBorrar = "[sp_cuentas_delete]";
+
         // ORGANIZACIÓN
         public static string OrganizacionObtener = "[dbo].[sp_organizacion_consult]";
         public static string OrganizacionEditar = "[dbo].[sp_organizacion_update]";

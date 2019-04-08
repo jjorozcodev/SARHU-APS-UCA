@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="NG_Areas.cs" />
     <Compile Include="NG_Bonos.cs" />
+    <Compile Include="NG_Cuentas.cs" />
     <Compile Include="NG_Departamentos.cs" />
     <Compile Include="NG_Funciones.cs" />
     <Compile Include="NG_Localidades.cs" />

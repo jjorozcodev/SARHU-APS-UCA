@@ -43,6 +43,7 @@
     <Compile Include="Area.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="Bono.cs" />
+    <Compile Include="Cuenta.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="Funcion.cs" />
     <Compile Include="Localidad.cs" />
