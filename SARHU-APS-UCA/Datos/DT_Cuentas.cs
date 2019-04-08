@@ -41,7 +41,6 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.CuentasAgregar;
-            
             comandoSql.Parameters.Clear();
 
             comandoSql.Parameters.Add("@cuenta_codigo_contable", SqlDbType.VarChar).Value = obj.CodigoContable;
@@ -144,6 +143,7 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
+            comandoSql.Parameters.Add("@cuenta_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@cuenta_codigo_contable", SqlDbType.VarChar).Value = obj.CodigoContable;
             comandoSql.Parameters.Add("@cuenta_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@cuenta_codigo_salarios", SqlDbType.VarChar).Value = obj.CuentaSalario;
@@ -178,7 +178,7 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
-            if(conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State == ConnectionState.Closed)
             {
                 conexionSql.Open();
             }
@@ -218,9 +218,9 @@ namespace Datos
 
             List<Cuenta> listCuentas = new List<Cuenta>();
 
-            foreach(Cuenta c in cuentas)
+            foreach (Cuenta c in cuentas)
             {
-                if(c.Estado == Estado)
+                if (c.Estado == Estado)
                 {
                     listCuentas.Add(c);
                 }
