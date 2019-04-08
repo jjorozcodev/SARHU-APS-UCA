@@ -176,8 +176,14 @@
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="sarhu\cambiar-clave.aspx" />
     <Content Include="sarhu\catalogos\agregar-cuenta.aspx" />
+    <Content Include="sarhu\catalogos\agregar-estadoc.aspx" />
+    <Content Include="sarhu\catalogos\agregar-nivela.aspx" />
     <Content Include="sarhu\catalogos\cuentas.aspx" />
     <Content Include="sarhu\catalogos\editar-cuenta.aspx" />
+    <Content Include="sarhu\catalogos\editar-estadoc.aspx" />
+    <Content Include="sarhu\catalogos\editar-nivela.aspx" />
+    <Content Include="sarhu\catalogos\estados-civiles.aspx" />
+    <Content Include="sarhu\catalogos\niveles-academicos.aspx" />
     <Content Include="sarhu\parametros\factores-calculo.aspx" />
     <Content Include="sarhu\perfil.aspx" />
     <Content Include="sarhu\ingresos-deducciones\adelantos.aspx" />
@@ -302,6 +308,20 @@
     <Compile Include="sarhu\catalogos\agregar-cuenta.aspx.designer.cs">
       <DependentUpon>agregar-cuenta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="sarhu\catalogos\agregar-estadoc.aspx.cs">
+      <DependentUpon>agregar-estadoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\agregar-estadoc.aspx.designer.cs">
+      <DependentUpon>agregar-estadoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\agregar-nivela.aspx.cs">
+      <DependentUpon>agregar-nivela.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\agregar-nivela.aspx.designer.cs">
+      <DependentUpon>agregar-nivela.aspx</DependentUpon>
+    </Compile>
     <Compile Include="sarhu\catalogos\cuentas.aspx.cs">
       <DependentUpon>cuentas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -315,6 +335,34 @@
     </Compile>
     <Compile Include="sarhu\catalogos\editar-cuenta.aspx.designer.cs">
       <DependentUpon>editar-cuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-estadoc.aspx.cs">
+      <DependentUpon>editar-estadoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-estadoc.aspx.designer.cs">
+      <DependentUpon>editar-estadoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-nivela.aspx.cs">
+      <DependentUpon>editar-nivela.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\editar-nivela.aspx.designer.cs">
+      <DependentUpon>editar-nivela.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\estados-civiles.aspx.cs">
+      <DependentUpon>estados-civiles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\estados-civiles.aspx.designer.cs">
+      <DependentUpon>estados-civiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\catalogos\niveles-academicos.aspx.cs">
+      <DependentUpon>niveles-academicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\catalogos\niveles-academicos.aspx.designer.cs">
+      <DependentUpon>niveles-academicos.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\ingresos-deducciones\adelantos.aspx.cs">
       <DependentUpon>adelantos.aspx</DependentUpon>

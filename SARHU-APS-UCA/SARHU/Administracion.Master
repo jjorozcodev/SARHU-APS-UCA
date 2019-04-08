@@ -88,6 +88,12 @@
                                 <li>
                                     <a href="~/sarhu/catalogos/cuentas.aspx" runat="server">Cuentas</a>
                                 </li>
+                                <li>
+                                    <a href="~/sarhu/catalogos/estados-civiles.aspx" runat="server">Estados Civiles</a>
+                                </li>
+                                <li>
+                                    <a href="~/sarhu/catalogos/niveles-academicos.aspx" runat="server">Niveles Académicos</a>
+                                </li>
                             </ul>
                         </li>
                         <li>
