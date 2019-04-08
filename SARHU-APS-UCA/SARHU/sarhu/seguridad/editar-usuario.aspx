@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="editar-usuario.aspx.cs" Inherits="SARHU.sarhu.seguridad.editar_usuario" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="editar-usuario.aspx.cs" Inherits="SARHU.sarhu.seguridad.editar_usuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
 
@@ -58,7 +58,7 @@
                                 <input type="text" class="form-control">
                             </div>
 
-                                <label>Correo Electronico</label>
+                                <label>Correo Electrónico</label>
                             <div class="form-group input-group" style="width: 100%;">
                                 <input type="text" class="form-control">
                             </div>
@@ -68,7 +68,7 @@
 
 
                             <div class="form-group" align="center">
-                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
+                                <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Editar</button>
                                 <a href="usuarios.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                             </div>
 

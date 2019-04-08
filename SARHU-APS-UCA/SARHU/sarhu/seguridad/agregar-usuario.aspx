@@ -62,7 +62,7 @@
                                 <input type="text" class="form-control">
                             </div>
 
-                                <label>Correo Electronico</label>
+                                <label>Correo Electrónico</label>
                             <div class="form-group input-group" style="width: 100%;">
                                 <input type="text" class="form-control">
                             </div>

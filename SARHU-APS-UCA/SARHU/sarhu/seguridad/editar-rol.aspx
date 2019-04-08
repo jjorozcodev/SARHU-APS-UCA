@@ -54,7 +54,6 @@
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
-
     </div>
 
     <script>
