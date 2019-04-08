@@ -381,32 +381,32 @@ create table SOS_ADENDUMS_FUNCIONES
 )
 GO
 
-create table SOS_ESTADOSCIVILES
+create table SOS_ESTADOS_CIVILES
 (
-	estadocivil_id int identity
-		constraint SOS_ESTADOSCIVILES_pk
+	estado_civil_id int identity
+		constraint SOS_ESTADOS_CIVILES_pk
 			primary key clustered,
-	estadocivil_nombre varchar(30) not null,
-	estadocivil_estado bit default 1 not null
+	estado_civil_nombre varchar(30) not null,
+	estado_civil_estado bit default 1 not null
 )
 GO
 
-create unique index SOS_ESTADOSCIVILES_estadocivil_id_uindex
-	on SOS_ESTADOSCIVILES (estadocivil_id)
+create unique index SOS_ESTADOS_CIVILES_estado_civil_id_uindex
+	on SOS_ESTADOS_CIVILES (estado_civil_id)
 GO
 
-create table SOS_NIVELESACADEMICOS
+create table SOS_NIVELES_ACADEMICOS
 (
-	nivelacademico_id int identity
-		constraint SOS_NIVELESACADEMICOS_pk
+	nivel_academico_id int identity
+		constraint SOS_NIVELES_ACADEMICOS_pk
 			primary key clustered,
-	nivelacademico_nombre varchar(30) not null,
-	nivelacademico_estado bit default 1 not null
+	nivel_academico_nombre varchar(30) not null,
+	nivel_academico_estado bit default 1 not null
 )
 GO
 
-create unique index SOS_NIVELESACADEMICOS_nivelacademico_id_uindex
-	on SOS_NIVELESACADEMICOS (nivelacademico_id)
+create unique index SOS_NIVELES_ACADEMICOS_nivel_academico_id_uindex
+	on SOS_NIVELES_ACADEMICOS (nivel_academico_id)
 GO
 
 create table SOS_CUENTAS
@@ -792,6 +792,86 @@ AS
 	UPDATE SOS_LOCALIDADES
 	SET localidad_estado = 0
 	WHERE localidad_id = @localidad_id;
+GO
+
+-- SOS_ESTADOS_CIVILES --
+
+CREATE PROCEDURE sp_estados_civiles_list
+AS
+	SELECT estado_civil_id, estado_civil_nombre, estado_civil_estado
+	FROM SOS_ESTADOS_CIVILES
+GO
+
+CREATE PROCEDURE sp_estados_civiles_insert
+(@estado_civil_nombre VARCHAR(30))
+AS
+	INSERT INTO SOS_ESTADOS_CIVILES(estado_civil_nombre)
+	VALUES (@estado_civil_nombre);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_estados_civiles_consult
+(@estado_civil_id int)
+AS
+	SELECT estado_civil_nombre, estado_civil_estado
+	FROM SOS_ESTADOS_CIVILES
+	WHERE estado_civil_id = @estado_civil_id;
+GO
+
+CREATE PROCEDURE sp_estados_civiles_update
+(@estado_civil_id INT, @estado_civil_nombre VARCHAR(30))
+AS
+	UPDATE SOS_ESTADOS_CIVILES
+	SET	estado_civil_nombre = @estado_civil_nombre
+	WHERE estado_civil_id = @estado_civil_id;
+GO
+
+CREATE PROCEDURE sp_estados_civiles_delete
+(@estado_civil_id INT)
+AS
+	UPDATE SOS_ESTADOS_CIVILES
+	SET estado_civil_estado = 0
+	WHERE estado_civil_id = @estado_civil_id;
+GO
+
+-- SOS_NIVELES_ACADEMICOS --
+
+CREATE PROCEDURE sp_niveles_academicos_list
+AS
+	SELECT nivel_academico_id, nivel_academico_nombre, nivel_academico_estado
+	FROM SOS_NIVELES_ACADEMICOS
+GO
+
+CREATE PROCEDURE sp_niveles_academicos_insert
+(@nivel_academico_nombre VARCHAR(30))
+AS
+	INSERT INTO SOS_NIVELES_ACADEMICOS(nivel_academico_nombre)
+	VALUES (@nivel_academico_nombre);
+	SELECT SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE sp_niveles_academicos_consult
+(@nivel_academico_id int)
+AS
+	SELECT nivel_academico_nombre, nivel_academico_estado
+	FROM SOS_NIVELES_ACADEMICOS
+	WHERE nivel_academico_id = @nivel_academico_id;
+GO
+
+CREATE PROCEDURE sp_niveles_academicos_update
+(@nivel_academico_id INT, @nivel_academico_nombre VARCHAR(30))
+AS
+	UPDATE SOS_NIVELES_ACADEMICOS
+	SET	nivel_academico_nombre = @nivel_academico_nombre
+	WHERE nivel_academico_id = @nivel_academico_id;
+GO
+
+CREATE PROCEDURE sp_niveles_academicos_delete
+(@nivel_academico_id INT)
+AS
+	UPDATE SOS_NIVELES_ACADEMICOS
+	SET nivel_academico_estado = 0
+	WHERE nivel_academico_id = @nivel_academico_id;
 GO
 
 --SOS_AREAS
@@ -1521,5 +1601,49 @@ GO
 INSERT [dbo].[SOS_ORGANIZACION] ([organizacion_pais], [organizacion_nombre], [organizacion_mision], [organizacion_vision], [organizacion_descripcion], [organizacion_fundacion], [localidad_id]) 
 VALUES (505, N'ALDEAS INFANTILES SOS NICARAGUA', N'Trabajamos por el derecho de los niños a vivir en familia.', N'Cada niño y cada niña pertenecen a una familia y crece con amor.', N'Somos una organización no gubernamental sin fines de lucro presente en 133 países del mundo, siendo la organización más grande en atención directa a niños, niñas, adolescentes y familias.', CAST(N'1949-01-01' AS Date), 0)
 GO
+
+SET IDENTITY_INSERT [dbo].[SARHU_INSS] ON 
+INSERT [dbo].[SARHU_INSS] ([inss_id], [inss_porcentaje], [inss_patronal], [inss_ultima_actualizacion])
+VALUES (1, CAST(7.00 AS Decimal(5, 2)), 0, GETDATE())
+GO
+INSERT [dbo].[SARHU_INSS] ([inss_id], [inss_porcentaje], [inss_patronal], [inss_ultima_actualizacion])
+VALUES (2, CAST(22.50 AS Decimal(5, 2)), 1, GETDATE())
+GO
+SET IDENTITY_INSERT [dbo].[SARHU_INSS] OFF
+
+SET IDENTITY_INSERT [dbo].[SARHU_IR] ON
+INSERT [dbo].[SARHU_IR] ([ir_id], [ir_desde], [ir_hasta], [ir_base], [ir_exceso], [ir_porcentaje_aplicable], [ir_ultima_actualizacion])
+VALUES (1, CAST(0.00 AS Decimal(9, 2)), CAST(100000.00 AS Decimal(9, 2)), CAST(0.00 AS Decimal(9, 2)), CAST(0.00 AS Decimal(9, 2)), CAST(0.00 AS Decimal(5, 2)), GETDATE())
+INSERT [dbo].[SARHU_IR] ([ir_id], [ir_desde], [ir_hasta], [ir_base], [ir_exceso], [ir_porcentaje_aplicable], [ir_ultima_actualizacion])
+VALUES (2, CAST(100000.01 AS Decimal(9, 2)), CAST(200000.00 AS Decimal(9, 2)), CAST(0.00 AS Decimal(9, 2)), CAST(100000.00 AS Decimal(9, 2)), CAST(0.15 AS Decimal(5, 2)), GETDATE())
+INSERT [dbo].[SARHU_IR] ([ir_id], [ir_desde], [ir_hasta], [ir_base], [ir_exceso], [ir_porcentaje_aplicable], [ir_ultima_actualizacion])
+VALUES (3, CAST(200000.01 AS Decimal(9, 2)), CAST(100000.00 AS Decimal(9, 2)), CAST(15000.00 AS Decimal(9, 2)), CAST(200000.00 AS Decimal(9, 2)), CAST(0.20 AS Decimal(5, 2)), GETDATE())
+INSERT [dbo].[SARHU_IR] ([ir_id], [ir_desde], [ir_hasta], [ir_base], [ir_exceso], [ir_porcentaje_aplicable], [ir_ultima_actualizacion])
+VALUES (4, CAST(350000.01 AS Decimal(9, 2)), CAST(500000.00 AS Decimal(9, 2)), CAST(45000.00 AS Decimal(9, 2)), CAST(350000.00 AS Decimal(9, 2)), CAST(0.25 AS Decimal(5, 2)), GETDATE())
+INSERT [dbo].[SARHU_IR] ([ir_id], [ir_desde], [ir_hasta], [ir_base], [ir_exceso], [ir_porcentaje_aplicable], [ir_ultima_actualizacion])
+VALUES (5, CAST(500000.01 AS Decimal(9, 2)), CAST(9999999.99 AS Decimal(9, 2)), CAST(82500.00 AS Decimal(9, 2)), CAST(500000.00 AS Decimal(9, 2)), CAST(0.30 AS Decimal(5, 2)), GETDATE())
+SET IDENTITY_INSERT [dbo].[SARHU_IR] OFF
+
+SET IDENTITY_INSERT [dbo].[SARHU_VARIABLES] ON
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (1, N'INATEC', CAST(2.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (2, N'Techo Salarial INSS', CAST(87945.75 AS Decimal(9, 2)),  GETDATE())
+
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (3, N'Días en Año', CAST(360.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (4, N'Meses del Año', CAST(12.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (5, N'Días en el Mes', CAST(30.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (6, N'Meses Prestaciones', CAST(6.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (7, N'Días Indemnización (Año 1-3)', CAST(30.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (8, N'Días Indemnización  (Año 4-6)', CAST(20.00 AS Decimal(9, 2)),  GETDATE())
+INSERT [dbo].[SARHU_VARIABLES] ([variable_id], [variable_nombre], [variable_valor], [variable_ultima_actualizacion])
+VALUES (9, N'Vacaciones Acumuladas Mes', CAST(2.50 AS Decimal(9, 2)),  GETDATE())
+SET IDENTITY_INSERT [dbo].[SARHU_VARIABLES] OFF
 
 /* ------------ fin registros tablas ------------ */

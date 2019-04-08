@@ -8,7 +8,6 @@ namespace SARHU.sarhu.parametros
 {
     public partial class impuestos : System.Web.UI.Page
     {
-
         private NG_IR ngIR = NG_IR.Instanciar();
         private NG_INSS ngINSS = NG_INSS.Instanciar();
         private NG_Variables ngVariable = NG_Variables.Instanciar();
