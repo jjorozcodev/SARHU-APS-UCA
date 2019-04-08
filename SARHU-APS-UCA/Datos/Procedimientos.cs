@@ -83,14 +83,7 @@
         public static string AreasAgregar = "[sp_areas_insert]";
         public static string AreasEditar = "[sp_areas_update]";
         public static string AreasBorrar = "[sp_areas_delete]";
-
-        // CUENTAS
-        public static string CuentasListar = "[sp_cuentas_list]";
-        public static string CuentasConsultar = "[sp_cuentas_consult]";
-        public static string CuentasAgregar = "[sp_cuentas_insert]";
-        public static string CuentasEditar = "[sp_cuentas_update]";
-        public static string CuentasBorrar = "[sp_cuentas_delete]";
-
+        
         // PUESTOS
         public static string PuestosListar = "[sp_puestos_list]";
         public static string PuestosConsultar = "[sp_puestos_consult]";
