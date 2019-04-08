@@ -11,8 +11,7 @@ namespace SARHU.sarhu.parametros {
     
     
     public partial class impuestos {
-
-        protected global::System.Web.UI.WebControls.Panel panelNotificacion;
+        
         /// <summary>
         /// Control porcentajeL.
         /// </summary>
