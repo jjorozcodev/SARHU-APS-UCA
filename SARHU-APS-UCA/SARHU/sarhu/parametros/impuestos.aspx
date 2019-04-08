@@ -20,6 +20,7 @@
                                         <div class="col-md-12" id="tabs">
                                            <ul class="nav nav-tabs">
 
+
                                                 <li class="active"><a href="#inss" data-toggle="tab">INSS</a></li>
                                                 <li ><a href="#ir" data-toggle="tab">IR</a></li>
                                                 <li><a href="#inatec" data-toggle="tab">INATEC</a></li>
@@ -321,7 +322,7 @@
 
                                                              <div class="form-group" align="center">
 
-                                        <asp:Button ID="btnActualizarIr" Text="Actualizar" runat="server" CssClass="btn btn-success  fondo-verde-aldeas" align="center" OnClick="Editar_click"></asp:Button>
+                                        <asp:Button ID="btnActualizarIr" Text="Actualizar" runat="server" CssClass="btn btn-success  fondo-verde-aldeas" align="center" OnClick="ActualizarIR_click"></asp:Button>
 
                                                             </div>                                                         
                                                           </div>

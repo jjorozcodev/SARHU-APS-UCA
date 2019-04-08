@@ -13,13 +13,13 @@ namespace SARHU.sarhu.parametros
         private NG_INSS ngINSS = NG_INSS.Instanciar();
         private NG_Variables ngVariable = NG_Variables.Instanciar();
 
-        protected INSS ins1, ins2 = null;
-        private int idinnss = 1, idinss2 = 2;
+        protected INSS inssLaboral, inssPatronal = null;
+        private int idInnssL = 1, idInssP = 2;
 
-        protected Variable va1, va2 = null;
-        private int idVariable1 = 6, idVariable2 = 8;
+        protected Variable variableTechoSalarial, variableINATEC = null;
+        private int idVariableTS = 6, idVariableINATEC = 8;
 
-        protected IR ir1, ir2, ir3, ir4, ir5 = null;
+        protected IR ir0_100K, ir100_200k, ir200_100k, ir350_500k, ir500_999mill = null;
         private int idActualizar1 = 1, idActualizar2 = 2, idActualizar3 = 3, idActualizar4 = 4, idActualizar5 = 5;
    
 
@@ -28,17 +28,17 @@ namespace SARHU.sarhu.parametros
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ins1 = ngINSS.Consultar(idinnss);
-            ins2 = ngINSS.Consultar(idinss2);
+            inssLaboral = ngINSS.Consultar(idInnssL);
+            inssPatronal = ngINSS.Consultar(idInssP);
 
-            va1 = ngVariable.Consultar(idVariable1);
-            va2 = ngVariable.Consultar(idVariable2);
+            variableTechoSalarial = ngVariable.Consultar(idVariableTS);
+            variableINATEC = ngVariable.Consultar(idVariableINATEC);
 
-            ir1 = ngIR.Consultar(idActualizar1);
-            ir2 = ngIR.Consultar(idActualizar2);
-            ir3 = ngIR.Consultar(idActualizar3);
-            ir4 = ngIR.Consultar(idActualizar4);
-            ir5 = ngIR.Consultar(idActualizar5);
+            ir0_100K = ngIR.Consultar(idActualizar1);
+            ir100_200k = ngIR.Consultar(idActualizar2);
+            ir200_100k = ngIR.Consultar(idActualizar3);
+            ir350_500k = ngIR.Consultar(idActualizar4);
+            ir500_999mill = ngIR.Consultar(idActualizar5);
 
 
 
@@ -54,21 +54,21 @@ namespace SARHU.sarhu.parametros
 
         private void CargarInformacionINSS()
         {
-            if (ins1 != null)
+            if (inssLaboral != null)
             {
-                porcentajeL.Text = ins1.Porcentaje.ToString();          
+                porcentajeL.Text = inssLaboral.Porcentaje.ToString();          
           
             }
 
-            if (ins2 != null)
+            if (inssPatronal != null)
             {
-                porcentajeP.Text = ins2.Porcentaje.ToString();
+                porcentajeP.Text = inssPatronal.Porcentaje.ToString();
    
             }
 
-            if (va1 != null)
+            if (variableTechoSalarial != null)
             {
-                techoSalaralInss.Text = va1.Valor.ToString();
+                techoSalaralInss.Text = variableTechoSalarial.Valor.ToString();
 
             }
 
@@ -80,9 +80,9 @@ namespace SARHU.sarhu.parametros
 
         private void CargarInformacionInatec()
                 {
-                    if (va2 != null)
+                    if (variableINATEC != null)
                     {
-                        porcentajeIna.Text = va2.Valor.ToString();
+                        porcentajeIna.Text = variableINATEC.Valor.ToString();
 
 
                     }
@@ -91,50 +91,50 @@ namespace SARHU.sarhu.parametros
 
         private void CargarInformacionIR()
         {
-            if (ir1 != null)
+            if (ir0_100K != null)
             {
-                impDesde1.Text = ir1.Desde.ToString();               
-                impHasta1.Text = ir1.Hasta.ToString();
-                impBase1.Text = ir1.Base.ToString();
-                impExceso1.Text = ir1.Exceso.ToString();
-                impPorcentaje1.Text = ir1.PorcentajeAplicable.ToString();                                     
+                impDesde1.Text = ir0_100K.Desde.ToString();               
+                impHasta1.Text = ir0_100K.Hasta.ToString();
+                impBase1.Text = ir0_100K.Base.ToString();
+                impExceso1.Text = ir0_100K.Exceso.ToString();
+                impPorcentaje1.Text = ir0_100K.PorcentajeAplicable.ToString();                                     
                 
             }
 
-            if (ir2 != null)
+            if (ir100_200k != null)
             {
 
-                impDesde2.Text = ir2.Desde.ToString();
-                impHasta2.Text = ir2.Hasta.ToString();
-                impBase2.Text = ir2.Base.ToString();
-                impExceso2.Text = ir2.Exceso.ToString();
-                impPorcentaje2.Text= ir2.PorcentajeAplicable.ToString();
+                impDesde2.Text = ir100_200k.Desde.ToString();
+                impHasta2.Text = ir100_200k.Hasta.ToString();
+                impBase2.Text = ir100_200k.Base.ToString();
+                impExceso2.Text = ir100_200k.Exceso.ToString();
+                impPorcentaje2.Text= ir100_200k.PorcentajeAplicable.ToString();
             }
 
-            if (ir3 != null)
+            if (ir200_100k != null)
             {
-                impDesde3.Text = ir3.Desde.ToString();
-                impHasta3.Text = ir3.Hasta.ToString();
-                impBase3.Text = ir3.Base.ToString();
-                impExceso3.Text = ir3.Exceso.ToString();
-                impPorcentaje3.Text = ir3.PorcentajeAplicable.ToString();
+                impDesde3.Text = ir200_100k.Desde.ToString();
+                impHasta3.Text = ir200_100k.Hasta.ToString();
+                impBase3.Text = ir200_100k.Base.ToString();
+                impExceso3.Text = ir200_100k.Exceso.ToString();
+                impPorcentaje3.Text = ir200_100k.PorcentajeAplicable.ToString();
             }
 
-            if (ir4 != null)
+            if (ir350_500k != null)
             {
-                impDesde4.Text = ir4.Desde.ToString();
-                impHasta4.Text = ir4.Hasta.ToString();
-                impBase4.Text = ir4.Base.ToString();
-                impExceso4.Text = ir4.Exceso.ToString();
-                impPorcentaje4.Text = ir4.PorcentajeAplicable.ToString();
+                impDesde4.Text = ir350_500k.Desde.ToString();
+                impHasta4.Text = ir350_500k.Hasta.ToString();
+                impBase4.Text = ir350_500k.Base.ToString();
+                impExceso4.Text = ir350_500k.Exceso.ToString();
+                impPorcentaje4.Text = ir350_500k.PorcentajeAplicable.ToString();
             }
-            if (ir5 != null)
+            if (ir500_999mill != null)
             {
-                impDesde5.Text = ir5.Desde.ToString();
-                impHasta5.Text = ir5.Hasta.ToString();
-                impBase5.Text = ir5.Base.ToString();
-                impExceso5.Text = ir5.Exceso.ToString();
-                impPorcentaje5.Text = ir5.PorcentajeAplicable.ToString();
+                impDesde5.Text = ir500_999mill.Desde.ToString();
+                impHasta5.Text = ir500_999mill.Hasta.ToString();
+                impBase5.Text = ir500_999mill.Base.ToString();
+                impExceso5.Text = ir500_999mill.Exceso.ToString();
+                impPorcentaje5.Text = ir500_999mill.PorcentajeAplicable.ToString();
             }
             
         }
@@ -151,7 +151,7 @@ namespace SARHU.sarhu.parametros
         // Control myControl1 = FindControl("impDesde");
 
 
-        private IR ObtenerDatosInterfazIR()
+        private IR ObtenerDatosInterfazIR0_100K()
         {
             IR i = new IR();
 
@@ -168,7 +168,7 @@ namespace SARHU.sarhu.parametros
 
 
 
-        private IR ObtenerDatosInterfazIR2()
+        private IR ObtenerDatosInterfazIR100_200K()
         {
             
 
@@ -187,7 +187,7 @@ namespace SARHU.sarhu.parametros
 
 
 
-        private IR ObtenerDatosInterfazIR3()
+        private IR ObtenerDatosInterfazIR200_100K()
         {
 
 
@@ -206,7 +206,7 @@ namespace SARHU.sarhu.parametros
         }
 
 
-        private IR ObtenerDatosInterfazIR4()
+        private IR ObtenerDatosInterfazIR350_500K()
         {
 
 
@@ -224,7 +224,7 @@ namespace SARHU.sarhu.parametros
         }
 
 
-        private IR ObtenerDatosInterfazIR5()
+        private IR ObtenerDatosInterfazIR500K_999Mill()
         {
 
 
@@ -243,7 +243,7 @@ namespace SARHU.sarhu.parametros
         }
         //--------------------------------------------------------------------
 
-        private INSS ObtenerDatosInterfazINSS()
+        private INSS ObtenerDatosInterfazINSSLaboral()
         {
             INSS ins = new INSS();
 
@@ -256,7 +256,7 @@ namespace SARHU.sarhu.parametros
             return ins;
         }
 
-        private INSS ObtenerDatosInterfazINSS2()
+        private INSS ObtenerDatosInterfazINSSPatronal()
         {
             INSS i = new INSS();
             int id = 2;
@@ -268,7 +268,7 @@ namespace SARHU.sarhu.parametros
             return i;
         }
 
-        private Variable ObtenerDatosInterfazINSS3()
+        private Variable ObtenerDatosInterfazINSSTechoSaralial()
         {
             Variable v = new Variable();
             int id = 6;
@@ -300,9 +300,9 @@ namespace SARHU.sarhu.parametros
 
         protected void ActualizarInatec_click(object sender, EventArgs e)
         {
-            this.va2 = ObtenerDatosInterfazInatec();
+            this.variableINATEC = ObtenerDatosInterfazInatec();
 
-            EjecutarNotificarUsuario(ngVariable.Editar(va2));
+            EjecutarNotificarUsuario(ngVariable.Editar(variableINATEC));
 
         }
 
@@ -310,32 +310,32 @@ namespace SARHU.sarhu.parametros
 
         protected void ActualizarINSS_click(object sender, EventArgs e)
         {
-            this.ins1 = ObtenerDatosInterfazINSS();
-            this.ins2 = ObtenerDatosInterfazINSS2();
-            this.va1 = ObtenerDatosInterfazINSS3();
+            this.inssLaboral = ObtenerDatosInterfazINSSLaboral();
+            this.inssPatronal = ObtenerDatosInterfazINSSPatronal();
+            this.variableTechoSalarial = ObtenerDatosInterfazINSSTechoSaralial();
 
-            EjecutarNotificarUsuario(ngINSS.Editar(ins1));
-            EjecutarNotificarUsuario(ngINSS.Editar(ins2));
-            EjecutarNotificarUsuario(ngVariable.Editar(va1));
+            EjecutarNotificarUsuario(ngINSS.Editar(inssLaboral));
+            EjecutarNotificarUsuario(ngINSS.Editar(inssPatronal));
+            EjecutarNotificarUsuario(ngVariable.Editar(variableTechoSalarial));
 
 
         }
 
 
 
-        protected void Editar_click(object sender, EventArgs e)
+        protected void ActualizarIR_click(object sender, EventArgs e)
         {
-            this.ir1 = ObtenerDatosInterfazIR();
-            this.ir2 = ObtenerDatosInterfazIR2();
-            this.ir3 = ObtenerDatosInterfazIR3();
-            this.ir4 = ObtenerDatosInterfazIR4();
-            this.ir5 = ObtenerDatosInterfazIR5();
+            this.ir0_100K = ObtenerDatosInterfazIR0_100K();
+            this.ir100_200k = ObtenerDatosInterfazIR100_200K();
+            this.ir200_100k = ObtenerDatosInterfazIR200_100K();
+            this.ir350_500k = ObtenerDatosInterfazIR350_500K();
+            this.ir500_999mill = ObtenerDatosInterfazIR500K_999Mill();
 
-            EjecutarNotificarUsuario(ngIR.Editar(ir1));
-            EjecutarNotificarUsuario(ngIR.Editar(ir2));
-            EjecutarNotificarUsuario(ngIR.Editar(ir3));
-            EjecutarNotificarUsuario(ngIR.Editar(ir4));
-            EjecutarNotificarUsuario(ngIR.Editar(ir5));
+            EjecutarNotificarUsuario(ngIR.Editar(ir0_100K));
+            EjecutarNotificarUsuario(ngIR.Editar(ir100_200k));
+            EjecutarNotificarUsuario(ngIR.Editar(ir200_100k));
+            EjecutarNotificarUsuario(ngIR.Editar(ir350_500k));
+            EjecutarNotificarUsuario(ngIR.Editar(ir500_999mill));
 
 
 
