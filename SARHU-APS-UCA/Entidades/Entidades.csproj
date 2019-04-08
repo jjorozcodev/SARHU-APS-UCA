@@ -58,6 +58,8 @@
     <Compile Include="Organizacion.cs" />
     <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Puesto.cs" />
+    <Compile Include="Puestos.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Variable.cs" />

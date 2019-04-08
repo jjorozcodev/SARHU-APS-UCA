@@ -17,9 +17,7 @@ namespace SARHU.sarhu.personal
         private NG_Puestos ngPuesto = NG_Puestos.Instanciar();
         public string Message = null;
         private Puestos puesto = null;
-
-
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

@@ -10,7 +10,7 @@ namespace Datos
     {
         List<Puestos> puestos = new List<Puestos>();
 
-        private SqlConnection conexionSql = Conexion.Instanciar().ConexionDB();
+        private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
         private SqlDataAdapter adaptadorSql = null;
      
@@ -41,7 +41,7 @@ namespace Datos
             puestos.Clear();
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoListar;
+            comandoSql.CommandText = Procedimientos.PuestosListar;
 
             comandoSql.Parameters.Clear();
 
@@ -77,7 +77,7 @@ namespace Datos
         
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoConsultar;
+            comandoSql.CommandText = Procedimientos.PuestosConsultar;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_id", SqlDbType.Int).Value = id;
@@ -110,7 +110,7 @@ namespace Datos
           
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoAgregar;
+            comandoSql.CommandText = Procedimientos.PuestosAgregar;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_nombre", SqlDbType.VarChar).Value = obj.Nombre;
@@ -137,7 +137,7 @@ namespace Datos
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoEditar;
+            comandoSql.CommandText = Procedimientos.PuestosEditar;
 
 
             comandoSql.Parameters.Clear();
@@ -165,7 +165,7 @@ namespace Datos
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoDelete;
+            comandoSql.CommandText = Procedimientos.PuestosBorrar;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_id", SqlDbType.Int).Value = id;
@@ -188,7 +188,7 @@ namespace Datos
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoFuncionAgregar;
+            comandoSql.CommandText = Procedimientos.PuestoFuncionesAgregar;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_id", SqlDbType.VarChar).Value = idpuesto;
@@ -211,7 +211,7 @@ namespace Datos
             // TODO: Para mostrar en la tabla.
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoFuncionListar;
+            comandoSql.CommandText = Procedimientos.PuestoFuncionesListar;
             comandoSql.Parameters.Clear();
             adaptadorSql = new SqlDataAdapter(comandoSql);
             DataTable dt = new DataTable();
@@ -225,7 +225,7 @@ namespace Datos
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoFuncionBorrar;
+            comandoSql.CommandText = Procedimientos.PuestoFuncionesBorrar;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_id", SqlDbType.Int).Value = idPuesto;
@@ -246,7 +246,7 @@ namespace Datos
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestoFuncionBorrarTodo;
+            //comandoSql.CommandText = Procedimientos.PuestoFuncionBorrarTodo;
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@puesto_id", SqlDbType.Int).Value = idPuesto;
