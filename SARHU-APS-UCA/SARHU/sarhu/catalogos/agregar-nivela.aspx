@@ -17,14 +17,18 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                <% =Mensaje %>
+                                            </asp:Panel>
+
                                             <div class="form-group input-group" style="width: 100%;">
                                                 <label>Nombre</label>
-                                                <div class="form-group input-group" style="width: 100%;">
-                                                    <input type="text" class="form-control">
-                                                </div>
+                                                <asp:TextBox ID="nivelaNombre" type="text" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
-                                             <div class="form-group" align="center">
-                                                <button id="btnGuardar" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
+                                            <div class="form-group">
+                                                <asp:Button runat="server" class="btn btn-success  fondo-verde-aldeas" ID="btnGuardar" Text="Guardar" OnClick="Guardar_Click" />
                                                 <a href="niveles-academicos.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                                             </div>
 
@@ -47,4 +51,14 @@
         <!-- /.col-lg-12 -->
 
     </div>
+
+        <script>
+            $(document).ready(function () {
+            setTimeout(function () {
+                $("#panelNotificacion").fadeOut("slow", function () {
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/catalogos/niveles-academicos' 
+                });
+            }, 2500);
+        });
+    </script>
 </asp:Content>
