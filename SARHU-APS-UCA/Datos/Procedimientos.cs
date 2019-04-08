@@ -56,6 +56,13 @@
         public static string PermisosAgregar = "[sp_permisos_insert]";
         public static string PermisosBorrar = "[sp_permisos_delete]";
 
+        // ESTADOS CIVILES
+        public static string EstadosCivilesListar = "[sp_estados_civiles_list]";
+        public static string EstadosCivilesConsultar = "[sp_estados_civiles_consult]";
+        public static string EstadosCivilesAgregar = "[sp_estados_civiles_insert]";
+        public static string EstadosCivilesEditar = "[sp_estados_civiles_update]";
+        public static string EstadosCivilesBorrar = "[sp_estados_civiles_delete]";
+
         // ÁREAS
         public static string AreasListar = "[sp_areas_list]";
         public static string AreasConsultar = "[sp_areas_consult]";

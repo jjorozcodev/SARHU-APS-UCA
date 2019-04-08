@@ -57,7 +57,7 @@ namespace Negocio
 
         public List<EstadoCivil> ListarPorEstado(bool estado)
         {
-            return null; //dtEstadosCiviles.ListarPorEstado(estado);
+            return dtEstadosCiviles.ListarPorEstado(estado);
         }
     }
 }
