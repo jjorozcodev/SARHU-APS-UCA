@@ -51,6 +51,7 @@ namespace SARHU.sarhu.catalogos
             c.CodigoContable = codigoContable.Text;
             c.CuentaSalario = cuentaSalario.Text;
             c.CuentaImpuestos = cuentaImpuesto.Text;
+            c.Planilla = cuentaPlanilla.Checked;
             c.CuentaSeguros = cuentaSeguro.Text;
             c.Descripcion = cuentaDescripcion.Value;
             c.Estado = true;

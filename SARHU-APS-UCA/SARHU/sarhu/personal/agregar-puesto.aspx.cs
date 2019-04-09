@@ -16,7 +16,7 @@ namespace SARHU.sarhu.personal
         Funcion funciones = null;
         private NG_Puestos ngPuesto = NG_Puestos.Instanciar();
         public string Message = null;
-        private Puestos puesto = null;
+        private Puesto puesto = null;
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -66,9 +66,9 @@ namespace SARHU.sarhu.personal
         }
 
 
-        private Puestos ObtenerDatosInterfaz()
+        private Puesto ObtenerDatosInterfaz()
         {
-            puesto = new Puestos();
+            puesto = new Puesto();
             puesto.Nombre = NombrePuesto.Text;
             puesto.Descripcion = textarea.Value;
             puesto.SalarioBase = decimal.Parse(Salario.Text);
@@ -91,7 +91,7 @@ namespace SARHU.sarhu.personal
         }
 
 
-        private bool GuardarPuesto(Puestos puesto)
+        private bool GuardarPuesto(Puesto puesto)
         {
             bool resp = false;
             int idObtenido = ngPuesto.AgregarPuesto(puesto);

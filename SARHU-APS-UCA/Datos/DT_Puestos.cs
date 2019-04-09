@@ -6,9 +6,9 @@ using System;
 
 namespace Datos
 {
-    public class DT_Puestos : I_CRUD<Puestos>
+    public class DT_Puestos : I_CRUD<Puesto>
     {
-        List<Puestos> puestos = new List<Puestos>();
+        List<Puesto> puestos = new List<Puesto>();
 
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
@@ -36,7 +36,7 @@ namespace Datos
 
 
 
-        public List<Puestos> Listar()
+        public List<Puesto> Listar()
         {
             puestos.Clear();
             comandoSql.Connection = conexionSql;
@@ -55,14 +55,14 @@ namespace Datos
 
             while (reader.Read())
             {
-                Puestos p = new Puestos();
+                Puesto p = new Puesto();
                 p.Id = reader.GetInt32(0);
                 p.Nombre = reader.GetString(1);
                 p.Descripcion = reader.GetString(2);
                 p.CuentaId = reader.GetInt32(3);
                 p.AreaId = reader.GetInt32(4);
                 p.SalarioBase = reader.GetDecimal(5);
-
+                p.Estado = reader.GetBoolean(6);
                 puestos.Add(p);
             }
             reader.Close();
@@ -72,7 +72,23 @@ namespace Datos
             return puestos;
         }
 
-        public Puestos Consultar(int id)
+        public List<Puesto> ListarPorEstado(bool Estado)
+        {
+            Listar();
+            List<Puesto> PuestosActivos = new List<Puesto>();
+            foreach (Puesto p in puestos)
+            {
+                if (p.Estado == Estado)
+                {
+                    PuestosActivos.Add(p);
+                }
+            }
+
+            return PuestosActivos;
+
+        }
+
+        public Puesto Consultar(int id)
         {
         
             comandoSql.Connection = conexionSql;
@@ -88,7 +104,7 @@ namespace Datos
             }
 
             SqlDataReader reader = comandoSql.ExecuteReader();
-            Puestos puesto = new Puestos();
+            Puesto puesto = new Puesto();
 
             while (reader.Read())
             {                
@@ -105,7 +121,7 @@ namespace Datos
             return puesto;
         }
 
-        public int Agregar(Puestos obj)
+        public int Agregar(Puesto obj)
         {
           
             comandoSql.Connection = conexionSql;
@@ -133,7 +149,7 @@ namespace Datos
             return idPuesto;
         }
 
-        public bool Editar(Puestos obj)
+        public bool Editar(Puesto obj)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -242,25 +258,7 @@ namespace Datos
         }
 
 
-        public void EliminarFuncionesPuestoTodo(int idPuesto)
-        {
-            comandoSql.Connection = conexionSql;
-            comandoSql.CommandType = CommandType.StoredProcedure;
-            //comandoSql.CommandText = Procedimientos.PuestoFuncionBorrarTodo;
-
-            comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@puesto_id", SqlDbType.Int).Value = idPuesto;
-           
-
-            if (conexionSql.State == ConnectionState.Closed)
-            {
-                conexionSql.Open();
-            }
-
-            int borrado = comandoSql.ExecuteNonQuery();
-
-            conexionSql.Close();
-        }
+     
 
     }
 }

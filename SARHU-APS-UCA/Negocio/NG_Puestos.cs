@@ -35,7 +35,7 @@ namespace Negocio
         }
 
 
-        public int AgregarPuesto(Puestos puesto)
+        public int AgregarPuesto(Puesto puesto)
         {
 
             return DT_Puestos.Instanciar().Agregar(puesto);
@@ -52,21 +52,27 @@ namespace Negocio
 
         }
 
-        public List<Puestos> ListarPuesto()
+        public List<Puesto> ListarPuesto(bool Estado)
         {
 
-            return dtPuesto.Listar();
+            return dtPuesto.ListarPorEstado(Estado);
 
         }
 
-        public bool EditarPuesto(Puestos puestos)
+        public bool EditarPuesto(Puesto puestos)
         {
 
             return dtPuesto.Editar(puestos);
         }
 
-        public bool Eliminar(int id) {
-            dtPuesto.EliminarFuncionesPuestoTodo(id);
+        public bool Eliminar(int id, List<int> funcionesID) {
+
+            foreach (int idfuncion in funcionesID)
+            {
+                EliminarFuncionPuesto(id, idfuncion);
+            }
+
+           
             return dtPuesto.Borrar(id);
 
         }
@@ -77,7 +83,7 @@ namespace Negocio
 
         }
 
-        public Puestos Consultar(int id)
+        public Puesto Consultar(int id)
         {
 
             return dtPuesto.Consultar(id);

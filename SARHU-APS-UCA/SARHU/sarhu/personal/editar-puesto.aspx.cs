@@ -19,7 +19,7 @@ namespace SARHU.sarhu.personal
         private static DataTable dtFuncion = new DataTable();
 
         private Funcion funciones = null;
-        private Puestos puesto = null;
+        private Puesto puesto = null;
         private static int id = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -118,9 +118,9 @@ namespace SARHU.sarhu.personal
         }
 
 
-        private Puestos ObtenerDatosInterfaz()
+        private Puesto ObtenerDatosInterfaz()
         {
-            puesto = new Puestos();
+            puesto = new Puesto();
             puesto.Id = id;
             puesto.Nombre = NombrePuesto.Text;
             puesto.Descripcion = textarea.Value;
@@ -148,7 +148,7 @@ namespace SARHU.sarhu.personal
 
        
 
-        private bool GuardarPuesto(Puestos puesto)
+        private bool GuardarPuesto(Puesto puesto)
         {
 
             funcionesId.Sort();
@@ -175,7 +175,7 @@ namespace SARHU.sarhu.personal
         {
             id = int.Parse(ViewState["IdPuesto"].ToString());
 
-            Puestos puesto = ngPuesto.Consultar(id);
+            Puesto puesto = ngPuesto.Consultar(id);
 
             NombrePuesto.Text = puesto.Nombre;
             textarea.Value = puesto.Descripcion;
