@@ -37,6 +37,27 @@
         public static string EmpleadosEditar = "[sp_empleados_update]";
         public static string EmpleadosBorrar = "[sp_empleados_delete]";
 
+        //PLANILLAS
+        public static string PlanillasListar = "[sp_planilla_list]";
+        public static string PlanillasConsultar = "[sp_planilla_consult]";
+        public static string PlanillasAgregar = "[sp_planilla_insert]";
+        public static string PlanillasEditar = "[sp_planilla_update]";
+        public static string PlanillasBorrar = "[sp_planilla_delete]";
+
+        //PLANILLAS DETALLE
+        public static string PlanillasDetalleListar = "[sp_planilla_detalle_list]";
+        public static string PlanillasDetalleConsultar = "[sp_planilla_detalle_consult]";
+        public static string PlanillasDetalleAgregar = "[sp_planilla_detalle_insert]";
+        public static string PlanillasDetalleEditar = "[sp_planilla_detalle_update]";
+
+
+        //PLANILLAS EMPLEADO
+        public static string PlanillasEmpleadoListar = "[sp_planilla_empleado_list]";
+        public static string PlanillasEmpleadoConsultar = "[sp_planilla_empleado_consult]";
+        public static string PlanillasEmpleadoAgregar = "[sp_planilla_empleado_insert]";
+        public static string PlanillasEmpleadoEditar = "[sp_planilla_empleado_update]";
+ 
+
         // LOCALIDADES
         public static string LocalidadesListar = "[sp_localidades_list]";
         public static string LocalidadesConsultar = "[sp_localidades_consult]";
