@@ -98,7 +98,6 @@ namespace Negocio
             List<Funcion> ltFunciones = new List<Funcion>();
 
             ltFunciones = dtFunciones.Listar();
-            int i = 0;
 
             foreach (DataRow row in tablePuestosFunciones.Rows)
             {

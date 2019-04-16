@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion.Master" AutoEventWireup="true" CodeBehind="agregar-cuenta.aspx.cs" Inherits="SARHU.sarhu.catalogos.agregar_cuenta" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-
-
+<asp:Content ID="ContentCuenta" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -44,14 +42,14 @@
                                                 <asp:TextBox ID="cuentaSeguro" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
 
+                                            <label>Cuenta Planilla</label>
                                             <div  class="form-group input-group" style="width: 100%;">
-                                                <label>Cuenta Planilla</label>
-                                                <asp:CheckBox ID="cuentaPlanilla" runat="server" CssClass="form-control" required="required"></asp:CheckBox>
+                                                <asp:CheckBox ID="cuentaPlanilla" runat="server" CssClass="form-check-input" required="required"></asp:CheckBox>
                                             </div>
 
-                                                <label>Descripción</label>
-                                                <textarea style="resize: none" id="cuentaDescripcion" runat="server" rows="5" cols="5" class="form-control" maxlength="25" name="textarea"></textarea>
-                                                <div id="textarea_feedback">25 caracteres disponibles</div>
+                                            <label>Descripción</label>
+                                            <textarea style="resize: none" id="cuentaDescripcion" runat="server" rows="5" cols="5" class="form-control" maxlength="25" name="textarea"></textarea>
+                                            <div id="textarea_feedback">25 caracteres disponibles</div>
 
                                             <div class="form-group" align="center">
                                                <asp:Button runat="server" class="btn btn-success  fondo-verde-aldeas" ID="btnGuardar" Text="Guardar" OnClick="Guardar_Click" />
