@@ -55,6 +55,7 @@
     <Compile Include="NG_Municipios.cs" />
     <Compile Include="NG_NivelesAcademicos.cs" />
     <Compile Include="NG_Organizacion.cs" />
+    <Compile Include="NG_Planilla.cs" />
     <Compile Include="NG_Programas.cs" />
     <Compile Include="NG_Puestos.cs" />
     <Compile Include="NG_Roles.cs" />

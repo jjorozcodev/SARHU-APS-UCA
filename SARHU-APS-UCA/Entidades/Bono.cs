@@ -1,4 +1,6 @@
-﻿namespace Entidades
+﻿using System;
+
+namespace Entidades
 {
     public class Bono
     {
@@ -7,5 +9,6 @@
         public string Descripcion { get; set; }
         public decimal Monto { get; set; }
         public bool Estado { get; set; }
+        public DateTime fecha_Aplicación { get; set;}
     }
 }
