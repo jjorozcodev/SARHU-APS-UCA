@@ -106,6 +106,14 @@
                                 </li>--%>
                             </ul>
                         </li>
+                         <li>
+                            <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Planilla <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                               
+                                <li>
+                                    <a href="~/sarhu/planilla/historial-planillas.aspx" runat="server">Historial</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

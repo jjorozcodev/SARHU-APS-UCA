@@ -198,6 +198,9 @@
     <Content Include="sarhu\personal\editar-puesto.aspx" />
     <Content Include="sarhu\personal\empleados.aspx" />
     <Content Include="sarhu\personal\puestos.aspx" />
+    <Content Include="sarhu\planilla\editar-planilla.aspx" />
+    <Content Include="sarhu\planilla\historial-planillas.aspx" />
+    <Content Include="sarhu\planilla\procesar-planilla.aspx" />
     <Content Include="sarhu\seguridad\agregar-usuario.aspx" />
     <Content Include="sarhu\seguridad\editar-usuario.aspx" />
     <Content Include="sarhu\seguridad\usuarios.aspx" />
@@ -468,6 +471,27 @@
     </Compile>
     <Compile Include="sarhu\personal\puestos.aspx.designer.cs">
       <DependentUpon>puestos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\planilla\editar-planilla.aspx.cs">
+      <DependentUpon>editar-planilla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\planilla\editar-planilla.aspx.designer.cs">
+      <DependentUpon>editar-planilla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\planilla\historial-planillas.aspx.cs">
+      <DependentUpon>historial-planillas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\planilla\historial-planillas.aspx.designer.cs">
+      <DependentUpon>historial-planillas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sarhu\planilla\procesar-planilla.aspx.cs">
+      <DependentUpon>procesar-planilla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sarhu\planilla\procesar-planilla.aspx.designer.cs">
+      <DependentUpon>procesar-planilla.aspx</DependentUpon>
     </Compile>
     <Compile Include="sarhu\seguridad\agregar-usuario.aspx.cs">
       <DependentUpon>agregar-usuario.aspx</DependentUpon>
