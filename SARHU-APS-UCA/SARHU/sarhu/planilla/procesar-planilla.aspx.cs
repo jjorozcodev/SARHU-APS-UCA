@@ -21,21 +21,51 @@ namespace SARHU.sarhu.planilla
         private List<Localidad> localidad = new List<Localidad>();
         private static DataTable planilla = new DataTable();
         private static decimal monto = 0m;
+        private static int idDirector;
+        private static int idLocalidad;
+        public static string Message;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarDatos();
-               
+
             }
+        }
+
+        protected Planilla_Empleado ObtenerDatosInterfaz()
+        {
+       
+            Planilla_Empleado Pemp = new Planilla_Empleado();
+            Pemp.Idlocalidad = idLocalidad;
+            Pemp.Iddirector = idDirector;
+            Pemp.Idresponsable = 12;
+            Pemp.Fecha_elaboracion = DateTime.Now;
+            Pemp.Fecha_aprobacion = DateTime.Now;
+            Pemp.Observacion = textarea.Value;
+            Pemp.Guardado = true;
+            Pemp.Aprobado = false;
+            Pemp.Estado = true;
+
+            return Pemp;
+        }
+
+        protected bool GuardarPlanilla(Planilla_Empleado plan)
+        {
+            decimal inssp = Convert.ToDecimal(inssPatronal.Text);
+            decimal inssl = Convert.ToDecimal(inssLaboral.Text);
+            decimal Inatec = Convert.ToDecimal(inatec.Text);
+            decimal techo = Convert.ToDecimal(techoSalarial.Text);
+
+            return ngPlanilla.AgregarPlanilla(plan, planilla, inssp , inssl , Inatec , techo );
         }
 
         protected void CargarDatos()
         {
             foreach (Variable var in ngVariables.Listar())
             {
-                if (var.Id== 9)
+                if (var.Id == 9)
                 {
                     inatec.Text = var.Valor.ToString();
                 }
@@ -70,18 +100,18 @@ namespace SARHU.sarhu.planilla
                 {
                     inssLaboral.Text = i.Porcentaje.ToString();
                 }
-            }          
+            }
 
         }
 
         protected void GenerarPlanilla(int id)
         {
-            
+
             planilla = ngPlanilla.ObtenerPlanilla(id);
             GridView1.DataSource = planilla;
             GridView1.DataBind();
         }
-        
+
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridView1.EditIndex = e.NewEditIndex;
@@ -97,9 +127,9 @@ namespace SARHU.sarhu.planilla
             decimal salarioB = Convert.ToDecimal(row.Cells[4].Text);
             decimal salarioDevengado = Convert.ToDecimal(row.Cells[11].Text);
             salarioDevengado = salarioDevengado - monto;
-           // decimal montoIngreso = Convert.ToDecimal(row.Cells[9].Text);
+            // decimal montoIngreso = Convert.ToDecimal(row.Cells[9].Text);
             planilla.Rows[e.RowIndex].BeginEdit();
-            if(horas.Text != string.Empty)
+            if (horas.Text != string.Empty)
             {
                 monto = ngPlanilla.CalcularHorasExtras(int.Parse(horas.Text), salarioB);
                 planilla.Rows[e.RowIndex]["Horas_Extra"] = horas.Text;
@@ -107,8 +137,8 @@ namespace SARHU.sarhu.planilla
                 planilla.Rows[e.RowIndex]["Salario_Devengado"] = salarioDevengado + monto;
 
             }
-           
-           
+
+
 
             planilla.Rows[e.RowIndex].EndEdit();
             planilla.AcceptChanges();
@@ -127,11 +157,31 @@ namespace SARHU.sarhu.planilla
 
         protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int id = int.Parse(ddlLocalidad.SelectedItem.Value);
-            Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(id);
+            idLocalidad = int.Parse(ddlLocalidad.SelectedItem.Value);
+            Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(idLocalidad);
             director.Text = empleado.Nombres;
+            idDirector = empleado.Id;
 
-            GenerarPlanilla(id);
+            GenerarPlanilla(idLocalidad);
+        }
+
+        protected void Guardar_Click(object sender, EventArgs e)
+        {
+
+            if (GuardarPlanilla(ObtenerDatosInterfaz()))
+            {
+                Message = "GUARDADO EXITOSAMENTE";
+
+            }
+            else
+            {
+                Message = "ERROR AL GUARDAR EL REGISTRO";
+                panel.CssClass = "alert alert-danger alert-dismissable";
+            }
+
+            panel.Visible = true;
+
+
         }
     }
-}
+    }

@@ -18,6 +18,11 @@
                                     <div class="row">
                                         <div class="col-md-12" id="tabs">
                                             <div class="col-md-12" style="padding: 8px;">
+                                                <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                    <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                   <%=Message %>
+                                                </asp:Panel>
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
@@ -40,7 +45,7 @@
                                                             </td>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:DropDownList runat="server"  CssClass="form-control" ID="ddlLocalidad" AutoPostBack="true" OnSelectedIndexChanged="ddlLocalidad_SelectedIndexChanged"></asp:DropDownList>
+                                                                    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlLocalidad" AutoPostBack="true" OnSelectedIndexChanged="ddlLocalidad_SelectedIndexChanged"></asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
                                                                         ControlToValidate="ddlLocalidad"
                                                                         ErrorMessage="Selecciona una Localidad"
@@ -50,7 +55,7 @@
                                                             </td>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="director" CssClass="form-control" type="text" Enabled="false"/>
+                                                                    <asp:TextBox runat="server" ID="director" CssClass="form-control" type="text" Enabled="false" />
                                                                     <span class="input-group-btn">
                                                                         <a data-toggle="modal" data-target="#mediumModal" type="button" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Lista de Directores"><i class="fa fa-search"></i></span></a>
                                                                     </span>
@@ -72,33 +77,33 @@
                                                         <tr>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="inssPatronal" CssClass="form-control" type="number" Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="inssPatronal" CssClass="form-control"  Enabled="false" />
                                                                     <span class="input-group-addon">%</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="inssLaboral" CssClass="form-control" type="number" Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="inssLaboral" CssClass="form-control"  Enabled="false" />
                                                                     <span class="input-group-addon">%</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="inatec" CssClass="form-control" type="number" Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="inatec" CssClass="form-control" Enabled="false" />
                                                                     <span class="input-group-addon">%</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
                                                                     <span class="input-group-addon">C$</span>
-                                                                    <asp:TextBox runat="server" ID="techoSalarial" CssClass="form-control" type="number" Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="techoSalarial" CssClass="form-control"  Enabled="false" />
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <label>Observaciones</label>
-                                                <textarea style="resize: none" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
+                                                <textarea style="resize: none" runat="server" clientidmode="static" id="textarea" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
                                                 <div id="textarea_feedback">150 caracteres disponibles</div>
                                             </div>
                                         </div>
@@ -106,45 +111,45 @@
                                             <li class="active"><a href="#datosP" data-toggle="tab">Detalle de Empleados</a></li>
                                         </ul>
                                         <div class="tab-content">
-                                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                                             <asp:UpdatePanel runat="server">
                                                 <ContentTemplate>
-                                                        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" OnRowEditing="GridView1_RowEditing"
-                                                OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" CellPadding="10" EmptyDataText="No Hay Datos Disponibles">
-                                                <Columns>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="btnEdit" runat="server" CommandName="Edit" Text="Editar" CssClass="btn btn-success  fondo-verde-aldeas" />
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Update" Text="Actualizar" CssClass="btn btn-success  fondo-verde-aldeas" />
+                                                    <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" OnRowEditing="GridView1_RowEditing"
+                                                        OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" CellPadding="10" EmptyDataText="No Hay Datos Disponibles">
+                                                        <Columns>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="btnEdit" runat="server" CommandName="Edit" Text="Editar" CssClass="btn btn-success  fondo-verde-aldeas" />
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Update" Text="Actualizar" CssClass="btn btn-success  fondo-verde-aldeas" />
 
-                                                            <asp:LinkButton ID="btnCancel" runat="server" CommandName="Cancel" Text="Cancelar" CssClass="btn btn-danger fondo-rojo-aldeas" />
-                                                        </EditItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="Codigo_Empleado" HeaderText="Código del Empleado" InsertVisible="False" ReadOnly="True" />
-                                                     <asp:BoundField DataField="Nombres_Empleado" HeaderText="Nombres del Empleado" ReadOnly="True" />
-                                                     <asp:BoundField DataField="Apellidos_Empleado" HeaderText="Apellidos del Empleado" ReadOnly="True" />
-                                                     <asp:BoundField DataField="Salario_base" HeaderText="Salario Base" ReadOnly="True" />
-                                                    <asp:TemplateField HeaderText="Horas Extra">
-                                                        <ItemTemplate>
-                                                            <asp:Label runat="server" Text='<%#Eval("Horas_Extra") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="horas" style="width:100%" runat="server" Text='<%#Eval("Horas_Extra")%>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="Pago_Inss_Laboral" HeaderText="Pago INSS Laboral" ReadOnly="True" />
-                                                    <asp:BoundField DataField="Pago_Inss_Patronal" HeaderText="Pago INSS Patronal" ReadOnly="True" />
-                                                    <asp:BoundField DataField="Pago_IR" HeaderText="Pago IR" ReadOnly="True" />
-                                                    <asp:BoundField DataField="Monto_de_Ingreso" HeaderText="Monto de Bonos" ReadOnly="True" />
-                                                    <asp:BoundField DataField="Monto_de_Deducciones" HeaderText="Monto de Deducciones" ReadOnly="True" />
-                                                    <asp:BoundField DataField="Salario_Devengado" HeaderText="Salario Devengado" ReadOnly="True" />                          
-                                                </Columns>
-                                            </asp:GridView>
+                                                                    <asp:LinkButton ID="btnCancel" runat="server" CommandName="Cancel" Text="Cancelar" CssClass="btn btn-danger fondo-rojo-aldeas" />
+                                                                </EditItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="Codigo_Empleado" HeaderText="Código del Empleado" InsertVisible="False" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Nombres_Empleado" HeaderText="Nombres del Empleado" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Apellidos_Empleado" HeaderText="Apellidos del Empleado" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Salario_base" HeaderText="Salario Base" ReadOnly="True" />
+                                                            <asp:TemplateField HeaderText="Horas Extra">
+                                                                <ItemTemplate>
+                                                                    <asp:Label runat="server" Text='<%#Eval("Horas_Extra") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="horas" Style="width: 100%" runat="server" Text='<%#Eval("Horas_Extra")%>'></asp:TextBox>
+                                                                </EditItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="Pago_Inss_Laboral" HeaderText="Pago INSS Laboral" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Pago_Inss_Patronal" HeaderText="Pago INSS Patronal" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Pago_IR" HeaderText="Pago IR" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Monto_de_Ingreso" HeaderText="Monto de Bonos" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Monto_de_Deducciones" HeaderText="Monto de Deducciones" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Salario_Devengado" HeaderText="Salario Devengado" ReadOnly="True" />
+                                                        </Columns>
+                                                    </asp:GridView>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        
+
                                         </div>
 
                                         <!-- /.row (nested) -->
@@ -152,7 +157,7 @@
                                     <!-- /.panel-body -->
                                 </div>
                                 <div class="form-group" align="center">
-                                    <button type="button" class="btn btn-success  fondo-verde-aldeas" align="center">Guardar</button>
+                                    <asp:Button runat="server" ID="Guardar" type="button" class="btn btn-success  fondo-verde-aldeas" Text="Guardar" align="center" OnClick="Guardar_Click"></asp:Button>
                                     <a href="historial-planillas.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                                 </div>
                             </div>
@@ -251,6 +256,15 @@
 
                 $('#textarea_feedback').html(text_remaining + ' caracteres disponibles');
             });
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#panel").fadeOut("slow", function () {
+                    window.location.replace("historial-planillas.aspx");
+                });
+                //#popupBox is the DIV to fade out
+            }, 250); //5000 equals 5 seconds
         });
     </script>
 </asp:Content>

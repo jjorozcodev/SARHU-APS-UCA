@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Datos;
 using System.Linq;
 using Entidades;
 using System.Text;
@@ -13,33 +14,41 @@ namespace Negocio
 
         private static NG_Planilla ngPlanilla = null;
 
+        // Llamado a la Capa de Datos
+        DT_Planilla dtPlanilla = DT_Planilla.Instanciar();
+     
 
-        //Variables que se usan
-        ///Llamados a la capa de Negocio
+        //Llamados a la capa de Negocio
         private NG_IR ngIR = NG_IR.Instanciar();
         private NG_Empleados ngEmpleado = NG_Empleados.Instanciar();
         private NG_Puestos ngPuesto = NG_Puestos.Instanciar();
         private NG_INSS ngInss = NG_INSS.Instanciar();
+        private NG_Localidades ngLocalidades = NG_Localidades.Instanciar();
         private NG_Adelantos ngAdelantos = NG_Adelantos.Instanciar();
         private NG_Bonos ngBonos = NG_Bonos.Instanciar();
         private NG_Adendums ngAdendums = NG_Adendums.Instanciar();
         private NG_Variables ngVariables = NG_Variables.Instanciar();
-        /// Lista de Datos
+
+        // Lista de Datos
         private List<IR> tablaIR = new List<IR>();
         private List<Empleado> empleados = new List<Empleado>();
         private List<Puesto> puestos = new List<Puesto>();
-        private DataTable Planilla;
+        private static DataTable Planilla;
+        private DataTable vistaPlanilla;
         private List<INSS> inss = new List<INSS>();
         private List<Adelanto> adelanto = new List<Adelanto>();
         private List<Bono> bonos = new List<Bono>();
         private List<Adendum> adendums = new List<Adendum>();
-        ///Variables numericas
+        private List<Planilla_Empleado> planillaEncabezado = new List<Planilla_Empleado>();
+
+        //Variables numericas
         private decimal months = 0m;
         private decimal diasDelMes = 0m;
         private decimal inssAnual = 0m;
-        decimal montoHorasExtra = 0m;
+        private decimal montoHorasExtra = 0m;
+        private decimal Iraplicado= 0m;
 
-        ///Variables para DataTable
+        //Variables para DataTable
         private decimal montoinssPatronal = 0m;
         private decimal irMensual = 0m;
         private decimal montoinssLaboral = 0m;
@@ -64,12 +73,81 @@ namespace Negocio
             return ngPlanilla;
         }
 
+        //Metodos básicos del CRUD
         public DataTable ObtenerPlanilla(int id)
         {
             GenerarPlanilla(id);
             return Planilla;
         }
 
+
+        public bool AgregarPlanilla(Planilla_Empleado Pemp, DataTable dataPlanilla, decimal porcentajeINSSp, decimal porcentajeINSSL, decimal porcentajeInactec, decimal techoSalarial)
+        {
+            bool resp = false;
+           
+            Planilla = dataPlanilla;
+
+            int Idplanilla = dtPlanilla.Agregar(Pemp);
+            if (Idplanilla > 0)
+            {
+                resp = true;
+
+                dtPlanilla.AgregarDetallePlanilla(Idplanilla, porcentajeINSSp, porcentajeINSSL, porcentajeInactec, techoSalarial);
+                AgregarDetalleEmpleado(Idplanilla);
+
+            }
+            return resp;
+        }
+
+        private void AgregarDetalleEmpleado(int idPlanilla) {
+
+            foreach (DataRow row in Planilla.Rows)
+            {
+               int idEmpleado = Convert.ToInt32(row["Id_Empleado"].ToString());
+              decimal salarioBase = Convert.ToDecimal(row["Salario_base"].ToString());
+              decimal pagoInssL =  Convert.ToDecimal(row["Pago_Inss_Laboral"].ToString());
+              decimal pagoInssP = Convert.ToDecimal(row["Pago_Inss_Patronal"].ToString());
+              decimal pagoIR =  Convert.ToDecimal(row["Pago_IR"].ToString());
+              decimal porcentajeAplicado =  Convert.ToDecimal(row["Porcentaje_Aplicado"].ToString());
+              decimal montoingreso = Convert.ToDecimal(row["Monto_de_Ingreso"].ToString());
+              decimal montoDeduccion =Convert.ToDecimal(row["Monto_de_Deducciones"].ToString());
+              decimal salarioDevengado = Convert.ToDecimal(row["Salario_Devengado"].ToString());
+
+
+              dtPlanilla.GuardarDetalleEmpleado(idPlanilla, idEmpleado, salarioBase, pagoInssP, pagoInssL, pagoIR, porcentajeAplicado, montoingreso, montodeducciones, salarioDevengado);
+            }
+
+           
+        }
+
+
+        public DataTable ListarPlanillas()
+        {
+            vistaPlanilla = new DataTable();
+            InitVistaPlanilla();
+
+           planillaEncabezado = dtPlanilla.Listar();
+
+            foreach (Planilla_Empleado plan in planillaEncabezado)
+            {
+                foreach (Localidad local in ngLocalidades.ListarPorEstado(true))
+                {
+                    if (plan.Idlocalidad == local.Id)
+                    {
+                        if (plan.Aprobado)
+                        {
+                            vistaPlanilla.Rows.Add(plan.Id, local.Alias, plan.Fecha_elaboracion, "Sí",plan.Fecha_aprobacion);
+                        }
+                        else
+                        {
+                            vistaPlanilla.Rows.Add(plan.Id, local.Alias, plan.Fecha_elaboracion, "No", plan.Fecha_aprobacion);
+                        }
+                    }
+                }
+            }
+            return vistaPlanilla;
+        }
+            
         private void GenerarPlanilla(int id)
         {
             Planilla = new DataTable();
@@ -100,7 +178,7 @@ namespace Negocio
                                     CalcularSalarioDevengado((puesto.SalarioBase + adendum.IncrementoSalarial));
 
                                     RellenarDataTable(emp.Id, emp.Codigo, emp.Nombres, emp.Apellidos, puesto.SalarioBase + adendum.IncrementoSalarial, horasExtra, montoinssLaboral, montoinssPatronal,
-                                                      irMensual, montoingreso, montodeducciones, salariototal);
+                                                      irMensual, montoingreso, montodeducciones, salariototal, Iraplicado);
                                 }
                                 else
                                 {
@@ -110,7 +188,7 @@ namespace Negocio
                                     CalcularSalarioDevengado(puesto.SalarioBase);
 
                                     RellenarDataTable(emp.Id, emp.Codigo, emp.Nombres, emp.Apellidos, puesto.SalarioBase, horasExtra, montoinssLaboral, montoinssPatronal,
-                                                      irMensual, montoingreso, montodeducciones, salariototal);
+                                                      irMensual, montoingreso, montodeducciones, salariototal, Iraplicado);
                                 }
 
                             }
@@ -123,7 +201,7 @@ namespace Negocio
                             CalcularSalarioDevengado(puesto.SalarioBase);
 
                             RellenarDataTable(emp.Id, emp.Codigo, emp.Nombres, emp.Apellidos, puesto.SalarioBase, horasExtra, montoinssLaboral, montoinssPatronal,
-                                              irMensual, montoingreso, montodeducciones, salariototal);
+                                              irMensual, montoingreso, montodeducciones, salariototal, Iraplicado);
                         }
 
 
@@ -136,15 +214,15 @@ namespace Negocio
 
         private void RellenarDataTable(int idEmpleado, string codigoEmpleado, string nombresEmpleado, string apellidoEmpleado, decimal salarioBase, decimal horasExtra,
                                        decimal montoInssLaboral, decimal montoInssPatronal, decimal montoIR, decimal montoIngreso, decimal montoDeducciones,
-                                       decimal salarioTotal)
+                                       decimal salarioTotal, decimal IrAplicado)
         {
 
             Planilla.Rows.Add(idEmpleado, codigoEmpleado, nombresEmpleado, apellidoEmpleado, salarioBase, horasExtra, montoInssLaboral, montoInssPatronal,
-                               montoIR, montoIngreso, montoDeducciones, salarioTotal);
+                               montoIR, montoIngreso, montoDeducciones, salarioTotal, IrAplicado);
 
 
         }
-
+        //Inicialización de DataTables
         private void InitDataTable()
         {
             Planilla.Columns.Add("Id_Empleado", typeof(Int32));
@@ -159,7 +237,21 @@ namespace Negocio
             Planilla.Columns.Add("Monto_de_Ingreso", typeof(decimal));
             Planilla.Columns.Add("Monto_de_Deducciones", typeof(decimal));
             Planilla.Columns.Add("Salario_Devengado", typeof(decimal));
+            Planilla.Columns.Add("Porcentaje_Aplicado", typeof(decimal));
         }
+
+        private void InitVistaPlanilla()
+        {
+            vistaPlanilla.Columns.Add("Id", typeof(Int32));
+            vistaPlanilla.Columns.Add("Localidad", typeof(string));
+            vistaPlanilla.Columns.Add("Fecha_de_Elaboración", typeof(DateTime));
+            vistaPlanilla.Columns.Add("Aprobado", typeof(string));
+            vistaPlanilla.Columns.Add("Fecha_de_Aprobación", typeof(DateTime));
+        }
+
+
+
+        // Recupera Datos necesarios para elaboración de planilla
 
         private void RecuperarVariables()
         {
@@ -175,7 +267,6 @@ namespace Negocio
                 }
             }
         }
-
         private List<IR> RecuperarIR()
         {
 
@@ -196,8 +287,9 @@ namespace Negocio
         private List<Empleado> RecuperarEmpleados(int idLocalidad)
         {
             List<Empleado> tempEmpleados = new List<Empleado>();
+            empleados = ngEmpleado.ListarPorEstado(true);
 
-            foreach (Empleado e in ngEmpleado.ListarPorEstado(true))
+            foreach (Empleado e in empleados)
             {
                 if (idLocalidad == e.LocalidadId)
                 {
@@ -214,22 +306,6 @@ namespace Negocio
             return ngBonos.ListarPorEstado(true);
         }
 
-        /*
-            private List<Empleado> RecuperarEmpleados(int idLocalidad)
-        {
-            List<Empleado> tempEmpleados = new List<Empleado>();
-
-            foreach (Empleado e in  ngEmpleado.ListarPorEstado(true))
-            {
-                if(idLocalidad == e.localidad){
-                
-                }
-            }
-
-            return;
-        }
-         */
-
         private List<Adelanto> RecuperarAdelantos()
         {
             return ngAdelantos.ListarPorEstado(true);
@@ -240,6 +316,7 @@ namespace Negocio
             return ngAdendums.ListarPorEstado(true);
         }
 
+        //Cálculos necesarios para elaboración de planilla
         private void calcularINSS(decimal salarioB, decimal salarioProyectado)
         {
             inss = RecuperarINSS();
@@ -283,7 +360,7 @@ namespace Negocio
 
                     decimal irAnual = (salarioConInss - ir.Exceso) * ir.PorcentajeAplicable;
                     irAnual = irAnual + ir.Base;
-
+                    Iraplicado= ir.PorcentajeAplicable;
                     irMensual = irAnual / months;
                     irMensual = Decimal.Round(irMensual, 2);
 
@@ -346,5 +423,8 @@ namespace Negocio
 
             return montoingreso = Decimal.Round(montoingreso + montoHorasExtra, 2);
         }
+
+
+
     }
 }

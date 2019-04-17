@@ -58,6 +58,7 @@
     <Compile Include="DT_Municipios.cs" />
     <Compile Include="DT_NivelesAcademicos.cs" />
     <Compile Include="DT_Organizacion.cs" />
+    <Compile Include="DT_Planilla.cs" />
     <Compile Include="DT_Programas.cs" />
     <Compile Include="DT_Puestos.cs" />
     <Compile Include="DT_Roles.cs" />
