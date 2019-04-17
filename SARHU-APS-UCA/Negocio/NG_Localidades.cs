@@ -12,7 +12,7 @@ namespace Negocio
         private static NG_Programas ngProgramas = NG_Programas.Instanciar();
         private static NG_Departamentos ngDepartamentos = NG_Departamentos.Instanciar();
         private static NG_Municipios ngMunicipios = NG_Municipios.Instanciar();
-
+        private static NG_Empleados ngEmpleado = NG_Empleados.Instanciar();
         private static NG_Localidades ngLocalidades = null;
 
         private NG_Localidades()
@@ -69,6 +69,21 @@ namespace Negocio
             List<Localidad> lcldds = this.ListarPorEstado(true);
             int cantidadLocsActivos = lcldds.Count;
             return cantidadLocsActivos;
+        }
+
+        public Empleado RecuperarDirectorLocalidad(int idLocalidad)
+        {
+            Empleado empleado = new Empleado();
+            
+                foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
+                {
+                    if (idLocalidad == emp.LocalidadId)
+                    {
+                        empleado = emp;
+                    }
+                }           
+
+            return empleado;
         }
 
         public DataTable VisualizarLocalidades()

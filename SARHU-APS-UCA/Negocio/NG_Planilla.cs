@@ -64,19 +64,19 @@ namespace Negocio
             return ngPlanilla;
         }
 
-        public DataTable ObtenerPlanilla()
+        public DataTable ObtenerPlanilla(int id)
         {
-            GenerarPlanilla();
+            GenerarPlanilla(id);
             return Planilla;
         }
 
-        private void GenerarPlanilla()
+        private void GenerarPlanilla(int id)
         {
             Planilla = new DataTable();
             InitDataTable();
             RecuperarVariables();
             
-            empleados = RecuperarEmpleados();
+            empleados = RecuperarEmpleados(id);
             puestos = RecuperarPuestos();
             adendums = RecuperarAdendum();
 
@@ -193,10 +193,20 @@ namespace Negocio
             return ngPuesto.ListarPuesto(true);
         }
 
-        private List<Empleado> RecuperarEmpleados()
+        private List<Empleado> RecuperarEmpleados(int idLocalidad)
         {
+            List<Empleado> tempEmpleados = new List<Empleado>();
 
-            return ngEmpleado.ListarPorEstado(true);
+            foreach (Empleado e in ngEmpleado.ListarPorEstado(true))
+            {
+                if (idLocalidad == e.LocalidadId)
+                {
+                    tempEmpleados.Add(e);
+                }
+            }
+
+
+            return tempEmpleados;
         }
 
         private List<Bono> RecuperarBonos()

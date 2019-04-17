@@ -40,7 +40,7 @@
                                                             </td>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:DropDownList runat="server"  CssClass="form-control" ID="ddlLocalidad"></asp:DropDownList>
+                                                                    <asp:DropDownList runat="server"  CssClass="form-control" ID="ddlLocalidad" AutoPostBack="true" OnSelectedIndexChanged="ddlLocalidad_SelectedIndexChanged"></asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
                                                                         ControlToValidate="ddlLocalidad"
                                                                         ErrorMessage="Selecciona una Localidad"

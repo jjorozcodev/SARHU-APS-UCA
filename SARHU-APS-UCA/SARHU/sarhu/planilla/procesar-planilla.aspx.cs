@@ -27,7 +27,7 @@ namespace SARHU.sarhu.planilla
             if (!IsPostBack)
             {
                 CargarDatos();
-                GenerarPlanilla();
+               
             }
         }
 
@@ -70,26 +70,14 @@ namespace SARHU.sarhu.planilla
                 {
                     inssLaboral.Text = i.Porcentaje.ToString();
                 }
-            }
-
-            foreach (Localidad local in localidad)
-            {
-                foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
-                {
-                    if (local.DirectorId == emp.Id)
-                    {
-                        director.Text = emp.Nombres;
-                    }
-                }
-               
-            }
+            }          
 
         }
 
-        protected void GenerarPlanilla()
+        protected void GenerarPlanilla(int id)
         {
             
-            planilla = ngPlanilla.ObtenerPlanilla();
+            planilla = ngPlanilla.ObtenerPlanilla(id);
             GridView1.DataSource = planilla;
             GridView1.DataBind();
         }
@@ -135,6 +123,15 @@ namespace SARHU.sarhu.planilla
             GridView1.EditIndex = -1;
             GridView1.DataSource = planilla;
             GridView1.DataBind();
+        }
+
+        protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = int.Parse(ddlLocalidad.SelectedItem.Value);
+            Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(id);
+            director.Text = empleado.Nombres;
+
+            GenerarPlanilla(id);
         }
     }
 }
