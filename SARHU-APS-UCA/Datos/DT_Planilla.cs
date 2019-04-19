@@ -87,9 +87,7 @@ namespace Datos
         }
 
         public Planilla_Empleado Consultar(int id)
-        {
-
-            ///localidad_id,director_id,fecha_elaboracion,responsable_id,fecha_aprobacion,observaciones,guardado,aprobado,estado
+        {                     
 
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -108,6 +106,7 @@ namespace Datos
 
             while (reader.Read())
             {
+                Pe.Id = id;
                 Pe.Idlocalidad = reader.GetInt32(0);
                 Pe.Iddirector = reader.GetInt32(1);
                 Pe.Fecha_elaboracion = reader.GetDateTime(2);

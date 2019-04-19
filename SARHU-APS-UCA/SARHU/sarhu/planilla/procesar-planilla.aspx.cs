@@ -76,6 +76,7 @@ namespace SARHU.sarhu.planilla
             }
 
             ///DropdownList
+            ddlProgramas.Enabled = false;
             ddlProgramas.DataSource = ngProgramas.ListarPorEstado(true);
             ddlProgramas.DataTextField = "Nombre";
             ddlProgramas.DataValueField = "Id";
@@ -127,7 +128,7 @@ namespace SARHU.sarhu.planilla
             decimal salarioB = Convert.ToDecimal(row.Cells[4].Text);
             decimal salarioDevengado = Convert.ToDecimal(row.Cells[11].Text);
             salarioDevengado = salarioDevengado - monto;
-            // decimal montoIngreso = Convert.ToDecimal(row.Cells[9].Text);
+          
             planilla.Rows[e.RowIndex].BeginEdit();
             if (horas.Text != string.Empty)
             {
@@ -159,8 +160,10 @@ namespace SARHU.sarhu.planilla
         {
             idLocalidad = int.Parse(ddlLocalidad.SelectedItem.Value);
             Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(idLocalidad);
+            Localidad local = ngLocalidades.Consultar(idLocalidad);
             director.Text = empleado.Nombres;
             idDirector = empleado.Id;
+            ddlProgramas.Items.FindByValue(local.ProgramaId.ToString()).Selected = true;
 
             GenerarPlanilla(idLocalidad);
         }

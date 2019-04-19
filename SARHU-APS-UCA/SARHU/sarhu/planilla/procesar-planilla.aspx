@@ -35,7 +35,7 @@
                                                         <tr>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server"></asp:DropDownList>
+                                                                    <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server" ></asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                                                                         ControlToValidate="ddlProgramas"
                                                                         ErrorMessage="Selecciona un Programa"

@@ -120,6 +120,10 @@ namespace Negocio
            
         }
 
+        public Planilla_Empleado ConsultarPlanillaEmpleado(int id)
+        {
+            return dtPlanilla.Consultar(id);
+        }
 
         public DataTable ListarPlanillas()
         {
@@ -147,7 +151,32 @@ namespace Negocio
             }
             return vistaPlanilla;
         }
-            
+
+        public bool EditarPlanilla(Planilla_Empleado pemp)
+        {
+            return dtPlanilla.Editar(pemp);
+        }
+        
+        public DataTable ConsultarDetallePlanilla(int idPlanilla) {
+            return dtPlanilla.ConsultarDetallePlanilla(idPlanilla);
+        }
+        
+        public DataTable ConsultarDetalleEmpleado(int idPlanilla) {
+            Planilla = new DataTable();
+            InitDataTable();
+
+            foreach (DataRow row in ngPlanilla.ConsultarDetalleEmpleado(idPlanilla).Rows)
+            {
+
+            }
+
+           // Planilla = ngPlanilla.ConsultarDetalleEmpleado(idPlanilla);           
+            return Planilla;
+        }
+        
+        
+        
+        //
         private void GenerarPlanilla(int id)
         {
             Planilla = new DataTable();

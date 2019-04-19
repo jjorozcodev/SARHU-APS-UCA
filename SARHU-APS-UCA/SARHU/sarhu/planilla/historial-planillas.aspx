@@ -35,8 +35,8 @@
                                     <td><%#Eval("Aprobado")%></td>
                                     <td><%#Eval("Fecha_de_Aprobación","{0:d/M/yyyy}")%></td>
                                     <td align="center">
-                                        <a href="editar-planilla.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Planilla"><i class="fa fa-edit fa-fw"></i></span></a>
-                                        <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Aprobar Planilla"><i class="fa fa-check fa-fw"></i></span></button>
+                                        <a href="editar-planilla.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Planilla"><i class="fa fa-edit fa-fw"></i></span></a>
+                                        <asp:LinkButton runat="server" ID="Aprobar" CssClass="btn btn-default" CommandArgument='<%#Eval("Id")%>' OnClick="Aprobar_Click"><span data-toggle="tooltip" data-placement="top" title="Aprobar Planilla"><i class="fa fa-check fa-fw"></i></span></asp:LinkButton>
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -68,10 +68,10 @@
                     <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                 </div>
                 <div class="modal-body">
-                    ¿Está seguro que desea aprobar la planilla con el ID "0001"?
+                    ¿Está seguro que desea aprobar la planilla de <%=aliasLocalidad%>?
                 </div>
                 <div class="modal-footer">
-                    <button onclick="DeletePopup()" data-dismiss="modal" type="button" class="btn btn-danger fondo-rojo-aldeas">Aprobar</button>
+                    <asp:Button runat="server" ID="Confirmar" CssClass="btn btn-danger fondo-rojo-aldeas" Text="Aprobar" OnClick="Confirmar_Click"></asp:Button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -80,14 +80,14 @@
         <!-- /.modal-dialog -->
     </div>
 
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="aprove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     Aprobado correctamente
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <a href="historial-planillas.aspx" type="button" class="btn btn-default">Cerrar</a>
 
                 </div>
             </div>
@@ -101,8 +101,8 @@
             $('#myModal').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
 
-        function DeletePopup() {
-            $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
+        function AprobarPopup() {
+            $('#aprove').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
 
 
