@@ -46,6 +46,7 @@ namespace SARHU.sarhu.planilla
             programas.Enabled = false;
             localidad.Enabled = false;
             techoSalarial.Enabled = false;
+            director.Enabled = false;
         } 
 
         protected void CargarDatos()
@@ -106,22 +107,59 @@ namespace SARHU.sarhu.planilla
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            GridViewRow row = GridView1.Rows[e.RowIndex]; //Find the row that was clicked for updating.         
 
+            TextBox horas = (TextBox)row.Cells[5].FindControl("horas");
+            decimal salarioB = Convert.ToDecimal(row.Cells[4].Text);
+            decimal salarioDevengado = Convert.ToDecimal(row.Cells[11].Text);
+            salarioDevengado = salarioDevengado - monto;
+
+            planilla.Rows[e.RowIndex].BeginEdit();
+            if (horas.Text != string.Empty)
+            {
+                monto = ngPlanilla.CalcularHorasExtras(int.Parse(horas.Text), salarioB);
+                planilla.Rows[e.RowIndex]["Horas_Extra"] = horas.Text;
+                planilla.Rows[e.RowIndex]["Monto_de_Ingreso"] = monto;
+                planilla.Rows[e.RowIndex]["Salario_Devengado"] = salarioDevengado + monto;
+
+            }
+
+
+
+            planilla.Rows[e.RowIndex].EndEdit();
+            planilla.AcceptChanges();
+
+            GridView1.EditIndex = -1;
+            GridView1.DataSource = planilla;
+            GridView1.DataBind();
         }
 
         protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-
+            GridView1.EditIndex = -1;
+            GridView1.DataSource = planilla;
+            GridView1.DataBind();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
+            GridView1.EditIndex = e.NewEditIndex;
+            GridView1.DataSource = planilla;
+            GridView1.DataBind();
         }
 
         protected void Guardar_Click(object sender, EventArgs e)
         {
-
+            if (ngPlanilla.EditarDetalleEmpleado(Idplanilla, planilla))
+            {
+                Message = "La Operación se realizo con éxito";
+            }
+            else
+            {
+                Message = "Hubo un error en la operación";
+                panel.CssClass = "alert alert-danger alert-dismissable";
+            }
+            panel.Visible = true;
         }
     }
 }

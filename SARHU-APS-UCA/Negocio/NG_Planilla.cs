@@ -61,6 +61,7 @@ namespace Negocio
         private NG_Planilla()
         {
             //Singleton
+            RecuperarVariables();
         }
 
 
@@ -69,7 +70,9 @@ namespace Negocio
             if (ngPlanilla == null)
             {
                 ngPlanilla = new NG_Planilla();
+                
             }
+            
             return ngPlanilla;
         }
 
@@ -184,17 +187,60 @@ namespace Negocio
         {
             Planilla = new DataTable();
             InitDataTable();
+            // Planilla = ngPlanilla.ConsultarDetalleEmpleado(idPlanilla);
 
-            foreach (DataRow row in ngPlanilla.ConsultarDetalleEmpleado(idPlanilla).Rows)
+            foreach (DataRow row in dtPlanilla.ConsultarDetalleEmpleado(idPlanilla).Rows)
             {
+                foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
+                {
+                    if (emp.Id == int.Parse(row["empleado_id"].ToString()))
+                    {
+                        RellenarDataTable(
+                            emp.Id,
+                            emp.Codigo,
+                            emp.Nombres,
+                            emp.Apellidos,
+                            Convert.ToDecimal(row["salario_base"].ToString()),
+                            Convert.ToDecimal(row["horas_extra"].ToString()),
+                            Convert.ToDecimal(row["monto_INSS_L"].ToString()),
+                            Convert.ToDecimal(row["monto_INSS_P"].ToString()),
+                            Convert.ToDecimal(row["monto_IR"].ToString()),
+                            Convert.ToDecimal(row["monto_ingresos"].ToString()),
+                            Convert.ToDecimal(row["monto_deducciones"].ToString()),
+                            Convert.ToDecimal(row["salario_devengado"].ToString()),
+                            Convert.ToDecimal(row["porcentaje_IR_aplicado"].ToString())                           
+                         );
+                    }
+                }
 
             }
 
-            // Planilla = ngPlanilla.ConsultarDetalleEmpleado(idPlanilla);           
+
             return Planilla;
         }
 
+        public bool EditarDetalleEmpleado(int idPlanilla, DataTable planilla)
+        {
+            bool resp = false;
 
+            foreach (DataRow row in Planilla.Rows)
+            {               
+                decimal salarioBase = Convert.ToDecimal(row["Salario_base"].ToString());
+                decimal pagoInssL = Convert.ToDecimal(row["Pago_Inss_Laboral"].ToString());
+                decimal pagoInssP = Convert.ToDecimal(row["Pago_Inss_Patronal"].ToString());
+                decimal pagoIR = Convert.ToDecimal(row["Pago_IR"].ToString());
+                decimal porcentajeAplicado = Convert.ToDecimal(row["Porcentaje_Aplicado"].ToString());
+                decimal montoingreso = Convert.ToDecimal(row["Monto_de_Ingreso"].ToString());
+                decimal montoDeduccion = Convert.ToDecimal(row["Monto_de_Deducciones"].ToString());
+                decimal salarioDevengado = Convert.ToDecimal(row["Salario_Devengado"].ToString());
+                decimal horasExtra = Convert.ToDecimal(row["Horas_Extra"].ToString());
+
+
+               resp = dtPlanilla.EditarDetalleEmpleado(idPlanilla,salarioBase, pagoInssP, pagoInssL, pagoIR, porcentajeAplicado, montoingreso, montodeducciones, salarioDevengado, horasExtra);
+            }
+            return resp;
+
+        }
 
         //
         private void GenerarPlanilla(int id)
@@ -316,6 +362,7 @@ namespace Negocio
                 }
             }
         }
+
         private List<IR> RecuperarIR()
         {
 
@@ -366,6 +413,7 @@ namespace Negocio
         }
 
         //Cálculos necesarios para elaboración de planilla
+
         private void calcularINSS(decimal salarioB, decimal salarioProyectado)
         {
             inss = RecuperarINSS();
@@ -373,12 +421,13 @@ namespace Negocio
             {
                 if (Inss.Patronal)
                 {
+                    //Calculo de INSS Patronal
                     montoinssPatronal = salarioB * (Inss.Porcentaje / 100);
                     montoinssPatronal = Decimal.Round(montoinssPatronal, 2);
                 }
                 else
                 {
-                    montoinssLaboral = salarioB * (Inss.Porcentaje / 100); //Este es el inss mensual por que se usa el salario base que gana el empleado
+                    montoinssLaboral = salarioB * (Inss.Porcentaje / 100); // inss mensual por que se usa el salario base que gana el empleado
                     montoinssLaboral = Decimal.Round(montoinssLaboral, 2);
 
                     inssAnual = salarioProyectado * (Inss.Porcentaje / 100);//Inss Anual, por que se esta usando el salario proyectado por 12 meses
@@ -387,13 +436,18 @@ namespace Negocio
             }
         }
 
+
+        /*
+         En el Calcular IR se proyecta el salario base del empleado a 12 meses, y se trabaja con la tabla del IR anual para una mayor precisión
+        */
+
         private void CalcularIR(decimal salarioB)
         {
 
             tablaIR = RecuperarIR();
 
 
-            decimal salarioProyectado = salarioB * months;
+            decimal salarioProyectado = salarioB * months; //Proyección del salario
 
             calcularINSS(salarioB, salarioProyectado);
 
@@ -402,28 +456,27 @@ namespace Negocio
 
 
 
-            foreach (IR ir in tablaIR)///Con un foreach se recorre el datatable
+            foreach (IR ir in tablaIR) //Se recorre la lista para comparar el salario del empleado
             {
-                if ((salarioConInss > ir.Desde) && (salarioConInss < ir.Hasta))
+                if ((salarioConInss > ir.Desde) && (salarioConInss < ir.Hasta)) //Se compara si el salario esta entre los rangos de la tabla del IR
                 {
 
                     decimal irAnual = (salarioConInss - ir.Exceso) * ir.PorcentajeAplicable;
                     irAnual = irAnual + ir.Base;
                     Iraplicado = ir.PorcentajeAplicable;
-                    irMensual = irAnual / months;
-                    irMensual = Decimal.Round(irMensual, 2);
+                    irMensual = irAnual / months; // Se divide el IR anual entre los meses para obtener el IR mensual
+                    irMensual = Decimal.Round(irMensual, 2); // Se da una precisión de 2 digitos de decimales                                       
 
                 }
 
             }
-
 
         }
 
         private void CalcularSalarioDevengado(decimal salarioB)
         {
 
-            salariototal = salarioB + montoingreso;
+            salariototal = salarioB + montoingreso; 
             salariototal = salariototal - montodeducciones;
             salariototal = salariototal - montoinssLaboral;
             salariototal = salariototal - irMensual;
@@ -442,8 +495,6 @@ namespace Negocio
                     montodeducciones = Decimal.Round(montodeducciones, 2);
                 }
             }
-
-
         }
 
         private void CalcularMontoIngreso(decimal salarioBase)
@@ -453,7 +504,6 @@ namespace Negocio
             {
                 if (DateTime.Now == bono.fecha_Aplicación)
                 {
-
                     montoingreso = salarioBase + bono.Monto;
                     montoingreso = Decimal.Round(montoingreso, 2);
                 }
@@ -463,7 +513,6 @@ namespace Negocio
 
         public decimal CalcularHorasExtras(decimal horasExtra, decimal salarioBase)
         {
-
             montoingreso = montoingreso - montoHorasExtra;
             decimal salarioDiario = salarioBase / diasDelMes;
             decimal salarioPorHora = salarioDiario / 8;
