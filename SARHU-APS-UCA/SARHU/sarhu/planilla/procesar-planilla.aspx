@@ -21,8 +21,15 @@
                                                 <asp:Panel ID="panel" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                                     <i class="fa-lg fa fa-exclamation-circle "></i>
-                                                   <%=Message %>
+                                                    <%=Message %>
                                                 </asp:Panel>
+
+                                                <asp:Panel ID="existence" ClientIDMode="static" CssClass="alert alert-danger alert-dismissable" runat="server" Visible="false">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                    <i class="fa-lg fa fa-exclamation-circle "></i>
+                                                    Ya existe un registro igual
+                                                </asp:Panel>
+
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
@@ -35,7 +42,7 @@
                                                         <tr>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server" ></asp:DropDownList>
+                                                                    <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server"></asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                                                                         ControlToValidate="ddlProgramas"
                                                                         ErrorMessage="Selecciona un Programa"
@@ -77,13 +84,13 @@
                                                         <tr>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="inssPatronal" CssClass="form-control"  Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="inssPatronal" CssClass="form-control" Enabled="false" />
                                                                     <span class="input-group-addon">%</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="inssLaboral" CssClass="form-control"  Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="inssLaboral" CssClass="form-control" Enabled="false" />
                                                                     <span class="input-group-addon">%</span>
                                                                 </div>
                                                             </td>
@@ -96,7 +103,7 @@
                                                             <td class="col-md-3">
                                                                 <div class="form-group input-group" style="width: 100%;">
                                                                     <span class="input-group-addon">C$</span>
-                                                                    <asp:TextBox runat="server" ID="techoSalarial" CssClass="form-control"  Enabled="false" />
+                                                                    <asp:TextBox runat="server" ID="techoSalarial" CssClass="form-control" Enabled="false" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -265,6 +272,13 @@
                 });
                 //#popupBox is the DIV to fade out
             }, 250); //5000 equals 5 seconds
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#existence").fadeOut("slow")
+                });                
+            }, 300);
         });
     </script>
 </asp:Content>

@@ -51,7 +51,7 @@ namespace SARHU.sarhu.planilla
             return Pemp;
         }
 
-        protected bool GuardarPlanilla(Planilla_Empleado plan)
+        protected int GuardarPlanilla(Planilla_Empleado plan)
         {
             decimal inssp = Convert.ToDecimal(inssPatronal.Text);
             decimal inssl = Convert.ToDecimal(inssLaboral.Text);
@@ -158,6 +158,7 @@ namespace SARHU.sarhu.planilla
 
         protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlProgramas.ClearSelection();
             idLocalidad = int.Parse(ddlLocalidad.SelectedItem.Value);
             Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(idLocalidad);
             Localidad local = ngLocalidades.Consultar(idLocalidad);
@@ -170,20 +171,23 @@ namespace SARHU.sarhu.planilla
 
         protected void Guardar_Click(object sender, EventArgs e)
         {
-
-            if (GuardarPlanilla(ObtenerDatosInterfaz()))
+            int bandera = GuardarPlanilla(ObtenerDatosInterfaz());
+            switch (bandera)
             {
-                Message = "GUARDADO EXITOSAMENTE";
-
+                case 0:
+                    Message = "ERROR AL GUARDAR EL REGISTRO";
+                    panel.CssClass = "alert alert-danger alert-dismissable";
+                    panel.Visible = true;
+                    break;
+                case 1:
+                    Message = "GUARDADO EXITOSAMENTE";
+                    panel.Visible = true;
+                    break;               
+                default:
+                    existence.Visible = true;
+                    break;
             }
-            else
-            {
-                Message = "ERROR AL GUARDAR EL REGISTRO";
-                panel.CssClass = "alert alert-danger alert-dismissable";
-            }
-
-            panel.Visible = true;
-
+            
 
         }
     }

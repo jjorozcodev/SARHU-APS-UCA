@@ -275,7 +275,7 @@ namespace Datos
         }
         ///METODOS PARA EL PLANILLA DEL EMPLEADO
         public void GuardarDetalleEmpleado(int Idplanilla, int Idempleado, decimal salarioBase, decimal montoInssPatronal, decimal montoInssLaboral,
-                                            decimal montoIR, decimal porcentajeAplicado, decimal montoIngreso, decimal montoDeducciones, decimal salarioDevengado)
+                                            decimal montoIR, decimal porcentajeAplicado, decimal montoIngreso, decimal montoDeducciones, decimal salarioDevengado, decimal horasExtra)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -292,6 +292,7 @@ namespace Datos
             comandoSql.Parameters.Add("@monto_ingresos", SqlDbType.Decimal).Value = montoIngreso;
             comandoSql.Parameters.Add("@monto_deducciones", SqlDbType.Decimal).Value = montoDeducciones;
             comandoSql.Parameters.Add("@salario_devengado", SqlDbType.Decimal).Value = salarioDevengado;
+            comandoSql.Parameters.Add("@horas_extra", SqlDbType.Decimal).Value = horasExtra;
 
             if (conexionSql.State == ConnectionState.Closed)
             {

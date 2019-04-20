@@ -16,7 +16,7 @@ namespace Negocio
 
         // Llamado a la Capa de Datos
         DT_Planilla dtPlanilla = DT_Planilla.Instanciar();
-     
+
 
         //Llamados a la capa de Negocio
         private NG_IR ngIR = NG_IR.Instanciar();
@@ -46,7 +46,7 @@ namespace Negocio
         private decimal diasDelMes = 0m;
         private decimal inssAnual = 0m;
         private decimal montoHorasExtra = 0m;
-        private decimal Iraplicado= 0m;
+        private decimal Iraplicado = 0m;
 
         //Variables para DataTable
         private decimal montoinssPatronal = 0m;
@@ -81,43 +81,61 @@ namespace Negocio
         }
 
 
-        public bool AgregarPlanilla(Planilla_Empleado Pemp, DataTable dataPlanilla, decimal porcentajeINSSp, decimal porcentajeINSSL, decimal porcentajeInactec, decimal techoSalarial)
+        public int AgregarPlanilla(Planilla_Empleado Pemp, DataTable dataPlanilla, decimal porcentajeINSSp, decimal porcentajeINSSL, decimal porcentajeInactec, decimal techoSalarial)
         {
-            bool resp = false;
-           
+            int resp = 0;
+
             Planilla = dataPlanilla;
+            planillaEncabezado = dtPlanilla.Listar();
 
-            int Idplanilla = dtPlanilla.Agregar(Pemp);
-            if (Idplanilla > 0)
+            foreach (Planilla_Empleado planemp in planillaEncabezado)
             {
-                resp = true;
+                if (planemp.Fecha_elaboracion.Month != Pemp.Fecha_elaboracion.Month)
+                {
+                    int Idplanilla = dtPlanilla.Agregar(Pemp);
+                    if (Idplanilla > 0)
+                    {
+                        resp = 1;
 
-                dtPlanilla.AgregarDetallePlanilla(Idplanilla, porcentajeINSSp, porcentajeINSSL, porcentajeInactec, techoSalarial);
-                AgregarDetalleEmpleado(Idplanilla);
+                        dtPlanilla.AgregarDetallePlanilla(Idplanilla, porcentajeINSSp, porcentajeINSSL, porcentajeInactec, techoSalarial);
+                        AgregarDetalleEmpleado(Idplanilla);
+
+                    }
+                    else
+                    {
+                        resp = 0;
+                    }
+                }
+                else
+                {
+                    resp = 3;
+                }
 
             }
             return resp;
         }
 
-        private void AgregarDetalleEmpleado(int idPlanilla) {
+        private void AgregarDetalleEmpleado(int idPlanilla)
+        {
 
             foreach (DataRow row in Planilla.Rows)
             {
-               int idEmpleado = Convert.ToInt32(row["Id_Empleado"].ToString());
-              decimal salarioBase = Convert.ToDecimal(row["Salario_base"].ToString());
-              decimal pagoInssL =  Convert.ToDecimal(row["Pago_Inss_Laboral"].ToString());
-              decimal pagoInssP = Convert.ToDecimal(row["Pago_Inss_Patronal"].ToString());
-              decimal pagoIR =  Convert.ToDecimal(row["Pago_IR"].ToString());
-              decimal porcentajeAplicado =  Convert.ToDecimal(row["Porcentaje_Aplicado"].ToString());
-              decimal montoingreso = Convert.ToDecimal(row["Monto_de_Ingreso"].ToString());
-              decimal montoDeduccion =Convert.ToDecimal(row["Monto_de_Deducciones"].ToString());
-              decimal salarioDevengado = Convert.ToDecimal(row["Salario_Devengado"].ToString());
+                int idEmpleado = Convert.ToInt32(row["Id_Empleado"].ToString());
+                decimal salarioBase = Convert.ToDecimal(row["Salario_base"].ToString());
+                decimal pagoInssL = Convert.ToDecimal(row["Pago_Inss_Laboral"].ToString());
+                decimal pagoInssP = Convert.ToDecimal(row["Pago_Inss_Patronal"].ToString());
+                decimal pagoIR = Convert.ToDecimal(row["Pago_IR"].ToString());
+                decimal porcentajeAplicado = Convert.ToDecimal(row["Porcentaje_Aplicado"].ToString());
+                decimal montoingreso = Convert.ToDecimal(row["Monto_de_Ingreso"].ToString());
+                decimal montoDeduccion = Convert.ToDecimal(row["Monto_de_Deducciones"].ToString());
+                decimal salarioDevengado = Convert.ToDecimal(row["Salario_Devengado"].ToString());
+                decimal horasExtra = Convert.ToDecimal(row["Horas_Extra"].ToString());
 
 
-              dtPlanilla.GuardarDetalleEmpleado(idPlanilla, idEmpleado, salarioBase, pagoInssP, pagoInssL, pagoIR, porcentajeAplicado, montoingreso, montodeducciones, salarioDevengado);
+                dtPlanilla.GuardarDetalleEmpleado(idPlanilla, idEmpleado, salarioBase, pagoInssP, pagoInssL, pagoIR, porcentajeAplicado, montoingreso, montodeducciones, salarioDevengado, horasExtra);
             }
 
-           
+
         }
 
         public Planilla_Empleado ConsultarPlanillaEmpleado(int id)
@@ -130,7 +148,7 @@ namespace Negocio
             vistaPlanilla = new DataTable();
             InitVistaPlanilla();
 
-           planillaEncabezado = dtPlanilla.Listar();
+            planillaEncabezado = dtPlanilla.Listar();
 
             foreach (Planilla_Empleado plan in planillaEncabezado)
             {
@@ -140,7 +158,7 @@ namespace Negocio
                     {
                         if (plan.Aprobado)
                         {
-                            vistaPlanilla.Rows.Add(plan.Id, local.Alias, plan.Fecha_elaboracion, "Sí",plan.Fecha_aprobacion);
+                            vistaPlanilla.Rows.Add(plan.Id, local.Alias, plan.Fecha_elaboracion, "Sí", plan.Fecha_aprobacion);
                         }
                         else
                         {
@@ -156,12 +174,14 @@ namespace Negocio
         {
             return dtPlanilla.Editar(pemp);
         }
-        
-        public DataTable ConsultarDetallePlanilla(int idPlanilla) {
+
+        public DataTable ConsultarDetallePlanilla(int idPlanilla)
+        {
             return dtPlanilla.ConsultarDetallePlanilla(idPlanilla);
         }
-        
-        public DataTable ConsultarDetalleEmpleado(int idPlanilla) {
+
+        public DataTable ConsultarDetalleEmpleado(int idPlanilla)
+        {
             Planilla = new DataTable();
             InitDataTable();
 
@@ -170,19 +190,19 @@ namespace Negocio
 
             }
 
-           // Planilla = ngPlanilla.ConsultarDetalleEmpleado(idPlanilla);           
+            // Planilla = ngPlanilla.ConsultarDetalleEmpleado(idPlanilla);           
             return Planilla;
         }
-        
-        
-        
+
+
+
         //
         private void GenerarPlanilla(int id)
         {
             Planilla = new DataTable();
             InitDataTable();
             RecuperarVariables();
-            
+
             empleados = RecuperarEmpleados(id);
             puestos = RecuperarPuestos();
             adendums = RecuperarAdendum();
@@ -389,7 +409,7 @@ namespace Negocio
 
                     decimal irAnual = (salarioConInss - ir.Exceso) * ir.PorcentajeAplicable;
                     irAnual = irAnual + ir.Base;
-                    Iraplicado= ir.PorcentajeAplicable;
+                    Iraplicado = ir.PorcentajeAplicable;
                     irMensual = irAnual / months;
                     irMensual = Decimal.Round(irMensual, 2);
 
