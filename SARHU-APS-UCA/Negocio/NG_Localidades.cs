@@ -71,17 +71,42 @@ namespace Negocio
             return cantidadLocsActivos;
         }
 
+        /* public Empleado RecuperarDirectorLocalidad(int idLocalidad)
+         {
+             Empleado empleado = new Empleado();
+
+
+                 foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
+                 {
+                     if (idLocalidad == emp.LocalidadId)
+                     {
+                         empleado = emp;
+                     }
+                 }           
+
+             return empleado;
+         }*/
+
+
         public Empleado RecuperarDirectorLocalidad(int idLocalidad)
         {
             Empleado empleado = new Empleado();
-            
-                foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
+            foreach (Localidad local in ListarPorEstado(true))
+            {
+                if (idLocalidad == local.Id)
                 {
-                    if (idLocalidad == emp.LocalidadId)
+                    foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
                     {
-                        empleado = emp;
+                        if (local.DirectorId == emp.Id)
+                        {
+                            empleado = emp;
+                        }
                     }
-                }           
+                }
+
+            }
+
+
 
             return empleado;
         }
@@ -97,7 +122,7 @@ namespace Negocio
 
             List<Localidad> localidadesActivas = this.ListarPorEstado(true);
 
-            foreach(Localidad l in localidadesActivas)
+            foreach (Localidad l in localidadesActivas)
             {
                 Programa p = ngProgramas.Consultar(l.ProgramaId);
                 Departamento d = ngMunicipios.ObtenerDepartamento(l.MunicipioId);

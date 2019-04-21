@@ -335,8 +335,8 @@ namespace Datos
             return dt;
         }
 
-        public void EditarDetalleEmpleado(int Idplanilla, decimal salarioBase, decimal montoInssPatronal, decimal montoInssLaboral,
-                                           decimal montoIR, decimal porcentajeAplicado, decimal montoIngreso, decimal montoDeducciones, decimal salarioDevengado)
+        public bool EditarDetalleEmpleado(int Idplanilla, decimal salarioBase, decimal montoInssPatronal, decimal montoInssLaboral,
+                                           decimal montoIR, decimal porcentajeAplicado, decimal montoIngreso, decimal montoDeducciones, decimal salarioDevengado, decimal horasExtra)
         {
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
@@ -344,14 +344,15 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@planilla_id", SqlDbType.Int).Value = Idplanilla;           
-            comandoSql.Parameters.Add("@salario_base", SqlDbType.Date).Value = salarioBase;
-            comandoSql.Parameters.Add("@monto_INSS_P", SqlDbType.Int).Value = montoInssPatronal;
-            comandoSql.Parameters.Add("@monto_INSS_L", SqlDbType.Date).Value = montoInssLaboral;
-            comandoSql.Parameters.Add("@monto_IR", SqlDbType.VarChar).Value = montoIR;
-            comandoSql.Parameters.Add("@porcentaje_IR_aplicado", SqlDbType.Bit).Value = porcentajeAplicado;
-            comandoSql.Parameters.Add("@monto_ingresos", SqlDbType.Bit).Value = montoIngreso;
-            comandoSql.Parameters.Add("@monto_deducciones", SqlDbType.Bit).Value = montoDeducciones;
-            comandoSql.Parameters.Add("@salario_devengado", SqlDbType.Bit).Value = salarioDevengado;
+            comandoSql.Parameters.Add("@salario_base", SqlDbType.Decimal).Value = salarioBase;
+            comandoSql.Parameters.Add("@monto_INSS_P", SqlDbType.Decimal).Value = montoInssPatronal;
+            comandoSql.Parameters.Add("@monto_INSS_L", SqlDbType.Decimal).Value = montoInssLaboral;
+            comandoSql.Parameters.Add("@monto_IR", SqlDbType.Decimal).Value = montoIR;
+            comandoSql.Parameters.Add("@porcentaje_IR_aplicado", SqlDbType.Decimal).Value = porcentajeAplicado;
+            comandoSql.Parameters.Add("@monto_ingresos", SqlDbType.Decimal).Value = montoIngreso;
+            comandoSql.Parameters.Add("@monto_deducciones", SqlDbType.Decimal).Value = montoDeducciones;
+            comandoSql.Parameters.Add("@salario_devengado", SqlDbType.Decimal).Value = salarioDevengado;
+            comandoSql.Parameters.Add("@horas_extras", SqlDbType.Decimal).Value = horasExtra;
 
             if (conexionSql.State == ConnectionState.Closed)
             {
@@ -363,7 +364,7 @@ namespace Datos
             //int idPlanilla = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexionSql.Close();
 
-
+            return (Editado > 0);
         }
 
     }
