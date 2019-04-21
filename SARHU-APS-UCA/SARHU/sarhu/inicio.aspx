@@ -65,7 +65,7 @@
                                 <i class="fa fa-users fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">450</div>
+                                <div class="huge"><% = cantEmpl %></div>
                                 <div>Empleados Activos</div>
                             </div>
                         </div>

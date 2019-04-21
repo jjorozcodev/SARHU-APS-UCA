@@ -8,16 +8,16 @@ namespace Datos
 {
     public class DT_Puestos : I_CRUD<Puesto>
     {
-        List<Puesto> puestos = new List<Puesto>();
+        //GLOBALES
 
+       
         private SqlConnection conexionSql = Conexion.Instanciar().ConexionBD();
         private SqlCommand comandoSql = new SqlCommand();
         private SqlDataAdapter adaptadorSql = null;
-     
+        List<Puesto> puestos = new List<Puesto>();
 
         private static DT_Puestos dtPuestos = null;
-
-
+        
         private DT_Puestos()
         {
             //Singleton
@@ -28,13 +28,42 @@ namespace Datos
             if (dtPuestos == null)
             {
                 dtPuestos = new DT_Puestos();
-
             }
             return dtPuestos;
         }
 
+        // METODOS
+
+        /// <summary>
+        /// El método permite agregar un registro de la entidad [Puesto].
+        /// Recibe como parámetro un objeto [Puesto] con la información a agregar a la base de datos (Código Contable, Descripción, Cuenta de Salario, de Impuestos y de Seguros).
+        /// Devuelve un valor entero con el id generado.
+        /// </summary>
+        public int Agregar(Puesto obj)
+        {
+            comandoSql.Connection = conexionSql;
+            comandoSql.CommandType = CommandType.StoredProcedure;
+            comandoSql.CommandText = Procedimientos.PuestosAgregar;
+
+            comandoSql.Parameters.Clear();
+            comandoSql.Parameters.Add("@puesto_nombre", SqlDbType.VarChar).Value = obj.Nombre;
+            comandoSql.Parameters.Add("@puesto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
+            comandoSql.Parameters.Add("@cuenta_id", SqlDbType.Int).Value = obj.CuentaId;
+            comandoSql.Parameters.Add("@area_id", SqlDbType.Int).Value = obj.AreaId;
+            comandoSql.Parameters.Add("@puesto_salario_base", SqlDbType.Decimal).Value = obj.SalarioBase;
+
+            if (conexionSql.State == ConnectionState.Closed)
+            {
+                conexionSql.Open();
+            }
 
 
+            //int agregado = comandoSql.ExecuteNonQuery();
+            int idPuesto = Convert.ToInt32(comandoSql.ExecuteScalar());
+            conexionSql.Close();
+
+            return idPuesto;
+        }
 
         public List<Puesto> Listar()
         {
@@ -121,33 +150,6 @@ namespace Datos
             return puesto;
         }
 
-        public int Agregar(Puesto obj)
-        {
-          
-            comandoSql.Connection = conexionSql;
-            comandoSql.CommandType = CommandType.StoredProcedure;
-            comandoSql.CommandText = Procedimientos.PuestosAgregar;
-
-            comandoSql.Parameters.Clear();
-            comandoSql.Parameters.Add("@puesto_nombre", SqlDbType.VarChar).Value = obj.Nombre;
-            comandoSql.Parameters.Add("@puesto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
-            comandoSql.Parameters.Add("@cuenta_id", SqlDbType.Int).Value = obj.CuentaId;
-            comandoSql.Parameters.Add("@area_id", SqlDbType.Int).Value = obj.AreaId;
-            comandoSql.Parameters.Add("@puesto_salario_base", SqlDbType.Decimal).Value = obj.SalarioBase;
-
-            if (conexionSql.State == ConnectionState.Closed)
-            {
-                conexionSql.Open();
-            }
-
-
-            //int agregado = comandoSql.ExecuteNonQuery();
-            int idPuesto = Convert.ToInt32(comandoSql.ExecuteScalar());
-            conexionSql.Close();
-           
-            return idPuesto;
-        }
-
         public bool Editar(Puesto obj)
         {
             comandoSql.Connection = conexionSql;
@@ -218,7 +220,6 @@ namespace Datos
             int agregado = comandoSql.ExecuteNonQuery();
 
             conexionSql.Close();
-
         }
 
         public DataTable ListarPuestosFunciones()
