@@ -46,8 +46,9 @@ namespace Datos
             comandoSql.Parameters.Add("@programa_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@programa_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -72,8 +73,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -98,8 +100,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@programa_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -139,8 +142,9 @@ namespace Datos
             comandoSql.Parameters.Add("@programa_nombre", SqlDbType.VarChar).Value = obj.Nombre;
             comandoSql.Parameters.Add("@programa_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -166,8 +170,9 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 

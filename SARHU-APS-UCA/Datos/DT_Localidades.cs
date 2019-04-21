@@ -50,8 +50,9 @@ namespace Datos
             comandoSql.Parameters.Add("@localidad_telefono", SqlDbType.VarChar).Value = obj.Telefono;
             comandoSql.Parameters.Add("@localidad_direccion", SqlDbType.VarChar).Value = obj.Direccion;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -76,8 +77,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -102,8 +104,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -151,8 +154,9 @@ namespace Datos
             comandoSql.Parameters.Add("@localidad_direccion", SqlDbType.VarChar).Value = obj.Direccion;
             comandoSql.Parameters.Add("@localidad_id", SqlDbType.VarChar).Value = obj.Id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -178,8 +182,9 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 

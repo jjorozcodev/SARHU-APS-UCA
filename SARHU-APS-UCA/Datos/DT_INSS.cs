@@ -47,8 +47,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@inss_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -91,8 +92,9 @@ namespace Datos
             comandoSql.Parameters.Add("@inss_porcentaje", SqlDbType.Decimal).Value = obj.Porcentaje;
             comandoSql.Parameters.Add("@ultima_actualizacion", SqlDbType.DateTime).Value = obj.UltimaActualizacion;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -118,8 +120,9 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 

@@ -48,8 +48,9 @@ namespace Datos
             comandoSql.Parameters.Add("@usuario_clave", SqlDbType.VarChar).Value = obj.Clave;
             comandoSql.Parameters.Add("@usuario_correo", SqlDbType.VarChar).Value = obj.Correo;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -75,8 +76,9 @@ namespace Datos
 
             comandoSql.Parameters.Add("@usuario_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -102,8 +104,9 @@ namespace Datos
 
             comandoSql.Parameters.Add("@usuario_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -149,8 +152,9 @@ namespace Datos
             comandoSql.Parameters.Add("@usuario_clave", SqlDbType.VarChar).Value = obj.Clave;
             comandoSql.Parameters.Add("@usuario_correo", SqlDbType.VarChar).Value = obj.Correo;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -176,8 +180,9 @@ namespace Datos
 
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 

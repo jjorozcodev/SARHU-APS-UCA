@@ -145,7 +145,6 @@ namespace Datos
             int idPuesto = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexionSql.Close();
            
-
             return idPuesto;
         }
 

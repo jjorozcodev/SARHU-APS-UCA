@@ -50,8 +50,9 @@ namespace Datos
             comandoSql.Parameters.Add("@adelanto_fecha_deduccion", SqlDbType.Date).Value = obj.FechaDeduccion.Date;
             comandoSql.Parameters.Add("@adelanto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -77,8 +78,9 @@ namespace Datos
 
             comandoSql.Parameters.Add("@adelanto_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -104,8 +106,9 @@ namespace Datos
 
             comandoSql.Parameters.Add("@adelanto_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -158,8 +161,9 @@ namespace Datos
             comandoSql.Parameters.Add("@adelanto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
             comandoSql.Parameters.Add("@adelanto_cancelado", SqlDbType.Bit).Value = obj.Cancelado;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -185,8 +189,9 @@ namespace Datos
             
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 

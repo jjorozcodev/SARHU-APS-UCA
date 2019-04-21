@@ -57,8 +57,9 @@ namespace Datos
             comandoSql.Parameters.Clear();
             comandoSql.Parameters.Add("@organizacion_pais", SqlDbType.Int).Value = codPais;
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -109,8 +110,9 @@ namespace Datos
             comandoSql.Parameters.Add("@localidad_id", SqlDbType.Int).Value = 0; // Aun no se puede asignar. 0 Puede ser por defecto.
 
 
-            if (conexionSql.State == ConnectionState.Closed)
+            if (conexionSql.State != ConnectionState.Open)
             {
+                conexionSql.Close();
                 conexionSql.Open();
             }
 
