@@ -28,7 +28,7 @@
 
                                             <label>Nombre</label>
                                             <div class="form-group input-group" style="width: 100%;">
-                                                <asp:TextBox ID="NombrePuesto" runat="server" CssClass="form-control" />
+                                                <asp:TextBox ID="NombrePuesto" runat="server" required="required" CssClass="form-control" />
 
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                                                 ControlToValidate="NombrePuesto"                                                
@@ -37,8 +37,9 @@
                                             </asp:RequiredFieldValidator>
 
                                             </div>
-                                            <div class="form-group" style="width: 100%;">
+
                                                 <label>Descripción</label>
+                                            <div class="form-group" style="width: 100%;">
                                                 <textarea style="resize: none" id="textarea" runat="server" clientidmode="Static" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
                                                 <div id="textarea_feedback">150 caracteres disponibles</div>
                                             </div>
