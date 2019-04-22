@@ -9,7 +9,9 @@ namespace SARHU.sarhu.catalogos
     {
         protected Localidad localidad = new Localidad();
         protected string Message { get; set; }
-       
+        private NG_Empleados ngEmpleado = NG_Empleados.Instanciar();
+        private NG_Localidades ngLocalidad = NG_Localidades.Instanciar();
+        private static int idDirector;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,8 +37,10 @@ namespace SARHU.sarhu.catalogos
             Departamento.DataTextField = "Nombre";
             Departamento.DataValueField = "Id";
             Departamento.DataBind();
-            Departamento.Items.Insert(0, new ListItem("Seleccione...", "0"));       
-           
+            Departamento.Items.Insert(0, new ListItem("Seleccione...", "0"));
+
+            EmpleadosView.DataSource = ngEmpleado.ListarPorEstado(true);
+            EmpleadosView.DataBind();
         }
 
         private void LoadMunicipio(int id)
@@ -57,7 +61,7 @@ namespace SARHU.sarhu.catalogos
 
         private void ConsultData(int ID)
         {
-            localidad = NG_Localidades.Instanciar().Consultar(ID);
+            localidad = ngLocalidad.Consultar(ID);
 
             Idlocalidad.Value =  localidad.Id.ToString();
             Alias.Text = localidad.Alias;
@@ -69,8 +73,9 @@ namespace SARHU.sarhu.catalogos
             LoadMunicipio(d.Id);//El setdefault recupera los municipios segun el Departamento para rellenar el dropdownlist
 
             Municipio.Items.FindByValue(localidad.MunicipioId.ToString()).Selected = true;//Una vez cargados los departamentos se ubica el municipio del departamento
+            Empleado emp = ngLocalidad.RecuperarDirectorLocalidad(localidad.Id);
 
-            Director.Text = "Hermann Gmeiner";
+            Director.Text = emp.Nombres;
             textarea.Value = localidad.Direccion;
             Telefono.Text = localidad.Telefono; 
         }
@@ -82,7 +87,7 @@ namespace SARHU.sarhu.catalogos
             //localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
             localidad.Telefono = Telefono.Text;
             localidad.Alias = Alias.Text;
-            localidad.DirectorId = 0111;
+            localidad.DirectorId = idDirector;
             localidad.Direccion = textarea.Value;
             localidad.Id = int.Parse( Idlocalidad.Value);
 
@@ -109,6 +114,13 @@ namespace SARHU.sarhu.catalogos
                 panel.CssClass = "alert alert-danger alert-dismissable";
                 panel.Visible = true;
             }
+        }
+
+        protected void EmpleadosView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow gr = EmpleadosView.SelectedRow;
+            idDirector = int.Parse(gr.Cells[1].Text);
+            Director.Text = gr.Cells[2].Text;
         }
     }
 }

@@ -70,22 +70,22 @@ namespace Negocio
             int cantidadLocsActivos = lcldds.Count;
             return cantidadLocsActivos;
         }
-
-        /* public Empleado RecuperarDirectorLocalidad(int idLocalidad)
+   
+        public List<Empleado> RecuperarEmpleadosPorLocalidad(int idLocalidad)
          {
-             Empleado empleado = new Empleado();
+             List<Empleado> empleado = new List<Empleado>();
 
 
                  foreach (Empleado emp in ngEmpleado.ListarPorEstado(true))
                  {
                      if (idLocalidad == emp.LocalidadId)
                      {
-                         empleado = emp;
+                         empleado.Add(emp);
                      }
                  }           
 
              return empleado;
-         }*/
+         }
 
 
         public Empleado RecuperarDirectorLocalidad(int idLocalidad)
@@ -105,9 +105,6 @@ namespace Negocio
                 }
 
             }
-
-
-
             return empleado;
         }
 
@@ -126,9 +123,10 @@ namespace Negocio
             {
                 Programa p = ngProgramas.Consultar(l.ProgramaId);
                 Departamento d = ngMunicipios.ObtenerDepartamento(l.MunicipioId);
+                Empleado emp = RecuperarDirectorLocalidad(l.Id);
                 // TODO: Director recuperar ID
 
-                vistaLocalidades.Rows.Add(l.Id, p.Nombre, d.Nombre, "Hermann Gmeiner", l.Telefono);
+                vistaLocalidades.Rows.Add(l.Id, p.Nombre, d.Nombre, emp.Nombres, l.Telefono);
             }
 
             return vistaLocalidades;

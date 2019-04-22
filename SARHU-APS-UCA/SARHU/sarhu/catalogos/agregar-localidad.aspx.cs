@@ -2,13 +2,17 @@
 using Entidades;
 using Negocio;
 using System.Web.UI.WebControls;
-
+using System.Collections.Generic;
 
 namespace SARHU.sarhu.catalogos
 {
     public partial class agregar_localidad : System.Web.UI.Page
     {
         protected string Mensaje { get; set; }
+        private static List<Empleado> TableEmpleado = new List<Empleado>();
+        private NG_Empleados ngEmpleado = NG_Empleados.Instanciar();
+        private NG_Municipios ngMunicipios = NG_Municipios.Instanciar();
+        private static int idDirector;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,6 +41,10 @@ namespace SARHU.sarhu.catalogos
 
             ///Se Deshabilita el Dropdown
             setDefault();
+
+            ///Carga del View Para los empleados
+            EmpleadosView.DataSource = ngEmpleado.ListarPorEstado(true);
+            EmpleadosView.DataBind();
         }
 
         private void setDefault()
@@ -50,10 +58,10 @@ namespace SARHU.sarhu.catalogos
             Localidad localidad = new Localidad();
             localidad.ProgramaId = int.Parse(ddlProgramas.SelectedItem.Value);
             localidad.MunicipioId = int.Parse(ddlMunicipios.SelectedItem.Value);
-            //localidad.DepartamentoId = int.Parse(Departamento.SelectedItem.Value);
+          
             localidad.Telefono = Telefono.Text;
             localidad.Alias = Alias.Text;
-            localidad.DirectorId = 0111;
+            localidad.DirectorId = idDirector;
             localidad.Direccion = textarea.Value;
             
             Alias.Text = "";
@@ -76,7 +84,7 @@ namespace SARHU.sarhu.catalogos
             if (id > 0)
             {
                 ddlMunicipios.Enabled = true;
-                ddlMunicipios.DataSource = NG_Municipios.Instanciar().ObtenerMunicipios(id);
+                ddlMunicipios.DataSource = ngMunicipios.ObtenerMunicipios(id);
                 ddlMunicipios.DataTextField = "Nombre";
                 ddlMunicipios.DataValueField = "Id";
                 ddlMunicipios.DataBind();
@@ -98,6 +106,14 @@ namespace SARHU.sarhu.catalogos
                 panelNotificacion.CssClass = "alert alert-danger alert-dismissable";
                 panelNotificacion.Visible = true;
             }
+        }
+
+        
+        protected void EmpleadosView_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            GridViewRow gr = EmpleadosView.SelectedRow;
+             idDirector = int.Parse(gr.Cells[1].Text);
+            Director.Text = gr.Cells[2].Text;
         }
     }
 }

@@ -249,7 +249,7 @@ namespace Negocio
             InitDataTable();
             RecuperarVariables();
 
-            empleados = RecuperarEmpleados(id);
+            empleados = ngLocalidades.RecuperarEmpleadosPorLocalidad(id);
             puestos = RecuperarPuestos();
             adendums = RecuperarAdendum();
 
@@ -380,7 +380,7 @@ namespace Negocio
             return ngPuesto.ListarPuesto(true);
         }
 
-        private List<Empleado> RecuperarEmpleados(int idLocalidad)
+     /*   private List<Empleado> RecuperarEmpleados(int idLocalidad)
         {
             List<Empleado> tempEmpleados = new List<Empleado>();
             empleados = ngEmpleado.ListarPorEstado(true);
@@ -395,7 +395,7 @@ namespace Negocio
 
 
             return tempEmpleados;
-        }
+        }*/
 
         private List<Bono> RecuperarBonos()
         {

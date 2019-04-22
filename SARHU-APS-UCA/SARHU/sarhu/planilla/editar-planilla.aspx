@@ -186,32 +186,13 @@
                                                         <h5 class="modalLittle" id="littleModalLabel">Seleccione</h5>
                                                     </div>
                                                     <div class="panel-body tooltip-demo">
-                                                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Nombre</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="odd gradeX">
-                                                                    <td>001</td>
-                                                                    <td>María Espinoza</td>
-                                                                </tr>
-                                                                <tr class="even gradeC" style='border: inset 0pt'>
-                                                                    <td>002</td>
-                                                                    <td>Luis Morales</td>
-                                                                </tr>
-                                                                <tr class="even gradeD" style='border: inset 0pt'>
-                                                                    <td>003</td>
-                                                                    <td>Andrea Mendez</td>
-                                                                </tr>
-                                                                <tr class="even gradeE" style='border: inset 0pt'>
-                                                                    <td>004</td>
-                                                                    <td>Rodrigo Hernandez</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        <asp:GridView ID="EmpleadosView" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" EmptyDataText="No hay datos disponibles." CssClass="table table-striped table-bordered table-hover" CellPadding="0" Width="100%" OnSelectedIndexChanged="EmpleadosView_SelectedIndexChanged">
+                                                            <Columns>
+                                                                <asp:CommandField ControlStyle-CssClass="btn btn-success  fondo-verde-aldeas" ShowSelectButton="True" />
+                                                                <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
+                                                                <asp:BoundField DataField="Nombres" HeaderText="Funcion" />
+                                                            </Columns>
+                                                        </asp:GridView>
                                                         <!-- /.table-responsive -->
                                                     </div>
                                                     <!-- /.panel-body -->
