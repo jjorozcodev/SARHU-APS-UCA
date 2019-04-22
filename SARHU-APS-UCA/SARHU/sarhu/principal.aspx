@@ -68,7 +68,7 @@
                                             <div class="form-group" style="width: 100%">
                                                 <label>Fecha de Fundación</label>
                                                 <div class="form-group input-group" style="width: 100%;">
-                                                    <input type="date" id="orgFundacion" class="form-control" runat="server" name="FechaFundacion" step="1" min="1900-01-01" max="2000-12-31" value="2000-01-01">
+                                                    <input type="date" id="orgFundacion" class="form-control" runat="server" name="FechaFundacion" step="1" min="1900-01-01" max="2100-12-31" value="2000-01-01">
                                                 </div>
                                             </div>
                                             <div class="form-group" align="center">
