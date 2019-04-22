@@ -66,5 +66,19 @@ namespace Negocio
             int cantidadEmplActivos = empl.Count;
             return cantidadEmplActivos;
         }
+        
+        public int CantidadEmpleadosVarones()
+        {
+            List<Empleado> empls = this.ListarPorEstado(true);
+            int contador = 0;
+            foreach(Empleado e in empls)
+            {
+                if (e.Sexo)
+                {
+                    contador++;
+                }
+            }
+            return contador;
+        }
     }
 }

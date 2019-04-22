@@ -185,11 +185,8 @@
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -250,15 +247,11 @@
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
-
 
     <script>
         new Chart(document.getElementById("chartPie"),
@@ -270,7 +263,7 @@
                     ["Hombres", "Mujeres"],
                     "datasets":
                     [{
-                        "data": [340, 154],
+                        "data": [<% = cantEmplM %>, <% = cantEmplF %>],
                         "backgroundColor":
                         [   "rgba(92, 184, 92,0.75)",
                             "rgba(240, 173, 78,0.75)"]

@@ -11,6 +11,8 @@ namespace SARHU.sarhu
         protected int cantProgAct = 0;
         protected int cantLocAct = 0;
         protected int cantEmpl = 0;
+        protected int cantEmplM = 0;
+        protected int cantEmplF = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,7 +20,8 @@ namespace SARHU.sarhu
             cantProgAct = NG_Programas.Instanciar().CantidadProgramasActivos();
             cantLocAct = NG_Localidades.Instanciar().CantidadLocalidadesActivas();
             cantEmpl = NG_Empleados.Instanciar().CantidadEmpleadosActivos();
-
+            cantEmplM = NG_Empleados.Instanciar().CantidadEmpleadosVarones();
+            cantEmplF = cantEmpl - cantEmplM;
         }
     }
 }
