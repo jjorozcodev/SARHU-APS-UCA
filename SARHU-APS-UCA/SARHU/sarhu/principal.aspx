@@ -33,10 +33,10 @@
                                             </asp:Panel>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group" style="width: 100%">
+                                            <div class="form-group input-group" style="width: 100%">
                                                 <label>Nombre</label>
                                                 <div class="form-group input-group" style="width: 100%;">
-                                                    <asp:TextBox ID="orgNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="orgNombre" type="text" CssClass="form-control" runat="server" required="required"></asp:TextBox>
                                                 </div>
                                             </div>
                                             

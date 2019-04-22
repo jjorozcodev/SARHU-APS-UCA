@@ -28,9 +28,9 @@
                                                 <label>Nombre</label>
                                                 <asp:TextBox ID="bonoNombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
-                                            <div class="form-group" style="width: 100%;">
+                                            <div class="form-group input-group" style="width: 100%;">
                                                 <label>Descripción</label>
-                                                <textarea style="resize: none" id="bonoDescripcion" runat="server" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
+                                                <textarea style="resize: none" id="bonoDescripcion" runat="server" rows="5" cols="5" class="form-control" required="required" maxlength="150" name="textarea"></textarea>
                                                 <div id="textarea_feedback">150 caracteres disponibles</div>
                                             </div>
                                             <label>Monto</label>
@@ -81,7 +81,7 @@
         $(document).ready(function () {
             setTimeout(function () {
                 $("#panelNotificacion").fadeOut("slow", function () {
-                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/ingresos/bonos' 
+                    location.href = 'http://<% =HttpContext.Current.Request.Url.Authority %><% =HttpContext.Current.Request.ApplicationPath %>/sarhu/ingresos-deducciones/bonos' 
                 });
             }, 2500);
         });
