@@ -46,10 +46,7 @@
                                                             </td>
                                                             <td class="col-md-4">
                                                                 <div class="form-group input-group" style="width: 100%;">
-                                                                    <asp:TextBox runat="server" ID="director" CssClass="form-control" type="text" />
-                                                                    <span class="input-group-btn">
-                                                                        <a data-toggle="modal" data-target="#mediumModal" type="button" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Lista de Directores"><i class="fa fa-search"></i></span></a>
-                                                                    </span>
+                                                                    <asp:TextBox runat="server" ID="director" CssClass="form-control" type="text" />                                                                   
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -164,58 +161,7 @@
                  </div>
             </div>
 
-    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button style="font-size: 35px" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h2 class="modal-title" id="mediumModalLabel">Lista de Directores</h2>
-                </div>
-                <div class="modal-body">
-                    <div id="page-wrapper1">
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-6">
-                                <div class="panel panel-formulario">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="panel panel-default2">
-                                                    <div>
-                                                        <h5 class="modalLittle" id="littleModalLabel">Seleccione</h5>
-                                                    </div>
-                                                    <div class="panel-body tooltip-demo">
-                                                        <asp:GridView ID="EmpleadosView" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" EmptyDataText="No hay datos disponibles." CssClass="table table-striped table-bordered table-hover" CellPadding="0" Width="100%" OnSelectedIndexChanged="EmpleadosView_SelectedIndexChanged">
-                                                            <Columns>
-                                                                <asp:CommandField ControlStyle-CssClass="btn btn-success  fondo-verde-aldeas" ShowSelectButton="True" />
-                                                                <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
-                                                                <asp:BoundField DataField="Nombres" HeaderText="Funcion" />
-                                                            </Columns>
-                                                        </asp:GridView>
-                                                        <!-- /.table-responsive -->
-                                                    </div>
-                                                    <!-- /.panel-body -->
-                                                </div>
-                                                <!-- /.panel -->
-                                            </div>
-                                            <!-- /.col-lg-12 -->
-                                        </div>
-                                        <!-- /.row (nested) -->
-                                    </div>
-                                    <!-- /.panel-body -->
-                                </div>
-                            </div>
-                            <!-- /.col-lg-6 (nested) -->
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
+   
 
     <script>
             $(document).ready(function () {
