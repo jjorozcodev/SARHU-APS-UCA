@@ -33,7 +33,7 @@
                                 <tr class="odd gradeX">
                                     <td><%#Eval("Nombre")%></td>
                                     <td><%#Eval("Descripcion")%></td>
-                                    <td><%#Eval("SalarioBase")%> </td>
+                                    <td><%#Eval("SalarioBase", "{0:N2}")%> </td>
                                     <td align="center">
                                         <asp:LinkButton runat="server" ID="Detalle" CssClass="btn btn-default" Style="margin-right: 10px;" CommandArgument='<%# Eval("Id") %>' OnClick="Detalle_Click"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Puesto"><i class="fa fa-eye fa-fw"></i></span></asp:LinkButton>
                                         <a href="editar-puesto.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Puesto"><i class="fa fa-edit fa-fw"></i></span></a>

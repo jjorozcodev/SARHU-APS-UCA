@@ -20,8 +20,10 @@ namespace SARHU.sarhu.planilla
         private NG_INSS ngInss = NG_INSS.Instanciar();
         private List<Localidad> localidad = new List<Localidad>();
         private static DataTable planilla = new DataTable();
+        private static List<Empleado> TableEmpleado = new List<Empleado>();
         private static decimal monto = 0m;
         private static int idDirector;
+        private static int idResponsable;
         private static int idLocalidad;
         public static string Message;
 
@@ -29,18 +31,21 @@ namespace SARHU.sarhu.planilla
         {
             if (!IsPostBack)
             {
+                TableEmpleado.Clear();
                 CargarDatos();
+                TableEmpleado = ngEmpleado.ListarPorEstado(true);
+                CargarEmpleadosView(TableEmpleado);
 
             }
         }
 
         protected Planilla_Empleado ObtenerDatosInterfaz()
         {
-       
+
             Planilla_Empleado Pemp = new Planilla_Empleado();
             Pemp.Idlocalidad = idLocalidad;
             Pemp.Iddirector = idDirector;
-            Pemp.Idresponsable = 12;
+            Pemp.Idresponsable = idResponsable;
             Pemp.Fecha_elaboracion = DateTime.Now;
             Pemp.Fecha_aprobacion = DateTime.Now;
             Pemp.Observacion = textarea.Value;
@@ -58,11 +63,13 @@ namespace SARHU.sarhu.planilla
             decimal Inatec = Convert.ToDecimal(inatec.Text);
             decimal techo = Convert.ToDecimal(techoSalarial.Text);
 
-            return ngPlanilla.AgregarPlanilla(plan, planilla, inssp , inssl , Inatec , techo );
+            return ngPlanilla.AgregarPlanilla(plan, planilla, inssp, inssl, Inatec, techo);
         }
 
         protected void CargarDatos()
         {
+
+
             foreach (Variable var in ngVariables.Listar())
             {
                 if (var.Id == 9)
@@ -105,6 +112,15 @@ namespace SARHU.sarhu.planilla
 
         }
 
+        protected void CargarEmpleadosView(List<Empleado> empleado)
+        {
+         
+            EmpleadosView.DataSource = empleado;
+            EmpleadosView.DataBind();
+
+
+        }
+
         protected void GenerarPlanilla(int id)
         {
 
@@ -128,7 +144,7 @@ namespace SARHU.sarhu.planilla
             decimal salarioB = Convert.ToDecimal(row.Cells[4].Text);
             decimal salarioDevengado = Convert.ToDecimal(row.Cells[11].Text);
             salarioDevengado = salarioDevengado - monto;
-          
+
             planilla.Rows[e.RowIndex].BeginEdit();
             if (horas.Text != string.Empty)
             {
@@ -159,11 +175,19 @@ namespace SARHU.sarhu.planilla
         protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlProgramas.ClearSelection();
+
             idLocalidad = int.Parse(ddlLocalidad.SelectedItem.Value);
             Empleado empleado = ngLocalidades.RecuperarDirectorLocalidad(idLocalidad);
             Localidad local = ngLocalidades.Consultar(idLocalidad);
+
+            TableEmpleado = ngLocalidades.RecuperarEmpleadosPorLocalidad(idLocalidad);
+
+            CargarEmpleadosView(TableEmpleado);
+
+
             director.Text = empleado.Nombres;
             idDirector = empleado.Id;
+            idResponsable = empleado.Id;
             ddlProgramas.Items.FindByValue(local.ProgramaId.ToString()).Selected = true;
 
             GenerarPlanilla(idLocalidad);
@@ -182,13 +206,35 @@ namespace SARHU.sarhu.planilla
                 case 1:
                     Message = "GUARDADO EXITOSAMENTE";
                     panel.Visible = true;
-                    break;               
+                    break;
                 default:
                     existence.Visible = true;
                     break;
             }
-            
+
+
+        }
+
+        protected void EmpleadosView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            if (int.Parse(ddlLocalidad.SelectedItem.Value) != 0)
+            {
+                GridViewRow gr = EmpleadosView.SelectedRow;
+                idResponsable = int.Parse(gr.Cells[1].Text);
+                director.Text = gr.Cells[2].Text;
+            }
+            else
+            {
+                idResponsable = 0;
+                director.Text = string.Empty;
+            }
+           
+        }
+
+        protected void EmpleadosView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
 
         }
     }
-    }
+}

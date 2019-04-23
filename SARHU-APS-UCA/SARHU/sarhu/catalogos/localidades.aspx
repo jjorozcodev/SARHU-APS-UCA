@@ -40,7 +40,7 @@
                                         <td><%#Eval("Director")%></td>
                                         <td><%#Eval("Telefono")%></td>
                                         <td align="center">
-                                            <%--<asp:LinkButton ID="Detalle" runat="server" CommandArgument='<%# Eval("Id")%>' CssClass="btn btn-default" OnClick="VerDetalle_Click" Style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Localidad"><i class="fa fa-eye fa-fw"></i></span></asp:LinkButton>--%>
+                                            <asp:LinkButton ID="Detalle" runat="server" CommandArgument='<%# Eval("Id")%>' CssClass="btn btn-default" OnClick="Detalle_Click" Style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Localidad"><i class="fa fa-eye fa-fw"></i></span></asp:LinkButton>
                                             <a href="editar-localidad.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Localidad"><i class="fa fa-edit fa-fw"></i></span></a>
                                             <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Localidad"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
                                         </td>

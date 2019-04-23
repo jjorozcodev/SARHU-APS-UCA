@@ -17,7 +17,10 @@ namespace SARHU.sarhu.catalogos
         {
             if (!Page.IsPostBack)
             {
+                CargarProgramas();
+                CargarDepartamentos();
                 CargarInformacion();
+                
             }
            
         }
@@ -41,13 +44,6 @@ namespace SARHU.sarhu.catalogos
             CargarInformacion();
         }
 
-        protected void VerDetalle_Click(object sender, CommandEventArgs e)
-        {
-            LinkButton button = (sender as LinkButton);
-            int index = int.Parse(button.CommandArgument);
-            ConsultData(index);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowDetail();", true);
-        }
 
         private void EjecutarNotificarUsuario(bool correcto)
         {
@@ -106,6 +102,7 @@ namespace SARHU.sarhu.catalogos
             Alias.Text = localidad.Alias;
             //En busca el valor del Id en el dropdownlist para dejarlo ubicado al momento de cargar la pagina
             Programa.Items.FindByValue(localidad.ProgramaId.ToString()).Selected = true;
+
             Departamento d = NG_Municipios.Instanciar().ObtenerDepartamento(localidad.MunicipioId);
             Departamento.Items.FindByValue(d.Id.ToString()).Selected = true;
 
@@ -113,9 +110,19 @@ namespace SARHU.sarhu.catalogos
 
             Municipio.Items.FindByValue(localidad.MunicipioId.ToString()).Selected = true;//Una vez cargados los departamentos se ubica el municipio del departamento
 
-            Director.Text = "Hermann Gmeiner";
+            Empleado emp = ngLocalidades.RecuperarDirectorLocalidad(localidad.Id);
+
+            Director.Text = emp.Nombres;
             textarea.Value = localidad.Direccion;
             Telefono.Text = localidad.Telefono;
+        }
+
+        protected void Detalle_Click(object sender, EventArgs e)
+        {
+            LinkButton button = (sender as LinkButton);
+            int index = int.Parse(button.CommandArgument);
+            ConsultData(index);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowDetail();", true);
         }
 
         //protected void Delete_Click(object sender, EventArgs e)
@@ -131,7 +138,7 @@ namespace SARHU.sarhu.catalogos
         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "none", "ShowPopup();", true);
         //}
 
-      
+
 
         //protected void Confirm_Click(object sender, EventArgs e)
         //{
