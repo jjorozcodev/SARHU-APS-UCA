@@ -59,6 +59,11 @@ namespace Negocio
 
         }
 
+        public List<Puesto> Listar()
+        {
+            return dtPuesto.Listar();
+        }
+
         public bool EditarPuesto(Puesto puestos)
         {
 

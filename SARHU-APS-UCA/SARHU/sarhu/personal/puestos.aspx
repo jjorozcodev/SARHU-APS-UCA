@@ -14,7 +14,11 @@
             <div class="col-lg-12">
                 <div class="panel panel-default2">
                     <div class="panel-body tooltip-demo">
-                     
+                      <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa-lg fa fa-exclamation-circle "></i>
+                            <% =Message %>
+                        </asp:Panel>
                         <asp:Repeater runat="server" ID="rptFunciones">
                             <HeaderTemplate>
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">

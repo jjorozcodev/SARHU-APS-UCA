@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class puestos : System.Web.UI.Page
+    public partial class puestos : Page
     {
         protected NG_Puestos ngPuesto = NG_Puestos.Instanciar();
         protected static int id = 0;

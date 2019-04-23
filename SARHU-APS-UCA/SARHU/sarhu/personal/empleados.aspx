@@ -1,56 +1,54 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="empleados.aspx.cs" Inherits="SARHU.sarhu.personal.empleados" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+
+<asp:Content ID="ContentEmpleados" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
      <div id="page-wrapper">
       <div class="row">
            <div class="col-lg-12">
                 <h1 class="page-header">Listado de Empleados</h1>
                 <a href="agregar-empleado.aspx" id="Generar" type="button" class="btn btn-success fondo-verde-aldeas" style="margin-bottom: 10px"><i class="fa fa-plus fa-fw"></i>Agregar Empleado</a>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default2">
                     <div class="panel-body tooltip-demo">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Programa</th>
-                                    <th width="200px">Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>230319</td>
-                                    <td>Maria Juana</td>
-                                    <td>Maldonado Palacios</td>
-                                    <td>Centro de Formación Hermann Gmeiner Estelí</td>
+                         <asp:Panel ID="panelNotificacion" ClientIDMode="static" CssClass="alert alert-success alert-dismissable" runat="server" Visible="false">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa-lg fa fa-exclamation-circle "></i>
+                            <% =Mensaje %>
+                        </asp:Panel>
+                        <asp:Repeater runat="server" ID="rptEmpleados">
+                            <HeaderTemplate>
+                               <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-datos">
+                                <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Programa</th>
+                                            <th width="200px">Operaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                 <tr class="odd gradeX">
+                                    <td><%#Eval("Codigo")%></td>
+                                    <td><%#Eval("Nombres")%></td>
+                                    <td><%#Eval("Apellidos")%></td>
+                                    <td><%#Eval("ProgramaLocalidad")%> </td>
                                     <td align="center">
-                                      <a data-toggle="modal" data-target="#mediumModal"  type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Empleado"><i class="fa fa-eye fa-fw"></i></span></a>
-                                        <a href="editar-empleado.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Empleado"><i class="fa fa-edit fa-fw"></i></span></a>
-                                         <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Empleado"><i class="fa fa-trash-o fa-fw"></i></span></button>
+                                        <a href="editar-empleado.aspx?id=<%# Eval("Id")%>" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Empleado"><i class="fa fa-edit fa-fw"></i></span></a>
+                                        <asp:LinkButton OnCommand="Borrar_Click" CommandArgument='<%#Eval("Id")%>' runat="server" CssClass="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Empleado"><i class="fa fa-trash-o fa-fw"></i></span></asp:LinkButton>
                                     </td>
-
                                 </tr>
-                                <tr class="odd gradeX">
-                                    <td>230320</td>
-                                    <td>Pedro Luis</td>
-                                    <td>Rodriguez Mendez</td>
-                                    <td>Programa de Fortalecimiento Familiar Somoto</td>
-                                    <td align="center">
-                                      <a data-toggle="modal" data-target="#mediumModal"  type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Ver Detalle Empleado"><i class="fa fa-eye fa-fw"></i></span></a>
-                                        <a href="editar-empleado.aspx" type="button" class="btn btn-default" style="margin-right: 10px"><span data-toggle="tooltip" data-placement="top" title="Editar Datos Empleado"><i class="fa fa-edit fa-fw"></i></span></a>
-                                         <button type="button" onclick="ShowPopup()" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Borrar Datos Empleado"><i class="fa fa-trash-o fa-fw"></i></span></button>
-                                    </td>
-
-                                </tr>
-                            </tbody>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </tbody>
                         </table>
-                        <!-- /.table-responsive -->
+                            </FooterTemplate>
+                        </asp:Repeater>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -245,10 +243,10 @@
                                             <h4 class="modal-title" id="myModalLabel">¡Atención!</h4>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Está seguro que desea borrar al empleado con código "230319"?
+                                            ¿Está seguro que desea borrar <%=NombreCompleto%>?
                                         </div>
                                         <div class="modal-footer">
-                                            <button  onclick="DeletePopup()" data-dismiss="modal" type="button" class="btn btn-danger fondo-rojo-aldeas">Borrar</button>
+                                            <asp:LinkButton runat="server" OnClick="Confirmar_Click" Text="Borrar" CssClass="btn btn-danger fondo-rojo-aldeas"></asp:LinkButton>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> 
                                         </div>
                                     </div>
@@ -261,7 +259,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    Borrado correctamente
+                    <%=Mensaje %>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -272,13 +270,13 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+        <asp:HiddenField runat="server" ID="idSeleccionado" />
     <script>
-        function ShowPopup() {
+        function PopupConfirmacion() {
             $('#myModal').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
 
-        function DeletePopup() {
+        function PopupNotificacion() {
             $('#delete').modal({ backdrop: 'static', keyboard: false }, 'show');
         }
 
@@ -292,7 +290,7 @@
     <script>
 
     $(document).ready(function () {
-                $('#dataTables-example').DataTable({
+                $('#dataTables-datos').DataTable({
                     responsive: true
                 });
             });

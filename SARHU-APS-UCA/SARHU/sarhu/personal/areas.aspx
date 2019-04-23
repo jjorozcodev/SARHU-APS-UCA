@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sistema.Master" AutoEventWireup="true" CodeBehind="areas.aspx.cs" Inherits="SARHU.sarhu.personal.areas" %>
 
 <asp:Content ID="ContentAreas" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
