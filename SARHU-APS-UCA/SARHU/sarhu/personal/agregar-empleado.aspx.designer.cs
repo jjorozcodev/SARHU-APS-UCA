@@ -208,7 +208,7 @@ namespace SARHU.sarhu.personal {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText SalarioEmpleado;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl SalarioEmpleado;
         
         /// <summary>
         /// Control rdBancoSi.
@@ -244,7 +244,7 @@ namespace SARHU.sarhu.personal {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText antiguedad;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl antiguedad;
         
         /// <summary>
         /// Control Guardar.
