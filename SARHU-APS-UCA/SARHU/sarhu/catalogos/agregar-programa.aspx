@@ -29,7 +29,7 @@
                                             </div>
                                             <div class="form-group" style="width: 100%;">
                                                 <label>Descripción</label>
-                                                <textarea style="resize: none" id="programaDescripcion" runat="server" rows="5" cols="5" class="form-control" maxlength="150" name="textarea"></textarea>
+                                                <textarea style="resize: none" id="programaDescripcion" runat="server" rows="5" cols="5" class="form-control" maxlength="150" name="textarea" required="required"></textarea>
                                                 <div id="textarea_feedback">150 caracteres disponibles</div>
                                             </div>
 

@@ -48,16 +48,11 @@
                                                                     <td class="col-md-4">
                                                                         <div class="form-group input-group" style="width: 100%;">
                                                                             <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server"></asp:DropDownList>
-                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                                                                                ControlToValidate="ddlProgramas"
-                                                                                ErrorMessage="Selecciona un Programa"
-                                                                                InitialValue="0" SetFocusOnError="True" ForeColor="#FF3300">
-                                                                            </asp:RequiredFieldValidator>
                                                                         </div>
                                                                     </td>
                                                                     <td class="col-md-4">
                                                                         <div class="form-group input-group" style="width: 100%;">
-                                                                            <asp:DropDownList runat="server" CssClass="form-control" ID="ddlLocalidad" AutoPostBack="true" OnSelectedIndexChanged="ddlLocalidad_SelectedIndexChanged"></asp:DropDownList>
+                                                                            <asp:DropDownList runat="server" required="required" CssClass="form-control" ID="ddlLocalidad" AutoPostBack="true" OnSelectedIndexChanged="ddlLocalidad_SelectedIndexChanged"></asp:DropDownList>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
                                                                                 ControlToValidate="ddlLocalidad"
                                                                                 ErrorMessage="Selecciona una Localidad"
@@ -67,7 +62,7 @@
                                                                     </td>
                                                                     <td class="col-md-4">
                                                                         <div class="form-group input-group" style="width: 100%;">
-                                                                            <asp:TextBox runat="server" ID="director" CssClass="form-control" type="text" Enabled="false" />
+                                                                            <asp:TextBox runat="server" ID="director" ClientIDMode="Static" CssClass="form-control" type="text" Enabled="false" required="required" />
                                                                             <span class="input-group-btn">
                                                                                 <a data-toggle="modal" data-target="#mediumModal" type="button" class="btn btn-default"><span data-toggle="tooltip" data-placement="top" title="Lista de Directores"><i class="fa fa-search"></i></span></a>
                                                                             </span>

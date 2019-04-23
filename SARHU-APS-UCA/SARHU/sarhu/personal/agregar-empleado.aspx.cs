@@ -20,7 +20,7 @@ namespace SARHU.sarhu.personal
                 CargarCatalogos();
             }
         }
-        
+
         private void CargarCatalogos()
         {
             ///Rellenar Dropdown De Estados Civiles
