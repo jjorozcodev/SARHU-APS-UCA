@@ -27,7 +27,7 @@
                                                 <label>Nombre</label>
                                                 <asp:TextBox ID="estadocNombre" type="text" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" align="center">
                                                 <asp:Button runat="server" class="btn btn-success  fondo-verde-aldeas" ID="btnGuardar" Text="Guardar" OnClick="Guardar_Click" />
                                                 <a href="estados-civiles.aspx" type="button" class="btn btn-danger fondo-rojo-aldeas">Cancelar</a>
                                             </div>
