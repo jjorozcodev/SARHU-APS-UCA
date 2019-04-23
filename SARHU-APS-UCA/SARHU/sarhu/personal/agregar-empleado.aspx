@@ -22,7 +22,6 @@
                                     <i class="fa-lg fa fa-exclamation-circle "></i>
                                     <% =Mensaje %>
                                 </asp:Panel>
-
                                 <asp:ScriptManager ID="ScriptManagerEmp" runat="server"></asp:ScriptManager>
 
                                 <div class="row">
