@@ -47,7 +47,7 @@
                                                                 <tr>
                                                                     <td class="col-md-4">
                                                                         <div class="form-group input-group" style="width: 100%;">
-                                                                            <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server"></asp:DropDownList
+                                                                            <asp:DropDownList CssClass="form-control" ID="ddlProgramas" runat="server"></asp:DropDownList>
                                                                         </div>
                                                                     </td>
                                                                     <td class="col-md-4">
