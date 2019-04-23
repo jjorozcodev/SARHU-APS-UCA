@@ -472,7 +472,9 @@ namespace Negocio
             }
 
         }
-
+        
+        //Calcular Salario Devengado calcula el salarioTotal que le corresponde el empleado después que se 
+        // le aplican bonos y deducciones.
         private void CalcularSalarioDevengado(decimal salarioB)
         {
 
@@ -483,6 +485,7 @@ namespace Negocio
             salariototal = Decimal.Round(salariototal, 2);
         }
 
+        //Calcular Monto de Deducción retiene del Empleado una deducción, en este caso serían los adelantos del salario.
         private void CalcularMontoDeduccion(int id, decimal salarioBase)
         {
             adelanto = RecuperarAdelantos();
@@ -491,12 +494,19 @@ namespace Negocio
             {
                 if (adelantos.EmpleadoId == id)
                 {
-                    montodeducciones = salarioBase - adelantos.Monto;
-                    montodeducciones = Decimal.Round(montodeducciones, 2);
+                    if (adelantos.FechaDeduccion == DateTime.Now)
+                    {
+                        montodeducciones = adelantos.Monto;
+                        montodeducciones = Decimal.Round(montodeducciones, 2);
+                        adelantos.Cancelado = true;
+                        ngAdelantos.Editar(adelantos);
+                    }
+
                 }
             }
         }
 
+        //CalcularMontoIngreso hace el cálculo de cuanto le corresponde al Empleado si tiene un bono activo.
         private void CalcularMontoIngreso(decimal salarioBase)
         {
             bonos = RecuperarBonos();

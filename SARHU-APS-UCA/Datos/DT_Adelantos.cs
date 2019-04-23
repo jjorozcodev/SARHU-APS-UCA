@@ -6,7 +6,7 @@ using System;
 
 namespace Datos
 {
-    public class DT_Adelantos : I_CRUD<Adelanto>
+    public class DT_Adelantos
     {
         //GLOBALES
 
@@ -23,7 +23,7 @@ namespace Datos
 
         public static DT_Adelantos Instanciar()
         {
-            if(dtAdelantos == null)
+            if (dtAdelantos == null)
             {
                 dtAdelantos = new DT_Adelantos();
             }
@@ -31,9 +31,10 @@ namespace Datos
         }
 
         // METODOS
+
         /// <summary>
         /// El método permite agregar un registro de la entidad [Adelanto].
-        /// Recibe como parámetro un objeto [Adelanto] con la información a agregar a la base de datos (Id de empleado, Monto, Fecha de Entrega, Fecha de Deducción y Descripción).
+        /// Recibe como parámetro un objeto [Adelanto] con la información a agregar a la base de datos (EmpleadoId, FechaEntrega, FechaDeduccion, Descripcion y Monto).
         /// Devuelve un valor entero con el id generado.
         /// </summary>
         public int Agregar(Adelanto obj)
@@ -41,18 +42,16 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AdelantosAgregar;
-            
+
             comandoSql.Parameters.Clear();
-
             comandoSql.Parameters.Add("@empleado_id", SqlDbType.Int).Value = obj.EmpleadoId;
-            comandoSql.Parameters.Add("@adelanto_monto", SqlDbType.Decimal).Value = obj.Monto;
-            comandoSql.Parameters.Add("@adelanto_fecha_entrega", SqlDbType.Date).Value = obj.FechaEntrega.Date;
-            comandoSql.Parameters.Add("@adelanto_fecha_deduccion", SqlDbType.Date).Value = obj.FechaDeduccion.Date;
+            comandoSql.Parameters.Add("@adelanto_fecha_entrega", SqlDbType.Date).Value = obj.FechaEntrega;
+            comandoSql.Parameters.Add("@adelanto_fecha_deduccion", SqlDbType.Date).Value = obj.FechaDeduccion;
             comandoSql.Parameters.Add("@adelanto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
+            comandoSql.Parameters.Add("@adelanto_monto", SqlDbType.Decimal).Value = obj.Monto;            
 
-            if (conexionSql.State != ConnectionState.Open)
+            if (conexionSql.State == ConnectionState.Closed)
             {
-                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -75,12 +74,10 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.AdelantosBorrar;
 
             comandoSql.Parameters.Clear();
-
             comandoSql.Parameters.Add("@adelanto_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State != ConnectionState.Open)
+            if (conexionSql.State == ConnectionState.Closed)
             {
-                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -103,12 +100,10 @@ namespace Datos
             comandoSql.CommandText = Procedimientos.AdelantosConsultar;
 
             comandoSql.Parameters.Clear();
-
             comandoSql.Parameters.Add("@adelanto_id", SqlDbType.Int).Value = id;
 
-            if (conexionSql.State != ConnectionState.Open)
+            if (conexionSql.State == ConnectionState.Closed)
             {
-                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -118,19 +113,15 @@ namespace Datos
 
             while (reader.Read())
             {
-                DateTime fe, fd;
-
                 adelanto.Id = id;
                 adelanto.EmpleadoId = int.Parse(reader["empleado_id"].ToString());
-                adelanto.Monto = decimal.Parse(reader["adelanto_monto"].ToString());
-                DateTime.TryParse(reader["adelanto_fecha_entrega"].ToString(), out fe);
-                adelanto.FechaEntrega = fe;
-                DateTime.TryParse(reader["adelanto_fecha_deduccion"].ToString(), out fd);
-                adelanto.FechaDeduccion = fd;
+
+                adelanto.FechaEntrega = DateTime.Parse(reader["adelanto_fecha_entrega"].ToString());
+                adelanto.FechaDeduccion = DateTime.Parse(reader["adelanto_fecha_deduccion"].ToString());
                 adelanto.Descripcion = reader["adelanto_descripcion"].ToString();
+                adelanto.Monto = decimal.Parse(reader["adelanto_monto"].ToString());
                 adelanto.Cancelado = bool.Parse(reader["adelanto_cancelado"].ToString());
                 adelanto.Estado = bool.Parse(reader["adelanto_estado"].ToString());
-                
             }
 
             reader.Close();
@@ -142,7 +133,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite editar un registro de la entidad [Adelanto].
-        /// Recibe como parámetro un objeto [Adelanto] con la información editada para actualizarse en la base de datos (Id de empleado, Monto, Fecha de Entrega, Fecha de Deducción y Descripción).
+        /// Recibe como parámetro un objeto [Adelanto] con la información editada para actualizarse en la base de datos (EmpleadoId, FechaEntrega, FechaDeduccion, Descripcion y Monto).
         /// Devuelve un valor booleano para notificar si el registro fue editado o no.
         /// </summary>
         public bool Editar(Adelanto obj)
@@ -150,20 +141,25 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AdelantosEditar;
-            
+
+
             comandoSql.Parameters.Clear();
-
-            comandoSql.Parameters.Add("@adelanto_id", SqlDbType.Int).Value = obj.Id;
             comandoSql.Parameters.Add("@empleado_id", SqlDbType.Int).Value = obj.EmpleadoId;
-            comandoSql.Parameters.Add("@adelanto_monto", SqlDbType.Decimal).Value = obj.Monto;
-            comandoSql.Parameters.Add("@adelanto_fecha_entrega", SqlDbType.Date).Value = obj.FechaEntrega.Date;
-            comandoSql.Parameters.Add("@adelanto_fecha_deduccion", SqlDbType.Date).Value = obj.FechaDeduccion.Date;
+            comandoSql.Parameters.Add("@adelanto_id", SqlDbType.VarChar).Value = obj.Id;
+            comandoSql.Parameters.Add("@adelanto_fecha_entrega", SqlDbType.Date).Value = obj.FechaEntrega;
+            comandoSql.Parameters.Add("@adelanto_fecha_deduccion", SqlDbType.Date).Value = obj.FechaDeduccion;
             comandoSql.Parameters.Add("@adelanto_descripcion", SqlDbType.VarChar).Value = obj.Descripcion;
-            comandoSql.Parameters.Add("@adelanto_cancelado", SqlDbType.Bit).Value = obj.Cancelado;
-
-            if (conexionSql.State != ConnectionState.Open)
+            comandoSql.Parameters.Add("@adelanto_monto", SqlDbType.Decimal).Value = obj.Monto;
+            if (obj.FechaDeduccion < DateTime.Now)
             {
-                conexionSql.Close();
+                comandoSql.Parameters.Add("@adelanto_cancelado", SqlDbType.Bit).Value = 0;
+            }
+            else { comandoSql.Parameters.Add("@adelanto_cancelado", SqlDbType.Bit).Value = 1; };
+
+                
+
+            if (conexionSql.State == ConnectionState.Closed)
+            {
                 conexionSql.Open();
             }
 
@@ -176,7 +172,7 @@ namespace Datos
 
         /// <summary>
         /// El método permite obtener la lista de registros de la entidad [Adelanto] desde la base de datos.
-        /// Los campos que se devuelven son: Id de Adelanto, Id de Empleado, Monto, Fecha de Entrega, Fecha de Deducción, Descripción, Cancelado y Estado.
+        /// Los campos que se devuelven son: Id, EmpleadoId, FechaEntrega, FechaDeduccion, Descripcion y Monto.
         /// En caso de no existir ningún registro se devuelve una lista nula o vacía.
         /// </summary>
         public List<Adelanto> Listar()
@@ -186,12 +182,11 @@ namespace Datos
             comandoSql.Connection = conexionSql;
             comandoSql.CommandType = CommandType.StoredProcedure;
             comandoSql.CommandText = Procedimientos.AdelantosListar;
-            
+
             comandoSql.Parameters.Clear();
 
-            if (conexionSql.State != ConnectionState.Open)
+            if (conexionSql.State == ConnectionState.Closed)
             {
-                conexionSql.Close();
                 conexionSql.Open();
             }
 
@@ -201,16 +196,12 @@ namespace Datos
             {
                 Adelanto a = new Adelanto();
 
-                DateTime fe, fd;
-
                 a.Id = int.Parse(reader["adelanto_id"].ToString());
                 a.EmpleadoId = int.Parse(reader["empleado_id"].ToString());
-                a.Monto = decimal.Parse(reader["adelanto_monto"].ToString());
-                DateTime.TryParse(reader["adelanto_fecha_entrega"].ToString(), out fe);
-                a.FechaEntrega = fe;
-                DateTime.TryParse(reader["adelanto_fecha_deduccion"].ToString(), out fd);
-                a.FechaDeduccion = fd;
+                a.FechaEntrega = DateTime.Parse(reader["adelanto_fecha_entrega"].ToString());
+                a.FechaDeduccion = DateTime.Parse(reader["adelanto_fecha_deduccion"].ToString());
                 a.Descripcion = reader["adelanto_descripcion"].ToString();
+                a.Monto = decimal.Parse(reader["adelanto_monto"].ToString());
                 a.Cancelado = bool.Parse(reader["adelanto_cancelado"].ToString());
                 a.Estado = bool.Parse(reader["adelanto_estado"].ToString());
 
