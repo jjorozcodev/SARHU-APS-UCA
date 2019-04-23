@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace SARHU.sarhu.personal
 {
-    public partial class agregar_empleado : System.Web.UI.Page
+    public partial class agregar_empleado : Page
     {
         private NG_Empleados ngEmpleados = NG_Empleados.Instanciar();
         protected Empleado empleado = null;
