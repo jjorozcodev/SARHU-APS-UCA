@@ -57,6 +57,10 @@ namespace Negocio
 
         public bool Editar(Empleado obj)
         {
+            if (string.IsNullOrEmpty(obj.Foto))
+            {
+                obj.Foto = "../../Content/Imagenes/profile.png";
+            }
             return dtEmpleados.Editar(obj);
         }
 

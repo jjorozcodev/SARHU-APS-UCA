@@ -200,7 +200,19 @@ namespace Datos
                 conexionSql.Open();
             }
 
-            int editado = comandoSql.ExecuteNonQuery();
+
+            int editado = 0;
+
+            try
+            {
+                 editado = comandoSql.ExecuteNonQuery();
+            }
+            catch (Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("ERROR AL ACTUALIZAR" + exc.ToString());
+            }
+
+            
 
             conexionSql.Close();
 

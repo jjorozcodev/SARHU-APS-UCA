@@ -75,6 +75,7 @@
                                                 </div>
                                             </div>
                                             <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+<<<<<<< HEAD
                                                 <ContentTemplate>
                                                     <div class="col-md-6">
                                                         <label style="padding: 7px;">Edad</label>
@@ -85,6 +86,25 @@
                                                         </div>
                                                     </div>
                                         </div>
+||||||| merged common ancestors
+                                            <ContentTemplate>
+                                            <div class="col-md-6">
+                                                <label style="padding: 7px;">Edad</label>
+                                                <div class="form-group input-group" style="width: 100%;">
+                                                    <asp:TextBox ID="EmpEdad" runat="server" CssClass="form-control" disabled="disabled"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+=======
+                                                <ContentTemplate>
+                                                    <div class="col-md-6">
+                                                        <label style="padding: 7px;">Edad</label>
+                                                        <div class="form-group input-group" style="width: 100%;">
+                                                            <asp:TextBox ID="EmpEdad" runat="server" CssClass="form-control" disabled="disabled"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+>>>>>>> 53bf96b1b1822568d6b92772e7c5ae5be59d0590
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -106,12 +126,23 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+<<<<<<< HEAD
                                             </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </table>
+||||||| merged common ancestors
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        </table>
+=======
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                            </table>
+>>>>>>> 53bf96b1b1822568d6b92772e7c5ae5be59d0590
                                         <div>
                                             <label>Teléfono</label>
                                         </div>
+<<<<<<< HEAD
                                         <div class="form-group input-group" style="width: 100%;">
                                             <span class="input-group-addon">+505</span>
                                             <asp:TextBox ID="EmpTelefono" runat="server" type="number"
@@ -124,7 +155,33 @@
                                                 name="textarea"></textarea>
                                             <div id="textarea_feedback">200 caracteres disponibles</div>
                                         </div>
+||||||| merged common ancestors
+                                        <div class="form-group input-group" style="width: 100%;">
+                                            <span class="input-group-addon">+505</span>
+                                            <asp:TextBox ID="EmpTelefono" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group" style="width: 100%;">
+                                            <label>Dirección</label>
+                                            <textarea style="resize: none" id="EmpDireccion" runat="server" rows="5" cols="5"
+                                                class="form-control" maxlength="200"
+                                                name="textarea"></textarea>
+                                            <div id="textarea_feedback">200 caracteres disponibles</div>
+                                        </div>
+=======
+                                            <div class="form-group input-group" style="width: 100%;">
+                                                <span class="input-group-addon">+505</span>
+                                                <asp:TextBox ID="EmpTelefono" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                            <div class="form-group" style="width: 100%;">
+                                                <label>Dirección</label>
+                                                <textarea style="resize: none" id="EmpDireccion" runat="server" rows="5" cols="5"
+                                                    class="form-control" maxlength="200"
+                                                    name="textarea"></textarea>
+                                                <div id="textarea_feedback">200 caracteres disponibles</div>
+                                            </div>
+>>>>>>> 53bf96b1b1822568d6b92772e7c5ae5be59d0590
 
+<<<<<<< HEAD
                                         <asp:UpdatePanel runat="server" ID="UpdPanDatosAdmins">
                                             <ContentTemplate>
                                                 <label>Estado Civil</label>
@@ -140,6 +197,35 @@
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
+||||||| merged common ancestors
+                                        <asp:UpdatePanel runat="server" ID="UpdPanDatosAdmins">
+                                            <ContentTemplate>
+                                                <label>Estado Civil</label>
+                                                <div class="form-group input-group" style="width: 100%;">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlEstadosCiviles" runat="server" AutoPostBack="true"></asp:DropDownList>
+                                                </div>
+                                                <label>Nivel Académico</label>
+                                                <div class="form-group input-group" style="width: 100%;">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlNivelesAcademicos" runat="server" AutoPostBack="true"></asp:DropDownList>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+=======
+                                            <asp:UpdatePanel runat="server" ID="UpdPanDatosAdmins">
+                                                <ContentTemplate>
+                                                    <label>Estado Civil</label>
+                                                    <div class="form-group input-group" style="width: 100%;">
+                                                        <asp:DropDownList CssClass="form-control" ID="ddlEstadosCiviles" runat="server" AutoPostBack="true"></asp:DropDownList>
+                                                    </div>
+                                                    <label>Nivel Académico</label>
+                                                    <div class="form-group input-group" style="width: 100%;">
+                                                        <asp:DropDownList CssClass="form-control" ID="ddlNivelesAcademicos" runat="server" AutoPostBack="true"></asp:DropDownList>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+>>>>>>> 53bf96b1b1822568d6b92772e7c5ae5be59d0590
 
 
                                     <div class="tab-pane fade " id="datosA">
