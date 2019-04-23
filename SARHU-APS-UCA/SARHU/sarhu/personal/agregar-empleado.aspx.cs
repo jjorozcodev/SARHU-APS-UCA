@@ -101,6 +101,20 @@ namespace SARHU.sarhu.personal
             }
         }
 
+        protected void EmpFechaIngreso_TextChanged(object sender, EventArgs e)
+        {
+            DateTime fIngreso = DateTime.Parse(EmpFechaIngreso.Text);
+            int antig = DateTime.Today.AddTicks(-fIngreso.Ticks).Year - 1;
+            antiguedad.Value = antig.ToString();
+        }
+
+        protected void EmpFechaNac_TextChanged(object sender, EventArgs e)
+        {
+            DateTime fIngreso = DateTime.Parse(EmpFechaNac.Text);
+            int edad = DateTime.Today.AddTicks(-fIngreso.Ticks).Year - 1;
+            EmpEdad.Text = edad.ToString();
+        }
+
         private void LimpiarFormulario()
         {
             EmpCodigo.Text = string.Empty;
@@ -136,5 +150,7 @@ namespace SARHU.sarhu.personal
 
             panelNotificacion.Visible = true;
         }
+
+
     }
 }
