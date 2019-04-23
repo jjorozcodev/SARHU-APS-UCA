@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a href="personal/empleados.aspx">
                         <div class="panel-footer">
                             <span class="pull-left">Ver Detalles</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -108,7 +108,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading pad-10">
-                        Género de Colaboradores
+                        Género de Empleados
                     </div>
 
                     <div class="panel-body">
@@ -197,7 +197,7 @@
                     <button style="font-size: 35px" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h2 class="modal-title" id="localidadesModalLabel">Lista de Programas</h2>
+                    <h2 class="modal-title" id="localidadesModalLabel">Lista de Localidades</h2>
                 </div>
                 <div class="modal-body">
                     <div id="page-wrapper2">
@@ -252,6 +252,7 @@
             </div>
         </div>
     </div>
+    
 
     <script>
         new Chart(document.getElementById("chartPie"),
