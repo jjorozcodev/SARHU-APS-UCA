@@ -21,7 +21,7 @@ namespace Entidades
         public int AreaId { get; set; }
 
         [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(9, 2)")]
+        [Column(TypeName = "decimal(8, 2)")]
         public decimal SalarioBase { get; set; }
         public bool Estado { get; set; }
 

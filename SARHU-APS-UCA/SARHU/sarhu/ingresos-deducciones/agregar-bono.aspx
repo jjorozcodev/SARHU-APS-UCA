@@ -38,7 +38,7 @@
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button" disabled>C$</button>
                                                 </span>
-                                                <asp:TextBox ID="bonoMonto" type="number" step=".01" min="1.00" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                                                <asp:TextBox ID="bonoMonto" type="number" step="0.01" min="1.00" max="999999.99" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                                             </div>
                                             <div class="form-group" align="center">
                                                <asp:Button runat="server" class="btn btn-success  fondo-verde-aldeas" ID="btnGuardar" Text="Guardar" OnClick="Guardar_Click" />
